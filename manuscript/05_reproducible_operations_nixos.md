@@ -1,4 +1,4 @@
-# Reproducible Operations: NixOS in Depth {#sec:nixos}
+# Reproducible Operations: NixOS and the Build-Service Trust Boundary {#sec:nixos}
 
 ## The model: declarative configuration, generations, rollback
 

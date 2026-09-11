@@ -1,4 +1,4 @@
-# Conventional Desktops and Hardening Candidates {#sec:desktops}
+# Conventional Desktops: Hardening Candidates and Compatibility Costs {#sec:desktops}
 
 The two preceding sections examined the architectural poles of this review: hypervisor-based compartmentalization in [@sec:qubes] and declarative, rebuildable operations in [@sec:nixos]. Most operators, however, will run a conventional Linux desktop for the foreseeable future, so the desktop candidates deserve the same property-based scrutiny rather than a distribution-label comparison. This section evaluates seven desktop-focused candidates against the nine properties of [@sec:evaluation_framework], with particular attention to `application_confinement`, `integrity`, and `human_usability`: whether shipped defaults actually constrain applications, whether boot and update paths verify what runs, and whether a real operator will sustain the configuration. All judgments follow from documented designs, release notes, and advisories reviewed on 2026-09-10; none rests on a comparative penetration test, and none is expressed as a numeric score.
 

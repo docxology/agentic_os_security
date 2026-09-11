@@ -1,11 +1,13 @@
-"""Evidence registry invariants: 150 pinned sources, tier vocabulary,
-URL contract, capability baseline, and bib parity with references.bib.
+"""Evidence registry invariants: 155 pinned sources, tier vocabulary,
+URL contract, capability baseline, incident register, and bib parity
+with references.bib.
 
 The key->URL mapping below is pinned by the project brief plus the
 v0.2.0 research dossier (85 extension keys + the OpenAI-Hugging Face
-incident report); the evidence module must reproduce it exactly (plus
-the https scheme). Bib parity is checked with a regex over
-`@<type>{<key>,` occurrences — no bibtex parser dependency.
+incident report) and the v0.3.0 author-work set (5 Zenodo record
+URLs); the evidence module must reproduce it exactly (plus the https
+scheme). Bib parity is checked with a regex over `@<type>{<key>,`
+occurrences — no bibtex parser dependency.
 """
 
 from __future__ import annotations
@@ -164,6 +166,11 @@ PINNED_URLS = {
     "aisi_inspect_framework": "https://inspect.aisi.org.uk/",
     "aisi_control_red_team": "https://www.aisi.gov.uk/blog/how-our-new-control-red-team-is-stress-testing-frontier-monitors",
     "apollo_automode": "https://apolloresearch.ai/monitoring/pilot-automode-campaign",
+    "cogsecskills2026": "https://zenodo.org/records/21520558",
+    "cif_formal_2026": "https://zenodo.org/records/22134544",
+    "cif_validation_2026": "https://zenodo.org/records/18364128",
+    "cif_practitioner_2026": "https://zenodo.org/records/22134548",
+    "ageint2026": "https://zenodo.org/records/20732274",
     "shade_arena": "https://www.anthropic.com/research/shade-arena-sabotage-monitoring",
     "claude_code_auto_mode": "https://www.anthropic.com/engineering/claude-code-auto-mode",
 }
@@ -201,10 +208,10 @@ EXPECTED_BASELINE = {
 BIB_ENTRY_RE = re.compile(r"@(\w+)\s*\{\s*([^,\s]+)\s*,")
 
 
-def test_150_unique_source_keys_matching_pinned_set():
+def test_155_unique_source_keys_matching_pinned_set():
     keys = [s.key for s in evidence.SOURCES]
-    assert len(evidence.SOURCES) == 150
-    assert len(set(keys)) == 150
+    assert len(evidence.SOURCES) == 155
+    assert len(set(keys)) == 155
     assert set(keys) == set(PINNED_URLS)
 
 
@@ -221,7 +228,7 @@ def test_tiers_in_vocabulary_and_every_tier_populated():
 
     assert set(evidence.sources_by_tier()) == TIER_VOCAB
     counts = evidence.sources_by_tier()
-    assert sum(counts.values()) == 150
+    assert sum(counts.values()) == 155
     assert counts == dict(Counter(s.tier for s in evidence.SOURCES))
 
 
@@ -244,7 +251,7 @@ def test_bib_parity_every_source_key_is_a_bib_entry(project_root):
     source_keys = {s.key for s in evidence.SOURCES}
     missing = source_keys - bib_keys
     assert not missing, f"SOURCES keys missing from references.bib: {sorted(missing)}"
-    # v0.2.0 contract: 156 entries total = 150 source-derived + 6 scholarly.
+    # v0.3.0 contract: 161 entries total = 155 source-derived + 6 scholarly.
     scholarly = {
         "saltzer1975",
         "lampson1974",
@@ -254,4 +261,41 @@ def test_bib_parity_every_source_key_is_a_bib_entry(project_root):
         "levy1984",
     }
     assert scholarly <= bib_keys
-    assert len(bib_keys) >= 156
+    assert len(bib_keys) >= 161
+
+
+def test_author_work_sources_carry_zenodo_publisher_and_record_urls():
+    author_works = {
+        "cogsecskills2026": "https://zenodo.org/records/21520558",
+        "cif_formal_2026": "https://zenodo.org/records/22134544",
+        "cif_validation_2026": "https://zenodo.org/records/18364128",
+        "cif_practitioner_2026": "https://zenodo.org/records/22134548",
+        "ageint2026": "https://zenodo.org/records/20732274",
+    }
+    by_key = {s.key: s for s in evidence.SOURCES if s.key in author_works}
+    assert set(by_key) == set(author_works)
+    for key, url in author_works.items():
+        source = by_key[key]
+        assert source.url == url, key
+        assert source.tier == "research", key
+        assert source.publisher == "Zenodo", key
+        assert source.year == 2026, key
+
+
+def test_incident_register_is_populated_with_valid_citation_keys(project_root):
+    incidents = evidence.INCIDENTS
+    assert len(incidents) >= 14
+    assert len({i.incident_id for i in incidents}) == len(incidents)
+    bib_text = (project_root / "manuscript" / "references.bib").read_text(
+        encoding="utf-8"
+    )
+    bib_keys = {match.group(2) for match in BIB_ENTRY_RE.finditer(bib_text)}
+    source_keys = {s.key for s in evidence.SOURCES}
+    for incident in incidents:
+        assert incident.incident_id.strip(), incident.incident_id
+        assert incident.date.strip(), incident.incident_id
+        assert incident.actor_class.strip(), incident.incident_id
+        assert incident.vector.strip(), incident.incident_id
+        assert incident.boundary_lesson.strip(), incident.incident_id
+        assert incident.citation_key in source_keys, incident.incident_id
+        assert incident.citation_key in bib_keys, incident.incident_id

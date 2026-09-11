@@ -565,7 +565,8 @@ mjx-container[display="true"] {
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
-<h1 id="sec:orchestration">Securing Agent Orchestration</h1>
+<h1 id="sec:orchestration">Securing Agent Orchestration: Mediation
+Points Across Protocols</h1>
 <p>Multi-agent systems introduce a security surface that single-agent
 analysis misses: the orchestration layer that decomposes tasks,
 dispatches workers, aggregates results, and holds credentials on their
@@ -642,6 +643,11 @@ whatever lands there becomes reachable by every later task that shares
 it, which is the minimal-shared-state control of <span class="citation"
 data-cites="tbl:controls">[@tbl:controls]</span> restated
 structurally.</p>
+<p>Published deployment guides for cognitive-integrity controls give the
+worker tier the same treatment as a checklist: subagent-hardening
+playbooks that specify a disposable executor’s environment, grant set,
+and intake handling as configuration to be reviewed rather than platform
+defaults to be inherited [cif_practitioner_2026].</p>
 <h2 id="protocol-level-mediation-mcp-and-a2a">Protocol-level mediation:
 MCP and A2A</h2>
 <p>The orchestration layer is acquiring standards of its own, and their
@@ -722,17 +728,21 @@ authority: a worker returns requests that preserve or reduce scope,
 never requests that expand it, and the broker rejects expansions as a
 matter of policy. These three rules convert the deputy from a trusted
 forwarder into a checked channel.</p>
+<p>The formal grounding for these rules is δ-bounded delegation: each
+hop in an agent-to-agent chain is permitted to narrow the authority it
+passes, never to widen it, so trust cannot amplify across a delegation
+chain no matter how many intermediaries it traverses [cif_formal_2026].
+That formal model is not left as a statement of intent — its
+bounded-delegation and trust-boundedness properties have been exercised
+computationally, with implementations validating the no-amplification
+guarantee on constructed delegation scenarios [cif_validation_2026].</p>
 <figure id="fig:orchestration_boundaries">
-<a class="figure-full-size-link" href="../figures/orchestration_boundaries.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Orchestration boundaries: a planner decomposes a task into worker assignments"><img src="../figures/orchestration_boundaries.png" style="width:100.0%"
-alt="Orchestration boundaries: a planner decomposes a task into worker assignments; executors run one isolated task environment each; a tool broker mediates every privileged filesystem, browser, CI, cloud, and messaging operation against task-scoped policy; approval for consequential actions originates outside the orchestration hierarchy; and an append-only audit trail beyond every agent&#x27;s write authority records broker decisions, credential events, and approvals." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>Orchestration boundaries: a planner
-decomposes a task into worker assignments; executors run one isolated
-task environment each; a tool broker mediates every privileged
-filesystem, browser, CI, cloud, and messaging operation against
-task-scoped policy; approval for consequential actions originates
-outside the orchestration hierarchy; and an append-only audit trail
-beyond every agent’s write authority records broker decisions,
-credential events, and approvals.</figcaption>
+<a class="figure-full-size-link" href="../figures/orchestration_boundaries.png" target="_blank" rel="noopener" aria-label="Open full-size figure, A reference orchestration: one orchestrator delegating through an MCP-style tool broker to…"><img src="../figures/orchestration_boundaries.png" style="width:100.0%"
+alt="A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>A reference orchestration: one
+orchestrator delegating through an MCP-style tool broker to three
+disposable workers, with the ten mediation points numbered at each
+trust-boundary crossing.</figcaption>
 </figure>
 <p>The boundaries in <span class="citation"
 data-cites="fig:orchestration_boundaries">[@fig:orchestration_boundaries]</span>
@@ -805,19 +815,12 @@ control belongs. <span class="citation"
 data-cites="fig:agent_surface">[@fig:agent_surface]</span> arranges the
 matrix, with the numbered mediation points keyed to the list above.</p>
 <figure id="fig:agent_surface">
-<a class="figure-full-size-link" href="../figures/agent_surface.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The agent capability surface: six capability classes"><img src="../figures/agent_surface.png" style="width:100.0%"
-alt="Agent surface: which of the ten orchestration mediation points (orchestration.MEDIATION_POINTS, numbered) governs each agent capability class. Filled, numbered cells mark a mediation point that constrains the class - sandbox primitives, proxy-mediated egress, OAuth audience binding, classifier escalation, and the external human gate each cover distinct authority surfaces." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>The agent capability surface: six
-capability classes — content intake, tool and bridge use, credential
-touch, external communication, state mutation, and self-modification —
-crossed with the ten mediation points of this section’s taxonomy,
-numbered 1 through 10: sandbox primitives, egress proxy, tool
-annotations, OAuth resource-server binding, URL-mode elicitation,
-agent-to-agent transport security, agent identity exchange, classifier
-escalation, sandbox observability, and external approval. Dense rows
-indicate capability classes with layered mechanical coverage; the
-content-intake row shows where approval and review, rather than
-mediation, carry the control.</figcaption>
+<a class="figure-full-size-link" href="../figures/agent_surface.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Which mediation point constrains which agent capability class"><img src="../figures/agent_surface.png" style="width:100.0%"
+alt="Which mediation point constrains which agent capability class; filled numbered cells mark the primary control, and the right marginal counts how many distinct controls cover each capability." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>Which mediation point constrains which
+agent capability class; filled numbered cells mark the primary control,
+and the right marginal counts how many distinct controls cover each
+capability.</figcaption>
 </figure>
 <h2 id="approval-chains-across-agent-hierarchies">Approval chains across
 agent hierarchies</h2>

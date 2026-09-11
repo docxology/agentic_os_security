@@ -1,6 +1,6 @@
 \headcommand {\beamer@sectionpages {1}{0}}
 \headcommand {\beamer@subsectionpages {1}{0}}
-\headcommand {\sectionentry {1}{Reproducible Operations: NixOS in Depth}{1}{Reproducible Operations: NixOS in Depth}{0}}
+\headcommand {\sectionentry {1}{Reproducible Operations: NixOS and the Build-Service Trust Boundary}{1}{Reproducible Operations: NixOS and the Build-Service Trust Boundary}{0}}
 \headcommand {\slideentry {1}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {1}{0}{2}{2/2}{}{0}}

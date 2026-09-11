@@ -1,4 +1,6 @@
-"""Figure generators for the nine manuscript figures.
+"""Figure generators: the nine registry manuscript figures plus the cover
+graphical abstract (which carries no ``{#fig:...}`` label and is not part
+of the manuscript figure registry).
 
 Every generator takes ``project_root`` and returns the written PNG path
 (under ``output/figures/``).  All figures are 300 dpi, colorblind-safe, and
@@ -23,6 +25,7 @@ from .authority_ladder import generate_authority_ladder
 from .defensive_stack import generate_defensive_stack
 from .evidence_timeline import generate_evidence_timeline
 from .forecast_horizon import generate_forecast_horizon
+from .graphical_abstract import generate_graphical_abstract
 from .orchestration_boundaries import generate_orchestration_boundaries
 from .property_matrix import generate_property_matrix
 from .trust_domains import generate_trust_domains
@@ -49,4 +52,5 @@ __all__ = [
     "generate_agent_surface",
     "generate_forecast_horizon",
     "generate_update_windows",
+    "generate_graphical_abstract",
 ]

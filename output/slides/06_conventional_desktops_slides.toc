@@ -1,1 +1,1 @@
-\beamer@sectionintoc {1}{Conventional Desktops and Hardening Candidates}{1}{0}{1}
+\beamer@sectionintoc {1}{Conventional Desktops: Hardening Candidates and Compatibility Costs}{1}{0}{1}

@@ -1,6 +1,6 @@
 \headcommand {\beamer@sectionpages {1}{0}}
 \headcommand {\beamer@subsectionpages {1}{0}}
-\headcommand {\sectionentry {1}{Cognitive Security: The Authorized-Misuse Surface}{1}{Cognitive Security: The Authorized-Misuse Surface}{0}}
+\headcommand {\sectionentry {1}{Cognitive Security: Defending the Authorized-Misuse Surface}{1}{Cognitive Security: Defending the Authorized-Misuse Surface}{0}}
 \headcommand {\slideentry {1}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {1}{0}{2}{2/2}{}{0}}
@@ -63,8 +63,12 @@
 \headcommand {\beamer@framepages {30}{30}}
 \headcommand {\slideentry {1}{0}{31}{31/31}{}{0}}
 \headcommand {\beamer@framepages {31}{31}}
-\headcommand {\beamer@partpages {1}{31}}
-\headcommand {\beamer@subsectionpages {1}{31}}
-\headcommand {\beamer@sectionpages {1}{31}}
-\headcommand {\beamer@documentpages {31}}
-\headcommand {\gdef \inserttotalframenumber {31}}
+\headcommand {\slideentry {1}{0}{32}{32/32}{}{0}}
+\headcommand {\beamer@framepages {32}{32}}
+\headcommand {\slideentry {1}{0}{33}{33/33}{}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\beamer@partpages {1}{33}}
+\headcommand {\beamer@subsectionpages {1}{33}}
+\headcommand {\beamer@sectionpages {1}{33}}
+\headcommand {\beamer@documentpages {33}}
+\headcommand {\gdef \inserttotalframenumber {33}}

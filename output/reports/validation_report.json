@@ -13,14 +13,14 @@
   "figure_issues": [],
   "output_statistics": {
     "data": {
-      "files": 6,
-      "size_mb": 0.025864601135253906
+      "files": 8,
+      "size_mb": 0.03217601776123047
     },
     "detailed_validation": {
       "directories": {
         "data": {
           "exists": true,
-          "file_count": 6,
+          "file_count": 8,
           "largest_file": "evaluation_matrix.csv",
           "largest_file_path": "data/evaluation_matrix.csv",
           "size_mb": "0.03"
@@ -37,10 +37,10 @@
         },
         "figures": {
           "exists": true,
-          "file_count": 10,
-          "largest_file": "defensive_stack.png",
-          "largest_file_path": "figures/defensive_stack.png",
-          "size_mb": "2.37"
+          "file_count": 11,
+          "largest_file": "graphical_abstract.png",
+          "largest_file_path": "figures/graphical_abstract.png",
+          "size_mb": "2.74"
         },
         "llm": {
           "exists": false,
@@ -64,7 +64,7 @@
           "file_count": 1,
           "largest_file": "agentic_os_security_combined.pdf",
           "largest_file_path": "pdf/agentic_os_security_combined.pdf",
-          "size_mb": "2.79"
+          "size_mb": "3.15"
         },
         "reports": {
           "exists": true,
@@ -83,19 +83,19 @@
           "file_count": 18,
           "largest_file": "03_evaluation_framework_slides.pdf",
           "largest_file_path": "slides/03_evaluation_framework_slides.pdf",
-          "size_mb": "3.16"
+          "size_mb": "3.17"
         },
         "web": {
           "exists": true,
           "file_count": 21,
           "largest_file": "index.html",
           "largest_file_path": "web/index.html",
-          "size_mb": "1.10"
+          "size_mb": "1.11"
         }
       },
       "file_counts": {
-        "data": 6,
-        "figures": 10,
+        "data": 8,
+        "figures": 11,
         "manuscript": 21,
         "pdf": 1,
         "reports": 1,
@@ -114,11 +114,11 @@
           "combined_pdf": {
             "exists": true,
             "readable": true,
-            "size_mb": 2.79
+            "size_mb": 3.15
           },
           "data": {
             "exists": true,
-            "files": 6,
+            "files": 8,
             "optional": false,
             "readable": true,
             "required": true,
@@ -140,11 +140,11 @@
           },
           "figures": {
             "exists": true,
-            "files": 10,
+            "files": 11,
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 2.37
+            "size_mb": 2.74
           },
           "llm": {
             "exists": false,
@@ -174,7 +174,7 @@
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 2.79
+            "size_mb": 3.15
           },
           "reports": {
             "exists": true,
@@ -197,7 +197,7 @@
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 3.16
+            "size_mb": 3.17
           },
           "web": {
             "exists": true,
@@ -205,7 +205,7 @@
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 1.1
+            "size_mb": 1.11
           }
         },
         "inventory_mode": "stable-local-output-v1",
@@ -215,52 +215,53 @@
         "valid": true,
         "warnings": []
       },
-      "total_size_mb": 9.736259460449219
+      "total_size_mb": 10.499999046325684
     },
     "evidence_issues": [
       "02_threat_model.md:54: unsupported number 500000",
       "02_threat_model.md:54: unsupported number 48",
       "02_threat_model.md:54: unsupported number 72",
       "04_compartmentalization_qubes.md:17: unsupported number 45",
+      "04_compartmentalization_qubes.md:50: unsupported number 21",
       "04_compartmentalization_qubes.md:50: unsupported number 41",
       "04_compartmentalization_qubes.md:52: unsupported number 32",
       "05_reproducible_operations_nixos.md:7: unsupported number 22",
       "06_conventional_desktops.md:25: unsupported number 23.10",
       "07_servers_agent_infrastructure.md:38: unsupported number 23.10",
-      "11_opsec_for_agent_operators.md:13: unsupported number 8693",
+      "11_opsec_for_agent_operators.md:15: unsupported number 8693",
       "12_orchestration_security.md:17: unsupported number 8693",
-      "12_orchestration_security.md:21: unsupported number 9728",
-      "12_orchestration_security.md:21: unsupported number 8707",
-      "12_orchestration_security.md:21: unsupported number 2.1",
+      "12_orchestration_security.md:23: unsupported number 9728",
+      "12_orchestration_security.md:23: unsupported number 8707",
+      "12_orchestration_security.md:23: unsupported number 2.1",
       "README.md:7: unsupported number 71",
       "README.md:7: unsupported number 65"
     ],
     "figures": {
-      "files": 10,
-      "size_mb": 2.3742904663085938
+      "files": 11,
+      "size_mb": 2.742011070251465
     },
     "inventory_mode": "stable-local-output-v1",
     "pdf": {
       "files": 1,
-      "size_mb": 2.7850351333618164
+      "size_mb": 3.1543283462524414
     },
     "stable_inventory": {
       "categories": {
         "data": {
-          "files": 6,
-          "size_bytes": 27121
+          "files": 8,
+          "size_bytes": 33739
         },
         "figures": {
-          "files": 10,
-          "size_bytes": 2489624
+          "files": 11,
+          "size_bytes": 2875207
         },
         "manuscript": {
           "files": 21,
-          "size_bytes": 300138
+          "size_bytes": 305231
         },
         "pdf": {
           "files": 1,
-          "size_bytes": 2920321
+          "size_bytes": 3307553
         },
         "reports": {
           "files": 1,
@@ -268,16 +269,16 @@
         },
         "slides": {
           "files": 18,
-          "size_bytes": 3311593
+          "size_bytes": 3321538
         },
         "web": {
           "files": 21,
-          "size_bytes": 1156149
+          "size_bytes": 1162517
         }
       },
       "mode": "stable-local-output-v1",
-      "total_files": 78,
-      "total_size_bytes": 10209208
+      "total_files": 81,
+      "total_size_bytes": 11010047
     }
   },
   "recommendations": [],
@@ -292,97 +293,97 @@
   "validated_inputs": {
     "artifact_manifest": {
       "path": "output/reports/artifact_manifest.json",
-      "sha256": "2627b409d24d1182b17ff2c15679e026a43174e237af1c86af9668e7cc2ced17",
-      "size_bytes": 23902
+      "sha256": "36cc7ab03e93515ce137352f30ae05c69682d60482b08b677f05caea9c6c2d16",
+      "size_bytes": 24791
     },
     "combined_manuscript": {
       "path": "output/web/_combined_manuscript.md",
-      "sha256": "8ce953f334a5e3a1ef12f5bc9ba722da5b0d659372c7a1274187e5323b79a33f",
-      "size_bytes": 248741
+      "sha256": "8a08000bb1543c72074187d00ac0d2852006561312df995252d7646391ed5656",
+      "size_bytes": 250864
     },
     "composition_manifest": {
       "path": "output/reports/manuscript_composition.json",
-      "sha256": "3625e3cfaa74b2bc12b0045dba4772d07aa3b4b37fd9da1fd730e16a495514fd",
+      "sha256": "35924c17a53b8e6dc0f2ac235c9e95c065b7e8790d164e1fbf849268ece7ab18",
       "size_bytes": 4262
     },
     "consumed_manuscript": [
       {
         "rendered_path": "output/manuscript/00_abstract.md",
-        "rendered_sha256": "f4806d37983360b35b1de0af77646041d06b447ee245b1129e87caec989bb150",
+        "rendered_sha256": "9944b1417e08d40090079ff0926511dd253b231e9c1500487c60922b8380c1b1",
         "source_path": "manuscript/00_abstract.md",
         "source_sha256": "5a49674cb781e050efc86c1f1471b156830fefdb732df4776aacdbe68983de00"
       },
       {
         "rendered_path": "output/manuscript/01_introduction.md",
-        "rendered_sha256": "e827025d6ea5cd85f52eacb1e834946b6d86f04ea23b58f8119ca2eebbb23dfb",
+        "rendered_sha256": "81f6eeb73d8280ea79c202ae9e31e7a856d1d3d48b944fae864ddd28bd44b9d7",
         "source_path": "manuscript/01_introduction.md",
-        "source_sha256": "c58411fe8525cfed7e68f99ee78c992222a02237f82346e079452884eac1bc89"
+        "source_sha256": "0539d01f3447f7bd04ad7ba905522bcfbdc3bdc2b6361160837ec5c24ad3a348"
       },
       {
         "rendered_path": "output/manuscript/02_threat_model.md",
-        "rendered_sha256": "9b574eedd19b23a254723087234467808cac196ff5f382c59a29510a962f67f1",
+        "rendered_sha256": "3a761b09717fdd670c8e814fb06f2dbfb658ef45a897328aca41c4e97d9d952e",
         "source_path": "manuscript/02_threat_model.md",
-        "source_sha256": "958911fa99ba6f097650cebcfcb0f55d4075a0b57dafd090e25669ddb7b6acd3"
+        "source_sha256": "1d0c823f71cd44aa52fbf50e7bae8606915f850dd5a3d515cad8fe3294c11a16"
       },
       {
         "rendered_path": "output/manuscript/03_evaluation_framework.md",
-        "rendered_sha256": "1c9e25fa45e646c7e6b1bc80e92f0a9907ba62f7cfbf99fbcfcf75a9c8020dc7",
+        "rendered_sha256": "78963daf318631917b0cb47e540f5a288f8992bb4f4f39ec3410e61e4a90fe05",
         "source_path": "manuscript/03_evaluation_framework.md",
-        "source_sha256": "6c2ea6e0dec108fea27cac4c22ab2fc95e9017836dbc54066ddbff8c441cb377"
+        "source_sha256": "7f3ab36a249b8ef34e56c6a1b04266fce1a1750be9a1a1c2d5d4cd96dff90c46"
       },
       {
         "rendered_path": "output/manuscript/04_compartmentalization_qubes.md",
-        "rendered_sha256": "81388bc63d440095fe7be67b8c96053b877e1d30953934f453e69a5afc038c83",
+        "rendered_sha256": "cf2141bd092bf654a6a69c1e7e76c244a0c45ebb7d1c72bee37cdb154fa28710",
         "source_path": "manuscript/04_compartmentalization_qubes.md",
-        "source_sha256": "81388bc63d440095fe7be67b8c96053b877e1d30953934f453e69a5afc038c83"
+        "source_sha256": "cf2141bd092bf654a6a69c1e7e76c244a0c45ebb7d1c72bee37cdb154fa28710"
       },
       {
         "rendered_path": "output/manuscript/05_reproducible_operations_nixos.md",
-        "rendered_sha256": "675c30279feac1dc532890d60bb96ff1db0ec29096f1456754221f056808fbf8",
+        "rendered_sha256": "2c79d4d60a6aa530da64df1391ed33b61b0b8f1db5c6ceecaff4a8c145b86ccb",
         "source_path": "manuscript/05_reproducible_operations_nixos.md",
-        "source_sha256": "675c30279feac1dc532890d60bb96ff1db0ec29096f1456754221f056808fbf8"
+        "source_sha256": "2c79d4d60a6aa530da64df1391ed33b61b0b8f1db5c6ceecaff4a8c145b86ccb"
       },
       {
         "rendered_path": "output/manuscript/06_conventional_desktops.md",
-        "rendered_sha256": "9a00f7baa04b02f759cd5439de3b44a4f3581dd578a8ff049d61dfb53bf2136d",
+        "rendered_sha256": "13b97892db95b8dbf5143cd2320c25f6c449275070cd41bbcc02225cb8ab86ee",
         "source_path": "manuscript/06_conventional_desktops.md",
-        "source_sha256": "e79578fa51cb90e369699e7c88853d2833ba4670468186e27edf95188d1be5c7"
+        "source_sha256": "7ed3960e5fc09232f4376b2ea2b880d759543f90b4588053d6ec43d71839b361"
       },
       {
         "rendered_path": "output/manuscript/07_servers_agent_infrastructure.md",
-        "rendered_sha256": "4b1d887595381559a44599dbcb2dafb91886d253ff445065b93b99dd059ff039",
+        "rendered_sha256": "ef8ab078d72118c365dfb3c9bc5605b808f54e07450dc204172c9405c299d3f3",
         "source_path": "manuscript/07_servers_agent_infrastructure.md",
-        "source_sha256": "b10666218f777bc7e9119b8ff175b6a8a02622bcc6af9d8dd994b23fe7538dae"
+        "source_sha256": "a9cf685b06184a5af95e911f100c4ffb430ffa03c7697b84cb950836fab3ceac"
       },
       {
         "rendered_path": "output/manuscript/08_boundary_comparators.md",
-        "rendered_sha256": "10a1d43a4f3aae196b0fb3b4c1f5b0c6d26e0ca273a9a2c0396e4c82906f4116",
+        "rendered_sha256": "d34c8cd854e3e78ce002fabcbe2e746f41807bd2125c3ab80061dee42a953a37",
         "source_path": "manuscript/08_boundary_comparators.md",
-        "source_sha256": "10a1d43a4f3aae196b0fb3b4c1f5b0c6d26e0ca273a9a2c0396e4c82906f4116"
+        "source_sha256": "d34c8cd854e3e78ce002fabcbe2e746f41807bd2125c3ab80061dee42a953a37"
       },
       {
         "rendered_path": "output/manuscript/09_agentic_authority_architecture.md",
-        "rendered_sha256": "f9ae092d497d9ddae1fd9116f2a55b427d0c32643abd35863c7d8df61f1e84ad",
+        "rendered_sha256": "73e26da0a7147fb7216a5be77169e21697aab1f83ccff4254d61771a869de3bf",
         "source_path": "manuscript/09_agentic_authority_architecture.md",
-        "source_sha256": "2d259d84e8863119c3319a84349b726afd6f2dd31e5651d0a2107d513145de86"
+        "source_sha256": "c3f5c00a8e5ab84b58432464ceaab4115df504297ba9a784967ae53961707d0d"
       },
       {
         "rendered_path": "output/manuscript/10_cognitive_security.md",
-        "rendered_sha256": "c491eaa0387acbed300e9e53cc1380c55f45c681bd629e1b9269b04b49141245",
+        "rendered_sha256": "8be3835e8775f2ea1caf0f1cd7005c9764c3250dc8386ef44555694a0bd99cd9",
         "source_path": "manuscript/10_cognitive_security.md",
-        "source_sha256": "c491eaa0387acbed300e9e53cc1380c55f45c681bd629e1b9269b04b49141245"
+        "source_sha256": "8be3835e8775f2ea1caf0f1cd7005c9764c3250dc8386ef44555694a0bd99cd9"
       },
       {
         "rendered_path": "output/manuscript/11_opsec_for_agent_operators.md",
-        "rendered_sha256": "68534800e3b078827af2816f8484a43ca797434de007d27ae8b8ab96be13e0ba",
+        "rendered_sha256": "140aa1dd8e276e1f6ba7739dead2d09c995c7495cc8e6a63ba09b2e46c29af9c",
         "source_path": "manuscript/11_opsec_for_agent_operators.md",
-        "source_sha256": "c21adaae158f0ded1c8bbccecb41c70bc7372bd6bb7ccf1382d117d40f0d139b"
+        "source_sha256": "3ca5afaf6b8a3f8430bede1050441c3d317d4d7a52cb445168e18b045f286618"
       },
       {
         "rendered_path": "output/manuscript/12_orchestration_security.md",
-        "rendered_sha256": "f7aeec73bd4abecbf76580159b4e169be35d22b2b49a68f1f8b38dbee6487fd2",
+        "rendered_sha256": "fc4ab9a8c53eed5d845772ae5f03f853558cf48422fbc79582667b1c9bad8429",
         "source_path": "manuscript/12_orchestration_security.md",
-        "source_sha256": "30cf27cd456cc06890a01f3088f73ba544e6657221b72ac2c148caf6508a95f7"
+        "source_sha256": "93c672be5f64afc134502d626b3e972f77bc7bfccda4e654848669bb1f92bd76"
       },
       {
         "rendered_path": "output/manuscript/13_configuration_authorization.md",
@@ -392,15 +393,15 @@
       },
       {
         "rendered_path": "output/manuscript/14_forecast_2028_2031.md",
-        "rendered_sha256": "2f8789a307b9d395c2f4dff90e406c3a93f56a857f3738ec3c3a4151d4cb9333",
+        "rendered_sha256": "9da7b1fe43f5b87ba3ffb265919c0a60372f01f2fcd734b8613a326806856163",
         "source_path": "manuscript/14_forecast_2028_2031.md",
-        "source_sha256": "8d6e3a0f0263143ff6eaad002fd90339bbc5fed74f51bb30aff307c2bd272578"
+        "source_sha256": "e386b6d46337f223233f525baa558ccc695683471cc6c4e2f963e3e15225de57"
       },
       {
         "rendered_path": "output/manuscript/15_scenarios_and_confidence.md",
-        "rendered_sha256": "087b66d55906bb14e9ef4d2aaf0445f63402c8daf6310e904a00d18004c6c344",
+        "rendered_sha256": "c0dc268a079e9cb10640479ded1c8be219b118671172f295febb68620209c39b",
         "source_path": "manuscript/15_scenarios_and_confidence.md",
-        "source_sha256": "639a466e1b6b6e922f399baeaa966be250439b84e5ca6ab7d6783e887089f96b"
+        "source_sha256": "7eff510880a799312bb4d21243e62ef30e7a9dbb79168f372891f4b5232fb2d5"
       },
       {
         "rendered_path": "output/manuscript/16_conclusion.md",
@@ -410,23 +411,23 @@
       },
       {
         "rendered_path": "output/manuscript/99_references.md",
-        "rendered_sha256": "1d919f8fb4ff371df5ea85447347883b06f826bc397d1a356983425d7694d8a8",
+        "rendered_sha256": "5b3fe0f1813d38ffe3ee5a671ddeb5e97fa299c457e9fb7c9ab4e5d4a83f9715",
         "source_path": "manuscript/99_references.md",
-        "source_sha256": "1d919f8fb4ff371df5ea85447347883b06f826bc397d1a356983425d7694d8a8"
+        "source_sha256": "5b3fe0f1813d38ffe3ee5a671ddeb5e97fa299c457e9fb7c9ab4e5d4a83f9715"
       }
     ],
     "fingerprints": {
       "config": {
         "file_count": 18,
-        "sha256": "0891a9e3400c13dec28e30249e57a0ffce3ba7b14c83c1f488139fed7e2973ca"
+        "sha256": "bfe2edf77ae45948cbcf81cd1517b5e86d0854b12459067f537a5a15625f0d86"
       },
       "output": {
-        "file_count": 78,
-        "sha256": "d3125e5c6e9df1009f218f4d4317eb7fae41163c9152e037bba8b1481f702227"
+        "file_count": 81,
+        "sha256": "285b9afad7a2c800a877db63bf81e2a5bdd65b374c710a9978ff174f2cd4742b"
       },
       "source": {
-        "file_count": 48,
-        "sha256": "771795c8de2e3c05218723e70dc0a1a829e6dec04302f672488f90b6b4814cee"
+        "file_count": 52,
+        "sha256": "c49bdd30c98944162de7de5179e6849392b0d0a50acc8d8e9777ed153c469d73"
       },
       "stage": {
         "file_count": 1336,

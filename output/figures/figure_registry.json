@@ -1,12 +1,12 @@
 {
   "fig:agent_surface": {
-    "caption": "Agent surface: which of the ten orchestration mediation points (orchestration.MEDIATION_POINTS, numbered) governs each agent capability class. Filled, numbered cells mark a mediation point that constrains the class - sandbox primitives, proxy-mediated egress, OAuth audience binding, classifier escalation, and the external human gate each cover distinct authority surfaces.",
+    "caption": "Which mediation point constrains which agent capability class; filled numbered cells mark the primary control, and the right marginal counts how many distinct controls cover each capability.",
     "figure_id": "figure_007",
     "filename": "agent_surface.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:agent_surface",
     "metadata": {
-      "alt_text": "Agent surface: which of the ten orchestration mediation points (orchestration.MEDIATION_POINTS, numbered) governs each agent capability class. Filled, numbered cells mark a mediation point that constrains the class - sandbox primitives, proxy-mediated egress, OAuth audience binding, classifier escalation, and the external human gate each cover distinct authority surfaces.",
+      "alt_text": "Which mediation point constrains which agent capability class; filled numbered cells mark the primary control, and the right marginal counts how many distinct controls cover each capability.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
@@ -14,13 +14,13 @@
     "width": "0.9\\textwidth"
   },
   "fig:authority_ladder": {
-    "caption": "The authority ladder from proposal to revocation. An agent may autonomously occupy the lower rungs \u2014 proposing changes and staging artifacts \u2014 while authorize marks the rung that must lie outside the agent's own control, exercised by a human principal or deterministic policy. Audit and revoke remain principal powers that survive destruction of the execution environment: the record lives outside the environment, and revocation acts on credentials the environment no longer holds.",
+    "caption": "The six-rung authority ladder as a swimlane across human principal, orchestrator and agent, and tool broker; hatched cells mark exercise paths an agent must never hold without external authorization.",
     "figure_id": "figure_005",
     "filename": "authority_ladder.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:authority_ladder",
     "metadata": {
-      "alt_text": "The authority ladder from proposal to revocation. An agent may autonomously occupy the lower rungs \u2014 proposing changes and staging artifacts \u2014 while authorize marks the rung that must lie outside the agent's own control, exercised by a human principal or deterministic policy. Audit and revoke remain principal powers that survive destruction of the execution environment: the record lives outside the environment, and revocation acts on credentials the environment no longer holds.",
+      "alt_text": "The six-rung authority ladder as a swimlane across human principal, orchestrator and agent, and tool broker; hatched cells mark exercise paths an agent must never hold without external authorization.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
@@ -28,13 +28,13 @@
     "width": "0.9\\textwidth"
   },
   "fig:defensive_stack": {
-    "caption": "Defensive stack coverage: the candidate x mitigation-class matrix (24 candidates x 8 mitigation classes = 192 cells) rendered from registry.DEFENSIVE_STACK with the same colorblind-safe strong/partial/weak/n_a encoding as the property matrix, grouped into the eight candidate categories with per-class coverage marginals.",
+    "caption": "Defensive-stack coverage across eight mitigation classes: weak cells cluster on conventional desktops while compartmentalized, server, and high-assurance candidates concentrate strong stances in sandboxing, verified boot, and update operations.",
     "figure_id": "figure_003",
     "filename": "defensive_stack.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:defensive_stack",
     "metadata": {
-      "alt_text": "Defensive stack coverage: the candidate x mitigation-class matrix (24 candidates x 8 mitigation classes = 192 cells) rendered from registry.DEFENSIVE_STACK with the same colorblind-safe strong/partial/weak/n_a encoding as the property matrix, grouped into the eight candidate categories with per-class coverage marginals.",
+      "alt_text": "Defensive-stack coverage across eight mitigation classes: weak cells cluster on conventional desktops while compartmentalized, server, and high-assurance candidates concentrate strong stances in sandboxing, verified boot, and update operations.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
@@ -42,13 +42,13 @@
     "width": "0.9\\textwidth"
   },
   "fig:evidence_timeline": {
-    "caption": "Evidence timeline for the offensive-AI baseline, 2024\u20132026, in two lanes: offensive capability and governance evidence (NCSC 2024 and 2025 assessments, the 2025 Anthropic campaign investigations and OWASP agentic publications, MCP registry and spec milestones, the CISA-led Five Eyes adoption guidance, and the 2026 AISI incident report) and platform incidents and releases (Qubes OS 4.3.0, Nix 2.34/2.35 and its advisories, the hardened-profile removal, secureblue, OpenBSD 7.9, seL4 16.0.0, QSB advisories, and the OpenAI-Hugging Face incident report).",
+    "caption": "Two lanes of primary evidence, January 2024 through August 2026: offensive capability and governance milestones above, platform incident and release milestones below; marker color encodes evidentiary tier, and each callout names the primary source.",
     "figure_id": "figure_001",
     "filename": "evidence_timeline.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:evidence_timeline",
     "metadata": {
-      "alt_text": "Evidence timeline for the offensive-AI baseline, 2024\u20132026, in two lanes: offensive capability and governance evidence (NCSC 2024 and 2025 assessments, the 2025 Anthropic campaign investigations and OWASP agentic publications, MCP registry and spec milestones, the CISA-led Five Eyes adoption guidance, and the 2026 AISI incident report) and platform incidents and releases (Qubes OS 4.3.0, Nix 2.34/2.35 and its advisories, the hardened-profile removal, secureblue, OpenBSD 7.9, seL4 16.0.0, QSB advisories, and the OpenAI-Hugging Face incident report).",
+      "alt_text": "Two lanes of primary evidence, January 2024 through August 2026: offensive capability and governance milestones above, platform incident and release milestones below; marker color encodes evidentiary tier, and each callout names the primary source.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
@@ -56,13 +56,13 @@
     "width": "0.9\\textwidth"
   },
   "fig:forecast_horizon": {
-    "caption": "The 2028\u20132031 forecast horizon: the registered forecast claims grouped by confidence tier \u2014 high-confidence architectural bets, moderate execution-dependent outcomes, and low-confidence claims the analysis declines to endorse \u2014 across operating-system architecture, agent authority, and supply-chain domains. The horizon bounds this review's expectations; it is not a release schedule for any project.",
+    "caption": "Fourteen forecasts placed on the 2026\u20132031 horizon by confidence tier; high-confidence architectural bets cluster early, while low-confidence rows are explicit refusals to predict a distribution winner.",
     "figure_id": "figure_008",
     "filename": "forecast_horizon.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:forecast_horizon",
     "metadata": {
-      "alt_text": "The 2028\u20132031 forecast horizon: the registered forecast claims grouped by confidence tier \u2014 high-confidence architectural bets, moderate execution-dependent outcomes, and low-confidence claims the analysis declines to endorse \u2014 across operating-system architecture, agent authority, and supply-chain domains. The horizon bounds this review's expectations; it is not a release schedule for any project.",
+      "alt_text": "Fourteen forecasts placed on the 2026\u20132031 horizon by confidence tier; high-confidence architectural bets cluster early, while low-confidence rows are explicit refusals to predict a distribution winner.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
@@ -70,13 +70,13 @@
     "width": "0.9\\textwidth"
   },
   "fig:orchestration_boundaries": {
-    "caption": "Orchestration boundaries: a planner decomposes a task into worker assignments; executors run one isolated task environment each; a tool broker mediates every privileged filesystem, browser, CI, cloud, and messaging operation against task-scoped policy; approval for consequential actions originates outside the orchestration hierarchy; and an append-only audit trail beyond every agent's write authority records broker decisions, credential events, and approvals.",
+    "caption": "A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing.",
     "figure_id": "figure_006",
     "filename": "orchestration_boundaries.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:orchestration_boundaries",
     "metadata": {
-      "alt_text": "Orchestration boundaries: a planner decomposes a task into worker assignments; executors run one isolated task environment each; a tool broker mediates every privileged filesystem, browser, CI, cloud, and messaging operation against task-scoped policy; approval for consequential actions originates outside the orchestration hierarchy; and an append-only audit trail beyond every agent's write authority records broker decisions, credential events, and approvals.",
+      "alt_text": "A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
@@ -84,13 +84,13 @@
     "width": "0.9\\textwidth"
   },
   "fig:property_matrix": {
-    "caption": "The candidate\u2013property stance matrix across 24 candidates and 9 properties, rendered from output/data/evaluation_matrix.csv with colorblind-safe encoding of the strong/partial/weak/n_a vocabulary.",
+    "caption": "All 216 candidate-by-property stances, with candidates grouped into eight category bands (left strip) and per-property stance distributions (right marginals); glyphs mark strong (S), partial (P), weak (W), and not-assessed cells.",
     "figure_id": "figure_002",
     "filename": "property_matrix.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:property_matrix",
     "metadata": {
-      "alt_text": "The candidate\u2013property stance matrix across 24 candidates and 9 properties, rendered from output/data/evaluation_matrix.csv with colorblind-safe encoding of the strong/partial/weak/n_a vocabulary.",
+      "alt_text": "All 216 candidate-by-property stances, with candidates grouped into eight category bands (left strip) and per-property stance distributions (right marginals); glyphs mark strong (S), partial (P), weak (W), and not-assessed cells.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
@@ -98,13 +98,13 @@
     "width": "0.9\\textwidth"
   },
   "fig:trust_domains": {
-    "caption": "The seven trust domains of the proposed agentic authority architecture and the boundaries between them. Administration, personal identity, and the credential service hold assets whose loss is not recoverable by rebuilding; agent execution and browsing/intake meet hostile input and are deliberately disposable; release/deployment mediates what leaves; recovery sits beyond the destructive authority of everything else. The architecture's objective is real separation of authority, not maximizing the number of compartments.",
+    "caption": "Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets; numbered arrows mark the control catalog entries that mediate each crossing.",
     "figure_id": "figure_004",
     "filename": "trust_domains.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:trust_domains",
     "metadata": {
-      "alt_text": "The seven trust domains of the proposed agentic authority architecture and the boundaries between them. Administration, personal identity, and the credential service hold assets whose loss is not recoverable by rebuilding; agent execution and browsing/intake meet hostile input and are deliberately disposable; release/deployment mediates what leaves; recovery sits beyond the destructive authority of everything else. The architecture's objective is real separation of authority, not maximizing the number of compartments.",
+      "alt_text": "Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets; numbered arrows mark the control catalog entries that mediate each crossing.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
@@ -112,13 +112,13 @@
     "width": "0.9\\textwidth"
   },
   "fig:update_windows": {
-    "caption": "Stated update and support windows for all 24 candidates, colored by candidate category; hatched bars mark projects whose documented policy is rolling or lifecycle-based without a fixed support window (registry.UPDATE_WINDOWS carries the per-candidate policy detail).",
+    "caption": "Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category.",
     "figure_id": "figure_009",
     "filename": "update_windows.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:update_windows",
     "metadata": {
-      "alt_text": "Stated update and support windows for all 24 candidates, colored by candidate category; hatched bars mark projects whose documented policy is rolling or lifecycle-based without a fixed support window (registry.UPDATE_WINDOWS carries the per-candidate policy detail).",
+      "alt_text": "Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",

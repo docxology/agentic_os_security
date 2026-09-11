@@ -1,4 +1,4 @@
-# Introduction: Agents Arrive at the Kernel Boundary {#sec:introduction}
+# Introduction: Offensive AI Agents Arrive at the Operating-System Boundary {#sec:introduction}
 
 ## Why this review, now
 

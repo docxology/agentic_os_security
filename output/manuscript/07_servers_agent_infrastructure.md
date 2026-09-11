@@ -1,4 +1,4 @@
-# Servers and Agent-Execution Infrastructure {#sec:servers}
+# Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline {#sec:servers}
 
 Server selection differs from desktop selection in what dominates. Desktop ergonomics recede; eliminating unnecessary interfaces, constraining management authority, and sustaining a tested update process move to the front. The candidates below target different workloads — Kubernetes nodes, container hosts, appliances, minimal systems, general-purpose servers — so [@tbl:servers] is a selection guide per workload, not a universal ranking. Judgments follow documented designs and support policies reviewed on 2026-09-10, not comparative penetration testing, and no numeric scores are assigned.
 
@@ -21,7 +21,7 @@ During the review window the integrity paths of these candidates moved: Talos ma
 
 Support-policy diversity is easier to see than to state, so [@fig:update_windows] plots the documented support or update posture of each of the 24 candidates, colored by category, with rows annotated where a project states no fixed window. Some candidates commit to dated horizons — Ubuntu Core's fifteen-year window for Core 26 [@ubuntu_core_26_fde], Debian's LTS coverage to 2030-06-30 [@debian_trixie], Fedora's release end-of-life dates [@fedora_release_lifecycle] — while others hold rolling or release-relative postures this review records as policy rather than months. Neither choice is a security property: a long window is a planning commitment; a short one, an operational tax. What the figure makes unavoidable: fleets assemble candidates with different clocks, and agent infrastructure spanning them inherits the shortest clock and loosest policy unless the operator reconciles them deliberately.
 
-![Documented support and update posture across the 24 candidates, drawn as horizontal timeline bars and colored by candidate category, with an explicit "policy-defined" annotation where a project states no fixed support window instead of a fabricated duration. The figure supports the argument of [@sec:servers]: maintenance clocks are heterogeneous, documented, and part of the security architecture an operator must compose — they are not security scores.](../output/figures/update_windows.png){#fig:update_windows width=100%}
+![Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category.](../output/figures/update_windows.png){#fig:update_windows width=100%}
 
 ## An execution baseline for untrusted agent workloads
 

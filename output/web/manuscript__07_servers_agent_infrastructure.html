@@ -565,7 +565,8 @@ mjx-container[display="true"] {
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
-<h1 id="sec:servers">Servers and Agent-Execution Infrastructure</h1>
+<h1 id="sec:servers">Servers and Agent-Execution Infrastructure: The
+Disposable-Isolation Baseline</h1>
 <p>Server selection differs from desktop selection in what dominates.
 Desktop ergonomics recede; eliminating unnecessary interfaces,
 constraining management authority, and sustaining a tested update
@@ -742,16 +743,12 @@ makes unavoidable: fleets assemble candidates with different clocks, and
 agent infrastructure spanning them inherits the shortest clock and
 loosest policy unless the operator reconciles them deliberately.</p>
 <figure id="fig:update_windows">
-<a class="figure-full-size-link" href="../figures/update_windows.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Documented support and update posture across the 24 candidates, drawn as horizontal timeline…"><img src="../figures/update_windows.png" style="width:100.0%"
-alt="Stated update and support windows for all 24 candidates, colored by candidate category; hatched bars mark projects whose documented policy is rolling or lifecycle-based without a fixed support window (registry.UPDATE_WINDOWS carries the per-candidate policy detail)." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>Documented support and update posture
-across the 24 candidates, drawn as horizontal timeline bars and colored
-by candidate category, with an explicit “policy-defined” annotation
-where a project states no fixed support window instead of a fabricated
-duration. The figure supports the argument of <span class="citation"
-data-cites="sec:servers">[@sec:servers]</span>: maintenance clocks are
-heterogeneous, documented, and part of the security architecture an
-operator must compose — they are not security scores.</figcaption>
+<a class="figure-full-size-link" href="../figures/update_windows.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Documented support windows for all twenty-four candidates"><img src="../figures/update_windows.png" style="width:100.0%"
+alt="Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>Documented support windows for all
+twenty-four candidates; hatched bars mark rolling or lifecycle-based
+policies with no fixed window, and color encodes the candidate
+category.</figcaption>
 </figure>
 <h2 id="an-execution-baseline-for-untrusted-agent-workloads">An
 execution baseline for untrusted agent workloads</h2>

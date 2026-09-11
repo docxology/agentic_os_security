@@ -53,45 +53,45 @@ while executing---line 1394 of file plainnat.bst
 while executing---line 1394 of file plainnat.bst
 152 isn't valid ASCII for entry whonix_workstation_security
 while executing---line 1394 of file plainnat.bst
-You've used 152 entries,
+You've used 157 entries,
             2773 wiz_defined-function locations,
-            1130 strings with 24719 characters,
-and the built_in function-call counts, 47589 in all, are:
-= -- 4362
-> -- 1676
-< -- 151
-+ -- 758
-- -- 504
-* -- 2358
-:= -- 7272
-add.period$ -- 602
-call.type$ -- 152
-change.case$ -- 623
-chr.to.int$ -- 50
-cite$ -- 304
-duplicate$ -- 2321
-empty$ -- 4902
-format.name$ -- 662
-if$ -- 10286
-int.to.chr$ -- 103
+            1151 strings with 26297 characters,
+and the built_in function-call counts, 49114 in all, are:
+= -- 4502
+> -- 1726
+< -- 156
++ -- 782
+- -- 519
+* -- 2433
+:= -- 7504
+add.period$ -- 622
+call.type$ -- 157
+change.case$ -- 643
+chr.to.int$ -- 51
+cite$ -- 314
+duplicate$ -- 2396
+empty$ -- 5062
+format.name$ -- 682
+if$ -- 10616
+int.to.chr$ -- 107
 int.to.str$ -- 1
 missing$ -- 6
-newline$ -- 914
-num.names$ -- 608
-pop$ -- 1829
+newline$ -- 944
+num.names$ -- 628
+pop$ -- 1889
 preamble$ -- 1
-purify$ -- 472
+purify$ -- 487
 quote$ -- 0
-skip$ -- 1747
+skip$ -- 1801
 stack$ -- 0
-substring$ -- 405
-swap$ -- 258
+substring$ -- 415
+swap$ -- 268
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1667
+type$ -- 1722
 warning$ -- 0
-while$ -- 465
+while$ -- 480
 width$ -- 0
-write$ -- 2128
+write$ -- 2198
 (There were 25 error messages)

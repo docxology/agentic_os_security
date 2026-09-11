@@ -1,4 +1,4 @@
-# Cognitive Security: The Authorized-Misuse Surface {#sec:cognitive_security}
+# Cognitive Security: Defending the Authorized-Misuse Surface {#sec:cognitive_security}
 
 ## Grounding: the authorized-misuse record
 
@@ -40,6 +40,8 @@ The second cognitive surface is the agent's own output, consumed as evidence by 
 
 The response is not exhortation to stay vigilant; it is the design of boundaries around cognition, parallel to the boundaries the trust-domain architecture draws around authority. The official posture of the Five Eyes intelligence communities has converged on the same shape: the CISA-led guidance on careful adoption of agentic AI services — published 2026-04-30 — directs adopting organizations to sandboxed deployment, low-risk tasks first, threat-model-based evaluations, and red-teaming before wider rollout [@cisa_agentic_guidance]. Low-risk-first adoption is a cognitive boundary expressed operationally: it prices each delegation by consequence and earns higher-risk authority gradually, which is the friction-proportional-to-impact principle stated as adoption policy rather than interface design. It is notable that official guidance and the vendor engineering record of [@sec:agentic_authority] converge independently on sandboxing-plus-graduated-authority as the default posture.
 
+Formal work on agent integrity gives this design target names: belief integrity — the agent's working beliefs remaining traceable to what the principal actually established — and goal preservation — the objectives the agent pursues remaining the principal's — are stated, checkable properties rather than exhortations, and the boundaries below are the mechanisms that hold them [@cif_formal_2026].
+
 **Consequential-action gating.** The set of operations that cause irreversible or high-blast-radius change — publishing, production deployment, secret issuance, policy modification — must pass through gates outside the agent, per the external-approvals and operation-mediation controls of [@sec:agentic_authority]. Gating is the cognitive counterpart of least privilege: it assumes the agent's reasoning can be subverted and therefore places the irreversible step elsewhere.
 
 **Friction proportional to impact.** As above: approval effort should scale with consequence, and the consequential tier should use modalities that resist habituation. A uniform confirm-everything design trains the operator to confirm everything reflexively, including the consequential cases.
@@ -49,6 +51,8 @@ The response is not exhortation to stay vigilant; it is the design of boundaries
 **The second-AI-instance independence fallacy.** A tempting mitigation routes an agent's output through a second AI instance that reviews it before consequential action. A second instance reading the same hostile material, drawing on the same training lineage and the same context documents, is not automatically an independent security boundary: the failure modes are correlated, and an attacker who crafts material to persuade one model has material crafted to persuade models of its class. This fallacy matters because it flatters the design instinct that adding a reviewer suffices. Independence must come from structural difference — different information (the reviewer sees the artifact and the instruction provenance, not the agent's working context), different failure modes, or the deterministic enforcement of a policy that cannot be persuaded at all.
 
 **Verification as a cognitive control.** Where agent claims matter — findings, completed work, security assessments — the design question is what independent check exists. The AISI record is again instructive: the institute's investigation, not the agents' self-reports, established what had happened and what harm had or had not resulted [@aisi_incident_report]. The equivalent operator practice is grounding agent claims in artifacts that can be checked — test results, reproduced builds, diffs — rather than in the agent's narration of them.
+
+**Operator-side analytic tradecraft.** The controls above assume an operator whose judgment is itself trained and checkable, and the operator side now has an inspectable compensating layer: roughly one hundred cognitive-security and analytic-tradecraft skills — structured analytic techniques, deception detection, source verification, critical review — packaged to run under the same coding harnesses that run agent workloads, so the checks an operator applies to agent output are runnable, inspectable artifacts rather than ad-hoc habits [@cogsecskills2026]. The tradecraft behind that skill collection has an educational upstream in structured analytic intelligence curriculum [@ageint2026].
 
 ## Monitoring is itself an unsolved cognitive and control problem
 

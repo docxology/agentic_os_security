@@ -136,7 +136,7 @@
 \protected\def\breakseq#1{\seqsplit{#1}}
 \protected\def\breaktt#1{\begingroup\ttfamily\seqsplit{#1}\endgroup}
 \title{Agentic Security and Operating Systems}
-\author{Daniel Ari Friedman\\\footnotesize{Active Inference Institute}\\\footnotesize{\texttt{daniel@activeinference.institute}}\\\footnotesize{\href{https://orcid.org/0000-0001-6232-9096}{ORCID: 0000-0001-6232-9096}}}
+\author{Daniel Ari Friedman}
 \date{2026-09-10}
 
 % Core mathematics
@@ -209,7 +209,26 @@
 \newtheorem{example}[theorem]{Example}
 
 \begin{document}
-\maketitle
+\begin{titlepage}
+\centering
+\vspace*{0.55cm}
+{\Huge\sffamily\bfseries Agentic Security and Operating Systems\par}
+\vspace{0.4em}
+
+\vspace{0.75em}
+{\large\sffamily\bfseries Daniel Ari Friedman\par}
+{\small\sffamily Active Inference Institute\par}
+{\small\sffamily\texttt{daniel@activeinference.institute}\par}
+{\small\sffamily\href{https://orcid.org/0000-0001-6232-9096}{ORCID: 0000-0001-6232-9096}\par}
+\vspace{0.08em}
+\vspace{0.35em}
+\makeatletter
+{\@date\par}
+\makeatother
+\vfill
+\includegraphics[width=0.98\textwidth,height=0.6\textheight,keepaspectratio,alt={Graphical abstract: the two failure paths feed a nine-property evaluation of twenty-four operating systems, converging on the composition thesis — compartmentalization, reproducible operations, boot integrity, and capability-limited agents as one design target.}]{\detokenize{../figures/graphical_abstract.png}}
+\vfill
+\end{titlepage}
 \thispagestyle{empty}
 \tableofcontents
 \newpage
@@ -230,7 +249,7 @@ requires no kernel exploit at all, which reframes the evaluation: the
 axis of analysis is the authority a component already holds, not merely
 the difficulty of exploiting it.
 
-This revision (0.2.0) refreshes the evidence base through September 11,
+This revision (0.3.0) refreshes the evidence base through September 11,
 2026. The offensive baseline expands from four primary sources to the
 incident record now available: the NCSC assessments of January 2024 and
 May 2025, the Anthropic campaign investigation of November 2025 ---
@@ -273,8 +292,8 @@ offensive AI, reproducible builds.
 
 \newpage
 
-\section{Introduction: Agents Arrive at the Kernel
-Boundary}\label{sec:introduction}
+\section{Introduction: Offensive AI Agents Arrive at the
+Operating-System Boundary}\label{sec:introduction}
 
 \subsection{Why this review, now}\label{why-this-review-now}
 
@@ -566,7 +585,8 @@ property.
 
 \newpage
 
-\section{Threat Model: Two Ways to Lose}\label{sec:threat_model}
+\section{Threat Model: Two Ways to Lose --- Exploitation and Authorized
+Misuse}\label{sec:threat_model}
 
 \subsection{The primary scenario}\label{the-primary-scenario}
 
@@ -796,22 +816,12 @@ properties this review evaluates. \\
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Evidence timeline for the offensive-AI baseline, 2024--2026, in two lanes with month precision. Offensive capability and governance evidence: the NCSC assessments of January 2024 and May 2025 (2027 capability horizon), the August 2025 GTG-2002 ``vibe hacking'' report, the September 2025 MCP registry preview, the November 2025 GTG-1002 campaign investigation alongside the OWASP Agentic Threats and Mitigations guide, the December 2025 OWASP Top 10 for Agentic Applications, the February 2026 OpenAI consolidated disruption report, the April 2026 CISA-led Five-Eyes adoption guidance, and the August 2026 AISI incident report. Platform incidents and releases: Qubes OS 4.3.0 (December 2025), Nix 2.34 (February 2026) and secureblue v4.3.0 alongside the removed NixOS hardened profiles (March 2026), the April 2026 Nix symlink advisory, OpenBSD 7.9 (May 2026), Nix 2.35 and QSB-116 (June 2026), seL4 16.0.0 and QSB-118 (July 2026), and the August 2026 OpenAI--Hugging Face incident report.}]{../figures/evidence_timeline.png}
-\caption{Evidence timeline for the offensive-AI baseline, 2024--2026, in
-two lanes with month precision. Offensive capability and governance
-evidence: the NCSC assessments of January 2024 and May 2025 (2027
-capability horizon), the August 2025 GTG-2002 ``vibe hacking'' report,
-the September 2025 MCP registry preview, the November 2025 GTG-1002
-campaign investigation alongside the OWASP Agentic Threats and
-Mitigations guide, the December 2025 OWASP Top 10 for Agentic
-Applications, the February 2026 OpenAI consolidated disruption report,
-the April 2026 CISA-led Five-Eyes adoption guidance, and the August 2026
-AISI incident report. Platform incidents and releases: Qubes OS 4.3.0
-(December 2025), Nix 2.34 (February 2026) and secureblue v4.3.0
-alongside the removed NixOS hardened profiles (March 2026), the April
-2026 Nix symlink advisory, OpenBSD 7.9 (May 2026), Nix 2.35 and QSB-116
-(June 2026), seL4 16.0.0 and QSB-118 (July 2026), and the August 2026
-OpenAI--Hugging Face incident report.}\label{fig:evidence_timeline}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Two lanes of primary evidence, January 2024 through August 2026: offensive capability and governance milestones above, platform incident and release milestones below; marker color encodes evidentiary tier, and each callout names the primary source.}]{../figures/evidence_timeline.png}
+\caption{Two lanes of primary evidence, January 2024 through August
+2026: offensive capability and governance milestones above, platform
+incident and release milestones below; marker color encodes evidentiary
+tier, and each callout names the primary
+source.}\label{fig:evidence_timeline}
 \end{figure}
 
 \subsubsection{What the incident record actually
@@ -918,7 +928,7 @@ that follow.
 
 \newpage
 
-\section{Evaluation Framework: Properties over
+\section{Evaluation Framework: Nine Properties over Distribution
 Labels}\label{sec:evaluation_framework}
 
 \subsection{Why not a distribution
@@ -1113,11 +1123,11 @@ renders the current matrix.
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={The candidate--property stance matrix across 24 candidates and 9 properties, rendered from output/data/evaluation\_matrix.csv with colorblind-safe encoding of the strong/partial/weak/n\_a vocabulary.}]{../figures/property_matrix.png}
-\caption{The candidate--property stance matrix across 24 candidates and
-9 properties, rendered from output/data/evaluation\_matrix.csv with
-colorblind-safe encoding of the strong/partial/weak/n\_a
-vocabulary.}\label{fig:property_matrix}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={All 216 candidate-by-property stances, with candidates grouped into eight category bands (left strip) and per-property stance distributions (right marginals); glyphs mark strong (S), partial (P), weak (W), and not-assessed cells.}]{../figures/property_matrix.png}
+\caption{All 216 candidate-by-property stances, with candidates grouped
+into eight category bands (left strip) and per-property stance
+distributions (right marginals); glyphs mark strong (S), partial (P),
+weak (W), and not-assessed cells.}\label{fig:property_matrix}
 \end{figure}
 
 \subsection{The defensive stack: mitigation classes as a second
@@ -1132,7 +1142,11 @@ of kernel primitives --- sandboxing namespaces, restricted user
 namespaces, seccomp filters, egress proxies --- while microvisor and
 unikernel candidates push different classes (verified boot, disposable
 execution) to their limits (sec.~\ref{sec:servers}). The defensive-stack
-matrix captures that second view as data.
+matrix captures that second view as data, and treats layered controls as
+formal objects rather than a checklist: the Cognitive Integrity
+Framework's Defense Composition Algebra reasons about defenses composed
+over bounded-trust delegates, prior art this stack operationalizes as
+concrete per-class stances \citep{cif_formal_2026}.
 
 In \texttt{registry.py}, \breaktt{MITIGATION\_CLASSES} defines the eight
 mitigation classes --- \texttt{memory\_safety} (memory-safe
@@ -1160,14 +1174,11 @@ coverage marginal.
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={The defensive-stack matrix: 24 candidates scored against eight mitigation classes --- memory safety, allocator hardening, sandboxing primitives, MAC framework, verified boot, reproducible deployment, disposable execution, and update automation --- using the strong/partial/weak/n\_a stance vocabulary, rendered from output/data/defensive\_stack.csv with candidate categories grouped and per-class coverage shown as a marginal bar.}]{../figures/defensive_stack.png}
-\caption{The defensive-stack matrix: 24 candidates scored against eight
-mitigation classes --- memory safety, allocator hardening, sandboxing
-primitives, MAC framework, verified boot, reproducible deployment,
-disposable execution, and update automation --- using the
-strong/partial/weak/n\_a stance vocabulary, rendered from
-output/data/defensive\_stack.csv with candidate categories grouped and
-per-class coverage shown as a marginal bar.}\label{fig:defensive_stack}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Defensive-stack coverage across eight mitigation classes: weak cells cluster on conventional desktops while compartmentalized, server, and high-assurance candidates concentrate strong stances in sandboxing, verified boot, and update operations.}]{../figures/defensive_stack.png}
+\caption{Defensive-stack coverage across eight mitigation classes: weak
+cells cluster on conventional desktops while compartmentalized, server,
+and high-assurance candidates concentrate strong stances in sandboxing,
+verified boot, and update operations.}\label{fig:defensive_stack}
 \end{figure}
 
 Reading the two matrices together is the point. A candidate can hold a
@@ -1246,7 +1257,8 @@ for reproducible operations \citep{nixos_wiki}.
 
 \newpage
 
-\section{Compartmentalization: Qubes OS in Depth}\label{sec:qubes}
+\section{Compartmentalization: Qubes OS Under Offensive-Agent
+Load}\label{sec:qubes}
 
 \subsection{Architectural foundation: separation under
 Xen}\label{architectural-foundation-separation-under-xen}
@@ -1565,7 +1577,8 @@ enough to patch before automation finds the seam.
 
 \newpage
 
-\section{Reproducible Operations: NixOS in Depth}\label{sec:nixos}
+\section{Reproducible Operations: NixOS and the Build-Service Trust
+Boundary}\label{sec:nixos}
 
 \subsection{The model: declarative configuration, generations,
 rollback}\label{the-model-declarative-configuration-generations-rollback}
@@ -1904,8 +1917,8 @@ supplies what Nix deliberately does not.
 
 \newpage
 
-\section{Conventional Desktops and Hardening
-Candidates}\label{sec:desktops}
+\section{Conventional Desktops: Hardening Candidates and Compatibility
+Costs}\label{sec:desktops}
 
 The two preceding sections examined the architectural poles of this
 review: hypervisor-based compartmentalization in sec.~\ref{sec:qubes}
@@ -2201,7 +2214,8 @@ sec.~\ref{sec:scenarios}.
 
 \newpage
 
-\section{Servers and Agent-Execution Infrastructure}\label{sec:servers}
+\section{Servers and Agent-Execution Infrastructure: The
+Disposable-Isolation Baseline}\label{sec:servers}
 
 Server selection differs from desktop selection in what dominates.
 Desktop ergonomics recede; eliminating unnecessary interfaces,
@@ -2368,15 +2382,11 @@ loosest policy unless the operator reconciles them deliberately.
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Documented support and update posture across the 24 candidates, drawn as horizontal timeline bars and colored by candidate category, with an explicit ``policy-defined'' annotation where a project states no fixed support window instead of a fabricated duration. The figure supports the argument of sec.~: maintenance clocks are heterogeneous, documented, and part of the security architecture an operator must compose --- they are not security scores.}]{../figures/update_windows.png}
-\caption{Documented support and update posture across the 24 candidates,
-drawn as horizontal timeline bars and colored by candidate category,
-with an explicit ``policy-defined'' annotation where a project states no
-fixed support window instead of a fabricated duration. The figure
-supports the argument of sec.~\ref{sec:servers}: maintenance clocks are
-heterogeneous, documented, and part of the security architecture an
-operator must compose --- they are not security
-scores.}\label{fig:update_windows}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category.}]{../figures/update_windows.png}
+\caption{Documented support windows for all twenty-four candidates;
+hatched bars mark rolling or lifecycle-based policies with no fixed
+window, and color encodes the candidate
+category.}\label{fig:update_windows}
 \end{figure}
 
 \subsection{An execution baseline for untrusted agent
@@ -2513,8 +2523,8 @@ operator practices in sec.~\ref{sec:opsec}.
 
 \newpage
 
-\section{Boundary Comparators and Non-Linux
-Systems}\label{sec:comparators}
+\section{Boundary Comparators: What Non-Linux Systems
+Teach}\label{sec:comparators}
 
 The candidates examined so far live inside the Linux workstation and
 server lanes. This section places seven systems that sit outside those
@@ -2816,7 +2826,8 @@ comparators appears in sec.~\ref{sec:scenarios}.
 
 \newpage
 
-\section{Agentic Authority Architecture}\label{sec:agentic_authority}
+\section{Agentic Authority Architecture: Trust Domains, Controls, and
+the Authority Ladder}\label{sec:agentic_authority}
 
 \subsection{The governing rule}\label{the-governing-rule}
 
@@ -2912,16 +2923,10 @@ daily workstation and its agent. \\
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={The seven trust domains of the proposed agentic authority architecture and the boundaries between them. Administration, personal identity, and the credential service hold assets whose loss is not recoverable by rebuilding; agent execution and browsing/intake meet hostile input and are deliberately disposable; release/deployment mediates what leaves; recovery sits beyond the destructive authority of everything else. The architecture's objective is real separation of authority, not maximizing the number of compartments.}]{../figures/trust_domains.png}
-\caption{The seven trust domains of the proposed agentic authority
-architecture and the boundaries between them. Administration, personal
-identity, and the credential service hold assets whose loss is not
-recoverable by rebuilding; agent execution and browsing/intake meet
-hostile input and are deliberately disposable; release/deployment
-mediates what leaves; recovery sits beyond the destructive authority of
-everything else. The architecture's objective is real separation of
-authority, not maximizing the number of
-compartments.}\label{fig:trust_domains}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets; numbered arrows mark the control catalog entries that mediate each crossing.}]{../figures/trust_domains.png}
+\caption{Seven trust domains for AI-assisted work, arranged from hostile
+intake to protected assets; numbered arrows mark the control catalog
+entries that mediate each crossing.}\label{fig:trust_domains}
 \end{figure}
 
 The table and fig.~\ref{fig:trust_domains} encode two design judgments.
@@ -2944,7 +2949,13 @@ crosses the boundaries. Each control below is stated as an operating
 rule with the design rationale that makes it non-negotiable. Where a
 shipping agent tool already implements a version of a rule, the
 rationale cites the documented implementation --- as mechanism evidence,
-not as an endorsement of any tool's security.
+not as an endorsement of any tool's security. The nine are also a
+composed defense rather than a stack of independent toggles: Defense
+Composition Algebra treats layered controls as formal objects whose
+composition --- coverage interactions included, not just their count ---
+determines what an attacker must defeat, and the set below is chosen so
+that each control closes a failure the others leave open
+\citep{cif_formal_2026}.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
@@ -3122,15 +3133,11 @@ boundary.
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={The authority ladder from proposal to revocation. An agent may autonomously occupy the lower rungs --- proposing changes and staging artifacts --- while authorize marks the rung that must lie outside the agent's own control, exercised by a human principal or deterministic policy. Audit and revoke remain principal powers that survive destruction of the execution environment: the record lives outside the environment, and revocation acts on credentials the environment no longer holds.}]{../figures/authority_ladder.png}
-\caption{The authority ladder from proposal to revocation. An agent may
-autonomously occupy the lower rungs --- proposing changes and staging
-artifacts --- while authorize marks the rung that must lie outside the
-agent's own control, exercised by a human principal or deterministic
-policy. Audit and revoke remain principal powers that survive
-destruction of the execution environment: the record lives outside the
-environment, and revocation acts on credentials the environment no
-longer holds.}\label{fig:authority_ladder}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={The six-rung authority ladder as a swimlane across human principal, orchestrator and agent, and tool broker; hatched cells mark exercise paths an agent must never hold without external authorization.}]{../figures/authority_ladder.png}
+\caption{The six-rung authority ladder as a swimlane across human
+principal, orchestrator and agent, and tool broker; hatched cells mark
+exercise paths an agent must never hold without external
+authorization.}\label{fig:authority_ladder}
 \end{figure}
 
 The ladder in fig.~\ref{fig:authority_ladder} gives the architecture its
@@ -3158,6 +3165,16 @@ hinge altogether and are, in this architecture's terms, a design
 admission rather than a mode
 \citep{anthropic_sandboxing, codex_sandboxing}.
 
+The authorize/exercise split is also what keeps delegated trust bounded.
+Formal treatments of agent trust bound a delegate's effective trust by
+what it was authorized to exercise rather than by what it can reach, and
+the ladder encodes that bound structurally: authorization fixes the
+scope, exercise consumes it, and no rung is reachable that lets the
+agent enlarge its own authorization \citep{cif_formal_2026}. The
+orchestration section extends the same bound across agent-to-agent
+delegation chains, where unbounded trust would otherwise amplify with
+each hop sec.~\ref{sec:orchestration}.
+
 The trust domains, controls, and ladder compose into the scenarios of
 sec.~\ref{sec:scenarios}: a Qubes deployment realizes the domains as
 qubes with narrow communication policies \citep{qubes_architecture}, a
@@ -3171,7 +3188,7 @@ sec.~\ref{sec:cognitive_security}.
 
 \newpage
 
-\section{Cognitive Security: The Authorized-Misuse
+\section{Cognitive Security: Defending the Authorized-Misuse
 Surface}\label{sec:cognitive_security}
 
 \subsection{Grounding: the authorized-misuse
@@ -3409,6 +3426,13 @@ official guidance and the vendor engineering record of
 sec.~\ref{sec:agentic_authority} converge independently on
 sandboxing-plus-graduated-authority as the default posture.
 
+Formal work on agent integrity gives this design target names: belief
+integrity --- the agent's working beliefs remaining traceable to what
+the principal actually established --- and goal preservation --- the
+objectives the agent pursues remaining the principal's --- are stated,
+checkable properties rather than exhortations, and the boundaries below
+are the mechanisms that hold them \citep{cif_formal_2026}.
+
 \textbf{Consequential-action gating.} The set of operations that cause
 irreversible or high-blast-radius change --- publishing, production
 deployment, secret issuance, policy modification --- must pass through
@@ -3459,6 +3483,18 @@ resulted \citep{aisi_incident_report}. The equivalent operator practice
 is grounding agent claims in artifacts that can be checked --- test
 results, reproduced builds, diffs --- rather than in the agent's
 narration of them.
+
+\textbf{Operator-side analytic tradecraft.} The controls above assume an
+operator whose judgment is itself trained and checkable, and the
+operator side now has an inspectable compensating layer: roughly one
+hundred cognitive-security and analytic-tradecraft skills --- structured
+analytic techniques, deception detection, source verification, critical
+review --- packaged to run under the same coding harnesses that run
+agent workloads, so the checks an operator applies to agent output are
+runnable, inspectable artifacts rather than ad-hoc habits
+\citep{cogsecskills2026}. The tradecraft behind that skill collection
+has an educational upstream in structured analytic intelligence
+curriculum \citep{ageint2026}.
 
 \subsection{Monitoring is itself an unsolved cognitive and control
 problem}\label{monitoring-is-itself-an-unsolved-cognitive-and-control-problem}
@@ -3578,7 +3614,8 @@ is not.
 
 \newpage
 
-\section{Operator OpSec for Agent Work}\label{sec:opsec}
+\section{Operator OpSec: Identity, Egress, and Incident Response for
+Agent Work}\label{sec:opsec}
 
 Operating-system compartmentalization constrains what a compromised
 component can reach. Operator operational security constrains what a
@@ -3602,6 +3639,14 @@ that discipline into something more than exhortation: standards work now
 defines what an agent's identity can look like, incident reporting
 documents credential theft as a recurring failure mode, and transparency
 regulation turns attribution hygiene into a compliance surface.
+
+Structured self-assessment gives that discipline a reviewable form:
+operator posture assessments and human-oversight checklists, published
+as part of a practical deployment guide for cognitive-integrity
+controls, turn the review of agent-facing authority into a repeatable
+procedure rather than an ad hoc audit \citep{cif_practitioner_2026}. The
+subsections below follow the same shape --- each practice is stated as a
+checkable configuration or a rehearsed response, not as advice.
 
 \subsection{Identity compartmentalization across agent
 contexts}\label{identity-compartmentalization-across-agent-contexts}
@@ -3864,6 +3909,13 @@ agent-platform accounts themselves, not only the task-scoped credentials
 they issued, because a stolen platform key can mint new task authority
 after the original task environment is gone.
 
+Incident-response playbooks published for cognitive-integrity
+deployments ground that rehearsal: the revocation-first,
+rebuild-from-known-good, treat-transmitted-as-disclosed sequence appears
+there as practiced steps with assigned roles and timing rather than as
+principles to be improvised under pressure
+\citep{cif_practitioner_2026}.
+
 \subsection{Zero trust applied to agent tool
 calls}\label{zero-trust-applied-to-agent-tool-calls}
 
@@ -3891,7 +3943,8 @@ per-request credential to judge.
 
 \newpage
 
-\section{Securing Agent Orchestration}\label{sec:orchestration}
+\section{Securing Agent Orchestration: Mediation Points Across
+Protocols}\label{sec:orchestration}
 
 Multi-agent systems introduce a security surface that single-agent
 analysis misses: the orchestration layer that decomposes tasks,
@@ -3972,6 +4025,12 @@ volume, because shared mutable state accumulates authority --- whatever
 lands there becomes reachable by every later task that shares it, which
 is the minimal-shared-state control of tbl.~\ref{tbl:controls} restated
 structurally.
+
+Published deployment guides for cognitive-integrity controls give the
+worker tier the same treatment as a checklist: subagent-hardening
+playbooks that specify a disposable executor's environment, grant set,
+and intake handling as configuration to be reviewed rather than platform
+defaults to be inherited \citep{cif_practitioner_2026}.
 
 \subsection{Protocol-level mediation: MCP and
 A2A}\label{protocol-level-mediation-mcp-and-a2a}
@@ -4062,17 +4121,23 @@ scope, never requests that expand it, and the broker rejects expansions
 as a matter of policy. These three rules convert the deputy from a
 trusted forwarder into a checked channel.
 
+The formal grounding for these rules is \texorpdfstring{\ensuremath{\delta}}{delta}-bounded delegation: each hop
+in an agent-to-agent chain is permitted to narrow the authority it
+passes, never to widen it, so trust cannot amplify across a delegation
+chain no matter how many intermediaries it traverses
+\citep{cif_formal_2026}. That formal model is not left as a statement of
+intent --- its bounded-delegation and trust-boundedness properties have
+been exercised computationally, with implementations validating the
+no-amplification guarantee on constructed delegation scenarios
+\citep{cif_validation_2026}.
+
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Orchestration boundaries: a planner decomposes a task into worker assignments; executors run one isolated task environment each; a tool broker mediates every privileged filesystem, browser, CI, cloud, and messaging operation against task-scoped policy; approval for consequential actions originates outside the orchestration hierarchy; and an append-only audit trail beyond every agent's write authority records broker decisions, credential events, and approvals.}]{../figures/orchestration_boundaries.png}
-\caption{Orchestration boundaries: a planner decomposes a task into
-worker assignments; executors run one isolated task environment each; a
-tool broker mediates every privileged filesystem, browser, CI, cloud,
-and messaging operation against task-scoped policy; approval for
-consequential actions originates outside the orchestration hierarchy;
-and an append-only audit trail beyond every agent's write authority
-records broker decisions, credential events, and
-approvals.}\label{fig:orchestration_boundaries}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing.}]{../figures/orchestration_boundaries.png}
+\caption{A reference orchestration: one orchestrator delegating through
+an MCP-style tool broker to three disposable workers, with the ten
+mediation points numbered at each trust-boundary
+crossing.}\label{fig:orchestration_boundaries}
 \end{figure}
 
 The boundaries in fig.~\ref{fig:orchestration_boundaries} are the
@@ -4159,18 +4224,11 @@ list above.
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={The agent capability surface: six capability classes --- content intake, tool and bridge use, credential touch, external communication, state mutation, and self-modification --- crossed with the ten mediation points of this section's taxonomy, numbered 1 through 10: sandbox primitives, egress proxy, tool annotations, OAuth resource-server binding, URL-mode elicitation, agent-to-agent transport security, agent identity exchange, classifier escalation, sandbox observability, and external approval. Dense rows indicate capability classes with layered mechanical coverage; the content-intake row shows where approval and review, rather than mediation, carry the control.}]{../figures/agent_surface.png}
-\caption{The agent capability surface: six capability classes ---
-content intake, tool and bridge use, credential touch, external
-communication, state mutation, and self-modification --- crossed with
-the ten mediation points of this section's taxonomy, numbered 1 through
-10: sandbox primitives, egress proxy, tool annotations, OAuth
-resource-server binding, URL-mode elicitation, agent-to-agent transport
-security, agent identity exchange, classifier escalation, sandbox
-observability, and external approval. Dense rows indicate capability
-classes with layered mechanical coverage; the content-intake row shows
-where approval and review, rather than mediation, carry the
-control.}\label{fig:agent_surface}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Which mediation point constrains which agent capability class; filled numbered cells mark the primary control, and the right marginal counts how many distinct controls cover each capability.}]{../figures/agent_surface.png}
+\caption{Which mediation point constrains which agent capability class;
+filled numbered cells mark the primary control, and the right marginal
+counts how many distinct controls cover each
+capability.}\label{fig:agent_surface}
 \end{figure}
 
 \subsection{Approval chains across agent
@@ -4442,7 +4500,8 @@ exactly why it must be one the agent cannot complete alone.
 
 \newpage
 
-\section{Forecast: 2028--2031}\label{sec:forecast}
+\section{Forecast: The 2028--2031 Compartmentalization
+Horizon}\label{sec:forecast}
 
 The forecasts in this section cover the 2028--2031 horizon. They are
 reasoned expectations drawn from documented designs, the capability
@@ -4587,14 +4646,11 @@ confidence tier across the horizon.
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={The 2028--2031 forecast horizon: the registered forecast claims grouped by confidence tier --- high-confidence architectural bets, moderate execution-dependent outcomes, and low-confidence claims the analysis declines to endorse --- across operating-system architecture, agent authority, and supply-chain domains. The horizon bounds this review's expectations; it is not a release schedule for any project.}]{../figures/forecast_horizon.png}
-\caption{The 2028--2031 forecast horizon: the registered forecast claims
-grouped by confidence tier --- high-confidence architectural bets,
-moderate execution-dependent outcomes, and low-confidence claims the
-analysis declines to endorse --- across operating-system architecture,
-agent authority, and supply-chain domains. The horizon bounds this
-review's expectations; it is not a release schedule for any
-project.}\label{fig:forecast_horizon}
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Fourteen forecasts placed on the 2026--2031 horizon by confidence tier; high-confidence architectural bets cluster early, while low-confidence rows are explicit refusals to predict a distribution winner.}]{../figures/forecast_horizon.png}
+\caption{Fourteen forecasts placed on the 2026--2031 horizon by
+confidence tier; high-confidence architectural bets cluster early, while
+low-confidence rows are explicit refusals to predict a distribution
+winner.}\label{fig:forecast_horizon}
 \end{figure}
 
 \subsection{Forecasts this analysis
@@ -4636,7 +4692,8 @@ breakthrough than by which compositions people can actually keep.
 
 \newpage
 
-\section{Scenario Recommendations and Confidence}\label{sec:scenarios}
+\section{Scenario Recommendations with Change Conditions and Confidence
+Tiers}\label{sec:scenarios}
 
 The 8 scenarios below map the evaluation of
 sec.~\ref{sec:evaluation_framework} onto recurring situations.
@@ -4780,6 +4837,14 @@ of tbl.~\ref{tbl:trust_domains} is the operating plan for the target,
 and the operator and orchestration disciplines of sec.~\ref{sec:opsec}
 and sec.~\ref{sec:orchestration} are what keep it standing during real
 work.
+
+Operator readiness is trainable as well as structural:
+analytic-tradecraft curricula for agentic work --- the educational line
+behind the inspectable skill libraries cited in
+sec.~\ref{sec:cognitive_security} --- turn the operator's own review
+judgment into a maintained control, on the same footing as the
+configurations and rehearsed responses the recommendations above assume
+\citep{ageint2026}.
 
 The design-target framing carries a practical corollary: a
 well-maintained implementation of part of this design can be safer than
@@ -5025,9 +5090,10 @@ rewards.
 \section{References}\label{sec:references}
 
 The bibliography is generated by Pandoc--natbib from
-\texttt{references.bib} --- 156 entries comprising primary vendor
+\texttt{references.bib} --- 161 entries comprising primary vendor
 documentation, security advisories, incident reports, standards-body
-specifications and guidance, and scholarly anchors; no entries are
+specifications and guidance, scholarly anchors, and the author's
+cognitive-security research works published on Zenodo; no entries are
 listed by hand.
 
 

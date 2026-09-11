@@ -1,0 +1,59 @@
+{
+  "concepts": [
+    {
+      "citation_key": "cif_validation_2026",
+      "concept": "Belief integrity",
+      "concept_id": "belief_integrity",
+      "summary": "The defended system's beliefs remain verifiable against tampering and fabrication \u2014 a named property the authorized-misuse surface must preserve.",
+      "surface": "sec:cognitive_security",
+      "surface_kind": "section"
+    },
+    {
+      "citation_key": "cif_formal_2026",
+      "concept": "Defense Composition Algebra",
+      "concept_id": "defense_composition_algebra",
+      "summary": "Layered controls are formal objects whose composition can be reasoned about, so the nine controls act as a composed defense rather than an ad-hoc stack.",
+      "surface": "sec:agentic_authority",
+      "surface_kind": "section"
+    },
+    {
+      "citation_key": "cif_formal_2026",
+      "concept": "\u03b4-bounded delegation",
+      "concept_id": "delta_bounded_delegation",
+      "summary": "Delegation carries a bounded trust decrement \u03b4: authority granted to a subagent decays across agent-to-agent chains instead of amplifying.",
+      "surface": "operation_mediation",
+      "surface_kind": "control"
+    },
+    {
+      "citation_key": "cif_validation_2026",
+      "concept": "Goal preservation",
+      "concept_id": "goal_preservation",
+      "summary": "The system preserves the principal's stated goals against drift and hijacking across delegation and long-horizon execution.",
+      "surface": "sec:cognitive_security",
+      "surface_kind": "section"
+    },
+    {
+      "citation_key": "cif_formal_2026",
+      "concept": "Info-theoretic stealth-impact bounds",
+      "concept_id": "stealth_impact_bounds",
+      "summary": "Attacker stealth trades off against impact under information-theoretic bounds, so independent audit trails are the detection surface that makes stealth expensive.",
+      "surface": "independent_audit",
+      "surface_kind": "control"
+    },
+    {
+      "citation_key": "cif_validation_2026",
+      "concept": "Trust boundedness",
+      "concept_id": "trust_boundedness",
+      "summary": "Accumulated trust stays bounded: the authority ladder's authorize/exercise split keeps delegated trust from exceeding the principal's grant.",
+      "surface": "sec:agentic_authority",
+      "surface_kind": "section"
+    }
+  ],
+  "mapped_surfaces": [
+    "independent_audit",
+    "operation_mediation",
+    "sec:agentic_authority",
+    "sec:cognitive_security"
+  ],
+  "num_concepts": 6
+}

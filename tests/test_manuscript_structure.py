@@ -13,57 +13,63 @@ import pytest
 SECTION_FILES = {
     "00_abstract.md": ("Abstract", "sec:abstract"),
     "01_introduction.md": (
-        "Introduction: Agents Arrive at the Kernel Boundary",
+        "Introduction: Offensive AI Agents Arrive at the Operating-System Boundary",
         "sec:introduction",
     ),
-    "02_threat_model.md": ("Threat Model: Two Ways to Lose", "sec:threat_model"),
+    "02_threat_model.md": (
+        "Threat Model: Two Ways to Lose — Exploitation and Authorized Misuse",
+        "sec:threat_model",
+    ),
     "03_evaluation_framework.md": (
-        "Evaluation Framework: Properties over Labels",
+        "Evaluation Framework: Nine Properties over Distribution Labels",
         "sec:evaluation_framework",
     ),
     "04_compartmentalization_qubes.md": (
-        "Compartmentalization: Qubes OS in Depth",
+        "Compartmentalization: Qubes OS Under Offensive-Agent Load",
         "sec:qubes",
     ),
     "05_reproducible_operations_nixos.md": (
-        "Reproducible Operations: NixOS in Depth",
+        "Reproducible Operations: NixOS and the Build-Service Trust Boundary",
         "sec:nixos",
     ),
     "06_conventional_desktops.md": (
-        "Conventional Desktops and Hardening Candidates",
+        "Conventional Desktops: Hardening Candidates and Compatibility Costs",
         "sec:desktops",
     ),
     "07_servers_agent_infrastructure.md": (
-        "Servers and Agent-Execution Infrastructure",
+        "Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline",
         "sec:servers",
     ),
     "08_boundary_comparators.md": (
-        "Boundary Comparators and Non-Linux Systems",
+        "Boundary Comparators: What Non-Linux Systems Teach",
         "sec:comparators",
     ),
     "09_agentic_authority_architecture.md": (
-        "Agentic Authority Architecture",
+        "Agentic Authority Architecture: Trust Domains, Controls, and the Authority Ladder",
         "sec:agentic_authority",
     ),
     "10_cognitive_security.md": (
-        "Cognitive Security: The Authorized-Misuse Surface",
+        "Cognitive Security: Defending the Authorized-Misuse Surface",
         "sec:cognitive_security",
     ),
     "11_opsec_for_agent_operators.md": (
-        "Operator OpSec for Agent Work",
+        "Operator OpSec: Identity, Egress, and Incident Response for Agent Work",
         "sec:opsec",
     ),
     "12_orchestration_security.md": (
-        "Securing Agent Orchestration",
+        "Securing Agent Orchestration: Mediation Points Across Protocols",
         "sec:orchestration",
     ),
     "13_configuration_authorization.md": (
         "Configuration Generation Is Not Authorization",
         "sec:configuration_authorization",
     ),
-    "14_forecast_2028_2031.md": ("Forecast: 2028–2031", "sec:forecast"),
+    "14_forecast_2028_2031.md": (
+        "Forecast: The 2028–2031 Compartmentalization Horizon",
+        "sec:forecast",
+    ),
     "15_scenarios_and_confidence.md": (
-        "Scenario Recommendations and Confidence",
+        "Scenario Recommendations with Change Conditions and Confidence Tiers",
         "sec:scenarios",
     ),
     "16_conclusion.md": ("Conclusion: The Composition That Matters", "sec:conclusion"),

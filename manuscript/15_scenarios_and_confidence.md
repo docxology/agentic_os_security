@@ -1,4 +1,4 @@
-# Scenario Recommendations and Confidence {#sec:scenarios}
+# Scenario Recommendations with Change Conditions and Confidence Tiers {#sec:scenarios}
 
 The {{CONFIG_NUM_SCENARIOS}} scenarios below map the evaluation of [@sec:evaluation_framework] onto recurring situations. Recommendations are conditional judgments from documented designs and advisories, not an absolute ordering across every threat model. The assumptions matter enough that changing the hardware, the required software, or the adversary can change the recommendation; the change conditions state what would.
 
@@ -25,6 +25,8 @@ The refresh behind these rows is current, and it is worth stating what changed w
 ## The strongest overall direction
 
 The strongest synthesis across the reviews is: **Qubes-like containment, Nix-like reproducible operations, strong boot and update integrity, and capability-limited agents.** This is a design target, not a product claim. No reviewed system ships all four properties as a default, and they are exactly the non-substitutable set that [@sec:evaluation_framework] argues must be evaluated separately: containment without reproducible operations decays; reproducible operations without containment standardizes a single wide domain; both without boot and update integrity rest on an unverified foundation; all three without capability-limited agents leave the authorized-misuse path open ([@sec:agentic_authority]). The trust-domain architecture of [@tbl:trust_domains] is the operating plan for the target, and the operator and orchestration disciplines of [@sec:opsec] and [@sec:orchestration] are what keep it standing during real work.
+
+Operator readiness is trainable as well as structural: analytic-tradecraft curricula for agentic work — the educational line behind the inspectable skill libraries cited in [@sec:cognitive_security] — turn the operator's own review judgment into a maintained control, on the same footing as the configurations and rehearsed responses the recommendations above assume [@ageint2026].
 
 The design-target framing carries a practical corollary: a well-maintained implementation of part of this design can be safer than an ambitious combination whose integration nobody reliably owns. The Qubes-plus-NixOS combination is the standing example. Community work on a NixOS template exists [@qubes_issue_7992], but community templates do not receive updates from the Qubes project itself [@qubes_templates], and the integration — not either component — is where maintenance risk accumulates ([@sec:nixos]). Ownership is part of the security property: who reviews the composition, who patches it, who rehearses its recovery. An unowned maximal stack decays into exactly the neglected-architecture failure that [@sec:qubes] and [@sec:nixos] both document, while a smaller, owned one compounds its advantages over time.
 

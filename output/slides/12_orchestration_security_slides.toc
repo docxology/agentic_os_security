@@ -1,1 +1,1 @@
-\beamer@sectionintoc {1}{Securing Agent Orchestration}{1}{0}{1}
+\beamer@sectionintoc {1}{Securing Agent Orchestration: Mediation Points Across Protocols}{1}{0}{1}

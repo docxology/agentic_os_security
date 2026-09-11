@@ -565,7 +565,8 @@ mjx-container[display="true"] {
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
-<h1 id="sec:agentic_authority">Agentic Authority Architecture</h1>
+<h1 id="sec:agentic_authority">Agentic Authority Architecture: Trust
+Domains, Controls, and the Authority Ladder</h1>
 <h2 id="the-governing-rule">The governing rule</h2>
 <p>Every architecture in this review answers the exploitation path
 defined in <span class="citation"
@@ -669,17 +670,11 @@ its agent.</td>
 </tbody>
 </table></div>
 <figure id="fig:trust_domains">
-<a class="figure-full-size-link" href="../figures/trust_domains.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The seven trust domains of the proposed agentic authority architecture"><img src="../figures/trust_domains.png" style="width:100.0%"
-alt="The seven trust domains of the proposed agentic authority architecture and the boundaries between them. Administration, personal identity, and the credential service hold assets whose loss is not recoverable by rebuilding; agent execution and browsing/intake meet hostile input and are deliberately disposable; release/deployment mediates what leaves; recovery sits beyond the destructive authority of everything else. The architecture&#x27;s objective is real separation of authority, not maximizing the number of compartments." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>The seven trust domains of the proposed
-agentic authority architecture and the boundaries between them.
-Administration, personal identity, and the credential service hold
-assets whose loss is not recoverable by rebuilding; agent execution and
-browsing/intake meet hostile input and are deliberately disposable;
-release/deployment mediates what leaves; recovery sits beyond the
-destructive authority of everything else. The architecture’s objective
-is real separation of authority, not maximizing the number of
-compartments.</figcaption>
+<a class="figure-full-size-link" href="../figures/trust_domains.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets"><img src="../figures/trust_domains.png" style="width:100.0%"
+alt="Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets; numbered arrows mark the control catalog entries that mediate each crossing." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>Seven trust domains for AI-assisted work,
+arranged from hostile intake to protected assets; numbered arrows mark
+the control catalog entries that mediate each crossing.</figcaption>
 </figure>
 <p>The table and <span class="citation"
 data-cites="fig:trust_domains">[@fig:trust_domains]</span> encode two
@@ -702,7 +697,13 @@ work crosses the boundaries. Each control below is stated as an
 operating rule with the design rationale that makes it non-negotiable.
 Where a shipping agent tool already implements a version of a rule, the
 rationale cites the documented implementation — as mechanism evidence,
-not as an endorsement of any tool’s security.</p>
+not as an endorsement of any tool’s security. The nine are also a
+composed defense rather than a stack of independent toggles: Defense
+Composition Algebra treats layered controls as formal objects whose
+composition — coverage interactions included, not just their count —
+determines what an attacker must defeat, and the set below is chosen so
+that each control closes a failure the others leave open
+[cif_formal_2026].</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The nine controls of the agentic authority architecture: operating rule and design rationale for each. The rules hold…"><table id="tbl:controls" data-responsive-table="true">
 <caption>The nine controls of the agentic authority architecture:
 operating rule and design rationale for each. The rules hold regardless
@@ -887,16 +888,12 @@ questions identify an agent whose containment is a convenience, not a
 boundary.</p>
 <h2 id="the-authority-ladder">The authority ladder</h2>
 <figure id="fig:authority_ladder">
-<a class="figure-full-size-link" href="../figures/authority_ladder.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The authority ladder from proposal to revocation."><img src="../figures/authority_ladder.png" style="width:100.0%"
-alt="The authority ladder from proposal to revocation. An agent may autonomously occupy the lower rungs — proposing changes and staging artifacts — while authorize marks the rung that must lie outside the agent&#x27;s own control, exercised by a human principal or deterministic policy. Audit and revoke remain principal powers that survive destruction of the execution environment: the record lives outside the environment, and revocation acts on credentials the environment no longer holds." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>The authority ladder from proposal to
-revocation. An agent may autonomously occupy the lower rungs — proposing
-changes and staging artifacts — while authorize marks the rung that must
-lie outside the agent’s own control, exercised by a human principal or
-deterministic policy. Audit and revoke remain principal powers that
-survive destruction of the execution environment: the record lives
-outside the environment, and revocation acts on credentials the
-environment no longer holds.</figcaption>
+<a class="figure-full-size-link" href="../figures/authority_ladder.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The six-rung authority ladder as a swimlane across human principal, orchestrator"><img src="../figures/authority_ladder.png" style="width:100.0%"
+alt="The six-rung authority ladder as a swimlane across human principal, orchestrator and agent, and tool broker; hatched cells mark exercise paths an agent must never hold without external authorization." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>The six-rung authority ladder as a
+swimlane across human principal, orchestrator and agent, and tool
+broker; hatched cells mark exercise paths an agent must never hold
+without external authorization.</figcaption>
 </figure>
 <p>The ladder in <span class="citation"
 data-cites="fig:authority_ladder">[@fig:authority_ladder]</span> gives
@@ -925,6 +922,16 @@ routine edit-authorization to the agent while keeping command approval;
 bypass modes remove the hinge altogether and are, in this architecture’s
 terms, a design admission rather than a mode [anthropic_sandboxing;
 codex_sandboxing].</p>
+<p>The authorize/exercise split is also what keeps delegated trust
+bounded. Formal treatments of agent trust bound a delegate’s effective
+trust by what it was authorized to exercise rather than by what it can
+reach, and the ladder encodes that bound structurally: authorization
+fixes the scope, exercise consumes it, and no rung is reachable that
+lets the agent enlarge its own authorization [cif_formal_2026]. The
+orchestration section extends the same bound across agent-to-agent
+delegation chains, where unbounded trust would otherwise amplify with
+each hop <span class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span>.</p>
 <p>The trust domains, controls, and ladder compose into the scenarios of
 <span class="citation"
 data-cites="sec:scenarios">[@sec:scenarios]</span>: a Qubes deployment

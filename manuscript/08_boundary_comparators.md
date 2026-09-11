@@ -1,4 +1,4 @@
-# Boundary Comparators and Non-Linux Systems {#sec:comparators}
+# Boundary Comparators: What Non-Linux Systems Teach {#sec:comparators}
 
 The candidates examined so far live inside the Linux workstation and server lanes. This section places seven systems that sit outside those lanes — privacy distributions, a non-Linux BSD, formally verified and capability-based microkernel systems, a mobile platform, and offensive-toolkit distributions — into the same property vocabulary. Their value here is comparative: each one demonstrates, in a deployed artifact, a property that the composition argument of this review needs, and each also demonstrates the boundary at which its claim stops. Reading them as competitors for a single "most secure system" title misses what they actually teach. All entries follow the evaluation discipline of [@sec:evaluation_framework]: documented designs, explicitly scoped claims, no numeric scores.
 

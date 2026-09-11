@@ -12,6 +12,16 @@
       "status": "green"
     },
     {
+      "check": "incident_register_rows",
+      "detail": "14 incidents (minimum 12, unique ids)",
+      "status": "green"
+    },
+    {
+      "check": "cognitive_defense_coverage",
+      "detail": "6/6 CIF concepts mapped to project surfaces",
+      "status": "green"
+    },
+    {
       "check": "stance_vocabulary",
       "detail": "all stances in strong|partial|weak|n_a",
       "status": "green"
@@ -23,7 +33,7 @@
     },
     {
       "check": "source_url_uniqueness",
-      "detail": "150 unique URLs across 150 sources",
+      "detail": "155 unique URLs across 155 sources",
       "status": "green"
     },
     {

@@ -1,6 +1,6 @@
 \headcommand {\beamer@sectionpages {1}{0}}
 \headcommand {\beamer@subsectionpages {1}{0}}
-\headcommand {\sectionentry {1}{Scenario Recommendations and Confidence}{1}{Scenario Recommendations and Confidence}{0}}
+\headcommand {\sectionentry {1}{Scenario Recommendations with Change Conditions and Confidence Tiers}{1}{Scenario Recommendations with Change Conditions and Confidence Tiers}{0}}
 \headcommand {\slideentry {1}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {1}{0}{2}{2/2}{}{0}}
@@ -29,26 +29,28 @@
 \headcommand {\beamer@framepages {11}{11}}
 \headcommand {\slideentry {1}{2}{3}{12/12}{The strongest overall direction}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\beamer@subsectionpages {10}{12}}
-\headcommand {\beamer@subsectionentry {0}{1}{3}{13}{Confidence tiers and evidence limits}}
-\headcommand {\slideentry {1}{3}{1}{13/13}{Confidence tiers and evidence limits}{0}}
+\headcommand {\slideentry {1}{2}{4}{13/13}{The strongest overall direction}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {1}{3}{2}{14/14}{Confidence tiers and evidence limits}{0}}
+\headcommand {\beamer@subsectionpages {10}{13}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{14}{Confidence tiers and evidence limits}}
+\headcommand {\slideentry {1}{3}{1}{14/14}{Confidence tiers and evidence limits}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\slideentry {1}{3}{3}{15/15}{Confidence tiers and evidence limits}{0}}
+\headcommand {\slideentry {1}{3}{2}{15/15}{Confidence tiers and evidence limits}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {1}{3}{3}{15/16}{Confidence tiers and evidence limits}{0}}
-\headcommand {\beamer@framepages {15}{16}}
-\headcommand {\slideentry {1}{3}{4}{17/17}{Confidence tiers and evidence limits}{0}}
-\headcommand {\beamer@framepages {17}{17}}
-\headcommand {\slideentry {1}{3}{5}{18/18}{Confidence tiers and evidence limits}{0}}
+\headcommand {\slideentry {1}{3}{3}{16/16}{Confidence tiers and evidence limits}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {1}{3}{3}{16/17}{Confidence tiers and evidence limits}{0}}
+\headcommand {\beamer@framepages {16}{17}}
+\headcommand {\slideentry {1}{3}{4}{18/18}{Confidence tiers and evidence limits}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\slideentry {1}{3}{6}{19/19}{Confidence tiers and evidence limits}{0}}
+\headcommand {\slideentry {1}{3}{5}{19/19}{Confidence tiers and evidence limits}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {1}{3}{7}{20/20}{Confidence tiers and evidence limits}{0}}
+\headcommand {\slideentry {1}{3}{6}{20/20}{Confidence tiers and evidence limits}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\beamer@partpages {1}{20}}
-\headcommand {\beamer@subsectionpages {13}{20}}
-\headcommand {\beamer@sectionpages {1}{20}}
-\headcommand {\beamer@documentpages {20}}
-\headcommand {\gdef \inserttotalframenumber {20}}
+\headcommand {\slideentry {1}{3}{7}{21/21}{Confidence tiers and evidence limits}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\beamer@partpages {1}{21}}
+\headcommand {\beamer@subsectionpages {14}{21}}
+\headcommand {\beamer@sectionpages {1}{21}}
+\headcommand {\beamer@documentpages {21}}
+\headcommand {\gdef \inserttotalframenumber {21}}

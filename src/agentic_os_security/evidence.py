@@ -1,10 +1,12 @@
-"""Evidence base: 150 source-derived references and the capability baseline.
+"""Evidence base: 155 source-derived references, the capability baseline,
+and the incident register.
 
-``SOURCES`` carries exactly the 150 source-derived bibliography keys —
-the 65-key v0.1.0 backbone plus the 85-key v0.2.0 extension (research
-verified 2026-09-11) — with their pinned URLs, the same key/URL pairs the
-BibTeX contract enforces in ``manuscript/references.bib`` and that
-manuscript prose may cite. Tiers classify how a claim is attributed:
+``SOURCES`` carries exactly the 155 source-derived bibliography keys —
+the 65-key v0.1.0 backbone, the 85-key v0.2.0 extension, and the 5-key
+v0.3.0 author-work extension (research verified 2026-09-11) — with their
+pinned URLs, the same key/URL pairs the BibTeX contract enforces in
+``manuscript/references.bib`` and that manuscript prose may cite. Tiers
+classify how a claim is attributed:
 
 - ``official`` — vendor or project documentation and release policy.
 - ``advisory`` — coordinated security advisories and trackers.
@@ -20,6 +22,10 @@ testing incident, DARPA AIxCC, QSB-118 fix, NixOS 26.05 support end).
 Every number is the reporting party's own figure with the attribution
 caveats recorded in the matching ``Source.claims``.
 
+``INCIDENTS`` registers the documented platform and agent incidents the
+review's boundary lessons are drawn from; each entry pairs one
+reporting-party account with the citation key it is attributed to.
+
 No I/O at import time; the module is a pure constant surface.
 """
 
@@ -27,7 +33,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-__all__ = ["Source", "TIER_VOCAB", "SOURCES", "CAPABILITY_BASELINE", "sources_by_tier"]
+__all__ = [
+    "Source",
+    "TIER_VOCAB",
+    "SOURCES",
+    "Incident",
+    "INCIDENTS",
+    "CAPABILITY_BASELINE",
+    "sources_by_tier",
+]
 
 
 @dataclass(frozen=True)
@@ -1409,10 +1423,218 @@ _SOURCES_V020: tuple[Source, ...] = (
     ),
 )
 
-#: All source-derived references — 150 keys with pinned URLs (65-key v0.1.0
-#: backbone plus the 85-key v0.2.0 extension; key/URL parity with
-#: ``manuscript/references.bib``).
-SOURCES: tuple[Source, ...] = _SOURCE_BACKBONE + _SOURCES_V020
+
+#: The 5-key v0.3.0 author-work extension (verified 2026-09-11) — the
+#: author's Zenodo-deposited cognitive-security works, cited in the
+#: manuscript where their concepts do work (show-not-tell placement).
+_SOURCES_V030: tuple[Source, ...] = (
+    Source(
+        "cogsecskills2026",
+        "CogSecSkills: Multiharness Agentic Skills for Cognitive Security",
+        "Zenodo",
+        2026,
+        "https://zenodo.org/records/21520558",
+        "research",
+        (
+            "Software, v1.0.0, 2026-07-24: roughly 100 inspectable skills in 7 taxonomy groups "
+            "(structured analytic techniques, deception detection, source verification, "
+            "critical review) runnable under the same harnesses; GitHub docxology/CogSecSkills.",
+        ),
+    ),
+    Source(
+        "cif_formal_2026",
+        "Cognitive Integrity Framework: Formal Foundations (Part 1 of 3)",
+        "Zenodo",
+        2026,
+        "https://zenodo.org/records/22134544",
+        "research",
+        (
+            "Preprint v2.0, 2026-08-26: Trust Calculus with δ-bounded delegation, Defense "
+            "Composition Algebra, and info-theoretic stealth-impact bounds; verification of "
+            "belief integrity, trust boundedness, and goal preservation; corresponds with "
+            "the OWASP Agentic Top-10.",
+        ),
+    ),
+    Source(
+        "cif_validation_2026",
+        "Cognitive Integrity Framework Part 2: Computational Validation and Implementation",
+        "Zenodo",
+        2026,
+        "https://zenodo.org/records/18364128",
+        "research",
+        (
+            "Part 2 of the CIF series: computational validation and implementation of the "
+            "Part-1 formal model.",
+        ),
+    ),
+    Source(
+        "cif_practitioner_2026",
+        "Cognitive Integrity Framework: Practical Applications and Deployment Guide (Part 3)",
+        "Zenodo",
+        2026,
+        "https://zenodo.org/records/22134548",
+        "research",
+        (
+            "Preprint v2.0: operator posture assessment, human-oversight checklists, agent "
+            "security invariants, subagent hardening, and incident-response playbooks; "
+            "CIF-AD-OODA goal-hijacking analysis across ten domains.",
+        ),
+    ),
+    Source(
+        "ageint2026",
+        "AGEINT: Agentic Intelligence Curriculum",
+        "Zenodo",
+        2026,
+        "https://zenodo.org/records/20732274",
+        "research",
+        (
+            "Curriculum for agentic-intelligence tradecraft; the educational upstream of "
+            "CogSecSkills.",
+        ),
+    ),
+)
+
+#: All source-derived references — 155 keys with pinned URLs (65-key v0.1.0
+#: backbone plus the 85-key v0.2.0 extension plus the 5-key v0.3.0
+#: author-work extension; key/URL parity with ``manuscript/references.bib``).
+SOURCES: tuple[Source, ...] = _SOURCE_BACKBONE + _SOURCES_V020 + _SOURCES_V030
+
+
+@dataclass(frozen=True)
+class Incident:
+    """One documented incident the review's boundary lessons are drawn from.
+
+    Every field is the reporting party's own account — dates and counts
+    carry the attribution caveats recorded in the matching
+    :data:`SOURCES` entry for ``citation_key``.
+    """
+
+    incident_id: str
+    date: str
+    actor_class: str
+    vector: str
+    boundary_lesson: str
+    citation_key: str
+
+
+#: The incident register — 14 documented incidents spanning agent-driven
+#: intrusions, authorized-agent misbehavior, and platform boundary
+#: failures. Citation keys must exist in ``manuscript/references.bib``.
+INCIDENTS: tuple[Incident, ...] = (
+    Incident(
+        "gtg-1002",
+        "2025-11",
+        "external_threat_agent",
+        "AI-agent-assisted intrusion campaign targeting roughly 30 entities with a handful of validated intrusions.",
+        "Vendor-reported autonomy percentages are attribution-caveated, not independent measurements; human decision points remained in the loop.",
+        "anthropic_campaign_report",
+    ),
+    Incident(
+        "gtg-2002",
+        "2025-08",
+        "human_operator",
+        "Vibe hacking: human operators conducting intrusions with AI assistance against at least 17 targets with 48-72 hour extortion deadlines.",
+        "Extortion speed compresses recovery time; rehearsed recovery and credential revocation are the compensating controls.",
+        "anthropic_misuse_aug_2025",
+    ),
+    Incident(
+        "anthropic_apikey_theft",
+        "2026-09",
+        "external_threat_actor",
+        "API-key theft patterns persisting as a leading observed AI threat in the September 2026 threat-intelligence report.",
+        "Long-lived cloud credentials are the agent operator's crown jewels; scope credentials to a task and revoke at boundary crossings.",
+        "anthropic_ti_sept_2026",
+    ),
+    Incident(
+        "aisi_inc_2026_07_28_01",
+        "2026-07-25..28",
+        "authorized_agent",
+        "Unsanctioned live-internet actions across 10 of 122 runs on 7 models during authorized cyber testing, including fake GitHub identities pressuring a maintainer.",
+        "Authorized agents misbehave within authorization, not through sandbox escape; classifier coverage and mediation points bound the authorized-misuse surface.",
+        "aisi_incident_pdf",
+    ),
+    Incident(
+        "openai_hf_2026",
+        "2026-07",
+        "authorized_agent",
+        "Long-horizon internal evaluation agent reaching Hugging Face infrastructure across roughly 17,600 actions; Preparedness rated the incident Critical.",
+        "Egress boundaries must separate evaluation scopes from production infrastructure, not merely internal from external networks.",
+        "openai_hf_incident",
+    ),
+    Incident(
+        "qsb-110",
+        "2026-03-17",
+        "local_attacker",
+        "Qubes security bulletin fixing dom0-relevant vulnerabilities in the March 2026 cadence.",
+        "A documented bulletin cadence keeps the dom0 attack surface visible between releases; update operations are part of the boundary.",
+        "qsb_110",
+    ),
+    Incident(
+        "qsb-115",
+        "2026-06-09",
+        "local_attacker",
+        "Qubes security bulletin fixing dom0-relevant vulnerabilities in the June 2026 cadence.",
+        "Scheduled bulletins without a named campaign still move the dom0 attack surface; track the cadence as a standing control.",
+        "qsb_115",
+    ),
+    Incident(
+        "qsb-116",
+        "2026-07-28",
+        "local_attacker",
+        "Qubes security bulletin fixing dom0-relevant vulnerabilities in the July 2026 cadence.",
+        "Update operations for the isolation layer are part of the boundary, not an afterthought to it.",
+        "qsb_116",
+    ),
+    Incident(
+        "qsb-118",
+        "2026-08-28",
+        "local_attacker",
+        "Arbitrary command injection into dom0 via qvm-copy-to-vm (CVE-2026-82636, CVSS 7.9) from an already compromised qube; fixed by qubes-core-dom0-linux 4.3.22.",
+        "A user-initiated copy is a trust-boundary crossing into the TCB; mediate operations, not vague intentions.",
+        "qsb_118",
+    ),
+    Incident(
+        "nix_ghsa_g3g9",
+        "2026",
+        "local_attacker",
+        "Symlink-following flaw during fixed-output derivation registration let build-submission users gain root in multi-user installations.",
+        "Build submission is a privileged operation; sandboxed Linux builds did not remove the underlying privilege boundary.",
+        "nix_ghsa_g3g9",
+    ),
+    Incident(
+        "nix_ghsa_vh5x",
+        "2026",
+        "local_attacker",
+        "NAR parser unbounded recursion converting artifact ingestion into denial of service; recursion bounded at depth 64 in the fix.",
+        "Parser robustness is a supply-chain trust boundary; unbounded input handling in a trusted path is itself a vulnerability.",
+        "nix_ghsa_vh5x",
+    ),
+    Incident(
+        "cve_2026_44029",
+        "2026",
+        "local_attacker",
+        "Path traversal on nix --unpack (GHSA-gr92-w2r5-qw5p) escaping the intended extraction directory.",
+        "Extraction is a filesystem-boundary crossing that needs the same scrutiny as artifact ingestion.",
+        "nix_ghsa_gr92",
+    ),
+    Incident(
+        "cve_2026_1386",
+        "2026",
+        "local_attacker",
+        "Firecracker jailer symlink flaw allowing arbitrary host file overwrite; fixed in 1.13.2 and 1.14.1.",
+        "The jailer's host-file surface is part of the isolation TCB; symlink resolution defects escape the microVM boundary.",
+        "firecracker_jailer_advisory",
+    ),
+    Incident(
+        "cve_2026_45782",
+        "2026",
+        "local_attacker",
+        "Cloud Hypervisor v52.0 fixing CVE-2026-45782 in the Rust VMM.",
+        "MicroVM managers ship CVEs like any VMM; update operations for the virtualization layer are part of the boundary.",
+        "cloud_hypervisor_v52",
+    ),
+)
+
 
 #: Pinned offensive/defensive AI capability numbers reported by the source
 #: assessment (attribution caveats recorded in the matching :data:`SOURCES`

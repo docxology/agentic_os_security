@@ -7,8 +7,11 @@
 # Consumed by: `infrastructure/rendering/pdf_renderer.py` and `infrastructure/reporting/pipeline_report_model.py`
 paper:
   title: "Agentic Security and Operating Systems"
-  version: "0.2.0"
+  version: "0.3.0"
   date: "2026-09-10" # Auto-generated via `infrastructure/validation/output/validator.py` if empty
+  cover:
+    image: "output/figures/graphical_abstract.png"
+    alt: "Graphical abstract: the two failure paths feed a nine-property evaluation of twenty-four operating systems, converging on the composition thesis — compartmentalization, reproducible operations, boot integrity, and capability-limited agents as one design target."
 
 # Consumed by: `infrastructure.publishing.extract_publication_metadata` (in `infrastructure/publishing/metadata.py`)
 authors:

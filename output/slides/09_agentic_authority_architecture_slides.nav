@@ -1,6 +1,6 @@
 \headcommand {\beamer@sectionpages {1}{0}}
 \headcommand {\beamer@subsectionpages {1}{0}}
-\headcommand {\sectionentry {1}{Agentic Authority Architecture}{1}{Agentic Authority Architecture}{0}}
+\headcommand {\sectionentry {1}{Agentic Authority Architecture: Trust Domains, Controls, and the Authority Ladder}{1}{Agentic Authority Architecture: Trust Domains, Controls, and the Authority Ladder}{0}}
 \headcommand {\slideentry {1}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\slideentry {1}{0}{2}{2/2}{}{0}}
@@ -43,8 +43,10 @@
 \headcommand {\beamer@framepages {20}{20}}
 \headcommand {\slideentry {1}{0}{18}{21/21}{}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\beamer@partpages {1}{21}}
-\headcommand {\beamer@subsectionpages {1}{21}}
-\headcommand {\beamer@sectionpages {1}{21}}
-\headcommand {\beamer@documentpages {21}}
-\headcommand {\gdef \inserttotalframenumber {21}}
+\headcommand {\slideentry {1}{0}{19}{22/22}{}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\beamer@partpages {1}{22}}
+\headcommand {\beamer@subsectionpages {1}{22}}
+\headcommand {\beamer@sectionpages {1}{22}}
+\headcommand {\beamer@documentpages {22}}
+\headcommand {\gdef \inserttotalframenumber {22}}

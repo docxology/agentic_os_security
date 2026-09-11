@@ -20,7 +20,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-__all__ = ["MediationPoint", "MEDIATION_POINTS", "ORCHESTRATION_PATTERNS"]
+__all__ = [
+    "MediationPoint",
+    "MEDIATION_POINTS",
+    "ORCHESTRATION_PATTERNS",
+    "CifConcept",
+    "CIF_CONCEPTS",
+]
 
 
 @dataclass(frozen=True)
@@ -152,4 +158,70 @@ ORCHESTRATION_PATTERNS: tuple[tuple[str, str], ...] = (
     ("registry_governed_discovery",
      "Agent/tool discovery goes through a governed registry; authority "
      "concentrates in registry admission decisions and their governance."),
+)
+
+
+@dataclass(frozen=True)
+class CifConcept:
+    """One concept from the author's Cognitive Integrity Framework mapped
+    onto a project surface.
+
+    ``surface`` is either a control id from
+    ``trust_domains.CONTROLS`` or a ``sec:`` label from the manuscript's
+    section-label set — the place in this review where the concept does
+    work. ``citation_key`` points at the CIF-series bibliography entry.
+    """
+
+    concept_id: str
+    concept: str
+    summary: str
+    surface: str
+    citation_key: str
+
+
+#: The six CIF concepts the review operationalizes (ids pinned by the
+#: v0.3.0 dossier; summaries grounded in the cited CIF-series works).
+CIF_CONCEPTS: tuple[CifConcept, ...] = (
+    CifConcept(
+        "delta_bounded_delegation",
+        "δ-bounded delegation",
+        "Delegation carries a bounded trust decrement δ: authority granted to a subagent decays across agent-to-agent chains instead of amplifying.",
+        "operation_mediation",
+        "cif_formal_2026",
+    ),
+    CifConcept(
+        "defense_composition_algebra",
+        "Defense Composition Algebra",
+        "Layered controls are formal objects whose composition can be reasoned about, so the nine controls act as a composed defense rather than an ad-hoc stack.",
+        "sec:agentic_authority",
+        "cif_formal_2026",
+    ),
+    CifConcept(
+        "belief_integrity",
+        "Belief integrity",
+        "The defended system's beliefs remain verifiable against tampering and fabrication — a named property the authorized-misuse surface must preserve.",
+        "sec:cognitive_security",
+        "cif_validation_2026",
+    ),
+    CifConcept(
+        "trust_boundedness",
+        "Trust boundedness",
+        "Accumulated trust stays bounded: the authority ladder's authorize/exercise split keeps delegated trust from exceeding the principal's grant.",
+        "sec:agentic_authority",
+        "cif_validation_2026",
+    ),
+    CifConcept(
+        "goal_preservation",
+        "Goal preservation",
+        "The system preserves the principal's stated goals against drift and hijacking across delegation and long-horizon execution.",
+        "sec:cognitive_security",
+        "cif_validation_2026",
+    ),
+    CifConcept(
+        "stealth_impact_bounds",
+        "Info-theoretic stealth-impact bounds",
+        "Attacker stealth trades off against impact under information-theoretic bounds, so independent audit trails are the detection surface that makes stealth expensive.",
+        "independent_audit",
+        "cif_formal_2026",
+    ),
 )

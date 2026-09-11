@@ -1,1 +1,1 @@
-\beamer@sectionintoc {1}{Operator OpSec for Agent Work}{1}{0}{1}
+\beamer@sectionintoc {1}{Operator OpSec: Identity, Egress, and Incident Response for Agent Work}{1}{0}{1}

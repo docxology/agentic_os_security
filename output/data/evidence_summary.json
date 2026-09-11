@@ -27,12 +27,12 @@
     "reproducible_iso_pct": 95.18
   },
   "generated_at": "2026-09-10T12:00:00+00:00",
-  "num_sources": 150,
+  "num_sources": 155,
   "source_tier_counts": {
     "advisory": 13,
     "community": 14,
     "incident_report": 9,
     "official": 93,
-    "research": 21
+    "research": 26
   }
 }

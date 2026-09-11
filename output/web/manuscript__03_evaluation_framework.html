@@ -565,8 +565,8 @@ mjx-container[display="true"] {
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
-<h1 id="sec:evaluation_framework">Evaluation Framework: Properties over
-Labels</h1>
+<h1 id="sec:evaluation_framework">Evaluation Framework: Nine Properties
+over Distribution Labels</h1>
 <h2 id="why-not-a-distribution-label">Why not a distribution label</h2>
 <p>“Secure Linux” is not a property of a distribution; it is an outcome
 of a deployment matching a threat model. Distribution labels hide
@@ -767,12 +767,12 @@ reasons, rather than rewritten narrative. <span class="citation"
 data-cites="fig:property_matrix">[@fig:property_matrix]</span> renders
 the current matrix.</p>
 <figure id="fig:property_matrix">
-<a class="figure-full-size-link" href="../figures/property_matrix.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The candidate–property stance matrix across 24 candidates"><img src="../figures/property_matrix.png" style="width:100.0%"
-alt="The candidate–property stance matrix across 24 candidates and 9 properties, rendered from output/data/evaluation_matrix.csv with colorblind-safe encoding of the strong/partial/weak/n_a vocabulary." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>The candidate–property stance matrix
-across 24 candidates and 9 properties, rendered from
-output/data/evaluation_matrix.csv with colorblind-safe encoding of the
-strong/partial/weak/n_a vocabulary.</figcaption>
+<a class="figure-full-size-link" href="../figures/property_matrix.png" target="_blank" rel="noopener" aria-label="Open full-size figure, All 216 candidate-by-property stances, with candidates grouped into eight category bands"><img src="../figures/property_matrix.png" style="width:100.0%"
+alt="All 216 candidate-by-property stances, with candidates grouped into eight category bands (left strip) and per-property stance distributions (right marginals); glyphs mark strong (S), partial (P), weak (W), and not-assessed cells." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>All 216 candidate-by-property stances,
+with candidates grouped into eight category bands (left strip) and
+per-property stance distributions (right marginals); glyphs mark strong
+(S), partial (P), weak (W), and not-assessed cells.</figcaption>
 </figure>
 <h2 id="the-defensive-stack-mitigation-classes-as-a-second-lens">The
 defensive stack: mitigation classes as a second lens</h2>
@@ -786,7 +786,11 @@ namespaces, seccomp filters, egress proxies — while microvisor and
 unikernel candidates push different classes (verified boot, disposable
 execution) to their limits (<span class="citation"
 data-cites="sec:servers">[@sec:servers]</span>). The defensive-stack
-matrix captures that second view as data.</p>
+matrix captures that second view as data, and treats layered controls as
+formal objects rather than a checklist: the Cognitive Integrity
+Framework’s Defense Composition Algebra reasons about defenses composed
+over bounded-trust delegates, prior art this stack operationalizes as
+concrete per-class stances [cif_formal_2026].</p>
 <p>In <code>registry.py</code>, <code>MITIGATION_CLASSES</code> defines
 the eight mitigation classes — <code>memory_safety</code> (memory-safe
 implementation languages), <code>allocator_hardening</code> (hardened
@@ -812,15 +816,13 @@ data-cites="fig:defensive_stack">[@fig:defensive_stack]</span> renders
 the matrix as a heatmap with the eight candidate categories grouped and
 a per-class coverage marginal.</p>
 <figure id="fig:defensive_stack">
-<a class="figure-full-size-link" href="../figures/defensive_stack.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The defensive-stack matrix: 24 candidates scored against eight mitigation classes"><img src="../figures/defensive_stack.png" style="width:100.0%"
-alt="Defensive stack coverage: the candidate x mitigation-class matrix (24 candidates x 8 mitigation classes = 192 cells) rendered from registry.DEFENSIVE_STACK with the same colorblind-safe strong/partial/weak/n_a encoding as the property matrix, grouped into the eight candidate categories with per-class coverage marginals." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>The defensive-stack matrix: 24 candidates
-scored against eight mitigation classes — memory safety, allocator
-hardening, sandboxing primitives, MAC framework, verified boot,
-reproducible deployment, disposable execution, and update automation —
-using the strong/partial/weak/n_a stance vocabulary, rendered from
-output/data/defensive_stack.csv with candidate categories grouped and
-per-class coverage shown as a marginal bar.</figcaption>
+<a class="figure-full-size-link" href="../figures/defensive_stack.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Defensive-stack coverage across eight mitigation classes: weak cells cluster on conventional…"><img src="../figures/defensive_stack.png" style="width:100.0%"
+alt="Defensive-stack coverage across eight mitigation classes: weak cells cluster on conventional desktops while compartmentalized, server, and high-assurance candidates concentrate strong stances in sandboxing, verified boot, and update operations." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>Defensive-stack coverage across eight
+mitigation classes: weak cells cluster on conventional desktops while
+compartmentalized, server, and high-assurance candidates concentrate
+strong stances in sandboxing, verified boot, and update
+operations.</figcaption>
 </figure>
 <p>Reading the two matrices together is the point. A candidate can hold
 a <code>strong</code> containment stance (Qubes, from domain separation)

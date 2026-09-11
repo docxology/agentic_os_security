@@ -1,16 +1,16 @@
 {
   "claim_boundary": "Compact evidence summary for manuscript validation; full fact dumps are opt-in debug output.",
-  "fact_count": 768,
+  "fact_count": 806,
   "freshness_warnings": [],
   "kind_counts": {
-    "artifact": 77,
-    "citation": 156,
-    "figure": 37,
-    "number": 419,
+    "artifact": 80,
+    "citation": 161,
+    "figure": 39,
+    "number": 447,
     "section": 54,
     "table": 25
   },
-  "omitted_fact_count": 568,
+  "omitted_fact_count": 606,
   "sample_facts": [
     {
       "active": true,
@@ -254,6 +254,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[78].value",
+      "source_field": "$.claims[78].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "10"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T00:41:05Z",
       "kind": "number",
       "source": "output/data/evidence_summary.json:$.capability_baseline.aisi_unsanctioned_runs",
@@ -302,6 +314,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "cif_practitioner_2026",
+      "source_field": "cif-goal-hijacking-domains",
+      "source_path": "src/agentic_os_security/evidence.py",
+      "source_tier": "official_source",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "10"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T00:41:05Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[3].value (numeric variant)",
@@ -318,6 +342,18 @@
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[73].value (numeric variant)",
       "source_field": "$.claims[73].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.1"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[78].value (numeric variant)",
+      "source_field": "$.claims[78].value",
       "source_path": "data/claim_ledger.yaml",
       "source_tier": "configuration",
       "stale": false,
@@ -368,6 +404,18 @@
       "source_field": "num_mediation_points",
       "source_path": "src/agentic_os_security/orchestration.py",
       "source_tier": "project_source",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.1"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "cif_practitioner_2026 (numeric variant)",
+      "source_field": "cif-goal-hijacking-domains",
+      "source_path": "src/agentic_os_security/evidence.py",
+      "source_tier": "official_source",
       "stale": false,
       "tolerance": 0.0,
       "value": "0.1"
@@ -602,6 +650,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[75].value",
+      "source_field": "$.claims[75].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "100"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T00:41:06Z",
       "kind": "number",
       "source": "output/reports/manuscript_composition.json:$.ordered_inputs[0].ordinal (numeric variant)",
@@ -626,10 +686,34 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "cogsecskills2026",
+      "source_field": "cogsecskills-skill-count",
+      "source_path": "src/agentic_os_security/evidence.py",
+      "source_tier": "official_source",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "100"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T00:41:05Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[9].value (numeric variant)",
       "source_field": "$.claims[9].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "1"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[75].value (numeric variant)",
+      "source_field": "$.claims[75].value",
       "source_path": "data/claim_ledger.yaml",
       "source_tier": "configuration",
       "stale": false,
@@ -656,6 +740,18 @@
       "source_field": "matrix_coverage_pct",
       "source_path": "src/agentic_os_security/registry.py",
       "source_tier": "generated_metric",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "1"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "cogsecskills2026 (numeric variant)",
+      "source_field": "cogsecskills-skill-count",
+      "source_path": "src/agentic_os_security/evidence.py",
+      "source_tier": "official_source",
       "stale": false,
       "tolerance": 0.0,
       "value": "1"
@@ -1178,6 +1274,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[76].value",
+      "source_field": "$.claims[76].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "7"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T18:43:33Z",
       "kind": "number",
       "source": "output/data/evidence_summary.json:$.capability_baseline.aisi_models",
@@ -1238,6 +1346,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "cogsecskills2026",
+      "source_field": "cogsecskills-taxonomy-groups",
+      "source_path": "src/agentic_os_security/evidence.py",
+      "source_tier": "official_source",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "7"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T00:41:05Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[13].value (numeric variant)",
@@ -1266,6 +1386,18 @@
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[74].value (numeric variant)",
       "source_field": "$.claims[74].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.07"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[76].value (numeric variant)",
+      "source_field": "$.claims[76].value",
       "source_path": "data/claim_ledger.yaml",
       "source_tier": "configuration",
       "stale": false,
@@ -1334,7 +1466,19 @@
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
+      "kind": "number",
+      "source": "cogsecskills2026 (numeric variant)",
+      "source_field": "cogsecskills-taxonomy-groups",
+      "source_path": "src/agentic_os_security/evidence.py",
+      "source_tier": "official_source",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.07"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[16].value",
       "source_field": "$.claims[16].value",
@@ -1342,11 +1486,11 @@
       "source_tier": "configuration",
       "stale": false,
       "tolerance": 0.0,
-      "value": "150"
+      "value": "155"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
       "source": "output/data/evidence_summary.json:$.num_sources",
       "source_field": "$.num_sources",
@@ -1354,11 +1498,11 @@
       "source_tier": "generated_metric",
       "stale": false,
       "tolerance": 0.0,
-      "value": "150"
+      "value": "155"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
       "source": "agentic_os_security.evidence.SOURCES",
       "source_field": "num_sources",
@@ -1366,11 +1510,11 @@
       "source_tier": "project_source",
       "stale": false,
       "tolerance": 0.0,
-      "value": "150"
+      "value": "155"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[16].value (numeric variant)",
       "source_field": "$.claims[16].value",
@@ -1378,11 +1522,11 @@
       "source_tier": "configuration",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.5"
+      "value": "1.55"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
       "source": "output/data/evidence_summary.json:$.num_sources (numeric variant)",
       "source_field": "$.num_sources",
@@ -1390,11 +1534,11 @@
       "source_tier": "generated_metric",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.5"
+      "value": "1.55"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
       "source": "agentic_os_security.evidence.SOURCES (numeric variant)",
       "source_field": "num_sources",
@@ -1402,7 +1546,7 @@
       "source_tier": "project_source",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.5"
+      "value": "1.55"
     },
     {
       "active": true,
@@ -1574,7 +1718,7 @@
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[21].value",
       "source_field": "$.claims[21].value",
@@ -1582,23 +1726,23 @@
       "source_tier": "configuration",
       "stale": false,
       "tolerance": 0.0,
-      "value": "156"
+      "value": "161"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
-      "source": "manuscript/references.bib entry count (150 source-derived + 6 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md",
+      "source": "manuscript/references.bib entry count (155 source-derived + 6 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md",
       "source_field": "bib-entry-count",
       "source_path": "manuscript/references.bib",
       "source_tier": "manuscript_claim",
       "stale": false,
       "tolerance": 0.0,
-      "value": "156"
+      "value": "161"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[21].value (numeric variant)",
       "source_field": "$.claims[21].value",
@@ -1606,19 +1750,19 @@
       "source_tier": "configuration",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.56"
+      "value": "1.61"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
+      "checked_at": "2026-09-11T21:28:56Z",
       "kind": "number",
-      "source": "manuscript/references.bib entry count (150 source-derived + 6 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md (numeric variant)",
+      "source": "manuscript/references.bib entry count (155 source-derived + 6 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md (numeric variant)",
       "source_field": "bib-entry-count",
       "source_path": "manuscript/references.bib",
       "source_tier": "manuscript_claim",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.56"
+      "value": "1.61"
     },
     {
       "active": true,
@@ -2267,160 +2411,16 @@
       "stale": false,
       "tolerance": 0.0,
       "value": "0.04"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T00:41:06Z",
-      "kind": "number",
-      "source": "output/reports/manuscript_composition.json:$.ordered_inputs[3].ordinal (numeric variant)",
-      "source_field": "$.ordered_inputs[3].ordinal",
-      "source_path": "output/reports/manuscript_composition.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.04"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "anthropic_campaign_report (numeric variant)",
-      "source_field": "gtg1002_decision_points_low",
-      "source_path": "src/agentic_os_security/evidence.py",
-      "source_tier": "official_source",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.04"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "data/claim_ledger.yaml:$.claims[32].value",
-      "source_field": "$.claims[32].value",
-      "source_path": "data/claim_ledger.yaml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "6"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "output/data/evidence_summary.json:$.capability_baseline.gtg1002_decision_points_high",
-      "source_field": "$.capability_baseline.gtg1002_decision_points_high",
-      "source_path": "output/data/evidence_summary.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "6"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T00:41:06Z",
-      "kind": "number",
-      "source": "output/reports/manuscript_composition.json:$.ordered_inputs[5].ordinal",
-      "source_field": "$.ordered_inputs[5].ordinal",
-      "source_path": "output/reports/manuscript_composition.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "6"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "anthropic_campaign_report",
-      "source_field": "gtg1002_decision_points_high",
-      "source_path": "src/agentic_os_security/evidence.py",
-      "source_tier": "official_source",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "6"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "data/claim_ledger.yaml:$.claims[32].value (numeric variant)",
-      "source_field": "$.claims[32].value",
-      "source_path": "data/claim_ledger.yaml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.06"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "output/data/evidence_summary.json:$.capability_baseline.gtg1002_decision_points_high (numeric variant)",
-      "source_field": "$.capability_baseline.gtg1002_decision_points_high",
-      "source_path": "output/data/evidence_summary.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.06"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T00:41:06Z",
-      "kind": "number",
-      "source": "output/reports/manuscript_composition.json:$.ordered_inputs[5].ordinal (numeric variant)",
-      "source_field": "$.ordered_inputs[5].ordinal",
-      "source_path": "output/reports/manuscript_composition.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.06"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "anthropic_campaign_report (numeric variant)",
-      "source_field": "gtg1002_decision_points_high",
-      "source_path": "src/agentic_os_security/evidence.py",
-      "source_tier": "official_source",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.06"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "data/claim_ledger.yaml:$.claims[33].value",
-      "source_field": "$.claims[33].value",
-      "source_path": "data/claim_ledger.yaml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "19"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "output/data/evidence_summary.json:$.capability_baseline.aisi_actions",
-      "source_field": "$.capability_baseline.aisi_actions",
-      "source_path": "output/data/evidence_summary.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "19"
     }
   ],
   "schema": "template-evidence-registry-report-v1",
   "source_tiers": {
-    "artifact": 193,
-    "bibliography": 156,
-    "configuration": 131,
-    "generated_metric": 145,
-    "manuscript_claim": 10,
-    "official_source": 109,
+    "artifact": 198,
+    "bibliography": 161,
+    "configuration": 139,
+    "generated_metric": 157,
+    "manuscript_claim": 12,
+    "official_source": 115,
     "project_source": 24
   }
 }

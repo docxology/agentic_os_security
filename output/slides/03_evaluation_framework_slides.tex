@@ -216,7 +216,7 @@
 
 \begin{document}
 
-\section{Evaluation Framework: Properties over
+\section{Evaluation Framework: Nine Properties over Distribution
 Labels}\label{sec:evaluation_framework}
 
 \begin{frame}[allowframebreaks]{Why not a distribution label}
@@ -435,11 +435,11 @@ renders the current matrix.
 and refreshed}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={The candidate--property stance matrix across 24 candidates and 9 properties, rendered from output/data/evaluation\_matrix.csv with colorblind-safe encoding of the strong/partial/weak/n\_a vocabulary.}]{../figures/property_matrix.png}
-\caption{The candidate--property stance matrix across 24 candidates and
-9 properties, rendered from output/data/evaluation\_matrix.csv with
-colorblind-safe encoding of the strong/partial/weak/n\_a
-vocabulary.}\label{fig:property_matrix}
+\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={All 216 candidate-by-property stances, with candidates grouped into eight category bands (left strip) and per-property stance distributions (right marginals); glyphs mark strong (S), partial (P), weak (W), and not-assessed cells.}]{../figures/property_matrix.png}
+\caption{All 216 candidate-by-property stances, with candidates grouped
+into eight category bands (left strip) and per-property stance
+distributions (right marginals); glyphs mark strong (S), partial (P),
+weak (W), and not-assessed cells.}\label{fig:property_matrix}
 \end{figure}
 \end{frame}
 
@@ -455,12 +455,16 @@ of kernel primitives --- sandboxing namespaces, restricted user
 namespaces, seccomp filters, egress proxies --- while microvisor and
 unikernel candidates push different classes (verified boot, disposable
 execution) to their limits (sec.~8). The defensive-stack
-matrix captures that second view as data.
-
+matrix captures that second view as data, and treats layered controls as
+formal objects rather than a checklist: the Cognitive Integrity
+Framework's Defense Composition Algebra reasons about defenses composed
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{The defensive stack: mitigation
 classes as a second lens}
+over bounded-trust delegates, prior art this stack operationalizes as
+concrete per-class stances (Friedman 2026).
+
 In \texttt{registry.py}, \breaktt{MITIGATION\_CLASSES} defines the eight
 mitigation classes --- \texttt{memory\_safety} (memory-safe
 implementation languages), \breaktt{allocator\_hardening} (hardened
@@ -474,11 +478,11 @@ allocators and exploit mitigations), \breaktt{sandboxing\_primitives}
 class, using the same
 \texttt{strong}/\texttt{partial}/\texttt{weak}/\texttt{n\_a} vocabulary
 as the property matrix, grounded in the candidates' documented features
-and the 2026 research record (sandboxing stances reflect documented
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{The defensive stack: mitigation
 classes as a second lens}
+and the 2026 research record (sandboxing stances reflect documented
 namespace and seccomp practice; verified-boot stances reflect
 measured-boot and Secure Boot implementations). The helper
 \breaktt{defensive\_stack\_rows()} emits the full 24-candidate \texorpdfstring{\ensuremath{\times}}{x} 8-class
@@ -495,14 +499,11 @@ coverage marginal.
 classes as a second lens}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={The defensive-stack matrix: 24 candidates scored against eight mitigation classes --- memory safety, allocator hardening, sandboxing primitives, MAC framework, verified boot, reproducible deployment, disposable execution, and update automation --- using the strong/partial/weak/n\_a stance vocabulary, rendered from output/data/defensive\_stack.csv with candidate categories grouped and per-class coverage shown as a marginal bar.}]{../figures/defensive_stack.png}
-\caption{The defensive-stack matrix: 24 candidates scored against eight
-mitigation classes --- memory safety, allocator hardening, sandboxing
-primitives, MAC framework, verified boot, reproducible deployment,
-disposable execution, and update automation --- using the
-strong/partial/weak/n\_a stance vocabulary, rendered from
-output/data/defensive\_stack.csv with candidate categories grouped and
-per-class coverage shown as a marginal bar.}\label{fig:defensive_stack}
+\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={Defensive-stack coverage across eight mitigation classes: weak cells cluster on conventional desktops while compartmentalized, server, and high-assurance candidates concentrate strong stances in sandboxing, verified boot, and update operations.}]{../figures/defensive_stack.png}
+\caption{Defensive-stack coverage across eight mitigation classes: weak
+cells cluster on conventional desktops while compartmentalized, server,
+and high-assurance candidates concentrate strong stances in sandboxing,
+verified boot, and update operations.}\label{fig:defensive_stack}
 \end{figure}
 
 \end{frame}

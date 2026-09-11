@@ -1,4 +1,4 @@
-# Threat Model: Two Ways to Lose {#sec:threat_model}
+# Threat Model: Two Ways to Lose — Exploitation and Authorized Misuse {#sec:threat_model}
 
 ## The primary scenario
 
@@ -43,7 +43,7 @@ Discussions of agentic risk routinely over-extrapolate from thin evidence, so th
 | CISA-led Five-Eyes adoption guidance [@cisa_agentic_guidance] | April 2026 guidance for organizations adopting agentic AI services: sandboxed deployment, low-risk tasks first, threat-model-based evaluations, and red-teaming before production use. | Inter-agency governance posture, not a measurement. Its prescriptions — sandboxing, staged authority, adversarial testing — map directly onto the properties this review evaluates. |
 : The offensive-AI evidence baseline, 2024–2026: documented findings with evidentiary status and caveats. {#tbl:offensive_evidence}
 
-![Evidence timeline for the offensive-AI baseline, 2024–2026, in two lanes with month precision. Offensive capability and governance evidence: the NCSC assessments of January 2024 and May 2025 (2027 capability horizon), the August 2025 GTG-2002 "vibe hacking" report, the September 2025 MCP registry preview, the November 2025 GTG-1002 campaign investigation alongside the OWASP Agentic Threats and Mitigations guide, the December 2025 OWASP Top 10 for Agentic Applications, the February 2026 OpenAI consolidated disruption report, the April 2026 CISA-led Five-Eyes adoption guidance, and the August 2026 AISI incident report. Platform incidents and releases: Qubes OS 4.3.0 (December 2025), Nix 2.34 (February 2026) and secureblue v4.3.0 alongside the removed NixOS hardened profiles (March 2026), the April 2026 Nix symlink advisory, OpenBSD 7.9 (May 2026), Nix 2.35 and QSB-116 (June 2026), seL4 16.0.0 and QSB-118 (July 2026), and the August 2026 OpenAI–Hugging Face incident report.](../output/figures/evidence_timeline.png){#fig:evidence_timeline width=100%}
+![Two lanes of primary evidence, January 2024 through August 2026: offensive capability and governance milestones above, platform incident and release milestones below; marker color encodes evidentiary tier, and each callout names the primary source.](../output/figures/evidence_timeline.png){#fig:evidence_timeline width=100%}
 
 ### What the incident record actually shows
 

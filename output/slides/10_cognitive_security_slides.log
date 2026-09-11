@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 11:52
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 14:22
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1692,6 +1692,10 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
 
 ] [31
 
+] [32
+
+] [33
+
 ]
 \tf@nav=\write5
 \openout5 = `10_cognitive_security_slides.nav'.
@@ -1716,13 +1720,13 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32350 strings out of 468168
- 645753 string characters out of 5432815
+ 32354 strings out of 468168
+ 645785 string characters out of 5432815
  1189356 words of memory out of 5000000
- 60508 multiletter control sequences out of 15000+600000
+ 60512 multiletter control sequences out of 15000+600000
  631256 words of font info for 72 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1114b,419s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/10_cognitive_security_slides.pdf (31 pages).
+c_os_security/output/slides/10_cognitive_security_slides.pdf (33 pages).

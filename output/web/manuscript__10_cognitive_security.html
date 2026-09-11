@@ -565,7 +565,7 @@ mjx-container[display="true"] {
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
-<h1 id="sec:cognitive_security">Cognitive Security: The
+<h1 id="sec:cognitive_security">Cognitive Security: Defending the
 Authorized-Misuse Surface</h1>
 <h2 id="grounding-the-authorized-misuse-record">Grounding: the
 authorized-misuse record</h2>
@@ -793,6 +793,12 @@ the vendor engineering record of <span class="citation"
 data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>
 converge independently on sandboxing-plus-graduated-authority as the
 default posture.</p>
+<p>Formal work on agent integrity gives this design target names: belief
+integrity — the agent’s working beliefs remaining traceable to what the
+principal actually established — and goal preservation — the objectives
+the agent pursues remaining the principal’s — are stated, checkable
+properties rather than exhortations, and the boundaries below are the
+mechanisms that hold them [cif_formal_2026].</p>
 <p><strong>Consequential-action gating.</strong> The set of operations
 that cause irreversible or high-blast-radius change — publishing,
 production deployment, secret issuance, policy modification — must pass
@@ -840,6 +846,17 @@ resulted [aisi_incident_report]. The equivalent operator practice is
 grounding agent claims in artifacts that can be checked — test results,
 reproduced builds, diffs — rather than in the agent’s narration of
 them.</p>
+<p><strong>Operator-side analytic tradecraft.</strong> The controls
+above assume an operator whose judgment is itself trained and checkable,
+and the operator side now has an inspectable compensating layer: roughly
+one hundred cognitive-security and analytic-tradecraft skills —
+structured analytic techniques, deception detection, source
+verification, critical review — packaged to run under the same coding
+harnesses that run agent workloads, so the checks an operator applies to
+agent output are runnable, inspectable artifacts rather than ad-hoc
+habits [cogsecskills2026]. The tradecraft behind that skill collection
+has an educational upstream in structured analytic intelligence
+curriculum [ageint2026].</p>
 <h2
 id="monitoring-is-itself-an-unsolved-cognitive-and-control-problem">Monitoring
 is itself an unsolved cognitive and control problem</h2>

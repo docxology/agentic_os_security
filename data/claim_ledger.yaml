@@ -151,7 +151,7 @@ claims:
 
   - claim_id: num_sources
     kind: number
-    value: 150
+    value: 155
     source: agentic_os_security.evidence.SOURCES
     source_tier: project_source
     freshness: active
@@ -191,8 +191,8 @@ claims:
 
   - claim_id: bib-entry-count
     kind: number
-    value: 156
-    source: manuscript/references.bib entry count (150 source-derived + 6
+    value: 161
+    source: manuscript/references.bib entry count (155 source-derived + 6
       scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md
     source_tier: manuscript_claim
     freshness: active
@@ -636,3 +636,38 @@ claims:
     source_tier: project_source
     freshness: active
     artifact_path: src/agentic_os_security/orchestration.py
+
+  # v0.3.0 author-work claims (registered 2026-09-11). Sources are
+  # references.bib entry names; no # fragments.
+
+  - claim_id: cogsecskills-skill-count
+    kind: number
+    value: 100
+    source: cogsecskills2026
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: cogsecskills-taxonomy-groups
+    kind: number
+    value: 7
+    source: cogsecskills2026
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: cif-series-parts
+    kind: number
+    value: 3
+    source: cif_formal_2026
+    source_tier: manuscript_claim
+    freshness: active
+    artifact_path: src/agentic_os_security/orchestration.py
+
+  - claim_id: cif-goal-hijacking-domains
+    kind: number
+    value: 10
+    source: cif_practitioner_2026
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py

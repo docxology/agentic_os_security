@@ -7,10 +7,10 @@ A standalone, private research project that produces a deep review and prospectu
 ## What the project does
 
 - **Evaluation matrix.** Scores 24 OS candidates against 9 properties (`containment`, `authority`, `trusted_computing_base`, `application_confinement`, `integrity`, `persistence_recovery`, `update_operations`, `supply_chain_trust`, `human_usability`) with qualitative stances (`strong | partial | weak | n_a`) — never numeric security scores — across 8 operational scenarios.
-- **Evidence registry.** 150 documented sources (official docs, advisories, incident reports, research, community) with an explicit capability baseline, plus an 8-class mitigation/defensive-stack matrix, documented update windows, and a 10-point agent mediation taxonomy.
+- **Evidence registry.** 155 documented sources (official docs, advisories, incident reports, research, community, plus the author's cognitive-security works) with an explicit capability baseline, a 14-incident register, an 8-class mitigation/defensive-stack matrix, documented update windows, a 10-point agent mediation taxonomy, and the six Cognitive Integrity Framework (CIF) concepts mapped to controls and sections.
 - **Agentic authority architecture.** 7 trust domains, 9 controls, 9 configuration invariants an agent must never be able to violate.
 - **Forecast.** Confidence-tiered (high/moderate/low) predictions for 2028–2031.
-- **Manuscript.** 18 Pandoc-markdown sections hydrated from a deterministic token pipeline and rendered to PDF/HTML from a sibling template repository.
+- **Manuscript.** 18 Pandoc-markdown sections hydrated from a deterministic token pipeline and rendered to PDF/HTML from a sibling template repository, fronted by a generated cover graphical abstract.
 
 All assessments are **analytical judgments from documented designs**. There is no penetration testing, no exploit development, and no numeric scoring in this project.
 

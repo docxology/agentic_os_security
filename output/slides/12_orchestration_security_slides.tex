@@ -216,9 +216,11 @@
 
 \begin{document}
 
-\section{Securing Agent Orchestration}\label{sec:orchestration}
+\section{Securing Agent Orchestration: Mediation Points Across
+Protocols}\label{sec:orchestration}
 
-\begin{frame}[allowframebreaks]{Securing Agent Orchestration}
+\begin{frame}[allowframebreaks]{Securing Agent Orchestration: Mediation
+Points Across Protocols}
 Multi-agent systems introduce a security surface that single-agent
 analysis misses: the orchestration layer that decomposes tasks,
 dispatches workers, aggregates results, and holds credentials on their
@@ -310,6 +312,12 @@ mutable state accumulates authority --- whatever lands there becomes
 reachable by every later task that shares it, which is the
 minimal-shared-state control of tbl.~9 restated
 structurally.
+
+Published deployment guides for cognitive-integrity controls give the
+worker tier the same treatment as a checklist: subagent-hardening
+playbooks that specify a disposable executor's environment, grant set,
+and intake handling as configuration to be reviewed rather than platform
+defaults to be inherited (Friedman 2026c).
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Protocol-level mediation: MCP
@@ -421,17 +429,26 @@ trusted forwarder into a checked channel.
 
 \begin{frame}[fragile,allowframebreaks]{Delegation chains and the
 confused deputy}
+The formal grounding for these rules is \texorpdfstring{\ensuremath{\delta}}{delta}-bounded delegation: each hop
+in an agent-to-agent chain is permitted to narrow the authority it
+passes, never to widen it, so trust cannot amplify across a delegation
+chain no matter how many intermediaries it traverses (Friedman 2026b).
+That formal model is not left as a statement of intent --- its
+bounded-delegation and trust-boundedness properties have been exercised
+computationally, with implementations validating the no-amplification
+guarantee on constructed delegation scenarios (Friedman 2026a).
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Delegation chains and the
+confused deputy}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={Orchestration boundaries: a planner decomposes a task into worker assignments; executors run one isolated task environment each; a tool broker mediates every privileged filesystem, browser, CI, cloud, and messaging operation against task-scoped policy; approval for consequential actions originates outside the orchestration hierarchy; and an append-only audit trail beyond every agent's write authority records broker decisions, credential events, and approvals.}]{../figures/orchestration_boundaries.png}
-\caption{Orchestration boundaries: a planner decomposes a task into
-worker assignments; executors run one isolated task environment each; a
-tool broker mediates every privileged filesystem, browser, CI, cloud,
-and messaging operation against task-scoped policy; approval for
-consequential actions originates outside the orchestration hierarchy;
-and an append-only audit trail beyond every agent's write authority
-records broker decisions, credential events, and
-approvals.}\label{fig:orchestration_boundaries}
+\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing.}]{../figures/orchestration_boundaries.png}
+\caption{A reference orchestration: one orchestrator delegating through
+an MCP-style tool broker to three disposable workers, with the ten
+mediation points numbered at each trust-boundary
+crossing.}\label{fig:orchestration_boundaries}
 \end{figure}
 
 \end{frame}
@@ -530,18 +547,11 @@ mediation points keyed to the list above.
 \begin{frame}[allowframebreaks]{The mediation-point taxonomy}
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={The agent capability surface: six capability classes --- content intake, tool and bridge use, credential touch, external communication, state mutation, and self-modification --- crossed with the ten mediation points of this section's taxonomy, numbered 1 through 10: sandbox primitives, egress proxy, tool annotations, OAuth resource-server binding, URL-mode elicitation, agent-to-agent transport security, agent identity exchange, classifier escalation, sandbox observability, and external approval. Dense rows indicate capability classes with layered mechanical coverage; the content-intake row shows where approval and review, rather than mediation, carry the control.}]{../figures/agent_surface.png}
-\caption{The agent capability surface: six capability classes ---
-content intake, tool and bridge use, credential touch, external
-communication, state mutation, and self-modification --- crossed with
-the ten mediation points of this section's taxonomy, numbered 1 through
-10: sandbox primitives, egress proxy, tool annotations, OAuth
-resource-server binding, URL-mode elicitation, agent-to-agent transport
-security, agent identity exchange, classifier escalation, sandbox
-observability, and external approval. Dense rows indicate capability
-classes with layered mechanical coverage; the content-intake row shows
-where approval and review, rather than mediation, carry the
-control.}\label{fig:agent_surface}
+\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={Which mediation point constrains which agent capability class; filled numbered cells mark the primary control, and the right marginal counts how many distinct controls cover each capability.}]{../figures/agent_surface.png}
+\caption{Which mediation point constrains which agent capability class;
+filled numbered cells mark the primary control, and the right marginal
+counts how many distinct controls cover each
+capability.}\label{fig:agent_surface}
 \end{figure}
 \end{frame}
 

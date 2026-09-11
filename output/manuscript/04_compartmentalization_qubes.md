@@ -1,4 +1,4 @@
-# Compartmentalization: Qubes OS in Depth {#sec:qubes}
+# Compartmentalization: Qubes OS Under Offensive-Agent Load {#sec:qubes}
 
 ## Architectural foundation: separation under Xen
 

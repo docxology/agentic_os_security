@@ -1,8 +1,10 @@
-"""Evaluation analysis pipeline: data artifacts + all nine figures.
+"""Evaluation analysis pipeline: data artifacts, nine registry figures, and
+the cover graphical abstract.
 
-``run_analysis(project_root)`` is idempotent: every run rewrites the six data
-artifacts and the figure registry from the pinned registry and regenerates all
-nine figures.  Reports
+``run_analysis(project_root)`` is idempotent: every run rewrites the seven
+data artifacts plus the figure registry and the validation report from the
+pinned registry, regenerates all nine registry figures plus the cover
+graphical abstract (which is not a registry figure).  Reports
 carry timestamps from :mod:`agentic_os_security.build_clock` (which honors
 ``SOURCE_DATE_EPOCH``), never the wall clock.
 """
@@ -15,7 +17,7 @@ from pathlib import Path
 from typing import Any
 
 from ..build_clock import build_timestamp
-from ..evidence import CAPABILITY_BASELINE, SOURCES, sources_by_tier
+from ..evidence import CAPABILITY_BASELINE, INCIDENTS, SOURCES, sources_by_tier
 from ..forecasts import FORECASTS, counts_by_confidence
 from ..figures import (
     generate_agent_surface,
@@ -23,6 +25,7 @@ from ..figures import (
     generate_defensive_stack,
     generate_evidence_timeline,
     generate_forecast_horizon,
+    generate_graphical_abstract,
     generate_orchestration_boundaries,
     generate_property_matrix,
     generate_trust_domains,
@@ -38,8 +41,23 @@ from ..registry import (
     matrix_rows,
     stance_counts,
 )
+from ..orchestration import CIF_CONCEPTS
 from ..threat_model import AUTHORITY_LADDER
 from ..trust_domains import CONFIGURATION_INVARIANTS, CONTROLS, TRUST_DOMAINS
+
+
+#: The six CIF concept ids pinned by the v0.3.0 dossier (source of truth:
+#: ``orchestration.CIF_CONCEPTS``); the pipeline validates coverage.
+_CIF_CONCEPT_IDS: frozenset[str] = frozenset(
+    {
+        "delta_bounded_delegation",
+        "defense_composition_algebra",
+        "belief_integrity",
+        "trust_boundedness",
+        "goal_preservation",
+        "stealth_impact_bounds",
+    }
+)
 
 __all__ = ["run_analysis"]
 
@@ -55,6 +73,9 @@ _FIGURE_GENERATORS: dict[str, Any] = {
     "agent_surface.png": generate_agent_surface,
     "forecast_horizon.png": generate_forecast_horizon,
     "update_windows.png": generate_update_windows,
+    # The cover graphical abstract: generated like a figure but NOT a
+    # registry entry and NOT counted in RESULT_NUM_FIGURES (stays 9).
+    "graphical_abstract.png": generate_graphical_abstract,
 }
 
 _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
@@ -68,15 +89,10 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:evidence_timeline",
         "section": "Threat Model",
         "caption": (
-            "Evidence timeline for the offensive-AI baseline, 2024–2026, in two "
-            "lanes: offensive capability and governance evidence (NCSC 2024 and "
-            "2025 assessments, the 2025 Anthropic campaign investigations and "
-            "OWASP agentic publications, MCP registry and spec milestones, the "
-            "CISA-led Five Eyes adoption guidance, and the 2026 AISI incident "
-            "report) and platform incidents and releases (Qubes OS 4.3.0, Nix "
-            "2.34/2.35 and its advisories, the hardened-profile removal, "
-            "secureblue, OpenBSD 7.9, seL4 16.0.0, QSB advisories, and the "
-            "OpenAI-Hugging Face incident report)."
+            "Two lanes of primary evidence, January 2024 through August 2026: "
+            "offensive capability and governance milestones above, platform "
+            "incident and release milestones below; marker color encodes "
+            "evidentiary tier, and each callout names the primary source."
         ),
     },
     "property_matrix": {
@@ -85,9 +101,10 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:property_matrix",
         "section": "Evaluation Framework",
         "caption": (
-            "The candidate–property stance matrix across 24 candidates and 9 "
-            "properties, rendered from output/data/evaluation_matrix.csv with "
-            "colorblind-safe encoding of the strong/partial/weak/n_a vocabulary."
+            "All 216 candidate-by-property stances, with candidates grouped "
+            "into eight category bands (left strip) and per-property stance "
+            "distributions (right marginals); glyphs mark strong (S), partial "
+            "(P), weak (W), and not-assessed cells."
         ),
     },
     "defensive_stack": {
@@ -96,12 +113,10 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:defensive_stack",
         "section": "Evaluation Framework",
         "caption": (
-            "Defensive stack coverage: the candidate x mitigation-class matrix "
-            "(24 candidates x 8 mitigation classes = 192 cells) rendered from "
-            "registry.DEFENSIVE_STACK with the same colorblind-safe "
-            "strong/partial/weak/n_a encoding as the property matrix, grouped "
-            "into the eight candidate categories with per-class coverage "
-            "marginals."
+            "Defensive-stack coverage across eight mitigation classes: weak "
+            "cells cluster on conventional desktops while compartmentalized, "
+            "server, and high-assurance candidates concentrate strong stances "
+            "in sandboxing, verified boot, and update operations."
         ),
     },
     "trust_domains": {
@@ -110,14 +125,9 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:trust_domains",
         "section": "Agentic Authority Architecture",
         "caption": (
-            "The seven trust domains of the proposed agentic authority architecture "
-            "and the boundaries between them. Administration, personal identity, and "
-            "the credential service hold assets whose loss is not recoverable by "
-            "rebuilding; agent execution and browsing/intake meet hostile input and "
-            "are deliberately disposable; release/deployment mediates what leaves; "
-            "recovery sits beyond the destructive authority of everything else. The "
-            "architecture's objective is real separation of authority, not maximizing "
-            "the number of compartments."
+            "Seven trust domains for AI-assisted work, arranged from hostile "
+            "intake to protected assets; numbered arrows mark the control "
+            "catalog entries that mediate each crossing."
         ),
     },
     "authority_ladder": {
@@ -126,14 +136,10 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:authority_ladder",
         "section": "Agentic Authority Architecture",
         "caption": (
-            "The authority ladder from proposal to revocation. An agent may "
-            "autonomously occupy the lower rungs — proposing changes and staging "
-            "artifacts — while authorize marks the rung that must lie outside the "
-            "agent's own control, exercised by a human principal or deterministic "
-            "policy. Audit and revoke remain principal powers that survive "
-            "destruction of the execution environment: the record lives outside the "
-            "environment, and revocation acts on credentials the environment no "
-            "longer holds."
+            "The six-rung authority ladder as a swimlane across human "
+            "principal, orchestrator and agent, and tool broker; hatched "
+            "cells mark exercise paths an agent must never hold without "
+            "external authorization."
         ),
     },
     "orchestration_boundaries": {
@@ -142,13 +148,9 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:orchestration_boundaries",
         "section": "Securing Agent Orchestration",
         "caption": (
-            "Orchestration boundaries: a planner decomposes a task into worker "
-            "assignments; executors run one isolated task environment each; a tool "
-            "broker mediates every privileged filesystem, browser, CI, cloud, and "
-            "messaging operation against task-scoped policy; approval for "
-            "consequential actions originates outside the orchestration hierarchy; "
-            "and an append-only audit trail beyond every agent's write authority "
-            "records broker decisions, credential events, and approvals."
+            "A reference orchestration: one orchestrator delegating through "
+            "an MCP-style tool broker to three disposable workers, with the "
+            "ten mediation points numbered at each trust-boundary crossing."
         ),
     },
     "agent_surface": {
@@ -157,12 +159,9 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:agent_surface",
         "section": "Securing Agent Orchestration",
         "caption": (
-            "Agent surface: which of the ten orchestration mediation points "
-            "(orchestration.MEDIATION_POINTS, numbered) governs each agent "
-            "capability class. Filled, numbered cells mark a mediation point "
-            "that constrains the class - sandbox primitives, proxy-mediated "
-            "egress, OAuth audience binding, classifier escalation, and the "
-            "external human gate each cover distinct authority surfaces."
+            "Which mediation point constrains which agent capability class; "
+            "filled numbered cells mark the primary control, and the right "
+            "marginal counts how many distinct controls cover each capability."
         ),
     },
     "forecast_horizon": {
@@ -171,12 +170,10 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:forecast_horizon",
         "section": "Forecast",
         "caption": (
-            "The 2028–2031 forecast horizon: the registered forecast claims grouped "
-            "by confidence tier — high-confidence architectural bets, moderate "
-            "execution-dependent outcomes, and low-confidence claims the analysis "
-            "declines to endorse — across operating-system architecture, agent "
-            "authority, and supply-chain domains. The horizon bounds this review's "
-            "expectations; it is not a release schedule for any project."
+            "Fourteen forecasts placed on the 2026–2031 horizon by confidence "
+            "tier; high-confidence architectural bets cluster early, while "
+            "low-confidence rows are explicit refusals to predict a "
+            "distribution winner."
         ),
     },
     "update_windows": {
@@ -185,10 +182,9 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:update_windows",
         "section": "Servers and Agent-Execution Infrastructure",
         "caption": (
-            "Stated update and support windows for all 24 candidates, colored by "
-            "candidate category; hatched bars mark projects whose documented "
-            "policy is rolling or lifecycle-based without a fixed support window "
-            "(registry.UPDATE_WINDOWS carries the per-candidate policy detail)."
+            "Documented support windows for all twenty-four candidates; "
+            "hatched bars mark rolling or lifecycle-based policies with no "
+            "fixed window, and color encodes the candidate category."
         ),
     },
 }
@@ -289,6 +285,56 @@ def _write_figure_registry(path: Path) -> int:
     return len(entries)
 
 
+def _write_incident_register(path: Path) -> int:
+    """Write the incident register CSV from ``evidence.INCIDENTS``."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["incident_id", "date", "actor_class", "vector", "boundary_lesson", "citation"])
+        for incident in INCIDENTS:
+            writer.writerow(
+                [
+                    incident.incident_id,
+                    incident.date,
+                    incident.actor_class,
+                    incident.vector,
+                    incident.boundary_lesson,
+                    incident.citation_key,
+                ]
+            )
+    return len(INCIDENTS)
+
+
+def _write_cognitive_defenses(path: Path) -> dict[str, Any]:
+    """Write the CIF concept -> project-surface mapping (deterministic).
+
+    Byte-deterministic: sorted keys, fixed indent, trailing newline, no
+    timestamps.
+    """
+    control_ids = {control.control_id for control in CONTROLS}
+    concepts: list[dict[str, Any]] = []
+    for concept in CIF_CONCEPTS:
+        concepts.append(
+            {
+                "concept_id": concept.concept_id,
+                "concept": concept.concept,
+                "summary": concept.summary,
+                "surface": concept.surface,
+                "surface_kind": "control" if concept.surface in control_ids else "section",
+                "citation_key": concept.citation_key,
+            }
+        )
+    concepts.sort(key=lambda entry: entry["concept_id"])
+    payload = {
+        "concepts": concepts,
+        "num_concepts": len(concepts),
+        "mapped_surfaces": sorted({entry["surface"] for entry in concepts}),
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return payload
+
+
 def _run_checks(data_path: Path) -> dict[str, Any]:
     """Self-checks; raises :class:`AnalysisValidationError` on any red check."""
     checks: list[dict[str, Any]] = []
@@ -311,6 +357,24 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
         unique_pairs == len(rows),
         f"{unique_pairs} unique (candidate, property) pairs",
     )
+
+    incident_ids = [incident.incident_id for incident in INCIDENTS]
+    record(
+        "incident_register_rows",
+        len(INCIDENTS) >= 12 and len(incident_ids) == len(set(incident_ids)),
+        f"{len(INCIDENTS)} incidents (minimum 12, unique ids)",
+    )
+
+    concept_ids = {concept.concept_id for concept in CIF_CONCEPTS}
+    unmapped = sorted(concept.concept_id for concept in CIF_CONCEPTS if not concept.surface)
+    record(
+        "cognitive_defense_coverage",
+        concept_ids == _CIF_CONCEPT_IDS and not unmapped,
+        f"{len(CIF_CONCEPTS)}/6 CIF concepts mapped to project surfaces"
+        if concept_ids == _CIF_CONCEPT_IDS and not unmapped
+        else f"missing={sorted(_CIF_CONCEPT_IDS - concept_ids)} unmapped={unmapped}",
+    )
+
 
     bad_stances = sorted({stance for _, _, stance in rows} - _STANCE_VOCAB)
     record(
@@ -362,6 +426,7 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
         red = [check["check"] for check in checks if check["status"] == "red"]
         raise AnalysisValidationError(f"validation failed: {', '.join(red)}")
 
+
     return {
         "generated_at": build_timestamp(),
         "all_green": True,
@@ -373,7 +438,8 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
 
 
 def run_analysis(project_root: Path | str) -> dict[str, Any]:
-    """Run the full analysis: 6 data artifacts, then all 9 figures.
+    """Run the full analysis: 7 data artifacts, the 9 registry figures, and
+    the cover graphical abstract.
 
     Returns a summary dict with artifact paths and row/figure counts.
     """
@@ -385,6 +451,8 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
     stack_rows_written = _write_defensive_stack_csv(data_dir(root) / "defensive_stack.csv")
     update_rows_written = _write_update_windows_csv(data_dir(root) / "update_windows.csv")
     _write_evidence_summary(data_dir(root) / "evidence_summary.json")
+    incident_rows_written = _write_incident_register(data_dir(root) / "incident_register.csv")
+    cognitive_defenses = _write_cognitive_defenses(data_dir(root) / "cognitive_defenses.json")
     registry_entries = _write_figure_registry(figures_dir(root) / "figure_registry.json")
 
     report = _run_checks(data_path)
@@ -406,6 +474,8 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
         "scenario_rows": scenario_rows_written,
         "defensive_stack_rows": stack_rows_written,
         "update_window_rows": update_rows_written,
+        "incident_rows": incident_rows_written,
+        "cif_concepts_mapped": cognitive_defenses["num_concepts"],
         "figures_generated": len(figures),
         "figures": figures,
         "figure_registry_entries": registry_entries,
@@ -413,9 +483,9 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
         "data_artifacts": [
             "evaluation_matrix.csv",
             "scenario_recommendations.csv",
-            "defensive_stack.csv",
-            "update_windows.csv",
             "evidence_summary.json",
+            "incident_register.csv",
+            "cognitive_defenses.json",
             "figure_registry.json",
             "validation_report.json",
         ],

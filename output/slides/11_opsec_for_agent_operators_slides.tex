@@ -201,9 +201,11 @@
 
 \begin{document}
 
-\section{Operator OpSec for Agent Work}\label{sec:opsec}
+\section{Operator OpSec: Identity, Egress, and Incident Response for
+Agent Work}\label{sec:opsec}
 
-\begin{frame}[allowframebreaks]{Operator OpSec for Agent Work}
+\begin{frame}[allowframebreaks]{Operator OpSec: Identity, Egress, and
+Incident Response for Agent Work}
 Operating-system compartmentalization constrains what a compromised
 component can reach. Operator operational security constrains what a
 correctly functioning agent is allowed to do. The threat model of
@@ -220,7 +222,8 @@ available and the authority to act had already been granted (Institute
 2026). This section treats OpSec as the reviewable extension of the
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Operator OpSec for Agent Work}
+\begin{frame}[allowframebreaks]{Operator OpSec: Identity, Egress, and
+Incident Response for Agent Work}
 trust-domain architecture of sec.~10: the 7
 domains and 9 controls define what the system separates; operator
 discipline determines whether those separations survive contact with
@@ -229,6 +232,18 @@ more than exhortation: standards work now defines what an agent's
 identity can look like, incident reporting documents credential theft as
 a recurring failure mode, and transparency regulation turns attribution
 hygiene into a compliance surface.
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Operator OpSec: Identity, Egress, and
+Incident Response for Agent Work}
+Structured self-assessment gives that discipline a reviewable form:
+operator posture assessments and human-oversight checklists, published
+as part of a practical deployment guide for cognitive-integrity
+controls, turn the review of agent-facing authority into a repeatable
+procedure rather than an ad hoc audit (Friedman 2026). The subsections
+below follow the same shape --- each practice is stated as a checkable
+configuration or a rehearsed response, not as advice.
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Identity compartmentalization
@@ -540,6 +555,16 @@ response plan in one specific way: revocation must cover the
 agent-platform accounts themselves, not only the task-scoped credentials
 they issued, because a stolen platform key can mint new task authority
 after the original task environment is gone.
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Rehearsed incident response for
+agent-era compromise}
+Incident-response playbooks published for cognitive-integrity
+deployments ground that rehearsal: the revocation-first,
+rebuild-from-known-good, treat-transmitted-as-disclosed sequence appears
+there as practiced steps with assigned roles and timing rather than as
+principles to be improvised under pressure (Friedman 2026).
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Zero trust applied to agent tool calls}

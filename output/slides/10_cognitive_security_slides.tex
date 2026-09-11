@@ -201,7 +201,7 @@
 
 \begin{document}
 
-\section{Cognitive Security: The Authorized-Misuse
+\section{Cognitive Security: Defending the Authorized-Misuse
 Surface}\label{sec:cognitive_security}
 
 \begin{frame}[allowframebreaks]{Grounding: the authorized-misuse record}
@@ -477,6 +477,16 @@ official guidance and the vendor engineering record of
 sec.~10 converge independently on
 sandboxing-plus-graduated-authority as the default posture.
 
+Formal work on agent integrity gives this design target names: belief
+integrity --- the agent's working beliefs remaining traceable to what
+the principal actually established --- and goal preservation --- the
+objectives the agent pursues remaining the principal's --- are stated,
+checkable properties rather than exhortations, and the boundaries below
+are the mechanisms that hold them (Friedman 2026b).
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Cognitive boundary design}
 \textbf{Consequential-action gating.} The set of operations that cause
 irreversible or high-blast-radius change --- publishing, production
 deployment, secret issuance, policy modification --- must pass through
@@ -536,6 +546,21 @@ resulted (Institute 2026b). The equivalent operator practice is
 grounding agent claims in artifacts that can be checked --- test
 results, reproduced builds, diffs --- rather than in the agent's
 narration of them.
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Cognitive boundary design}
+\textbf{Operator-side analytic tradecraft.} The controls above assume an
+operator whose judgment is itself trained and checkable, and the
+operator side now has an inspectable compensating layer: roughly one
+hundred cognitive-security and analytic-tradecraft skills --- structured
+analytic techniques, deception detection, source verification, critical
+review --- packaged to run under the same coding harnesses that run
+agent workloads, so the checks an operator applies to agent output are
+runnable, inspectable artifacts rather than ad-hoc habits (Friedman
+2026c). The tradecraft behind that skill collection has an educational
+upstream in structured analytic intelligence curriculum (Friedman
+2026a).
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Monitoring is itself an unsolved

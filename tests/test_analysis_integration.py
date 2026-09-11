@@ -1,5 +1,6 @@
-"""Analysis pipeline integration: run_analysis writes the six data
-artifacts plus all nine figures, with row-count/tier-sum/verdict contracts,
+"""Analysis pipeline integration: run_analysis writes the eight data
+artifacts, the nine registry figures plus the cover graphical abstract,
+with row-count/tier-sum/verdict contracts and pinned caption assertions,
 and reruns are idempotent in validation verdicts.
 """
 
@@ -23,6 +24,30 @@ EXPECTED_FIGURES = {
     "agent_surface.png",
     "forecast_horizon.png",
     "update_windows.png",
+    # Cover graphical abstract: on disk with the figures, but NOT a
+    # manuscript figure registry entry (RESULT_NUM_FIGURES stays 9).
+    "graphical_abstract.png",
+}
+
+# Registry short names whose caption/alt_text must equal the v0.3.0 pinned
+# strings verbatim (spot-check subset; all nine carry pinned captions).
+PINNED_CAPTION_SPOT_CHECKS = {
+    "fig:evidence_timeline": (
+        "Two lanes of primary evidence, January 2024 through August 2026: "
+        "offensive capability and governance milestones above, platform "
+        "incident and release milestones below; marker color encodes "
+        "evidentiary tier, and each callout names the primary source."
+    ),
+    "fig:update_windows": (
+        "Documented support windows for all twenty-four candidates; hatched "
+        "bars mark rolling or lifecycle-based policies with no fixed window, "
+        "and color encodes the candidate category."
+    ),
+    "fig:agent_surface": (
+        "Which mediation point constrains which agent capability class; "
+        "filled numbered cells mark the primary control, and the right "
+        "marginal counts how many distinct controls cover each capability."
+    ),
 }
 
 
@@ -57,18 +82,83 @@ def test_run_analysis_writes_data_artifacts_and_figures(tmp_project):
     assert (data_dir / "update_windows.csv").exists()
     assert (data_dir / "evidence_summary.json").exists()
     assert (data_dir / "validation_report.json").exists()
+    assert (data_dir / "incident_register.csv").exists()
+    assert (data_dir / "cognitive_defenses.json").exists()
     assert (project_paths.figures_dir(tmp_project) / "figure_registry.json").exists()
 
     produced = {p.name for p in figures_dir.glob("*.png")}
     assert produced == EXPECTED_FIGURES
-    assert summary["figures_generated"] == 9
+    assert summary["figures_generated"] == 10
     assert summary["figure_registry_entries"] == 9
 
     registry = json.loads(
-        (project_paths.figures_dir(tmp_project) / "figure_registry.json").read_text(encoding="utf-8")
+        (project_paths.figures_dir(tmp_project) / "figure_registry.json").read_text(
+            encoding="utf-8"
+        )
     )
     assert len(registry) == 9
+    assert "graphical_abstract.png" not in {entry["filename"] for entry in registry.values()}
     assert all("section" in entry and "filename" in entry for entry in registry.values())
+
+
+def test_registry_captions_match_pinned_strings(tmp_project):
+    run_analysis(tmp_project)
+    registry = json.loads(
+        (project_paths.figures_dir(tmp_project) / "figure_registry.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    for label, pinned in PINNED_CAPTION_SPOT_CHECKS.items():
+        entry = registry[label]
+        assert entry["caption"] == pinned, f"caption for {label} drifts from the pinned string"
+        assert entry["metadata"]["alt_text"] == pinned, f"alt_text for {label} drifts from the pinned string"
+
+
+def test_incident_register_has_at_least_twelve_rows_plus_header(tmp_project):
+    run_analysis(tmp_project)
+    with (project_paths.data_dir(tmp_project) / "incident_register.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = list(csv.reader(handle))
+    assert rows[0] == ["incident_id", "date", "actor_class", "vector", "boundary_lesson", "citation"]
+    assert len(rows) - 1 >= 12
+    assert len({row[0] for row in rows[1:]}) == len(rows) - 1, "incident ids not unique"
+    assert all(row[5] for row in rows[1:]), "every incident carries a citation key"
+
+
+def test_cognitive_defenses_maps_all_six_cif_concepts(tmp_project):
+    run_analysis(tmp_project)
+    payload = json.loads(
+        (project_paths.data_dir(tmp_project) / "cognitive_defenses.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    concepts = {c["concept_id"]: c for c in payload["concepts"]}
+    assert set(concepts) == {
+        "delta_bounded_delegation",
+        "defense_composition_algebra",
+        "belief_integrity",
+        "trust_boundedness",
+        "goal_preservation",
+        "stealth_impact_bounds",
+    }
+    assert all(c["surface"] for c in concepts.values()), "every concept maps to a project surface"
+    assert all(c["surface_kind"] in {"control", "section"} for c in concepts.values())
+    assert all(c["citation_key"] for c in concepts.values())
+
+
+def test_validation_report_covers_new_v030_checks(tmp_project):
+    run_analysis(tmp_project)
+    report = json.loads(
+        (project_paths.data_dir(tmp_project) / "validation_report.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    checks = {entry["check"]: entry for entry in report["checks"]}
+    assert checks["incident_register_rows"]["status"] == "green"
+    cognitive = checks["cognitive_defense_coverage"]
+    assert cognitive["status"] == "green"
+    assert "6/6" in cognitive["detail"]
 
 
 def test_evaluation_matrix_has_216_data_rows_plus_header(tmp_project):
@@ -115,17 +205,17 @@ def test_scenario_recommendations_has_eight_rows(tmp_project):
     assert len({row[0] for row in rows[1:]}) == 8
 
 
-def test_evidence_summary_tier_counts_sum_to_150(tmp_project):
+def test_evidence_summary_tier_counts_sum_to_155(tmp_project):
     run_analysis(tmp_project)
     summary = json.loads(
         (project_paths.data_dir(tmp_project) / "evidence_summary.json").read_text(
             encoding="utf-8"
         )
     )
-    tier_counts = summary.get("tier_counts") or _find_int_mapping_with_sum(summary, 150)
-    assert tier_counts is not None, "no tier-count mapping summing to 150"
+    tier_counts = summary.get("tier_counts") or _find_int_mapping_with_sum(summary, 155)
+    assert tier_counts is not None, "no tier-count mapping summing to 155"
     assert set(tier_counts) == TIER_VOCAB
-    assert sum(tier_counts.values()) == 150
+    assert sum(tier_counts.values()) == 155
     assert "capability_baseline" in summary or any(
         "baseline" in key for key in summary
     )

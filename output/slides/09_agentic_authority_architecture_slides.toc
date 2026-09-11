@@ -1,1 +1,1 @@
-\beamer@sectionintoc {1}{Agentic Authority Architecture}{1}{0}{1}
+\beamer@sectionintoc {1}{Agentic Authority Architecture: Trust Domains, Controls, and the Authority Ladder}{1}{0}{1}

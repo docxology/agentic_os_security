@@ -3,13 +3,13 @@
     "pdf": {
       "exists": true,
       "file_count": 1,
-      "size_mb": "2.79",
-      "total_size_bytes": 2920321,
+      "size_mb": "3.15",
+      "total_size_bytes": 3307553,
       "largest_files": [
         {
           "name": "agentic_os_security_combined.pdf",
-          "size_mb": "2.79",
-          "size_bytes": 2920321,
+          "size_mb": "3.15",
+          "size_bytes": 3307553,
           "path": "pdf/agentic_os_security_combined.pdf"
         }
       ],
@@ -20,25 +20,25 @@
     "web": {
       "exists": true,
       "file_count": 21,
-      "size_mb": "1.10",
-      "total_size_bytes": 1156149,
+      "size_mb": "1.11",
+      "total_size_bytes": 1162517,
       "largest_files": [
         {
           "name": "index.html",
           "size_mb": "0.40",
-          "size_bytes": 418835,
+          "size_bytes": 422558,
           "path": "web/index.html"
         },
         {
           "name": "_combined_manuscript.md",
           "size_mb": "0.24",
-          "size_bytes": 248741,
+          "size_bytes": 250864,
           "path": "web/_combined_manuscript.md"
         },
         {
           "name": "manuscript__10_cognitive_security.html",
-          "size_mb": "0.03",
-          "size_bytes": 35814,
+          "size_mb": "0.04",
+          "size_bytes": 36957,
           "path": "web/manuscript__10_cognitive_security.html"
         }
       ],
@@ -51,25 +51,25 @@
     "slides": {
       "exists": true,
       "file_count": 18,
-      "size_mb": "3.16",
-      "total_size_bytes": 3311593,
+      "size_mb": "3.17",
+      "total_size_bytes": 3321538,
       "largest_files": [
         {
           "name": "03_evaluation_framework_slides.pdf",
           "size_mb": "0.70",
-          "size_bytes": 731937,
+          "size_bytes": 732047,
           "path": "slides/03_evaluation_framework_slides.pdf"
         },
         {
           "name": "12_orchestration_security_slides.pdf",
           "size_mb": "0.59",
-          "size_bytes": 620624,
+          "size_bytes": 622551,
           "path": "slides/12_orchestration_security_slides.pdf"
         },
         {
           "name": "09_agentic_authority_architecture_slides.pdf",
-          "size_mb": "0.57",
-          "size_bytes": 602511,
+          "size_mb": "0.58",
+          "size_bytes": 603982,
           "path": "slides/09_agentic_authority_architecture_slides.pdf"
         }
       ],
@@ -91,10 +91,16 @@
     },
     "figures": {
       "exists": true,
-      "file_count": 10,
-      "size_mb": "2.37",
-      "total_size_bytes": 2489624,
+      "file_count": 11,
+      "size_mb": "2.74",
+      "total_size_bytes": 2875207,
       "largest_files": [
+        {
+          "name": "graphical_abstract.png",
+          "size_mb": "0.37",
+          "size_bytes": 389115,
+          "path": "figures/graphical_abstract.png"
+        },
         {
           "name": "defensive_stack.png",
           "size_mb": "0.32",
@@ -106,24 +112,18 @@
           "size_mb": "0.31",
           "size_bytes": 324617,
           "path": "figures/property_matrix.png"
-        },
-        {
-          "name": "update_windows.png",
-          "size_mb": "0.31",
-          "size_bytes": 324370,
-          "path": "figures/update_windows.png"
         }
       ],
       "extensions": {
-        ".png": 9,
+        ".png": 10,
         ".json": 1
       }
     },
     "data": {
       "exists": true,
-      "file_count": 6,
+      "file_count": 8,
       "size_mb": "0.03",
-      "total_size_bytes": 27121,
+      "total_size_bytes": 33739,
       "largest_files": [
         {
           "name": "evaluation_matrix.csv",
@@ -138,15 +138,15 @@
           "path": "data/defensive_stack.csv"
         },
         {
-          "name": "scenario_recommendations.csv",
+          "name": "incident_register.csv",
           "size_mb": "0.00",
-          "size_bytes": 2653,
-          "path": "data/scenario_recommendations.csv"
+          "size_bytes": 4133,
+          "path": "data/incident_register.csv"
         }
       ],
       "extensions": {
-        ".csv": 4,
-        ".json": 2
+        ".json": 3,
+        ".csv": 5
       }
     },
     "reports": {
@@ -188,25 +188,25 @@
       "exists": true,
       "file_count": 21,
       "size_mb": "0.29",
-      "total_size_bytes": 300138,
+      "total_size_bytes": 305231,
       "largest_files": [
         {
           "name": "references.bib",
           "size_mb": "0.04",
-          "size_bytes": 44270,
+          "size_bytes": 46905,
           "path": "manuscript/references.bib"
         },
         {
           "name": "10_cognitive_security.md",
           "size_mb": "0.02",
-          "size_bytes": 22822,
+          "size_bytes": 23939,
           "path": "manuscript/10_cognitive_security.md"
         },
         {
-          "name": "02_threat_model.md",
+          "name": "11_opsec_for_agent_operators.md",
           "size_mb": "0.02",
-          "size_bytes": 17881,
-          "path": "manuscript/02_threat_model.md"
+          "size_bytes": 18593,
+          "path": "manuscript/11_opsec_for_agent_operators.md"
         }
       ],
       "extensions": {
@@ -218,13 +218,13 @@
     "root": {
       "exists": true,
       "file_count": 1,
-      "size_mb": "2.79",
-      "total_size_bytes": 2920321,
+      "size_mb": "3.15",
+      "total_size_bytes": 3307553,
       "largest_files": [
         {
           "name": "agentic_os_security_combined.pdf",
-          "size_mb": "2.79",
-          "size_bytes": 2920321,
+          "size_mb": "3.15",
+          "size_bytes": 3307553,
           "path": "agentic_os_security_combined.pdf"
         }
       ],
@@ -233,55 +233,62 @@
       }
     }
   },
-  "total_files": 79,
-  "total_size_mb": 12.521294593811035,
+  "total_files": 82,
+  "total_size_mb": 13.654327392578125,
   "largest_files": [
     {
       "name": "agentic_os_security_combined.pdf",
-      "size_mb": "2.79",
-      "size_bytes": 2920321,
+      "size_mb": "3.15",
+      "size_bytes": 3307553,
       "category": "root",
       "path": "agentic_os_security_combined.pdf"
     },
     {
       "name": "agentic_os_security_combined.pdf",
-      "size_mb": "2.79",
-      "size_bytes": 2920321,
+      "size_mb": "3.15",
+      "size_bytes": 3307553,
       "category": "pdf",
       "path": "pdf/agentic_os_security_combined.pdf"
     },
     {
       "name": "03_evaluation_framework_slides.pdf",
       "size_mb": "0.70",
-      "size_bytes": 731937,
+      "size_bytes": 732047,
       "category": "slides",
       "path": "slides/03_evaluation_framework_slides.pdf"
     },
     {
       "name": "12_orchestration_security_slides.pdf",
       "size_mb": "0.59",
-      "size_bytes": 620624,
+      "size_bytes": 622551,
       "category": "slides",
       "path": "slides/12_orchestration_security_slides.pdf"
     },
     {
       "name": "09_agentic_authority_architecture_slides.pdf",
-      "size_mb": "0.57",
-      "size_bytes": 602511,
+      "size_mb": "0.58",
+      "size_bytes": 603982,
       "category": "slides",
       "path": "slides/09_agentic_authority_architecture_slides.pdf"
     },
     {
       "name": "index.html",
       "size_mb": "0.40",
-      "size_bytes": 418835,
+      "size_bytes": 422558,
       "category": "web",
       "path": "web/index.html"
     },
     {
+      "name": "graphical_abstract.png",
+      "size_mb": "0.37",
+      "size_bytes": 389115,
+      "category": "figures",
+      "path": "figures/graphical_abstract.png"
+    },
+    {
       "name": "07_servers_agent_infrastructure_slides.pdf",
       "size_mb": "0.35",
-      "size_bytes": 367752,
+      "size_bytes": 367757,
       "category": "slides",
       "path": "slides/07_servers_agent_infrastructure_slides.pdf"
     },
@@ -298,25 +305,18 @@
       "size_bytes": 324617,
       "category": "figures",
       "path": "figures/property_matrix.png"
-    },
-    {
-      "name": "update_windows.png",
-      "size_mb": "0.31",
-      "size_bytes": 324370,
-      "category": "figures",
-      "path": "figures/update_windows.png"
     }
   ],
   "missing_expected_files": [],
   "sizes_by_category": {
-    "pdf": 2.7850351333618164,
-    "web": 1.1025896072387695,
-    "slides": 3.1581811904907227,
-    "figures": 2.3742904663085938,
-    "data": 0.025864601135253906,
+    "pdf": 3.1543283462524414,
+    "web": 1.1086626052856445,
+    "slides": 3.167665481567383,
+    "figures": 2.742011070251465,
+    "data": 0.03217601776123047,
     "reports": 0.0040645599365234375,
-    "manuscript": 0.28623390197753906,
-    "root": 2.7850351333618164
+    "manuscript": 0.2910909652709961,
+    "root": 3.1543283462524414
   },
   "inventory_mode": "stable-local-output-v1",
   "inventory_scope": "stage5-delivery-mirror",
@@ -326,9 +326,9 @@
     ".md": 20,
     ".ico": 1,
     ".html": 19,
-    ".png": 9,
-    ".json": 4,
-    ".csv": 4,
+    ".png": 10,
+    ".json": 5,
+    ".csv": 5,
     ".yaml": 1,
     ".bib": 1
   }
