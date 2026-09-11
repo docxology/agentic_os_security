@@ -1,0 +1,8 @@
+\frametitle{The review invariants}
+The 9 invariants share one design principle: the state that would relax
+an invariant is never reachable from agent-writable configuration. They
+are capability invariants, not instruction invariants. A well-prompted
+agent and a compromised agent must be equally unable to violate them,
+because the authorized-misuse path does not distinguish persuasion from
+compromise at the enforcement layer. An invariant that holds only while
+the agent behaves is not an invariant; it is a preference.

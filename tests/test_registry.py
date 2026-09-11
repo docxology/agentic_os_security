@@ -74,6 +74,17 @@ CATEGORY_VOCAB = [
 
 STANCE_VOCAB = {"strong", "partial", "weak", "n_a"}
 
+MITIGATION_CLASS_IDS = {
+    "memory_safety",
+    "allocator_hardening",
+    "sandboxing_primitives",
+    "mac_framework",
+    "verified_boot",
+    "reproducible_deployment",
+    "disposable_execution",
+    "update_automation",
+}
+
 
 def test_nine_properties_with_unique_ids():
     ids = [p.property_id for p in registry.PROPERTIES]
@@ -157,3 +168,46 @@ def test_registry_ids_are_slug_like():
         assert slug.match(candidate.candidate_id), candidate.candidate_id
     for scenario in registry.SCENARIOS:
         assert slug.match(scenario.scenario_id), scenario.scenario_id
+
+
+def test_eight_mitigation_classes_with_pinned_unique_ids():
+    ids = [m.class_id for m in registry.MITIGATION_CLASSES]
+    assert len(ids) == 8
+    assert len(set(ids)) == 8
+    assert set(ids) == set(MITIGATION_CLASS_IDS)
+    for mitigation in registry.MITIGATION_CLASSES:
+        assert mitigation.name.strip(), mitigation.class_id
+        assert mitigation.description.strip(), mitigation.class_id
+
+
+def test_defensive_stack_covers_24_candidates_by_8_classes_with_valid_vocab():
+    candidate_ids = {c.candidate_id for c in registry.CANDIDATES}
+    assert set(registry.DEFENSIVE_STACK) == candidate_ids
+    for candidate_id, row in registry.DEFENSIVE_STACK.items():
+        assert set(row) == set(MITIGATION_CLASS_IDS), candidate_id
+        for class_id, stance in row.items():
+            assert stance in STANCE_VOCAB, (candidate_id, class_id, stance)
+
+
+def test_defensive_stack_rows_are_exactly_192_cells_matching_registry():
+    rows = registry.defensive_stack_rows()
+    assert len(rows) == 192
+    assert len(set(rows)) == 192
+    by_candidate = {c.candidate_id for c in registry.CANDIDATES}
+    assert {candidate_id for candidate_id, _, _ in rows} == by_candidate
+    assert {class_id for _, class_id, _ in rows} == set(MITIGATION_CLASS_IDS)
+    for candidate_id, class_id, stance in rows:
+        assert registry.DEFENSIVE_STACK[candidate_id][class_id] == stance
+
+
+def test_update_windows_cover_all_candidates_with_nonempty_policy():
+    candidate_ids = {c.candidate_id for c in registry.CANDIDATES}
+    assert set(registry.UPDATE_WINDOWS) == candidate_ids
+    for candidate_id, window in registry.UPDATE_WINDOWS.items():
+        assert window.candidate_id == candidate_id, candidate_id
+        assert window.policy.strip(), candidate_id
+        assert window.months is None or window.months > 0, candidate_id
+    # Fixed windows only where documented: months must be None elsewhere.
+    documented = registry.UPDATE_WINDOWS["ubuntu_lts"].months
+    assert documented == 60, documented
+    assert registry.UPDATE_WINDOWS["qubes_os"].months is None

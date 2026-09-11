@@ -1,0 +1,1 @@
+\beamer@sectionintoc {1}{Reproducible Operations: NixOS in Depth}{1}{0}{1}

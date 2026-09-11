@@ -1,0 +1,10 @@
+\beamer@slide {the-model-declarative-configuration-generations-rollback}{2}
+\beamer@slide {rollback-is-not-recovery}{5}
+\beamer@slide {reproducible-deployment-versus-verified-reproducible-builds}{7}
+\beamer@slide {six-misconceptions-that-matter-against-offensive-agents}{11}
+\beamer@slide {tbl:nixos_misconceptions}{12}
+\beamer@slide {the-package-manager-is-part-of-the-trusted-computing-base}{15}
+\beamer@slide {provenance-from-signatures-to-verification}{19}
+\beamer@slide {update-operations-the-support-clock-discipline}{21}
+\beamer@slide {composition-with-qubes}{23}
+\beamer@slide {assessment}{25}

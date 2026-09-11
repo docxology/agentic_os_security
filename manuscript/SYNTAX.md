@@ -17,7 +17,7 @@ Project-specific overlay on the canonical [`docs/guides/manuscript-semantics.md`
 
 All citation keys must exist in [`references.bib`](references.bib). Pandoc with `--natbib` converts `[@key]` to the right LaTeX cite command automatically; **never** write raw `\cite{}` in Markdown.
 
-**Key parity is enforced by tests** (`tests/test_evidence.py`, `tests/test_manuscript_structure.py`): every citation key used in prose must exist in `references.bib`; the bibliography has 71 entries (65 primary sources + 6 scholarly anchors).
+**Key parity is enforced by tests** (`tests/test_evidence.py`, `tests/test_manuscript_structure.py`): every citation key used in prose must exist in `references.bib`; the bibliography has 156 entries (150 primary sources + 6 scholarly anchors), extended in the v0.2.0 round (review date 2026-09-11).
 
 ## Figure References
 
@@ -42,6 +42,9 @@ All citation keys must exist in [`references.bib`](references.bib). Pandoc with 
 | `{#fig:authority_ladder}` | `output/figures/authority_ladder.png` | `generate_authority_ladder()` |
 | `{#fig:orchestration_boundaries}` | `output/figures/orchestration_boundaries.png` | `generate_orchestration_boundaries()` |
 | `{#fig:forecast_horizon}` | `output/figures/forecast_horizon.png` | `generate_forecast_horizon()` |
+| `{#fig:defensive_stack}` | `output/figures/defensive_stack.png` | `generate_defensive_stack()` |
+| `{#fig:update_windows}` | `output/figures/update_windows.png` | `generate_update_windows()` |
+| `{#fig:agent_surface}` | `output/figures/agent_surface.png` | `generate_agent_surface()` |
 
 ## Table References
 

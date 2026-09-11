@@ -579,6 +579,15 @@ misses what they actually teach. All entries follow the evaluation
 discipline of <span class="citation"
 data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>:
 documented designs, explicitly scoped claims, no numeric scores.</p>
+<p>This lane also moved during the review window. OpenBSD shipped two
+releases and, more tellingly, used its errata process to <em>remove</em>
+a previously shipped mitigation; seL4’s verification frontier extended
+to a new architecture and a new proof class; Sculpt 26.04 reworked how
+platform drivers obtain authority; and Tails rebuilt on a new Debian
+base while preserving its persistence model across automatic upgrades.
+For systems whose value is precisely their engineering discipline,
+release mechanics are evidence, not trivia [openbsd_errata78;
+sel4_2026_news; sculpt_26_04; tails_7_12].</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Non-Linux and boundary comparators: documented contribution, boundary or caveat, and the lesson each contributes to t…"><table id="tbl:comparators" data-responsive-table="true">
 <caption>Non-Linux and boundary comparators: documented contribution,
 boundary or caveat, and the lesson each contributes to the composition
@@ -604,10 +613,15 @@ and project documentation.</caption>
 <td>A gateway/workstation split that routes all traffic through a
 dedicated Tor gateway; its workstation documentation explicitly warns
 that compromise exposes the workstation’s credentials and browser data
-[whonix_technical_design; whonix_workstation_security].</td>
+[whonix_technical_design; whonix_workstation_security]. Whonix 17 has
+reached end of security support (with final deprecation notices through
+early and mid 2026), making Whonix 18 the only supported line
+[whonix_18_support].</td>
 <td>Anonymity is not credential protection: the project’s own
 documentation treats workstation compromise as exposing workstation-held
-secrets.</td>
+secrets. Running a deprecated release line to avoid migration is exactly
+the maintenance failure the supported-line discipline warns
+against.</td>
 <td>Boundary placement of networking — keeping the network-facing
 component in a separate trust domain — is a structural pattern that
 composes with compartmentalization; it does not make an authorized agent
@@ -617,10 +631,15 @@ harmless.</td>
 <td><strong>Tails</strong></td>
 <td>An amnesic live environment with Tor networking, plus optional
 encrypted Persistent Storage whose trade-offs the project documents
-[tails_overview; tails_persistent_storage].</td>
+[tails_overview; tails_persistent_storage]. The 7.x series is built on
+the Debian 13 base, preserves Persistent Storage across its automatic
+upgrade path, and current releases (7.12) carry a documented notice
+about Secure Boot certificate expiry for users who enabled Secure Boot
+on earlier releases [tails_7_12].</td>
 <td>Amnesia addresses trace reduction and session reset, not information
 exposed while the session is live; enabling persistence deliberately
-reintroduces state that must then be protected.</td>
+reintroduces state that must then be protected. Even an amnesic system’s
+boot chain needs certificate maintenance.</td>
 <td>Session-state hygiene is one contribution to
 <code>persistence_recovery</code>, and it must not be confused with a
 recovery plan for credentials used during the session.</td>
@@ -629,22 +648,38 @@ recovery plan for credentials used during the session.</td>
 <td><strong>OpenBSD</strong></td>
 <td>Documented secure-by-default service choices, privilege separation,
 and exploit mitigations including W^X and system-wide hardening
-[openbsd_security; openbsd_innovations].</td>
-<td>The documented record does not establish superiority for a modern
-browser-heavy, GPU-dependent, AI-development workstation; ecosystem and
-hardware constraints limit that fit.</td>
+[openbsd_security; openbsd_innovations]. Releases 7.8 (2025-10-22) and
+7.9 (2026-05-19) document the current state: a new
+<code>__pledge_open(2)</code> interface refined the pledge-to-open path,
+and <code>pinsyscall</code> gained a PT_LOAD refusal check that prevents
+mapping crafted executable segments over pinned entry points; kernel
+guard pages back the discipline [openbsd_78; openbsd_79].</td>
+<td>2026 errata for 7.8 and 7.9 <em>removed</em> the previously
+documented pledge <code>tmppath</code> permission and fixed a related
+namei race — the project retracted one of its own mitigations when its
+maintenance burden and race behavior outweighed its value
+[openbsd_errata78]. The documented record also does not establish
+superiority for a modern browser-heavy, GPU-dependent, AI-development
+workstation.</td>
 <td>Disciplined trusted-computing-base design is a property, not a
 platform identity; its techniques transfer as ideas even where the OS
-itself does not fit the workload.</td>
+itself does not fit the workload. Even the most disciplined base revises
+its own mitigations through a public errata process.</td>
 </tr>
 <tr>
 <td><strong>seL4</strong></td>
 <td>Formal verification of a small microkernel with explicitly scoped
 proofs and assumptions, including boot, hardware, and DMA-related
-qualifications [sel4_verification_assumptions; klein2009].</td>
+qualifications [sel4_verification_assumptions; klein2009]. The 2026 seL4
+milestone set documents the seL4 16.0.0 release, completion of the
+functional verification of the MCS kernel on 64-bit RISC-V, and the
+first confidentiality proof on AArch64, with Microkit 2.3.0 adding
+x86_64 IOMMU support for the smaller deployment path [sel4_2026_news;
+microkit_2_3].</td>
 <td>The proof boundary does not extend to the browser, driver stack,
-firmware chain, or user workflow that a real deployment adds on
-top.</td>
+firmware chain, or user workflow that a real deployment adds on top. New
+proofs on new architectures broaden the frontier; they do not lift the
+existing scope caveats.</td>
 <td>Strong assurance of a small core is one ingredient of the
 composition; every verification claim must be read at its stated
 boundary, not at the boundary a reader hopes for.</td>
@@ -654,7 +689,11 @@ boundary, not at the boundary a reader hopes for.</td>
 <td>Sculpt describes a general-purpose OS built from Genode’s
 microkernel architecture with capability-based security, sandboxed
 drivers, and VMs, at a 26.04 release and in day-to-day use by its
-developers [genode_sculpt].</td>
+developers. The 26.04 release (2026-04-30) adds a platform-driver
+gatekeeper that mediates which drivers may claim which devices,
+IOMMU-based DMA confinement, and a “black hole” component that swallows
+device-access requests from components without matching capability
+grants [sculpt_26_04; genode_sculpt].</td>
 <td>seL4 proof claims must not be transferred automatically to every
 Genode/Sculpt configuration or to the applications it hosts.</td>
 <td>The most active capability-based desktop trajectory in this review —
@@ -666,9 +705,15 @@ workloads today.</td>
 <td><strong>GrapheneOS</strong></td>
 <td>Hardening atop Android’s security model, documented to keep even
 Google Play services inside the standard app sandbox
-[grapheneos_features].</td>
+[grapheneos_features]. The 2026 release documentation adds
+per-application opt-outs from <code>hardened_malloc</code> for
+compatibility, a five-mode protection model for the USB-C pogo pins
+against malicious accessories, and continued hardening of the
+sandboxed-Play environment [grapheneos_releases].</td>
 <td>A mobile comparator, not a desktop Linux replacement; its guarantees
-are scoped to its platform.</td>
+are scoped to its platform. The per-app allocator opt-outs are
+themselves evidence of compatibility pressure: even the most
+defaults-disciplined mobile platform keeps an escape hatch.</td>
 <td>The transferable lesson is shipping useful applications with
 constrained authority by default — mainstream evidence that
 <code>application_confinement</code> with usable defaults is an
@@ -709,9 +754,13 @@ the hostile network is a separate, disposable-trust domain
 [whonix_technical_design]. Its documented compromise-exposure warning is
 equally instructive: anonymity infrastructure does not protect the
 workstation’s own credentials and browser data from a compromised
-workstation [whonix_workstation_security]. Anonymity and credential
-protection are distinct properties — the source review’s distinction
-applied — and confusing them produces designs that hide the operator’s
+workstation [whonix_workstation_security]. The project’s
+end-of-security-support notice for Whonix 17 — with deprecation notices
+arriving across early and mid 2026 — adds the maintenance dimension: a
+boundary design is only as good as its supported line, and the project
+treats migration to Whonix 18 as a user obligation, not an option
+[whonix_18_support]. Anonymity and credential protection are distinct
+properties; confusing them produces designs that hide the operator’s
 location while surrendering the operator’s secrets.</p>
 <p><strong>Tails contributes state hygiene.</strong> Amnesia is a
 deliberate <code>persistence_recovery</code> strategy: the default
@@ -719,45 +768,83 @@ system leaves nothing to forensically clean and resets every session.
 The optional Persistent Storage shows the honest tension in that design
 — every byte an operator chooses to persist is a byte that survives
 compromise and must be protected by other means
-[tails_persistent_storage]. For the composition argument, Tails
+[tails_persistent_storage]. The 7.x series on its Debian 13 base
+demonstrates that the hygiene can be sustained across upgrades rather
+than sacrificed to them: automatic upgrades now preserve the Persistent
+Storage, so the amnesic posture and an update path no longer trade off
+[tails_7_12]. The same release line documents a Secure Boot
+certificate-expiry notice for users of the earlier 7.7-era Secure Boot
+enablement — a reminder that even an amnesic system has a boot chain
+with its own maintenance clock. For the composition argument, Tails
 demonstrates that reducing what survives is a legitimate alternative to
 defending what persists, and that the two strategies must be chosen
 knowingly rather than mixed accidentally.</p>
-<p><strong>OpenBSD contributes trusted-base discipline.</strong>
-Privilege separation, W^X, and secure-by-default service configuration
-are documented properties of a codebase maintained under an unusual
-security-first discipline [openbsd_security; openbsd_innovations]. The
-correct comparative conclusion is narrow: for narrowly scoped network
+<p><strong>OpenBSD contributes trusted-base discipline — including
+self-revision.</strong> Privilege separation, W^X, and secure-by-default
+service configuration are documented properties of a codebase maintained
+under an unusual security-first discipline [openbsd_security;
+openbsd_innovations]. The 2026 record sharpens the lesson. The errata
+process for releases 7.8 and 7.9 removed the pledge <code>tmppath</code>
+permission across a series of errata and fixed a related namei race —
+retracting a documented mitigation whose race behavior made it a
+liability rather than an asset [openbsd_errata78]. Release 7.9 then
+introduced <code>__pledge_open(2)</code>, which narrows the window
+between a pledged path check and the actual open, and strengthened
+<code>pinsyscall</code> to refuse <code>PT_LOAD</code> mappings that
+would override pinned entry points [openbsd_79]. A trusted base that
+removes its own mitigations through a public, dated errata trail
+demonstrates the property that matters: the mitigation inventory is a
+maintained engineering artifact, not an advertising list. The correct
+comparative conclusion remains narrow: for narrowly scoped network
 services, OpenBSD is a serious non-Linux comparator; for a browser-heavy
 development workstation with GPU acceleration and AI tooling, the
 documented evidence does not support a superiority claim. Its lessons —
-small trusted base, mitigations as defaults — transfer to the
-composition argument as design standards for whichever platform actually
-runs the workload.</p>
+small trusted base, mitigations as defaults, mitigations subject to
+revision — transfer to the composition argument as design standards for
+whichever platform actually runs the workload.</p>
 <p><strong>seL4 and Genode/Sculpt contribute the small-trusted-base and
 capability-mediation trajectories.</strong> seL4’s formal verification
 demonstrates that a practical microkernel can carry machine-checked
-guarantees — and its assumptions documentation demonstrates, just as
-importantly, how verification claims must be scoped to boot, hardware,
-and DMA assumptions [sel4_verification_assumptions; klein2009]. Genode
-and Sculpt demonstrate the same lineage’s userland expression:
-capability-based security and sandboxed drivers in a general-purpose
-desktop [genode_sculpt; levy1984]. Capability mediation matters directly
-to agents: a capability system is the classic answer to the
-confused-deputy problem of an authority holder that cannot distinguish
-legitimate from attacker-chosen requests [hardy1988]. The caveat cuts
-both ways: proof claims attach to configurations, not product names, and
-a capability system hosting a compromised browser gains no automatic
-protection for what the browser legitimately receives.</p>
-<p><strong>GrapheneOS contributes the shipped-defaults
-demonstration.</strong> A mainstream mobile platform that keeps even
+guarantees — and its assumptions documentation shows how verification
+claims must be scoped to boot, hardware, and DMA assumptions
+[sel4_verification_assumptions; klein2009]. The 2026 record shows the
+frontier still moving in two directions at once: the functional
+verification of the MCS kernel completed on 64-bit RISC-V, and the first
+confidentiality proof landed on AArch64 — a non-interference property on
+the architecture real phones and laptops run [sel4_2026_news]; Microkit
+2.3.0 adds x86_64 IOMMU support to the smaller deployment path,
+acknowledging that even a small verified kernel must delegate device
+containment to hardware [microkit_2_3]. Genode and Sculpt demonstrate
+the same lineage’s userland expression, and the 26.04 release makes the
+capability argument concrete at the hardware boundary: the
+platform-driver gatekeeper mediates which components may claim which
+devices, the IOMMU confines what a driver’s DMA can actually reach, and
+the “black hole” component absorbs device-access requests from
+components holding no matching capability — a structural refusal of the
+confused-deputy path rather than a policy warning about it
+[sculpt_26_04; levy1984]. Capability mediation matters directly to
+agents: a capability system is the classic answer to the confused-deputy
+problem of an authority holder that cannot distinguish legitimate from
+attacker-chosen requests [hardy1988]. The caveat cuts both ways: proof
+claims attach to configurations, not product names, and a capability
+system hosting a compromised browser gains no automatic protection for
+what the browser legitimately receives.</p>
+<p><strong>GrapheneOS contributes the shipped-defaults demonstration —
+and its limits.</strong> A mainstream mobile platform that keeps even
 first-party services inside the standard app sandbox shows that
 constrained authority by default is a product decision, not a research
-artifact [grapheneos_features]. That is the
-<code>application_confinement</code> and <code>human_usability</code>
-combination — defaults that survive real use — which every desktop
-candidate in <span class="citation"
-data-cites="sec:desktops">[@sec:desktops]</span> must also achieve. The
+artifact [grapheneos_features]. The 2026 documentation adds three
+details that are as instructive as the headline claim: per-application
+opt-outs from <code>hardened_malloc</code> exist because some
+applications fail under the hardened allocator, a five-mode protection
+model now governs the USB-C pogo pins against malicious accessories, and
+the sandboxed-Play environment continues to be hardened in place
+[grapheneos_releases]. Each item is evidence of the same design stance —
+containment defaults with narrowly scoped, documented escape hatches —
+and of its cost: even the most defaults-disciplined platform in this
+review maintains compatibility exceptions, which is exactly the
+maintenance burden the desktop candidates of <span class="citation"
+data-cites="sec:desktops">[@sec:desktops]</span> must budget for. The
 mobile platform is not the answer for a workstation; it is evidence that
 the property is shippable.</p>
 <p><strong>Kali and Parrot contribute the negative control.</strong>
@@ -778,8 +865,8 @@ base without mediating an agent’s credentials; GrapheneOS constrains
 applications without constraining what a persuaded agent may do with
 legitimate access. The synthesis — which components, composed, cover
 both paths — is the trust-domain architecture of <span class="citation"
-data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>, and
-the scenario-level placement of these comparators appears in <span
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>; the
+scenario-level placement of these comparators appears in <span
 class="citation" data-cites="sec:scenarios">[@sec:scenarios]</span>.</p>
 </main>
 </body>

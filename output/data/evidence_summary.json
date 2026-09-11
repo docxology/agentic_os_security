@@ -1,21 +1,38 @@
 {
   "capability_baseline": {
+    "aisi_actions": 19,
     "aisi_incident_days": "2026-07-25..28",
+    "aisi_models": 7,
+    "aisi_report_published": "2026-08-04",
     "aisi_runs_total": 122,
     "aisi_unsanctioned_runs": 10,
+    "aixcc_identified_pct": 86,
+    "aixcc_patched_pct": 68,
+    "aixcc_real_vulns": 18,
     "aixcc_year": 2025,
     "anthropic_targeted_entities": 30,
+    "gtg1002_autonomy_high_pct": 90,
+    "gtg1002_autonomy_low_pct": 80,
+    "gtg1002_decision_points_high": 6,
+    "gtg1002_decision_points_low": 4,
+    "ncsc_2027_assessment_date": "2025-05-07",
     "ncsc_horizon_year": 2027,
+    "ncsc_original_date": "2024-01-24",
     "nixos_2605_support_end": "2026-12-31",
-    "qsb_118_fix_package": "qubes-core-dom0-linux 4.3.22"
+    "openai_hf_actions": 17600,
+    "qsb_118_cve": "CVE-2026-82636",
+    "qsb_118_cvss": 7.9,
+    "qsb_118_fix_package": "qubes-core-dom0-linux 4.3.22",
+    "reproducible_closure_pct": 99.48,
+    "reproducible_iso_pct": 95.18
   },
   "generated_at": "2026-09-10T12:00:00+00:00",
-  "num_sources": 65,
+  "num_sources": 150,
   "source_tier_counts": {
-    "advisory": 4,
-    "community": 9,
-    "incident_report": 2,
-    "official": 48,
-    "research": 2
+    "advisory": 13,
+    "community": 14,
+    "incident_report": 9,
+    "official": 93,
+    "research": 21
   }
 }

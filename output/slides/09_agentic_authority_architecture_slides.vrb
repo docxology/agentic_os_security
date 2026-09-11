@@ -1,0 +1,12 @@
+\frametitle{Convergent implementations in shipping agent tools}
+credential-scoping or audit controls of this section, which is exactly
+the gap the trust-domain design addresses.
+
+The convergence has a design consequence the rationales above now state
+explicitly. Because the primitives are shared, an operator can evaluate
+any agent-sandbox claim directly: which filesystem mechanism
+(bubblewrap, Seatbelt, Landlock), whether egress is proxy-mediated or
+merely filtered, whether the network default is closed, and which
+approvals remain outside the agent. Vague answers to those four
+questions identify an agent whose containment is a convenience, not a
+boundary.

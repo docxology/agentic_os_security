@@ -1,0 +1,5 @@
+\frametitle{Limitations of matrix thinking}
+With the framework fixed, the next two sections apply it in depth to the
+two anchor platforms whose properties the rest of the architecture
+inherits: Qubes OS for containment (Q. O. Project 2026) and NixOS for
+reproducible operations ({community} 2026).

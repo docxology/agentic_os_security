@@ -598,7 +598,13 @@ and inter-domain clipboard transfer requires explicit user action rather
 than ambient sharing [qubes_gui_protocol]. This is materially stronger
 than starting several ordinary VMs and freely sharing clipboard, home
 directory, and credentials: the user’s attention — not a shared daemon —
-is the arbiter of what crosses.</p>
+is the arbiter of what crosses. Device assignment was historically one
+of the least mediated crossings: exposed PCI and USB devices handed a
+qube direct hardware reach, with policy expressed in coarse terms. The
+4.3 Devices API reworks this surface into a fine-grained, policy-checked
+device model [qubes_devices_api], so a qube can be granted a specific
+device while the set of devices it may never see is expressed as
+explicit denial policy rather than as an accident of configuration.</p>
 <h2 id="state-model-templates-appvms-disposables">State model:
 templates, AppVMs, disposables</h2>
 <p>Qubes’ template model separates maintained base software from
@@ -622,6 +628,19 @@ data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>
 applies. Second, template updates are an operator obligation: a strong
 containment architecture whose templates stop receiving patches degrades
 into a weak one through the update-operations property alone.</p>
+<p>The management layer that automates those updates has its own trust
+properties. Qubes’ salt-based administration executes configuration
+management against target qubes, and the documented security model is
+deliberate about it: management configuration is applied through
+per-target disposable management qubes — the design adopted after the
+QSB#45 management-domain analysis — so the code that administers a qube
+runs in an ephemeral domain scoped to that target rather than in a
+persistent privileged service [qubes_salt_administration]. For
+agent-bearing deployments this matters twice over: it is the pattern
+this review’s authority architecture recommends for agent operations
+(ephemeral execution, narrow grants), and it is a reminder that the
+management plane itself is part of the trusted computing base that must
+track advisories.</p>
 <h2 id="what-the-architecture-buys">What the architecture buys</h2>
 <ul>
 <li><strong>Bounded blast radius for a compromised application.</strong>
@@ -678,10 +697,14 @@ convenient qube.</td>
 <td>dom0 and hypervisor remain the trust base</td>
 <td>Qubes describes dom0 compromise as fatal to the security model, and
 a successful hypervisor escape could compromise the whole system
-[qubes_templates; qubes_faq].</td>
+[qubes_templates; qubes_faq]. Xen 4.19 in 4.3.0 inherits the
+hypervisor’s own advisory stream, including privilege-escape-class Xen
+Security Advisories such as XSA-500 and XSA-507 that Qubes ships patches
+for via its bulletins.</td>
 <td>Hypervisor, administrative services, firmware, and hardware are
 consequential dependencies; prompt patching of management and transfer
-tools is part of the architecture, not an afterthought.</td>
+tools is part of the architecture, not an afterthought — and the
+hypervisor itself is on the same patch clock.</td>
 </tr>
 <tr>
 <td>User-authorized transfers are workflow attacks</td>
@@ -699,7 +722,9 @@ compartmentalized system.</td>
 <td>The documented Anti Evil Maid path has specific TPM/Intel TXT
 requirements and operational hazards; the Secure Boot discussion
 explains why merely signing the bootloader or Xen is insufficient
-[qubes_anti_evil_maid; qubes_issue_4371].</td>
+[qubes_anti_evil_maid; qubes_issue_4371]. The AEM implementation has
+been ported to TrenchBoot with UEFI support [trenchboot_aem_uefi], but
+hardware suitability still gates the whole feature.</td>
 <td>Evaluate boot-chain requirements against the exact machine; do not
 infer them from the Qubes name.</td>
 </tr>
@@ -725,17 +750,33 @@ data-cites="sec:cognitive_security">[@sec:cognitive_security]</span>) a
 Qubes-relevant property: the GUI protocol’s confirmation dialogs are the
 last mediation before a cross-domain transfer, and an agent that can
 persuade is an actor those dialogs must resist.</p>
-<h2 id="qsb-118-the-patch-operations-lesson">QSB-118: the
-patch-operations lesson</h2>
-<p>On August 28, 2026, Qubes published QSB-118: an already-compromised
-qube could inject an arbitrary command into dom0 if the user initiated
-<code>qvm-copy-to-vm</code> from dom0 toward that qube; the bulletin
-states the VM-side variant was not affected and identifies
-<code>qubes-core-dom0-linux</code> 4.3.22 in dom0 as the fixing package
-for Qubes 4.3 [qsb_118]. This was not a claim that any webpage could
-silently escape any fully patched qube — but under the specified
-conditions it was a route to total compromise, exactly the dom0-fatal
-outcome the security model treats as game-over.</p>
+<h2 id="the-2026-qsb-record-small-privileged-interfaces-under-fire">The
+2026 QSB record: small privileged interfaces under fire</h2>
+<p>The security-bulletin record through 2026 is itself evidence for the
+threat model’s small-interfaces claim. QSB-110 (March 2026) and the
+bulletins through mid-2026 — including QSB-115 (June 2026) and QSB-116
+(July 2026) — document fixes in exactly the components the architecture
+flags as privileged: hypervisor, administrative services, and the
+tooling that moves bytes between domains [qsb_110; qsb_115; qsb_116].
+Alongside the Xen Security Advisories Qubes ships patches for, the
+pattern is consistent: the exposure concentrates in the mediation layer,
+not in arbitrary applications.</p>
+<p>QSB-118 is the sharpest instance. On August 28, 2026, Qubes published
+QSB-118 (CVE-2026-82636, CVSSv3 severity 7.9): an already-compromised
+qube could inject an arbitrary command into dom0 when a user ran
+<code>qvm-copy-to-vm</code> copying <strong>from dom0 to that
+qube</strong> — the dom0-side <code>qfile-dom0-agent</code> executed the
+attacker-influenced file name through a shell — while the VM-to-VM
+variant of the same tool was unaffected [qsb_118]. The bulletin affects
+all Qubes releases and identifies <code>qubes-core-dom0-linux</code>
+4.3.22 in dom0 as the fixing package for Qubes 4.3. The direction
+matters analytically: the trigger was a file copy initiated from the
+trusted administrative domain toward a possibly-compromised target, so
+the attack entered through a routine administrative workflow, not
+through an exotic guest-to-hypervisor escape. This was not a claim that
+any webpage could silently escape any fully patched qube — but under the
+specified conditions it was a route to total compromise, exactly the
+dom0-fatal outcome the security model treats as game-over.</p>
 <p>The lesson generalizes beyond Qubes. The vulnerability sat not in a
 guest kernel or the hypervisor, but in a <strong>management and transfer
 tool</strong> — a small privileged interface whose input included
@@ -750,19 +791,44 @@ domains as privileged paths that advisories can expose; and fold QSB
 monitoring ([qubes_qsb_index]) into the update-operations discipline the
 evaluation framework requires. The same structure — a privileged build
 or transfer service as part of the attack surface — recurs in the Nix
-advisory analyzed in <span class="citation"
+advisory chain analyzed in <span class="citation"
 data-cites="sec:nixos">[@sec:nixos]</span>, which is why this review
 treats update operations as a first-class property rather than an
 operational footnote.</p>
 <h2 id="trajectory-qubes-4.3">Trajectory: Qubes 4.3</h2>
-<p>The 4.3 release notes document changes including GUI/admin-domain
-splitting, new device-assignment mechanisms, and initial Wayland-related
-work [qubes_43_release_notes]; the GUI-domain guide distinguishes
-deployment modes and warns that some are suitable only for testing
-[qubes_gui_domain]. These directions matter architecturally: moving
-complex, exposure-heavy components (the GUI stack, device handling) away
-from the most privileged domain shrinks the trusted computing base in
-exactly the way the small-interfaces forecast in <span class="citation"
+<p>Qubes OS 4.3.0 reached general availability on December 21, 2025, on
+a stack of dom0 Fedora 41 over Xen 4.19 [qubes_430_release;
+qubes_43_release_notes]. The release’s architectural direction is
+disaggregation of the most privileged domain, and the pieces are worth
+naming because each moves exposure out of dom0: the sys-gui family
+splits the GUI stack into variants — sys-gui with a full GUI domain,
+sys-gui-gpu with direct GPU access, and sys-gui-vnc for remote display —
+so the windowing environment is no longer resident in the domain that
+also administers the system [qubes_43_release_notes; qubes_gui_domain].
+The Devices API gives device assignment a uniform policy interface,
+including explicit <code>devices_denied</code> policy rather than ad hoc
+exposure [qubes_devices_api]. Wayland support is real but the boundary
+caveat is precise: the initial Wayland session ships inside a GUI VM
+only — not in the GUI daemon or agent — and the Xwayland compatibility
+wrapper arrived in qubes-gui-daemon 4.3.4 [qubes_43_release_notes].
+Administratively, salt-based configuration management is documented with
+its per-target disposable management qube security model
+[qubes_salt_administration].</p>
+<p>The hardware conversation belongs to the same trajectory: the 4.3
+system requirements document the floor for a usable deployment —
+including VT-d/VT-x capability, a minimum of 6 GB of RAM, and 32 GB
+recommended — which is the practical gate on who can run the
+architecture at all [qubes_43_requirements]. On boot integrity, the Anti
+Evil Maid implementation has been ported to TrenchBoot with UEFI
+support, widening the class of machines where an authenticated-boot path
+is deployable beyond the older Intel TXT-only setup
+[trenchboot_aem_uefi; qubes_anti_evil_maid] — though the per-machine
+verification obligation in <span class="citation"
+data-cites="tbl:qubes_limits">[@tbl:qubes_limits]</span> stands. These
+directions matter architecturally: moving complex, exposure-heavy
+components (the GUI stack, device handling, administration) away from
+the most privileged domain shrinks the trusted computing base in exactly
+the way the small-interfaces forecast in <span class="citation"
 data-cites="sec:forecast">[@sec:forecast]</span> bets on. They should
 not, however, be read as proof that every installation already runs a
 fully separated, hardened GUI stack — deployment mode matters, and the
@@ -775,23 +841,26 @@ data-cites="sec:nixos">[@sec:nixos]</span>.</p>
 <h2 id="assessment">Assessment</h2>
 <p>Qubes is the leading architectural choice for a compartmentalized,
 high-risk personal workstation, <strong>provided</strong> three
-conditions hold: the hardware supports it well; the user actually
-maintains meaningful trust boundaries rather than collapsing
-compartments for convenience; and the dom0/management patch path is kept
-current. Its containment stance is <code>strong</code> on the
-candidate–property matrix; its application-confinement stance is
-<code>partial</code> by explicit design (no isolation within a qube),
-which places responsibility for intra-domain discipline — including
-where agents run — on the operator. The recommendation weakens when
-hardware support is poor, the workflow will not survive
-compartmentalization friction, or the dominant adversary is physical or
-firmware-level rather than content-driven; the anti-evil-maid and Secure
-Boot paths have specific hardware requirements that must be verified per
-machine [qubes_anti_evil_maid; qubes_issue_4371]. None of this is a
-claim that Qubes resists a measured attacker with a known probability —
-it is an architectural judgment from documented design
-[qubes_architecture], and under the threat model of <span
-class="citation"
+conditions hold: the hardware supports it well — which the 4.3
+requirements make concrete rather than rhetorical
+[qubes_43_requirements]; the user actually maintains meaningful trust
+boundaries rather than collapsing compartments for convenience; and the
+dom0/management patch path is kept current, with the 4.3.22 fix for
+CVE-2026-82636 as the canonical instance of why. Its containment stance
+is <code>strong</code> on the candidate–property matrix; its
+application-confinement stance is <code>partial</code> by explicit
+design (no isolation within a qube), which places responsibility for
+intra-domain discipline — including where agents run — on the operator.
+The recommendation weakens when hardware support is poor, the workflow
+will not survive compartmentalization friction, or the dominant
+adversary is physical or firmware-level rather than content-driven; the
+anti-evil-maid and Secure Boot paths have specific hardware requirements
+that must be verified per machine, though the TrenchBoot UEFI port
+broadens the eligible set [qubes_anti_evil_maid; qubes_issue_4371;
+trenchboot_aem_uefi]. None of this is a claim that Qubes resists a
+measured attacker with a known probability — it is an architectural
+judgment from documented design [qubes_architecture], and under the
+threat model of <span class="citation"
 data-cites="sec:threat_model">[@sec:threat_model]</span> its defining
 bet is the right one: separate the domains, mediate the crossings, and
 keep the privileged core small enough to patch before automation finds

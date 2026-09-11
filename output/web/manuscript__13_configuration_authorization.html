@@ -572,11 +572,10 @@ policy, or a deployment change as fluently as it writes code. Generation
 is not the security event. The security event is whatever independently
 enforces the boundary between what the agent may change and what it may
 only request — above all, the mechanisms that constrain the agent
-itself. This section deepens that argument, states the
-{{CONFIG_NUM_INVARIANTS}} review invariants that an agent must never be
-able to violate, and locates the separation of policy writing, policy
-approval, and permission exercise inside the authority architecture of
-<span class="citation"
+itself. This section deepens that argument, states the 9 review
+invariants that an agent must never be able to violate, and locates the
+separation of policy writing, policy approval, and permission exercise
+inside the authority architecture of <span class="citation"
 data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>.</p>
 <h2 id="generation-versus-enforcement">Generation versus
 enforcement</h2>
@@ -625,12 +624,40 @@ external caches, so the documented practice reads secrets at runtime
 under access control [nix_store_secrets]. Inspection value and
 authorization value are different properties, and the second never
 follows from the first.</p>
+<p>Provenance inspection, in particular, is maturing from a manual
+discipline into packaged tooling, and the Nix ecosystem is where it is
+furthest along. Source provenance is now a required attribute in
+nixpkgs: a <code>meta.sourceProvenance</code> declaration tagging each
+package’s inputs — from official releases to unvendored source trees —
+is merged as a requirement rather than a convention, which makes the
+provenance question answerable from the derivation data itself rather
+than from documentation [nixpkgs_source_provenance]. Around that
+requirement a tooling stack has formed: sbomnix generates CycloneDX and
+SPDX software bills of materials for a NixOS closure and emits SLSA
+provenance attestations for builds [sbomnix]; Trustix rebuilds packages
+independently and compares the results bit-for-bit against what the
+binary cache distributed, converting trust in a substitute into a
+checkable claim [trustix_rebuilt]; and the
+<code>nix provenance show</code> and <code>nix provenance verify</code>
+subcommands packaged by Determinate Systems expose the provenance of a
+built artifact for inspection and verification as ordinary command-line
+operations. The direction is exactly right for this threat model: the
+provenance of deployed software becomes inspectable data, in the same
+way declarative configuration made intended state inspectable. The
+section’s caution nonetheless applies unchanged. Provenance attests how
+an artifact was built and from what inputs; it does not authorize
+deployment, and a perfectly attested artifact is not thereby a permitted
+one. Inspection tooling raises the quality of the review; the
+authorization decision remains with the enforcement points this section
+describes.</p>
 <h2 id="the-review-invariants">The review invariants</h2>
 <p><span class="citation"
 data-cites="tbl:invariants">[@tbl:invariants]</span> states the review
 invariants: what an agent must never be able to do, the failure each
 invariant closes, and where enforcement must live.</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable data table"><table data-responsive-table="true">
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The 9 configuration review invariants: the capability closed, the failure each prevents, and the enforcement point"><table id="tbl:invariants" data-responsive-table="true">
+<caption>The 9 configuration review invariants: the capability closed,
+the failure each prevents, and the enforcement point</caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -703,14 +730,14 @@ class="citation" data-cites="tbl:controls">[@tbl:controls]</span>)</td>
 </tr>
 </tbody>
 </table></div>
-<p>The {{CONFIG_NUM_INVARIANTS}} invariants share one design principle:
-the state that would relax an invariant is never reachable from
-agent-writable configuration. They are capability invariants, not
-instruction invariants. A well-prompted agent and a compromised agent
-must be equally unable to violate them, because the authorized-misuse
-path does not distinguish persuasion from compromise at the enforcement
-layer. An invariant that holds only while the agent behaves is not an
-invariant; it is a preference.</p>
+<p>The 9 invariants share one design principle: the state that would
+relax an invariant is never reachable from agent-writable configuration.
+They are capability invariants, not instruction invariants. A
+well-prompted agent and a compromised agent must be equally unable to
+violate them, because the authorized-misuse path does not distinguish
+persuasion from compromise at the enforcement layer. An invariant that
+holds only while the agent behaves is not an invariant; it is a
+preference.</p>
 <h2
 id="separating-policy-writing-policy-approval-and-permission-exercise">Separating
 policy writing, policy approval, and permission exercise</h2>

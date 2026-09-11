@@ -7,29 +7,33 @@ Inventory Mode: stable-local-output-v1
 Inventory Scope: stage5-delivery-mirror
 Inventory Root: output/working/agentic_os_security
 
-Total Files: 35
-Total Size: 5.21 MB
+Total Files: 79
+Total Size: 12.52 MB
 
 Files by Category:
-  • pdf: 1 files (1.56 MB)
-  • web: 21 files (0.81 MB)
-  • figures: 7 files (1.26 MB)
-  • data: 4 files (0.01 MB)
+  • pdf: 1 files (2.79 MB)
+  • web: 21 files (1.10 MB)
+  • slides: 18 files (3.16 MB)
+  • figures: 10 files (2.37 MB)
+  • data: 6 files (0.03 MB)
   • reports: 1 files (0.00 MB)
-  • root: 1 files (1.56 MB)
+  • manuscript: 21 files (0.29 MB)
+  • root: 1 files (2.79 MB)
 
 Largest Files:
-  • agentic_os_security_combined.pdf: 1.56 MB (root)
-  • agentic_os_security_combined.pdf: 1.56 MB (pdf)
-  • property_matrix.png: 0.32 MB (figures)
-  • index.html: 0.27 MB (web)
-  • trust_domains.png: 0.26 MB (figures)
+  • agentic_os_security_combined.pdf: 2.79 MB (root)
+  • agentic_os_security_combined.pdf: 2.79 MB (pdf)
+  • 03_evaluation_framework_slides.pdf: 0.70 MB (slides)
+  • 12_orchestration_security_slides.pdf: 0.59 MB (slides)
+  • 09_agentic_authority_architecture_slides.pdf: 0.57 MB (slides)
 
 File Types:
+  • .pdf: 20 file(s)
+  • .md: 20 file(s)
   • .html: 19 file(s)
-  • .png: 6 file(s)
+  • .png: 9 file(s)
   • .json: 4 file(s)
-  • .pdf: 2 file(s)
-  • .csv: 2 file(s)
-  • .md: 1 file(s)
+  • .csv: 4 file(s)
   • .ico: 1 file(s)
+  • .yaml: 1 file(s)
+  • .bib: 1 file(s)

@@ -1,0 +1,193 @@
+candidate_id,candidate_name,class_id,stance
+qubes_os,Qubes OS,memory_safety,weak
+qubes_os,Qubes OS,allocator_hardening,weak
+qubes_os,Qubes OS,sandboxing_primitives,strong
+qubes_os,Qubes OS,mac_framework,n_a
+qubes_os,Qubes OS,verified_boot,partial
+qubes_os,Qubes OS,reproducible_deployment,weak
+qubes_os,Qubes OS,disposable_execution,strong
+qubes_os,Qubes OS,update_automation,partial
+nixos,NixOS,memory_safety,weak
+nixos,NixOS,allocator_hardening,weak
+nixos,NixOS,sandboxing_primitives,weak
+nixos,NixOS,mac_framework,weak
+nixos,NixOS,verified_boot,weak
+nixos,NixOS,reproducible_deployment,strong
+nixos,NixOS,disposable_execution,weak
+nixos,NixOS,update_automation,partial
+secureblue,secureblue,memory_safety,weak
+secureblue,secureblue,allocator_hardening,strong
+secureblue,secureblue,sandboxing_primitives,partial
+secureblue,secureblue,mac_framework,strong
+secureblue,secureblue,verified_boot,weak
+secureblue,secureblue,reproducible_deployment,partial
+secureblue,secureblue,disposable_execution,weak
+secureblue,secureblue,update_automation,strong
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),memory_safety,weak
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),allocator_hardening,weak
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),sandboxing_primitives,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),mac_framework,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),verified_boot,weak
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),reproducible_deployment,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),disposable_execution,weak
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),update_automation,strong
+fedora_workstation,Fedora Workstation,memory_safety,weak
+fedora_workstation,Fedora Workstation,allocator_hardening,weak
+fedora_workstation,Fedora Workstation,sandboxing_primitives,partial
+fedora_workstation,Fedora Workstation,mac_framework,partial
+fedora_workstation,Fedora Workstation,verified_boot,weak
+fedora_workstation,Fedora Workstation,reproducible_deployment,weak
+fedora_workstation,Fedora Workstation,disposable_execution,weak
+fedora_workstation,Fedora Workstation,update_automation,partial
+debian_stable,Debian stable,memory_safety,weak
+debian_stable,Debian stable,allocator_hardening,weak
+debian_stable,Debian stable,sandboxing_primitives,weak
+debian_stable,Debian stable,mac_framework,weak
+debian_stable,Debian stable,verified_boot,weak
+debian_stable,Debian stable,reproducible_deployment,weak
+debian_stable,Debian stable,disposable_execution,weak
+debian_stable,Debian stable,update_automation,partial
+ubuntu_lts,Ubuntu LTS,memory_safety,weak
+ubuntu_lts,Ubuntu LTS,allocator_hardening,weak
+ubuntu_lts,Ubuntu LTS,sandboxing_primitives,partial
+ubuntu_lts,Ubuntu LTS,mac_framework,partial
+ubuntu_lts,Ubuntu LTS,verified_boot,weak
+ubuntu_lts,Ubuntu LTS,reproducible_deployment,weak
+ubuntu_lts,Ubuntu LTS,disposable_execution,weak
+ubuntu_lts,Ubuntu LTS,update_automation,strong
+kicksecure,Kicksecure,memory_safety,weak
+kicksecure,Kicksecure,allocator_hardening,partial
+kicksecure,Kicksecure,sandboxing_primitives,weak
+kicksecure,Kicksecure,mac_framework,weak
+kicksecure,Kicksecure,verified_boot,weak
+kicksecure,Kicksecure,reproducible_deployment,weak
+kicksecure,Kicksecure,disposable_execution,weak
+kicksecure,Kicksecure,update_automation,partial
+opensuse_aeon,openSUSE Aeon,memory_safety,weak
+opensuse_aeon,openSUSE Aeon,allocator_hardening,weak
+opensuse_aeon,openSUSE Aeon,sandboxing_primitives,weak
+opensuse_aeon,openSUSE Aeon,mac_framework,weak
+opensuse_aeon,openSUSE Aeon,verified_boot,weak
+opensuse_aeon,openSUSE Aeon,reproducible_deployment,partial
+opensuse_aeon,openSUSE Aeon,disposable_execution,weak
+opensuse_aeon,openSUSE Aeon,update_automation,strong
+opensuse_microos,openSUSE MicroOS,memory_safety,weak
+opensuse_microos,openSUSE MicroOS,allocator_hardening,weak
+opensuse_microos,openSUSE MicroOS,sandboxing_primitives,weak
+opensuse_microos,openSUSE MicroOS,mac_framework,weak
+opensuse_microos,openSUSE MicroOS,verified_boot,weak
+opensuse_microos,openSUSE MicroOS,reproducible_deployment,partial
+opensuse_microos,openSUSE MicroOS,disposable_execution,partial
+opensuse_microos,openSUSE MicroOS,update_automation,strong
+alpine_linux,Alpine Linux,memory_safety,partial
+alpine_linux,Alpine Linux,allocator_hardening,weak
+alpine_linux,Alpine Linux,sandboxing_primitives,weak
+alpine_linux,Alpine Linux,mac_framework,weak
+alpine_linux,Alpine Linux,verified_boot,weak
+alpine_linux,Alpine Linux,reproducible_deployment,weak
+alpine_linux,Alpine Linux,disposable_execution,partial
+alpine_linux,Alpine Linux,update_automation,partial
+talos_linux,Talos Linux,memory_safety,weak
+talos_linux,Talos Linux,allocator_hardening,weak
+talos_linux,Talos Linux,sandboxing_primitives,partial
+talos_linux,Talos Linux,mac_framework,partial
+talos_linux,Talos Linux,verified_boot,strong
+talos_linux,Talos Linux,reproducible_deployment,partial
+talos_linux,Talos Linux,disposable_execution,partial
+talos_linux,Talos Linux,update_automation,strong
+bottlerocket,Bottlerocket,memory_safety,weak
+bottlerocket,Bottlerocket,allocator_hardening,weak
+bottlerocket,Bottlerocket,sandboxing_primitives,partial
+bottlerocket,Bottlerocket,mac_framework,strong
+bottlerocket,Bottlerocket,verified_boot,strong
+bottlerocket,Bottlerocket,reproducible_deployment,partial
+bottlerocket,Bottlerocket,disposable_execution,partial
+bottlerocket,Bottlerocket,update_automation,strong
+fedora_coreos,Fedora CoreOS,memory_safety,weak
+fedora_coreos,Fedora CoreOS,allocator_hardening,weak
+fedora_coreos,Fedora CoreOS,sandboxing_primitives,partial
+fedora_coreos,Fedora CoreOS,mac_framework,partial
+fedora_coreos,Fedora CoreOS,verified_boot,partial
+fedora_coreos,Fedora CoreOS,reproducible_deployment,partial
+fedora_coreos,Fedora CoreOS,disposable_execution,weak
+fedora_coreos,Fedora CoreOS,update_automation,strong
+rhel,RHEL,memory_safety,weak
+rhel,RHEL,allocator_hardening,weak
+rhel,RHEL,sandboxing_primitives,partial
+rhel,RHEL,mac_framework,strong
+rhel,RHEL,verified_boot,partial
+rhel,RHEL,reproducible_deployment,weak
+rhel,RHEL,disposable_execution,weak
+rhel,RHEL,update_automation,strong
+ubuntu_core,Ubuntu Core,memory_safety,weak
+ubuntu_core,Ubuntu Core,allocator_hardening,weak
+ubuntu_core,Ubuntu Core,sandboxing_primitives,strong
+ubuntu_core,Ubuntu Core,mac_framework,strong
+ubuntu_core,Ubuntu Core,verified_boot,strong
+ubuntu_core,Ubuntu Core,reproducible_deployment,weak
+ubuntu_core,Ubuntu Core,disposable_execution,weak
+ubuntu_core,Ubuntu Core,update_automation,strong
+whonix,Whonix,memory_safety,weak
+whonix,Whonix,allocator_hardening,weak
+whonix,Whonix,sandboxing_primitives,strong
+whonix,Whonix,mac_framework,weak
+whonix,Whonix,verified_boot,weak
+whonix,Whonix,reproducible_deployment,weak
+whonix,Whonix,disposable_execution,partial
+whonix,Whonix,update_automation,partial
+tails,Tails,memory_safety,weak
+tails,Tails,allocator_hardening,weak
+tails,Tails,sandboxing_primitives,partial
+tails,Tails,mac_framework,weak
+tails,Tails,verified_boot,weak
+tails,Tails,reproducible_deployment,partial
+tails,Tails,disposable_execution,strong
+tails,Tails,update_automation,partial
+openbsd,OpenBSD,memory_safety,weak
+openbsd,OpenBSD,allocator_hardening,strong
+openbsd,OpenBSD,sandboxing_primitives,strong
+openbsd,OpenBSD,mac_framework,weak
+openbsd,OpenBSD,verified_boot,weak
+openbsd,OpenBSD,reproducible_deployment,partial
+openbsd,OpenBSD,disposable_execution,weak
+openbsd,OpenBSD,update_automation,partial
+sel4,seL4,memory_safety,strong
+sel4,seL4,allocator_hardening,n_a
+sel4,seL4,sandboxing_primitives,strong
+sel4,seL4,mac_framework,strong
+sel4,seL4,verified_boot,n_a
+sel4,seL4,reproducible_deployment,n_a
+sel4,seL4,disposable_execution,n_a
+sel4,seL4,update_automation,n_a
+genode_sculpt,Genode / Sculpt,memory_safety,partial
+genode_sculpt,Genode / Sculpt,allocator_hardening,partial
+genode_sculpt,Genode / Sculpt,sandboxing_primitives,strong
+genode_sculpt,Genode / Sculpt,mac_framework,strong
+genode_sculpt,Genode / Sculpt,verified_boot,weak
+genode_sculpt,Genode / Sculpt,reproducible_deployment,weak
+genode_sculpt,Genode / Sculpt,disposable_execution,weak
+genode_sculpt,Genode / Sculpt,update_automation,partial
+grapheneos,GrapheneOS,memory_safety,partial
+grapheneos,GrapheneOS,allocator_hardening,strong
+grapheneos,GrapheneOS,sandboxing_primitives,strong
+grapheneos,GrapheneOS,mac_framework,strong
+grapheneos,GrapheneOS,verified_boot,strong
+grapheneos,GrapheneOS,reproducible_deployment,partial
+grapheneos,GrapheneOS,disposable_execution,weak
+grapheneos,GrapheneOS,update_automation,strong
+kali_linux,Kali Linux,memory_safety,weak
+kali_linux,Kali Linux,allocator_hardening,weak
+kali_linux,Kali Linux,sandboxing_primitives,weak
+kali_linux,Kali Linux,mac_framework,weak
+kali_linux,Kali Linux,verified_boot,weak
+kali_linux,Kali Linux,reproducible_deployment,weak
+kali_linux,Kali Linux,disposable_execution,weak
+kali_linux,Kali Linux,update_automation,partial
+parrot_security,Parrot Security,memory_safety,weak
+parrot_security,Parrot Security,allocator_hardening,weak
+parrot_security,Parrot Security,sandboxing_primitives,weak
+parrot_security,Parrot Security,mac_framework,weak
+parrot_security,Parrot Security,verified_boot,weak
+parrot_security,Parrot Security,reproducible_deployment,weak
+parrot_security,Parrot Security,disposable_execution,weak
+parrot_security,Parrot Security,update_automation,partial

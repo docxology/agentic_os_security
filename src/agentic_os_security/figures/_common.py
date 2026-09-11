@@ -1,18 +1,22 @@
-"""Shared deterministic style and save helpers for the figure package.
+"""Shared deterministic style and save helpers for the figure package (v2).
 
-Every figure in this package MUST be byte-identical across runs given identical
-inputs:
+Contract for every generator in :mod:`agentic_os_security.figures`:
 
-- the Agg backend is forced before any canvas is created;
-- fonts are pinned to DejaVu Sans (shipped with matplotlib, no system lookup);
-- ``svg.hashsalt`` is fixed so any SVG-derived element (clip paths, gradients)
-  hashes identically on every run;
-- no wall-clock value, environment string, or matplotlib version string is
-  written into the output file metadata;
-- all rendered text is ASCII (see :func:`ascii_text`).
+- Pure matplotlib (Agg), no network, no wall-clock, no pyplot state.
+- Typography tuned for a 9pt-document print: all text drawn at 6-10 pt in
+  figure inches, so at ``width=100%`` textwidth embedding the on-page size
+  matches 6.5-10 pt effective.
+- Byte-determinism: fixed fonts (DejaVu family only), fixed
+  ``svg.hashsalt``, PNG metadata stripped (``Software: None``), no
+  timestamps anywhere in figure code. Two runs on the same inputs produce
+  byte-identical files.
+- Colorblind-safe encoding: Okabe-Ito palette everywhere; stance and
+  confidence vocabularies get fixed color assignments.
 
-Figures are built directly on :class:`matplotlib.figure.Figure` rather than
-through ``pyplot`` so no global figure state can leak between generators.
+Version 2 additions over v0.1: category color map for the 8 candidate
+categories (shared by the property matrix, defensive stack, and update
+windows), print-scale rcParams (font sizes 6-10 pt), and the helper
+:func:`category_rows` used by the banded matrix figures.
 """
 
 from __future__ import annotations
@@ -32,7 +36,10 @@ __all__ = [
     "OKABE_ITO",
     "PALETTE",
     "STANCE_COLORS",
+    "STANCE_GLYPHS",
     "CONFIDENCE_COLORS",
+    "CATEGORY_COLORS",
+    "CATEGORY_LABELS",
     "DETERMINISTIC_RC",
     "FigureSpec",
     "Figure",
@@ -44,7 +51,7 @@ __all__ = [
     "wrap_ascii",
 ]
 
-# Okabe-Ito colorblind-safe qualitative palette.
+#: Okabe-Ito colorblind-safe qualitative palette.
 OKABE_ITO: dict[str, str] = {
     "black": "#000000",
     "orange": "#E69F00",
@@ -69,7 +76,8 @@ PALETTE: tuple[str, ...] = (
     OKABE_ITO["gray"],
 )
 
-# Qualitative stance encoding for the candidate x property matrix.
+#: Qualitative stance encoding for the candidate x property matrix and the
+#: defensive stack (same ``strong | partial | weak | n_a`` vocabulary).
 STANCE_COLORS: dict[str, str] = {
     "strong": OKABE_ITO["bluish_green"],
     "partial": OKABE_ITO["sky_blue"],
@@ -77,16 +85,54 @@ STANCE_COLORS: dict[str, str] = {
     "n_a": "#D9D9D9",
 }
 
-# Confidence-tier encoding for forecast figures (colorblind-safe subset).
+#: Single-letter cell glyphs kept legible at 9pt-document scale.
+STANCE_GLYPHS: dict[str, str] = {"strong": "S", "partial": "P", "weak": "W", "n_a": "-"}
+
+#: Glyph color per stance (chosen for contrast against STANCE_COLORS fills).
+STANCE_GLYPH_COLORS: dict[str, str] = {
+    "strong": "white",
+    "partial": "black",
+    "weak": "black",
+    "n_a": "#666666",
+}
+
+#: Confidence-tier encoding for the forecast figure (colorblind-safe subset).
 CONFIDENCE_COLORS: dict[str, str] = {
     "high": OKABE_ITO["bluish_green"],
     "moderate": OKABE_ITO["blue"],
     "low": OKABE_ITO["vermillion"],
 }
 
+#: Category color map for the 8-category candidate vocabulary (pinned ids in
+#: ``agentic_os_security.registry.CATEGORY_VOCAB``). Distinct hues under the
+#: Okabe-Ito constraint; yellow is paired with dark text wherever used as a
+#: band fill.
+CATEGORY_COLORS: dict[str, str] = {
+    "compartmentalized": OKABE_ITO["blue"],
+    "reproducible": OKABE_ITO["bluish_green"],
+    "desktop": OKABE_ITO["sky_blue"],
+    "server": OKABE_ITO["orange"],
+    "anonymity": OKABE_ITO["reddish_purple"],
+    "high_assurance": OKABE_ITO["vermillion"],
+    "mobile": OKABE_ITO["yellow"],
+    "offensive_toolkit": OKABE_ITO["gray"],
+}
+
+#: ASCII display labels for the category ids (title case).
+CATEGORY_LABELS: dict[str, str] = {
+    "compartmentalized": "Compartmentalized",
+    "reproducible": "Reproducible",
+    "desktop": "Desktop",
+    "server": "Server",
+    "anonymity": "Anonymity",
+    "high_assurance": "High assurance",
+    "mobile": "Mobile",
+    "offensive_toolkit": "Offensive toolkit",
+}
+
 DETERMINISTIC_RC: dict[str, object] = {
     # Byte-determinism anchors.
-    "svg.hashsalt": "agentic-os-security-0.1.0",
+    "svg.hashsalt": "agentic-os-security-0.2.0",
     # Fixed fonts: never resolve to a system font that varies by host.
     "font.family": "sans-serif",
     "font.sans-serif": ["DejaVu Sans"],
@@ -95,11 +141,22 @@ DETERMINISTIC_RC: dict[str, object] = {
     "mathtext.fontset": "dejavusans",
     # No typographic minus sign (missing-glyph safety).
     "axes.unicode_minus": False,
-    # Output discipline: PNG only, fixed dpi.
+    # Print typography: 9pt-document scale; generators draw at 6-10 pt.
+    "font.size": 8.0,
+    "figure.titlesize": 10.0,
+    "figure.titleweight": "bold",
+    "axes.titlesize": 9.0,
+    "axes.titleweight": "bold",
+    "axes.labelsize": 8.0,
+    "axes.labelweight": "normal",
+    "xtick.labelsize": 7.0,
+    "ytick.labelsize": 7.0,
+    "legend.fontsize": 6.8,
+    # Output discipline: PNG only, fixed dpi, no bbox-time surprises.
     "savefig.format": "png",
     "savefig.dpi": 300,
     "savefig.bbox": None,
-    "savefig.pad_inches": 0.1,
+    "savefig.pad_inches": 0.08,
     "figure.dpi": 100.0,
     # Flat, print-friendly defaults.
     "figure.facecolor": "white",
@@ -107,12 +164,17 @@ DETERMINISTIC_RC: dict[str, object] = {
     "axes.edgecolor": "#444444",
     "axes.labelcolor": "black",
     "axes.grid": False,
+    "axes.linewidth": 0.6,
     "grid.color": "#CCCCCC",
     "grid.linewidth": 0.5,
     "xtick.color": "#444444",
     "ytick.color": "#444444",
+    "xtick.major.width": 0.6,
+    "ytick.major.width": 0.6,
     "text.color": "black",
     "legend.frameon": False,
+    "lines.linewidth": 1.0,
+    "patch.linewidth": 0.8,
 }
 
 _ASCII_TRANSLATION = {

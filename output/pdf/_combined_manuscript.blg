@@ -3,55 +3,95 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: _combined_manuscript.aux
 The style file: plainnat.bst
 Database file #1: references.bib
-128 isn't valid ASCII for entry qubes_templates
+128 isn't valid ASCII for entry qsb_115
 while executing---line 1394 of file plainnat.bst
-129 isn't valid ASCII for entry tails_overview
+129 isn't valid ASCII for entry qsb_116
 while executing---line 1394 of file plainnat.bst
-130 isn't valid ASCII for entry tails_persistent_storage
+130 isn't valid ASCII for entry qsb_118
 while executing---line 1394 of file plainnat.bst
-131 isn't valid ASCII for entry whonix_technical_design
+131 isn't valid ASCII for entry qubes_43_release_notes
 while executing---line 1394 of file plainnat.bst
-132 isn't valid ASCII for entry whonix_workstation_security
+132 isn't valid ASCII for entry qubes_43_requirements
 while executing---line 1394 of file plainnat.bst
-You've used 71 entries,
+133 isn't valid ASCII for entry qubes_anti_evil_maid
+while executing---line 1394 of file plainnat.bst
+134 isn't valid ASCII for entry qubes_architecture
+while executing---line 1394 of file plainnat.bst
+135 isn't valid ASCII for entry qubes_devices_api
+while executing---line 1394 of file plainnat.bst
+136 isn't valid ASCII for entry qubes_disposables
+while executing---line 1394 of file plainnat.bst
+137 isn't valid ASCII for entry qubes_faq
+while executing---line 1394 of file plainnat.bst
+138 isn't valid ASCII for entry qubes_gui_domain
+while executing---line 1394 of file plainnat.bst
+139 isn't valid ASCII for entry qubes_gui_protocol
+while executing---line 1394 of file plainnat.bst
+140 isn't valid ASCII for entry qubes_issue_4371
+while executing---line 1394 of file plainnat.bst
+141 isn't valid ASCII for entry qubes_issue_7992
+while executing---line 1394 of file plainnat.bst
+142 isn't valid ASCII for entry qubes_qrexec
+while executing---line 1394 of file plainnat.bst
+143 isn't valid ASCII for entry qubes_qsb_index
+while executing---line 1394 of file plainnat.bst
+144 isn't valid ASCII for entry qubes_salt_administration
+while executing---line 1394 of file plainnat.bst
+145 isn't valid ASCII for entry qubes_security_design_goals
+while executing---line 1394 of file plainnat.bst
+146 isn't valid ASCII for entry qubes_templates
+while executing---line 1394 of file plainnat.bst
+147 isn't valid ASCII for entry tails_7_12
+while executing---line 1394 of file plainnat.bst
+148 isn't valid ASCII for entry tails_overview
+while executing---line 1394 of file plainnat.bst
+149 isn't valid ASCII for entry tails_persistent_storage
+while executing---line 1394 of file plainnat.bst
+150 isn't valid ASCII for entry whonix_18_support
+while executing---line 1394 of file plainnat.bst
+151 isn't valid ASCII for entry whonix_technical_design
+while executing---line 1394 of file plainnat.bst
+152 isn't valid ASCII for entry whonix_workstation_security
+while executing---line 1394 of file plainnat.bst
+You've used 152 entries,
             2773 wiz_defined-function locations,
-            856 strings with 13288 characters,
-and the built_in function-call counts, 22709 in all, are:
-= -- 2074
-> -- 824
-< -- 71
-+ -- 369
-- -- 249
-* -- 1178
-:= -- 3469
-add.period$ -- 278
-call.type$ -- 71
-change.case$ -- 295
-chr.to.int$ -- 22
-cite$ -- 142
-duplicate$ -- 1105
-empty$ -- 2309
-format.name$ -- 322
-if$ -- 4890
-int.to.chr$ -- 50
+            1130 strings with 24719 characters,
+and the built_in function-call counts, 47589 in all, are:
+= -- 4362
+> -- 1676
+< -- 151
++ -- 758
+- -- 504
+* -- 2358
+:= -- 7272
+add.period$ -- 602
+call.type$ -- 152
+change.case$ -- 623
+chr.to.int$ -- 50
+cite$ -- 304
+duplicate$ -- 2321
+empty$ -- 4902
+format.name$ -- 662
+if$ -- 10286
+int.to.chr$ -- 103
 int.to.str$ -- 1
 missing$ -- 6
-newline$ -- 428
-num.names$ -- 284
-pop$ -- 852
+newline$ -- 914
+num.names$ -- 608
+pop$ -- 1829
 preamble$ -- 1
-purify$ -- 225
+purify$ -- 472
 quote$ -- 0
-skip$ -- 826
+skip$ -- 1747
 stack$ -- 0
-substring$ -- 243
-swap$ -- 131
+substring$ -- 405
+swap$ -- 258
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 776
+type$ -- 1667
 warning$ -- 0
-while$ -- 222
+while$ -- 465
 width$ -- 0
-write$ -- 994
-(There were 5 error messages)
+write$ -- 2128
+(There were 25 error messages)

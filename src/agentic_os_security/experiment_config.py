@@ -3,7 +3,7 @@
 The experiment block is the configuration contract every analysis and
 validation step agrees on: 9 properties, 24 candidates, 8 candidate
 categories, 8 scenarios, 7 trust domains, 9 controls, the 4-value
-stance vocabulary, and the 6-entry figure registry. This module reads
+stance vocabulary, and the 9-entry figure registry. This module reads
 that block, checks every pinned key for presence, type, shape, and
 uniqueness, and raises :class:`ExperimentConfigError` on any missing
 or invalid entry. No I/O happens at import time.
@@ -41,7 +41,7 @@ REQUIRED_KEY_SHAPES: dict[str, tuple[str, int | None]] = {
     "scenario_ids": ("str_list", 8),
     "trust_domain_ids": ("str_list", 7),
     "control_ids": ("str_list", 9),
-    "figure_registry": ("fig_list", 6),
+    "figure_registry": ("fig_list", 9),
 }
 
 #: Shape of each ``figure_registry`` entry, e.g. ``fig:property_matrix -> property_matrix.png``.

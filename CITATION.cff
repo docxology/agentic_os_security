@@ -18,7 +18,7 @@ keywords:
 - offensive AI
 license: MIT
 message: If you use this software, please cite it using the metadata from this file.
-repository-code: https://github.com/docxology/agentic_os_security
+version: 0.2.0
 title: "Agentic Security and Operating Systems: A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security"
 type: software
 version: 0.1.0

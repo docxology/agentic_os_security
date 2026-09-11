@@ -23,7 +23,7 @@
     },
     {
       "check": "source_url_uniqueness",
-      "detail": "65 unique URLs across 65 sources",
+      "detail": "150 unique URLs across 150 sources",
       "status": "green"
     },
     {
@@ -49,6 +49,21 @@
     {
       "check": "authority_ladder",
       "detail": "propose -> stage -> authorize -> exercise -> audit -> revoke",
+      "status": "green"
+    },
+    {
+      "check": "defensive_stack_rows",
+      "detail": "192 stack rows (expected 192 = 24 x 8)",
+      "status": "green"
+    },
+    {
+      "check": "defensive_stack_vocabulary",
+      "detail": "all stack stances in strong|partial|weak|n_a",
+      "status": "green"
+    },
+    {
+      "check": "update_windows_count",
+      "detail": "24 update windows (expected 24)",
       "status": "green"
     }
   ],

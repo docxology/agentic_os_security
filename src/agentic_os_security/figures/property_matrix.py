@@ -2,9 +2,14 @@
 
 ``{#fig:property_matrix}`` -> ``output/figures/property_matrix.png``
 
-Driven entirely by :func:`agentic_os_security.registry.matrix_rows`; the
-qualitative color encoding (Okabe-Ito) mirrors the stance vocabulary
-``strong | partial | weak | n_a`` with a legend.
+Publication-grade layout (v0.2.0): the 24 candidate rows are grouped into
+the 8 pinned candidate categories (colored side band with rotated category
+labels and thin category separator lines), a right-side marginal
+stance-distribution bar per property, and a legend with stance counts
+embedded inside the plot. Driven entirely by
+:func:`agentic_os_security.registry.matrix_rows`; the qualitative color
+encoding (Okabe-Ito) mirrors the stance vocabulary
+``strong | partial | weak | n_a``.
 """
 
 from __future__ import annotations
@@ -12,21 +17,40 @@ from __future__ import annotations
 from pathlib import Path
 
 from matplotlib.colors import ListedColormap
-from matplotlib.patches import Patch
+from matplotlib.patches import Patch, Rectangle
 
 from ..project_paths import figures_dir
-from ..registry import CANDIDATES, PROPERTIES, matrix_rows
-from ._common import STANCE_COLORS, ascii_text, new_figure, save_figure
+from ..registry import CANDIDATES, CATEGORY_VOCAB, PROPERTIES, matrix_rows
+from ._common import (
+    CATEGORY_COLORS,
+    CATEGORY_LABELS,
+    STANCE_COLORS,
+    STANCE_GLYPHS,
+    STANCE_GLYPH_COLORS,
+    ascii_text,
+    new_figure,
+    save_figure,
+)
+
+_BAND_LABEL_OVERRIDES: dict[str, str] = {
+    "compartmentalized": "Comp.",
+    "reproducible": "Repro.",
+    "high_assurance": "High\nassur.",
+    "offensive_toolkit": "Off.\ntoolkit",
+}
+
 
 __all__ = ["generate_property_matrix"]
 
 _STANCE_ORDER: tuple[str, ...] = ("strong", "partial", "weak", "n_a")
-_STANCE_GLYPH: dict[str, str] = {"strong": "S", "partial": "P", "weak": "W", "n_a": "-"}
-_STANCE_GLYPH_COLOR: dict[str, str] = {"strong": "white", "partial": "black", "weak": "black", "n_a": "#666666"}
+_STANCE_INDEX: dict[str, int] = {stance: i for i, stance in enumerate(_STANCE_ORDER)}
+
+#: Left margin (in matrix column units) reserved for the category band.
+_BAND_X0, _BAND_X1, _BAND_LABEL_X = -1.85, -1.35, -1.60
 
 
 def generate_property_matrix(project_root: Path | str) -> Path:
-    """Render the 24-candidate by 9-property stance heatmap."""
+    """Render the 24-candidate by 9-property stance heatmap with category bands."""
     root = Path(project_root)
     out = figures_dir(root) / "property_matrix.png"
 
@@ -34,67 +58,154 @@ def generate_property_matrix(project_root: Path | str) -> Path:
     for candidate_id, property_id, stance in matrix_rows():
         stances[(candidate_id, property_id)] = stance
 
-    candidate_ids = [candidate.candidate_id for candidate in CANDIDATES]
+    # Rows grouped by the pinned category order, candidates in registry order
+    # within each band. Each entry: (candidate_id, display_name, category).
+    rows: list[tuple[str, str, str]] = []
+    for category in CATEGORY_VOCAB:
+        for candidate in CANDIDATES:
+            if candidate.category == category:
+                rows.append((candidate.candidate_id, ascii_text(candidate.name), category))
+    assert len(rows) == len(CANDIDATES), "category grouping lost candidates"
+
     property_ids = [prop.property_id for prop in PROPERTIES]
     property_names = [ascii_text(prop.name) for prop in PROPERTIES]
-    candidate_names = [ascii_text(candidate.name) for candidate in CANDIDATES]
 
-    index = {stance: i for i, stance in enumerate(_STANCE_ORDER)}
-    grid = [
-        [index[stances[(candidate_id, property_id)]] for property_id in property_ids]
-        for candidate_id in candidate_ids
-    ]
+    grid = [[_STANCE_INDEX[stances[(cid, pid)]] for pid in property_ids] for cid, _, _ in rows]
 
-    fig = new_figure((7.6, 9.6))
-    fig.subplots_adjust(left=0.315, right=0.985, top=0.945, bottom=0.245)
+    fig = new_figure((8.2, 9.4))
+    fig.subplots_adjust(left=0.222, right=0.872, top=0.945, bottom=0.225)
     ax = fig.add_subplot(111)
+    ax_marg = fig.add_axes((0.902, 0.225, 0.040, 0.72))  # right marginal axis
 
     cmap = ListedColormap([STANCE_COLORS[stance] for stance in _STANCE_ORDER])
     ax.imshow(grid, cmap=cmap, vmin=0, vmax=len(_STANCE_ORDER) - 1, aspect="auto")
+    # Widen the x range so the category band strip fits left of column 0.
+    ax.set_xlim(_BAND_X0 - 0.1, len(property_ids) - 0.5)
 
-    # White gridlines between cells.
+    # White gridlines between cells; heavier separators between category bands.
     ax.set_xticks([x - 0.5 for x in range(1, len(property_ids))], minor=True)
-    ax.set_yticks([y - 0.5 for y in range(1, len(candidate_ids))], minor=True)
-    ax.grid(which="minor", color="white", linewidth=1.2)
+    ax.set_yticks([y - 0.5 for y in range(1, len(rows))], minor=True)
+    ax.grid(which="minor", color="white", linewidth=0.8)
+    for i in range(1, len(rows)):
+        if rows[i][2] != rows[i - 1][2]:
+            ax.axhline(i - 0.5, color="#444444", linewidth=1.6, zorder=5)
+    for x in range(1, len(property_ids)):
+        ax.axvline(x - 0.5, color="white", linewidth=1.2, zorder=4)
     ax.tick_params(which="minor", length=0)
 
-    # Cell glyphs.
-    for row, candidate_id in enumerate(candidate_ids):
-        for col, property_id in enumerate(property_ids):
-            stance = stances[(candidate_id, property_id)]
+    # Cell glyphs (kept legible at 9pt-document scale).
+    for row_idx, (cid, _, _) in enumerate(rows):
+        for col_idx, pid in enumerate(property_ids):
+            stance = stances[(cid, pid)]
             ax.text(
-                col,
-                row,
-                _STANCE_GLYPH[stance],
+                col_idx,
+                row_idx,
+                STANCE_GLYPHS[stance],
                 ha="center",
                 va="center",
-                fontsize=7.0,
-                color=_STANCE_GLYPH_COLOR[stance],
+                fontsize=6.2,
+                fontweight="bold",
+                color=STANCE_GLYPH_COLORS[stance],
             )
 
     ax.set_xticks(range(len(property_ids)))
-    ax.set_xticklabels(property_names, rotation=45, ha="right", fontsize=8.5)
-    ax.set_yticks(range(len(candidate_ids)))
-    ax.set_yticklabels(candidate_names, fontsize=8.5)
+    ax.set_xticklabels(property_names, rotation=45, ha="right", fontsize=7.2)
+    ax.set_yticks(range(len(rows)))
+    ax.set_yticklabels([name for _, name, _ in rows], fontsize=7.0)
     ax.tick_params(which="major", length=0)
     for side in ("top", "right", "left", "bottom"):
         ax.spines[side].set_visible(False)
 
-    ax.set_title("Candidate x property stance matrix (24 x 9 = 216 cells)", fontsize=11, pad=10)
+    # Category band strip: one colored span per category with a rotated label.
+    for category in CATEGORY_VOCAB:
+        member_positions = [i for i, row in enumerate(rows) if row[2] == category]
+        if not member_positions:
+            continue
+        start, end = member_positions[0], member_positions[-1]
+        ax.add_patch(
+            Rectangle(
+                (_BAND_X0, start - 0.5),
+                _BAND_X1 - _BAND_X0,
+                end - start + 1,
+                facecolor=CATEGORY_COLORS[category],
+                edgecolor="white",
+                linewidth=0.8,
+                clip_on=False,
+            )
+        )
+        ax.text(
+            _BAND_LABEL_X,
+            (start + end) / 2,
+            _BAND_LABEL_OVERRIDES.get(category, ascii_text(CATEGORY_LABELS[category])),
+            rotation=90,
+            ha="center",
+            va="center",
+            fontsize=5.4,
+            fontweight="bold",
+            color="#1A1A1A",
+            linespacing=0.9,
+            zorder=6,
+            clip_on=False,
+        )
 
+    # Right marginal: stance distribution per property (counts across 24).
+    tallies = {pid: {stance: 0 for stance in _STANCE_ORDER} for pid in property_ids}
+    for _cid, pid, stance in matrix_rows():
+        tallies[pid][stance] += 1
+    ax_marg.set_xlim(0, len(CANDIDATES))
+    ax_marg.set_ylim(len(rows), 0)
+    ax_marg.set_xticks([])
+    ax_marg.set_yticks([])
+    for col_idx, pid in enumerate(property_ids):
+        left = 0
+        for stance in _STANCE_ORDER:
+            count = tallies[pid][stance]
+            if count:
+                ax_marg.barh(
+                    col_idx,
+                    count,
+                    left=left,
+                    height=0.78,
+                    color=STANCE_COLORS[stance],
+                    edgecolor="white",
+                    linewidth=0.4,
+                )
+                left += count
+    ax_marg.set_title("n=24", fontsize=6.0, pad=4)
+    for side in ("top", "right", "left"):
+        ax_marg.spines[side].set_visible(False)
+    ax_marg.spines["bottom"].set_color("#888888")
+
+    # Legend with stance counts, embedded in the lower-left margin (empty
+    # area below the category band strip).
+    total_counts = {
+        stance: sum(tallies[pid][stance] for pid in property_ids) for stance in _STANCE_ORDER
+    }
     handles = [
-        Patch(facecolor=STANCE_COLORS[stance], edgecolor="none", label=stance.replace("_", "-"))
+        Patch(
+            facecolor=STANCE_COLORS[stance],
+            edgecolor="#777777",
+            linewidth=0.4,
+            label=f"{stance} ({total_counts[stance]})",
+        )
         for stance in _STANCE_ORDER
     ]
-    ax.legend(
+    fig.legend(
         handles=handles,
-        loc="upper center",
-        bbox_to_anchor=(0.5, -0.155),
-        fontsize=9,
-        ncol=4,
-        title="Stance",
-        title_fontsize=9,
-        frameon=False,
+        loc="lower left",
+        bbox_to_anchor=(0.012, 0.018),
+        fontsize=6.6,
+        title="stance (216 cells)",
+        title_fontsize=6.6,
+        frameon=True,
+        facecolor="white",
+        edgecolor="#AAAAAA",
+        framealpha=0.95,
+        borderpad=0.6,
+        handlelength=1.2,
+        handleheight=0.9,
     )
+
+    ax.set_title("Candidate x property stance matrix (24 x 9 = 216 cells)", fontsize=9, pad=10)
 
     return save_figure(fig, out)

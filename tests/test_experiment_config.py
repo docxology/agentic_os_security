@@ -28,7 +28,7 @@ EXPECTED_LENGTHS = {
     "scenario_ids": 8,
     "trust_domain_ids": 7,
     "control_ids": 9,
-    "figure_registry": 6,
+    "figure_registry": 9,
 }
 
 

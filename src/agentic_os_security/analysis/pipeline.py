@@ -1,8 +1,8 @@
-"""Evaluation analysis pipeline: data artifacts + all six figures.
+"""Evaluation analysis pipeline: data artifacts + all nine figures.
 
-``run_analysis(project_root)`` is idempotent: every run rewrites the four data
+``run_analysis(project_root)`` is idempotent: every run rewrites the six data
 artifacts and the figure registry from the pinned registry and regenerates all
-six figures.  Reports
+nine figures.  Reports
 carry timestamps from :mod:`agentic_os_security.build_clock` (which honors
 ``SOURCE_DATE_EPOCH``), never the wall clock.
 """
@@ -18,18 +18,23 @@ from ..build_clock import build_timestamp
 from ..evidence import CAPABILITY_BASELINE, SOURCES, sources_by_tier
 from ..forecasts import FORECASTS, counts_by_confidence
 from ..figures import (
+    generate_agent_surface,
     generate_authority_ladder,
+    generate_defensive_stack,
     generate_evidence_timeline,
     generate_forecast_horizon,
     generate_orchestration_boundaries,
     generate_property_matrix,
     generate_trust_domains,
+    generate_update_windows,
 )
 from ..project_paths import data_dir, figures_dir
 from ..registry import (
     CANDIDATES,
     PROPERTIES,
     SCENARIOS,
+    UPDATE_WINDOWS,
+    defensive_stack_rows,
     matrix_rows,
     stance_counts,
 )
@@ -43,10 +48,13 @@ _STANCE_VOCAB: frozenset[str] = frozenset({"strong", "partial", "weak", "n_a"})
 _FIGURE_GENERATORS: dict[str, Any] = {
     "evidence_timeline.png": generate_evidence_timeline,
     "property_matrix.png": generate_property_matrix,
+    "defensive_stack.png": generate_defensive_stack,
     "trust_domains.png": generate_trust_domains,
     "authority_ladder.png": generate_authority_ladder,
     "orchestration_boundaries.png": generate_orchestration_boundaries,
+    "agent_surface.png": generate_agent_surface,
     "forecast_horizon.png": generate_forecast_horizon,
+    "update_windows.png": generate_update_windows,
 }
 
 _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
@@ -60,10 +68,15 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         "label": "fig:evidence_timeline",
         "section": "Threat Model",
         "caption": (
-            "Evidence timeline for the offensive-AI baseline, 2025–2026: NCSC "
-            "forecast horizon through 2027, the November 2025 Anthropic campaign "
-            "investigation, the April 2026 Nix symlink advisory and July 2026 AISI "
-            "incident, and the 2025 DARPA AIxCC defensive results."
+            "Evidence timeline for the offensive-AI baseline, 2024–2026, in two "
+            "lanes: offensive capability and governance evidence (NCSC 2024 and "
+            "2025 assessments, the 2025 Anthropic campaign investigations and "
+            "OWASP agentic publications, MCP registry and spec milestones, the "
+            "CISA-led Five Eyes adoption guidance, and the 2026 AISI incident "
+            "report) and platform incidents and releases (Qubes OS 4.3.0, Nix "
+            "2.34/2.35 and its advisories, the hardened-profile removal, "
+            "secureblue, OpenBSD 7.9, seL4 16.0.0, QSB advisories, and the "
+            "OpenAI-Hugging Face incident report)."
         ),
     },
     "property_matrix": {
@@ -77,8 +90,22 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
             "colorblind-safe encoding of the strong/partial/weak/n_a vocabulary."
         ),
     },
-    "trust_domains": {
+    "defensive_stack": {
         "figure_id": "figure_003",
+        "filename": "defensive_stack.png",
+        "label": "fig:defensive_stack",
+        "section": "Evaluation Framework",
+        "caption": (
+            "Defensive stack coverage: the candidate x mitigation-class matrix "
+            "(24 candidates x 8 mitigation classes = 192 cells) rendered from "
+            "registry.DEFENSIVE_STACK with the same colorblind-safe "
+            "strong/partial/weak/n_a encoding as the property matrix, grouped "
+            "into the eight candidate categories with per-class coverage "
+            "marginals."
+        ),
+    },
+    "trust_domains": {
+        "figure_id": "figure_004",
         "filename": "trust_domains.png",
         "label": "fig:trust_domains",
         "section": "Agentic Authority Architecture",
@@ -94,7 +121,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "authority_ladder": {
-        "figure_id": "figure_004",
+        "figure_id": "figure_005",
         "filename": "authority_ladder.png",
         "label": "fig:authority_ladder",
         "section": "Agentic Authority Architecture",
@@ -110,7 +137,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "orchestration_boundaries": {
-        "figure_id": "figure_005",
+        "figure_id": "figure_006",
         "filename": "orchestration_boundaries.png",
         "label": "fig:orchestration_boundaries",
         "section": "Securing Agent Orchestration",
@@ -124,8 +151,22 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
             "records broker decisions, credential events, and approvals."
         ),
     },
+    "agent_surface": {
+        "figure_id": "figure_007",
+        "filename": "agent_surface.png",
+        "label": "fig:agent_surface",
+        "section": "Securing Agent Orchestration",
+        "caption": (
+            "Agent surface: which of the ten orchestration mediation points "
+            "(orchestration.MEDIATION_POINTS, numbered) governs each agent "
+            "capability class. Filled, numbered cells mark a mediation point "
+            "that constrains the class - sandbox primitives, proxy-mediated "
+            "egress, OAuth audience binding, classifier escalation, and the "
+            "external human gate each cover distinct authority surfaces."
+        ),
+    },
     "forecast_horizon": {
-        "figure_id": "figure_006",
+        "figure_id": "figure_008",
         "filename": "forecast_horizon.png",
         "label": "fig:forecast_horizon",
         "section": "Forecast",
@@ -136,6 +177,18 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
             "declines to endorse — across operating-system architecture, agent "
             "authority, and supply-chain domains. The horizon bounds this review's "
             "expectations; it is not a release schedule for any project."
+        ),
+    },
+    "update_windows": {
+        "figure_id": "figure_009",
+        "filename": "update_windows.png",
+        "label": "fig:update_windows",
+        "section": "Servers and Agent-Execution Infrastructure",
+        "caption": (
+            "Stated update and support windows for all 24 candidates, colored by "
+            "candidate category; hatched bars mark projects whose documented "
+            "policy is rolling or lifecycle-based without a fixed support window "
+            "(registry.UPDATE_WINDOWS carries the per-candidate policy detail)."
         ),
     },
 }
@@ -172,6 +225,29 @@ def _write_scenario_csv(path: Path) -> int:
                 ]
             )
     return len(SCENARIOS)
+
+
+def _write_defensive_stack_csv(path: Path) -> int:
+    names = {candidate.candidate_id: candidate.name for candidate in CANDIDATES}
+    path.parent.mkdir(parents=True, exist_ok=True)
+    rows = defensive_stack_rows()
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["candidate_id", "candidate_name", "class_id", "stance"])
+        for candidate_id, class_id, stance in rows:
+            writer.writerow([candidate_id, names[candidate_id], class_id, stance])
+    return len(rows)
+
+
+def _write_update_windows_csv(path: Path) -> int:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["candidate_id", "policy", "months"])
+        for candidate in CANDIDATES:
+            window = UPDATE_WINDOWS[candidate.candidate_id]
+            writer.writerow([candidate.candidate_id, window.policy, window.months if window.months is not None else ""])
+    return len(UPDATE_WINDOWS)
 
 
 def _write_evidence_summary(path: Path) -> dict[str, Any]:
@@ -253,7 +329,7 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
     urls = [getattr(source, "url", "") for source in SOURCES]
     record(
         "source_url_uniqueness",
-        len(urls) == len(set(urls)) == 65,
+        len(urls) == len(set(urls)),
         f"{len(set(urls))} unique URLs across {len(urls)} sources",
     )
 
@@ -262,6 +338,23 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
     record("control_count", len(CONTROLS) == 9, f"{len(CONTROLS)} controls")
     record("invariant_count", len(CONFIGURATION_INVARIANTS) == 9, f"{len(CONFIGURATION_INVARIANTS)} invariants")
     record("authority_ladder", len(AUTHORITY_LADDER) == 6, " -> ".join(AUTHORITY_LADDER))
+    stack_rows = defensive_stack_rows()
+    record(
+        "defensive_stack_rows",
+        len(stack_rows) == 192,
+        f"{len(stack_rows)} stack rows (expected 192 = 24 x 8)",
+    )
+    bad_stack_stances = sorted({stance for _, _, stance in stack_rows} - _STANCE_VOCAB)
+    record(
+        "defensive_stack_vocabulary",
+        not bad_stack_stances,
+        "all stack stances in strong|partial|weak|n_a" if not bad_stack_stances else f"invalid: {bad_stack_stances}",
+    )
+    record(
+        "update_windows_count",
+        len(UPDATE_WINDOWS) == 24,
+        f"{len(UPDATE_WINDOWS)} update windows (expected 24)",
+    )
 
     stance_tallies = stance_counts()
     all_green = all(check["status"] == "green" for check in checks)
@@ -280,7 +373,7 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
 
 
 def run_analysis(project_root: Path | str) -> dict[str, Any]:
-    """Run the full analysis: 4 data artifacts, then all 6 figures.
+    """Run the full analysis: 6 data artifacts, then all 9 figures.
 
     Returns a summary dict with artifact paths and row/figure counts.
     """
@@ -289,6 +382,8 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
 
     matrix_rows_written = _write_matrix_csv(data_path)
     scenario_rows_written = _write_scenario_csv(data_dir(root) / "scenario_recommendations.csv")
+    stack_rows_written = _write_defensive_stack_csv(data_dir(root) / "defensive_stack.csv")
+    update_rows_written = _write_update_windows_csv(data_dir(root) / "update_windows.csv")
     _write_evidence_summary(data_dir(root) / "evidence_summary.json")
     registry_entries = _write_figure_registry(figures_dir(root) / "figure_registry.json")
 
@@ -309,6 +404,8 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
         "project_root": str(root),
         "matrix_rows": matrix_rows_written,
         "scenario_rows": scenario_rows_written,
+        "defensive_stack_rows": stack_rows_written,
+        "update_window_rows": update_rows_written,
         "figures_generated": len(figures),
         "figures": figures,
         "figure_registry_entries": registry_entries,
@@ -316,6 +413,8 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
         "data_artifacts": [
             "evaluation_matrix.csv",
             "scenario_recommendations.csv",
+            "defensive_stack.csv",
+            "update_windows.csv",
             "evidence_summary.json",
             "figure_registry.json",
             "validation_report.json",

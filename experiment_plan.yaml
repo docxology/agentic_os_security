@@ -26,6 +26,9 @@ expected_figures:
   - fig:authority_ladder
   - fig:orchestration_boundaries
   - fig:forecast_horizon
+  - fig:defensive_stack
+  - fig:update_windows
+  - fig:agent_surface
 expected_tables:
   - tbl:properties
   - tbl:offensive_evidence

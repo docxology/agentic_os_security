@@ -566,33 +566,42 @@ mjx-container[display="true"] {
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
 <h1 id="sec:forecast">Forecast: 2028–2031</h1>
-<p>The forecasts in this section cover the {{CONFIG_FORECAST_HORIZON}}
-horizon. They are reasoned expectations drawn from documented designs,
-the capability evidence assembled in <span class="citation"
+<p>The forecasts in this section cover the 2028–2031 horizon. They are
+reasoned expectations drawn from documented designs, the capability
+evidence assembled in <span class="citation"
 data-cites="sec:threat_model">[@sec:threat_model]</span>, and the
 platform reviews of <span class="citation"
 data-cites="sec:qubes">[@sec:qubes]</span> through <span
 class="citation" data-cites="sec:comparators">[@sec:comparators]</span>.
 They are not commitments, not measurements, and not claims about any
-project’s roadmap or release schedule. Two anchors bound the near end of
-the horizon. The UK NCSC assesses that AI already assists
-reconnaissance, vulnerability research, exploit development, and social
-engineering, while considering fully automated, end-to-end advanced
-attacks unlikely through 2027 [ncsc_ai_cyber_threat]. DARPA’s AIxCC
-results anchor the defensive side: machine-discovered and
-machine-patched vulnerabilities, including real non-synthetic flaws, are
-already demonstrated [darpa_aixcc_results]. The forecast assumes both
-curves move. It declines to assume that attacker capability improves
-while defensive engineering stands still.</p>
+project’s roadmap or release schedule. Official assessments bracket the
+near end of the horizon, and both are recent enough to describe the
+posture the forecast extends. The UK NCSC’s assessment published in May
+2025 at CYBERUK — its second look after the January 2024 original
+[ncsc_ai_threat_2024] — projects AI-assisted reconnaissance,
+vulnerability research, exploit development, and social engineering
+through a 2027 horizon, while considering fully automated, end-to-end
+advanced attacks unlikely within it [ncsc_ai_cyber_threat]. A year
+later, the CISA-led Five Eyes guidance on careful adoption of agentic AI
+services states the defensive counterpart: sandboxed deployment, early
+agents restricted to low-risk tasks, threat-model-based evaluation, and
+red-teaming as adoption prerequisites [cisa_agentic_guidance]. Together
+the two documents are the current official posture: offense is
+accelerating inside known boundaries, and defenders are advised to adopt
+capability under containment rather than withhold it. DARPA’s AIxCC
+results anchor the defensive engineering side within the same bracket:
+machine-discovered and machine-patched vulnerabilities, including real
+non-synthetic flaws, are already demonstrated [darpa_aixcc_results]. The
+forecast assumes both curves move through and beyond the bracket. It
+declines to assume that attacker capability improves while defensive
+engineering stands still.</p>
 <h2 id="highest-confidence-architectural-bets">Highest-confidence
 architectural bets</h2>
-<p>The forecast register records {{RESULT_FORECAST_TOTAL}} claims:
-{{RESULT_FORECAST_HIGH}} high-confidence architectural bets,
-{{RESULT_FORECAST_MODERATE}} execution-dependent outcomes, and
-{{RESULT_FORECAST_LOW}} claims the analysis declines to endorse. The
-high-confidence bets are architectural in a specific sense: each follows
-from the structure of the threat rather than from any vendor’s
-plans.</p>
+<p>The forecast register records 14 claims: 5 high-confidence
+architectural bets, 4 execution-dependent outcomes, and 5 claims the
+analysis declines to endorse. The high-confidence bets are architectural
+in a specific sense: each follows from the structure of the threat
+rather than from any vendor’s plans.</p>
 <p><strong>Compartmentalization value grows with exploitation
 frequency.</strong> If offensive automation raises how often exposed
 components fail, architectures that protect the rest of the system after
@@ -697,13 +706,13 @@ data-cites="fig:forecast_horizon">[@fig:forecast_horizon]</span>
 arranges the registered forecasts by confidence tier across the
 horizon.</p>
 <figure id="fig:forecast_horizon">
-<a class="figure-full-size-link" href="../figures/forecast_horizon.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The {{CONFIG_FORECAST_HORIZON}} forecast horizon: the registered forecast claims grouped by…"><img src="../figures/forecast_horizon.png" style="width:100.0%"
+<a class="figure-full-size-link" href="../figures/forecast_horizon.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The 2028–2031 forecast horizon: the registered forecast claims grouped by confidence tier"><img src="../figures/forecast_horizon.png" style="width:100.0%"
 alt="The 2028–2031 forecast horizon: the registered forecast claims grouped by confidence tier — high-confidence architectural bets, moderate execution-dependent outcomes, and low-confidence claims the analysis declines to endorse — across operating-system architecture, agent authority, and supply-chain domains. The horizon bounds this review&#x27;s expectations; it is not a release schedule for any project." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>The {{CONFIG_FORECAST_HORIZON}} forecast
-horizon: the registered forecast claims grouped by confidence tier —
-high-confidence architectural bets, moderate execution-dependent
-outcomes, and low-confidence claims the analysis declines to endorse —
-across operating-system architecture, agent authority, and supply-chain
+<figcaption>The 2028–2031 forecast horizon: the
+registered forecast claims grouped by confidence tier — high-confidence
+architectural bets, moderate execution-dependent outcomes, and
+low-confidence claims the analysis declines to endorse — across
+operating-system architecture, agent authority, and supply-chain
 domains. The horizon bounds this review’s expectations; it is not a
 release schedule for any project.</figcaption>
 </figure>
@@ -738,9 +747,9 @@ deadline pressure, the update process that decays, the delegation that
 widens for convenience (<span class="citation"
 data-cites="sec:cognitive_security">[@sec:cognitive_security]</span>). A
 forecast about architecture is therefore always partly a forecast about
-maintenance and ergonomics. The {{CONFIG_FORECAST_HORIZON}} window will
-be decided less by any single breakthrough than by which compositions
-people can actually keep.</p>
+maintenance and ergonomics. The 2028–2031 window will be decided less by
+any single breakthrough than by which compositions people can actually
+keep.</p>
 </main>
 </body>
 </html>

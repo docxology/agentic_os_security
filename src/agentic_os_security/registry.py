@@ -1,4 +1,5 @@
-"""Canonical registry: 9 properties, 24 candidates, 8 scenarios.
+"""Canonical registry: 9 properties, 24 candidates, 8 scenarios, 8 mitigation
+classes, and 24 update windows.
 
 This module is the single source of truth for the evaluation matrix —
 the candidate x property stance grid (24 x 9 = 216 cells) consumed by
@@ -28,15 +29,22 @@ __all__ = [
     "Property",
     "Candidate",
     "Scenario",
+    "MitigationClass",
+    "UpdateWindow",
     "STANCE_VOCAB",
     "CATEGORY_VOCAB",
+    "MITIGATION_CLASS_IDS",
     "PROPERTIES",
     "CANDIDATES",
     "SCENARIOS",
+    "MITIGATION_CLASSES",
+    "DEFENSIVE_STACK",
+    "UPDATE_WINDOWS",
     "matrix_rows",
     "category_counts",
     "stance_counts",
     "candidates_by_category",
+    "defensive_stack_rows",
 ]
 
 
@@ -169,12 +177,15 @@ CANDIDATES: tuple[Candidate, ...] = (
         "recommendation weakens under compartment collapse, poor hardware, or firmware- and "
         "physical-adversary dominance; for the highest-value secrets separate hardware remains "
         "a reasonable additional boundary rather than a failure of the Qubes concept.",
-        "4.3 release notes document GUI/admin-domain splitting, new device-assignment "
-        "mechanisms, and initial Wayland work — relevant directions, not proof every "
-        "installation already runs a fully separated hardened GUI stack; QSB-118 (an arbitrary "
-        "dom0 command injectable via qvm-copy-to-vm from an already compromised qube, fixed in "
-        "qubes-core-dom0-linux 4.3.22) shows dom0 transfer tooling must be patched promptly; "
-        "community templates receive no Qubes-project updates.",
+        "4.3.0 reached general availability 2025-12-21 on dom0 Fedora 41 with Xen 4.19, "
+        "splitting the GUI domain into sys-gui/sys-gui-gpu/sys-gui-vnc variants with initial "
+        "Wayland sessions confined to GUIVMs, a Devices API with per-qube device policy, and "
+        "salt administration from a per-target disposable management qube — relevant "
+        "directions, not proof every installation already runs a fully separated hardened GUI "
+        "stack; the 2026 QSB cadence (QSB-110/115/116) plus QSB-118 (CVE-2026-82636, CVSS "
+        "7.9: an arbitrary dom0 command injectable via qvm-copy-to-vm from an already "
+        "compromised qube, fixed in qubes-core-dom0-linux 4.3.22) shows dom0 transfer tooling "
+        "must be patched promptly; community templates receive no Qubes-project updates.",
         {
             "containment": "strong",
             "authority": "partial",
@@ -199,8 +210,8 @@ CANDIDATES: tuple[Candidate, ...] = (
         "generations are potentially vulnerable software; the store is readable by all users, "
         "so declarative secrets leak; SELinux and AppArmor integration incomplete as of April "
         "2026; Lanzaboote Secure Boot in development with key management outside project scope; "
-        "the hardened profile lacks a coherent baseline and can undermine browser sandboxing "
-        "without compensating setup; the April 2026 GHSA-g3g9 symlink flaw shows a privileged "
+        "the hardened distribution profile was fully removed (merged 2026-03-22) in favor of "
+        "the community NixOS Hardening wiki; the April 2026 GHSA-g3g9 symlink flaw shows a privileged "
         "build service is part of the attack surface.",
         "Strong foundation for controlled configuration and rebuildable environments for a "
         "capable operator — especially constructing, auditing, and replacing tightly scoped, "
@@ -229,9 +240,9 @@ CANDIDATES: tuple[Candidate, ...] = (
         "secureblue",
         "desktop",
         "Fedora Atomic base with broad hardened_malloc deployment, a confined Trivalent "
-        "browser, removal of SUID-root programs, restrictive application settings, disabled "
-        "Xwayland, user-namespace restrictions with documented exceptions, and signed-container "
-        "policy.",
+        "browser whose SELinux policy ships as an RPM subpackage, a SUID-less baseline as of "
+        "v4.9.1, SELinux-restricted user namespaces as a default-deny posture since v4.3.0, "
+        "restrictive application settings, disabled Xwayland, and signed-container policy.",
         "Documented compatibility-affecting restrictions require the supported workflow to fit "
         "and some tools need user-namespace exceptions; the feature list is project-documented "
         "design, not measured exploit resistance, patch latency, or independent audit coverage; "
@@ -693,9 +704,11 @@ CANDIDATES: tuple[Candidate, ...] = (
         "A compelling route to stronger assurance of a small core; a deployed system on it "
         "must still be evaluated at its whole reachable boundary, and a verified microkernel "
         "does not automatically yield the best practical desktop.",
-        "High-assurance research to track — evaluate the complete deployed system and its "
-        "proof boundary; production compatibility, drivers, tooling, and operational assurance "
-        "outweigh theoretical elegance for practical desktops.",
+        "seL4 16.0.0 (July 2026) completes MCS functional verification on 64-bit RISC-V and "
+        "carries the first AArch64 confidentiality proof, with Microkit 2.3.0 adding x86_64 "
+        "IOMMU support — high-assurance research to track; evaluate the complete deployed "
+        "system and its proof boundary; production compatibility, drivers, tooling, and "
+        "operational assurance outweigh theoretical elegance for practical desktops.",
         {
             "containment": "strong",
             "authority": "n_a",
@@ -914,3 +927,479 @@ def stance_counts() -> dict[str, int]:
 def candidates_by_category(category: str) -> list[Candidate]:
     """Return candidates whose ``category`` equals ``category`` (empty if none)."""
     return [candidate for candidate in CANDIDATES if candidate.category == category]
+
+
+@dataclass(frozen=True)
+class MitigationClass:
+    """One cross-candidate mitigation class assessed over the defensive stack."""
+
+    class_id: str
+    name: str
+    description: str
+
+
+@dataclass(frozen=True)
+class UpdateWindow:
+    """One candidate's documented support/update policy.
+
+    ``months`` is set only where a fixed support window is documented;
+    ``None`` marks candidates whose projects state no fixed window (rolling,
+    lifecycle-based, or upstream-driven policies).
+    """
+
+    candidate_id: str
+    policy: str
+    months: int | None
+
+
+MITIGATION_CLASS_IDS: tuple[str, ...] = (
+    "memory_safety",
+    "allocator_hardening",
+    "sandboxing_primitives",
+    "mac_framework",
+    "verified_boot",
+    "reproducible_deployment",
+    "disposable_execution",
+    "update_automation",
+)
+
+#: The 8 mitigation classes assessed across the candidate stack.
+MITIGATION_CLASSES: tuple[MitigationClass, ...] = (
+    MitigationClass(
+        "memory_safety",
+        "Memory safety",
+        "Memory-safe implementation posture — safe-language components and "
+        "memory-error resistance in the kernel and privileged layers.",
+    ),
+    MitigationClass(
+        "allocator_hardening",
+        "Allocator hardening",
+        "Hardened allocators and heap layouts (hardened_malloc, OpenBSD malloc "
+        "discipline) deployed by default.",
+    ),
+    MitigationClass(
+        "sandboxing_primitives",
+        "Sandboxing primitives",
+        "OS confinement primitives actually shipped: hypervisor compartments, "
+        "namespaces/seccomp, pledge/unveil, strict per-application sandboxes.",
+    ),
+    MitigationClass(
+        "mac_framework",
+        "MAC framework",
+        "Mandatory access control shipped and enforced by default (SELinux, "
+        "AppArmor, capability-based authority).",
+    ),
+    MitigationClass(
+        "verified_boot",
+        "Verified boot",
+        "Measured or verified boot chains (Secure Boot/UKI, AEM, TPM sealing) "
+        "documented as shipped or deployable.",
+    ),
+    MitigationClass(
+        "reproducible_deployment",
+        "Reproducible deployment",
+        "Declarative, atomic, or image-based deployment with measured "
+        "reproducibility where documented.",
+    ),
+    MitigationClass(
+        "disposable_execution",
+        "Disposable execution",
+        "First-class disposable task instances that discard hostile state "
+        "(disposable qubes, amnesic sessions, re-imaged nodes).",
+    ),
+    MitigationClass(
+        "update_automation",
+        "Update automation",
+        "Automated, coordinated security-update delivery (errata continuity, "
+        "atomic auto-updates, unattended upgrades).",
+    ),
+)
+
+#: Candidate x mitigation-class stances — 24 x 8 = 192 grounded cells using
+#: the same ``strong | partial | weak | n_a`` vocabulary as the property
+#: matrix. These are analytical judgments from documented designs (project
+#: security documentation, advisories, and release notes), not measured
+#: exploit resistance; ``n_a`` marks classes the project does not engage
+#: with at its architectural level.
+DEFENSIVE_STACK: dict[str, dict[str, str]] = {
+    "qubes_os": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "strong",
+        "mac_framework": "n_a",
+        "verified_boot": "partial",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "strong",
+        "update_automation": "partial",
+    },
+    "nixos": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "weak",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "strong",
+        "disposable_execution": "weak",
+        "update_automation": "partial",
+    },
+    "secureblue": {
+        "memory_safety": "weak",
+        "allocator_hardening": "strong",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "strong",
+        "verified_boot": "weak",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "weak",
+        "update_automation": "strong",
+    },
+    "fedora_atomic": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "partial",
+        "verified_boot": "weak",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "weak",
+        "update_automation": "strong",
+    },
+    "fedora_workstation": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "partial",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "partial",
+    },
+    "debian_stable": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "weak",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "partial",
+    },
+    "ubuntu_lts": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "partial",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "strong",
+    },
+    "kicksecure": {
+        "memory_safety": "weak",
+        "allocator_hardening": "partial",
+        "sandboxing_primitives": "weak",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "partial",
+    },
+    "opensuse_aeon": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "weak",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "weak",
+        "update_automation": "strong",
+    },
+    "opensuse_microos": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "weak",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "partial",
+        "update_automation": "strong",
+    },
+    "alpine_linux": {
+        "memory_safety": "partial",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "weak",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "partial",
+        "update_automation": "partial",
+    },
+    "talos_linux": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "partial",
+        "verified_boot": "strong",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "partial",
+        "update_automation": "strong",
+    },
+    "bottlerocket": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "strong",
+        "verified_boot": "strong",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "partial",
+        "update_automation": "strong",
+    },
+    "fedora_coreos": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "partial",
+        "verified_boot": "partial",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "weak",
+        "update_automation": "strong",
+    },
+    "rhel": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "strong",
+        "verified_boot": "partial",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "strong",
+    },
+    "ubuntu_core": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "strong",
+        "mac_framework": "strong",
+        "verified_boot": "strong",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "strong",
+    },
+    "whonix": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "strong",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "partial",
+        "update_automation": "partial",
+    },
+    "tails": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "partial",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "strong",
+        "update_automation": "partial",
+    },
+    "openbsd": {
+        "memory_safety": "weak",
+        "allocator_hardening": "strong",
+        "sandboxing_primitives": "strong",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "weak",
+        "update_automation": "partial",
+    },
+    "sel4": {
+        "memory_safety": "strong",
+        "allocator_hardening": "n_a",
+        "sandboxing_primitives": "strong",
+        "mac_framework": "strong",
+        "verified_boot": "n_a",
+        "reproducible_deployment": "n_a",
+        "disposable_execution": "n_a",
+        "update_automation": "n_a",
+    },
+    "genode_sculpt": {
+        "memory_safety": "partial",
+        "allocator_hardening": "partial",
+        "sandboxing_primitives": "strong",
+        "mac_framework": "strong",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "partial",
+    },
+    "grapheneos": {
+        "memory_safety": "partial",
+        "allocator_hardening": "strong",
+        "sandboxing_primitives": "strong",
+        "mac_framework": "strong",
+        "verified_boot": "strong",
+        "reproducible_deployment": "partial",
+        "disposable_execution": "weak",
+        "update_automation": "strong",
+    },
+    "kali_linux": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "weak",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "partial",
+    },
+    "parrot_security": {
+        "memory_safety": "weak",
+        "allocator_hardening": "weak",
+        "sandboxing_primitives": "weak",
+        "mac_framework": "weak",
+        "verified_boot": "weak",
+        "reproducible_deployment": "weak",
+        "disposable_execution": "weak",
+        "update_automation": "partial",
+    },
+}
+
+#: Documented support/update policies for all 24 candidates. ``months`` is
+#: set only where the project documents a fixed support window; ``None``
+#: marks rolling, lifecycle-based, or upstream-driven policies (recorded as
+#: policy text, not an inferred number).
+UPDATE_WINDOWS: dict[str, UpdateWindow] = {
+    "qubes_os": UpdateWindow(
+        "qubes_os",
+        "QSB advisories on a documented cadence; dom0 and template updates are user-driven; no fixed support window is stated",
+        None,
+    ),
+    "nixos": UpdateWindow(
+        "nixos",
+        "Rolling with release-based support; NixOS 26.05 support ends 2026-12-31 and successive releases overlap",
+        None,
+    ),
+    "secureblue": UpdateWindow(
+        "secureblue",
+        "Tracks the Fedora Atomic rebase cadence; no independent fixed support window is stated",
+        None,
+    ),
+    "fedora_atomic": UpdateWindow(
+        "fedora_atomic",
+        "Approximately 13-month Fedora release support window requires regular rebase upgrades",
+        13,
+    ),
+    "fedora_workstation": UpdateWindow(
+        "fedora_workstation",
+        "Approximately 13-month Fedora release support window requires regular upgrades",
+        13,
+    ),
+    "debian_stable": UpdateWindow(
+        "debian_stable",
+        "Coordinated security advisory process; LTS handled separately",
+        None,
+    ),
+    "ubuntu_lts": UpdateWindow(
+        "ubuntu_lts",
+        "Five years of standard security maintenance for LTS releases",
+        60,
+    ),
+    "kicksecure": UpdateWindow(
+        "kicksecure",
+        "Tracks the Debian release and security-advisory cadence it builds on",
+        None,
+    ),
+    "opensuse_aeon": UpdateWindow(
+        "opensuse_aeon",
+        "Rolling Tumbleweed base with transactional snapshots; no fixed support window stated",
+        None,
+    ),
+    "opensuse_microos": UpdateWindow(
+        "opensuse_microos",
+        "Rolling transactional server roles; no fixed support window stated",
+        None,
+    ),
+    "alpine_linux": UpdateWindow(
+        "alpine_linux",
+        "Roughly two-year main-repository support versus community-repository support until the next stable release",
+        24,
+    ),
+    "talos_linux": UpdateWindow(
+        "talos_linux",
+        "Supported until the second subsequent minor release; image-based upgrades track the release train",
+        None,
+    ),
+    "bottlerocket": UpdateWindow(
+        "bottlerocket",
+        "Approximately 14-month Kubernetes-variant support window with atomic image updates",
+        14,
+    ),
+    "fedora_coreos": UpdateWindow(
+        "fedora_coreos",
+        "Continuous Zincati-coordinated streaming updates with retained prior deployments; no fixed support window",
+        None,
+    ),
+    "rhel": UpdateWindow(
+        "rhel",
+        "Lifecycle-based errata continuity by product, phase, severity, and entitlement rather than a fixed months window",
+        None,
+    ),
+    "ubuntu_core": UpdateWindow(
+        "ubuntu_core",
+        "15 years of maintenance for Ubuntu Core 26 with TPM-sealed full disk encryption",
+        180,
+    ),
+    "whonix": UpdateWindow(
+        "whonix",
+        "Follows the Debian release it builds on; Whonix 17 reached end of security support in 2026 and 18 is the supported line",
+        None,
+    ),
+    "tails": UpdateWindow(
+        "tails",
+        "7.x series tracks the Debian 13 base; releases follow the upstream base without a fixed window",
+        None,
+    ),
+    "openbsd": UpdateWindow(
+        "openbsd",
+        "Current and one previous release supported; fixes delivered via errata and syspatch",
+        12,
+    ),
+    "sel4": UpdateWindow(
+        "sel4",
+        "Kernel project; no OS-level support window defined",
+        None,
+    ),
+    "genode_sculpt": UpdateWindow(
+        "genode_sculpt",
+        "Per-release platform advancing with Genode releases; no fixed support window stated",
+        None,
+    ),
+    "grapheneos": UpdateWindow(
+        "grapheneos",
+        "Device- and vendor-driven support following the Pixel security update cadence; no fixed project window",
+        None,
+    ),
+    "kali_linux": UpdateWindow(
+        "kali_linux",
+        "Rolling release consuming the Debian security process; no fixed support window stated",
+        None,
+    ),
+    "parrot_security": UpdateWindow(
+        "parrot_security",
+        "Rolling release; no fixed support window stated",
+        None,
+    ),
+}
+
+
+def defensive_stack_rows() -> list[tuple[str, str, str]]:
+    """Flatten the candidate x mitigation-class grid to 24 x 8 = 192 cells.
+
+    Returns ``(candidate_id, class_id, stance)`` tuples in
+    ``CANDIDATES`` x ``MITIGATION_CLASSES`` order.
+    """
+    return [
+        (candidate.candidate_id, mitigation.class_id, DEFENSIVE_STACK[candidate.candidate_id][mitigation.class_id])
+        for candidate in CANDIDATES
+        for mitigation in MITIGATION_CLASSES
+    ]

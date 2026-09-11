@@ -579,8 +579,7 @@ mediation, and the separation of proposal from authorization
 configuration, and policy faster than any prior tooling — and the pace
 at which a persuasion failure becomes a deployed change.</p>
 <p>Evaluation by properties rather than labels kept the comparison
-honest across the {{RESULT_MATRIX_CELLS}}-cell stance matrix of <span
-class="citation"
+honest across the 216-cell stance matrix of <span class="citation"
 data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>.
 The platform reviews locate the current frontier. Qubes supplies the
 strongest deployable compartmentalization under operational conditions,
@@ -614,9 +613,9 @@ chains are confused-deputy structures [hardy1988; lampson1974], the tool
 broker is the complete-mediation point, and approval lives outside the
 hierarchy. Configuration authorization (<span class="citation"
 data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>)
-completes the set: generation is not authorization, and the
-{{CONFIG_NUM_INVARIANTS}} invariants draw the line an agent must never
-be able to cross, whatever it can write.</p>
+completes the set: generation is not authorization, and the 9 invariants
+draw the line an agent must never be able to cross, whatever it can
+write.</p>
 <p>The forecast (<span class="citation"
 data-cites="sec:forecast">[@sec:forecast]</span>) commits to composition
 over miracle: compartmentalization grows more valuable as failures grow
@@ -624,8 +623,36 @@ more frequent, capability mediation rises to parity with exploit
 mitigation, trustworthy replacement outruns elaborate repair, small
 interfaces deserve disproportionate investment, and coherent defaults
 outrun hardening menus. None of this is a promise about any release; all
-of it is a claim about which properties matter while the
-{{CONFIG_FORECAST_HORIZON}} window passes.</p>
+of it is a claim about which properties matter while the 2028–2031
+window passes.</p>
+<p>The landscape around this prospectus is consolidating faster than the
+manuscript’s own timeline assumed. Standards bodies now name the agentic
+layer as a security object: OWASP publishes both an agentic
+threats-and-mitigations guide and a Top 10 for agentic applications
+[owasp_agentic_tm; owasp_agentic_top10]; the Cloud Security Alliance
+contributes the MAESTRO threat-modeling framework and the AegisSwarm
+zero-trust swarm architecture [csa_maestro; csa_securing_swarm]; NIST
+has opened an AI Agent Standards Initiative to coordinate exactly the
+identity, authorization, and incident-handling questions this review
+places at the orchestration layer [nist_ai_agent_standards]; and the
+European Union’s AI Act transparency obligations for AI agents,
+applicable from 2 August 2026, make disclosure of the acting agent a
+legal requirement rather than a design preference
+[eu_ai_act_transparency]. Meanwhile the coding-agent platforms have
+already answered the deployment question the prospectus raises: Claude
+Code sandboxes execution with OS primitives, routes egress through a
+proxy, and escalates classifier-flagged actions for review; OpenAI Codex
+renders one sandbox policy through Seatbelt, Bubblewrap, Landlock, or
+Windows ACLs with network access off by default; Gemini CLI ships
+sandbox profiles built on the same families of mechanism
+[anthropic_sandboxing; codex_sandboxing; gemini_cli_sandbox]. Three
+competing vendors, building independently, converged on the same triad —
+OS-primitive sandboxing, proxy-mediated egress, classifier-gated
+escalation. That convergence is the strongest external evidence this
+review can offer for its core claim: capability mediation is becoming
+the industry default, not a proposal awaiting adoption, and the open
+work is making the mediation layer coherent with the operating-system
+boundaries below it rather than inventing it.</p>
 <p>The prospectus is therefore specific about what to build next:</p>
 <ul>
 <li><strong>Capability mediation layers</strong> that make every agent
@@ -643,15 +670,15 @@ can grant itself.</li>
 system state is explicit, reviewable, reproducibly deployable — and
 independently authorized before deployment.</li>
 </ul>
-<p>The {{RESULT_NUM_FIGURES}} figures and the underlying analysis
-artifacts are reproducible from the repository’s own pipeline, because a
-prospectus about independently rebuildable environments should be one.
-The composition that matters is not any single system. It is the set of
-boundaries an operator can actually keep: workstations that
-compartmentalize, operations that rebuild, updates that authenticate,
-and agents that can propose everything while authorizing almost nothing.
-Building those, in pieces that someone demonstrably maintains, is the
-work this horizon rewards.</p>
+<p>The 9 figures and the underlying analysis artifacts are reproducible
+from the repository’s own pipeline, because a prospectus about
+independently rebuildable environments should be one. The composition
+that matters is not any single system. It is the set of boundaries an
+operator can actually keep: workstations that compartmentalize,
+operations that rebuild, updates that authenticate, and agents that can
+propose everything while authorizing almost nothing. Building those, in
+pieces that someone demonstrably maintains, is the work this horizon
+rewards.</p>
 </main>
 </body>
 </html>

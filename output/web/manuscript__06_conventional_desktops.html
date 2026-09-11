@@ -582,10 +582,18 @@ with particular attention to <code>application_confinement</code>,
 <code>integrity</code>, and <code>human_usability</code>: whether
 shipped defaults actually constrain applications, whether boot and
 update paths verify what runs, and whether a real operator will sustain
-the configuration. All judgments follow from documented designs and
-advisories reviewed on {{CONFIG_REVIEW_DATE}}; none rests on a
+the configuration. All judgments follow from documented designs, release
+notes, and advisories reviewed on 2026-09-10; none rests on a
 comparative penetration test, and none is expressed as a numeric
 score.</p>
+<p>The desktop lane is also where the fastest documented movement in
+this review is happening. The secureblue release sequence from v4.3.0
+through v4.9.1, Fedora’s removal of the GNOME X11 session, Debian’s LTS
+planning, and Ubuntu’s AppArmor and snap-permission changes all landed
+inside the review window, and each moves a candidate’s documented
+defaults in a direction this section can now assess concretely rather
+than in principle [secureblue_v430; secureblue_v491;
+fedora_wayland_only; debian_trixie; ubuntu_2604_security].</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Desktop candidates compared by documented security-relevant design, important limitation, and analytical assessment.…"><table id="tbl:desktops" data-responsive-table="true">
 <caption>Desktop candidates compared by documented security-relevant
 design, important limitation, and analytical assessment. Judgments are
@@ -611,25 +619,31 @@ they are not results of a comparative penetration test.</caption>
 <td>Silverblue documents read-only system paths with writable
 <code>/etc</code> and <code>/var</code>, and Fedora enforces SELinux as
 its default baseline [fedora_silverblue_technical;
-fedora_selinux_config].</td>
+fedora_selinux_config]. Fedora is also removing the GNOME X11 session:
+the Wayland-only GNOME change strips X11 session packages from the
+Fedora 43 and 44 GNOME offerings [fedora_wayland_only].</td>
 <td>Persistent writable state remains, and approximately 13 months of
-release support require regular upgrades to a new release
+release support require regular upgrades to a new release, with Fedora
+42 reaching end of life on 2026-05-13 and Fedora 43 on 2026-12-09
 [fedora_release_lifecycle]. Silverblue-specific details should not be
 transplanted onto Kinoite without checking each image.</td>
 <td>A credible atomic-desktop direction inside the Fedora ecosystem:
-image-based system updates and an enforcing MAC baseline by default. Its
-documented claims concern system paths and update mechanics, not
-containment of a compromised application’s access to that application’s
-own data.</td>
+image-based system updates, an enforcing MAC baseline by default, and a
+display stack being reduced to one code path. Its documented claims
+concern system paths and update mechanics, not containment of a
+compromised application’s access to that application’s own data.</td>
 </tr>
 <tr>
 <td><strong>Fedora Workstation</strong></td>
 <td>Fedora’s documented baseline includes SELinux enforcement without
-choosing an atomic variant [fedora_selinux_config].</td>
+choosing an atomic variant, and the same Wayland-only GNOME trajectory
+applies to the non-atomic desktop [fedora_selinux_config;
+fedora_wayland_only].</td>
 <td>SELinux policy and application sandboxing must be evaluated as
 deployed; the existence of a kernel access-control mechanism does not by
 itself establish a tight sandbox for each application
-[fedora_selinux_getting_started].</td>
+[fedora_selinux_getting_started]. The X11 removal also narrows fallback
+options for specialized workflows that still require X11.</td>
 <td>A defensible compatibility-first choice when the operator preserves
 the baseline and places dangerous work in separate isolation. An atomic
 variant does not automatically win every runtime-security comparison
@@ -640,11 +654,19 @@ against it.</td>
 <td>The project documents a Fedora Atomic base, broad
 <code>hardened_malloc</code> deployment, a confined Trivalent browser,
 removal of SUID-root programs, restrictive application settings, and
-signed-container policy [secureblue_features].</td>
-<td>The same documentation records compatibility-affecting restrictions,
-including disabled Xwayland and restrictions on user namespaces with
-specific supported exceptions [secureblue_features]. These are
-project-documented measures, not measured superiority results.</td>
+signed-container policy [secureblue_features]. Since v4.3.0, an SELinux
+policy denies user-namespace creation to unconfined processes and the
+container domain by default — a default-deny posture with explicit
+<code>ujust</code> toggles for Flatpak, Chromium, and container
+workflows [secureblue_v430]. The v4.9.1 release completed a SUID-less
+userland on 2026-05-26, removing the legacy setuid privilege path
+structurally rather than by policy [secureblue_v491].</td>
+<td>The same documentation records compatibility-affecting restrictions:
+disabled Xwayland by default, default-deny user namespaces that require
+per-domain toggles, and image renames that follow Fedora’s own (the
+browser rebranded to Trivalent in the v4.4.0 cycle)
+[secureblue_features]. These are project-documented measures, not
+measured superiority results.</td>
 <td>The most compelling conventional security-focused desktop candidate
 in this review, conditional on application compatibility, update
 reliability, and the operator not undoing the hardening to restore
@@ -655,12 +677,18 @@ convenience.</td>
 <td>Debian operates a coordinated security-advisory process and
 recommends unattended security upgrades; LTS extends stable support
 under a separate group from the Debian security team [debian_security;
-debian_lts].</td>
+debian_lts]. Debian 13 “trixie” released 2025-08-09 with full support
+into 2028 and LTS coverage to 2030-06-30; the Debian 14 “forky” cycle
+plans to require reproducible package builds as a matter of policy
+[debian_trixie].</td>
 <td>A maintenance policy is not evidence of strong isolation between
 arbitrary desktop applications, and the two support phases are organized
-differently; conflating them misstates who maintains what.</td>
+differently; conflating them misstates who maintains what. The
+reproducible-packages plan concerns build provenance, not runtime
+confinement.</td>
 <td>A sound conservative platform when deliberately configured for the
-actual workload. A well-maintained, narrowly configured installation is
+actual workload, now with the longest explicitly dated LTS horizon in
+this table. A well-maintained, narrowly configured installation is
 preferable to a more elaborate stack the owner cannot sustain.</td>
 </tr>
 <tr>
@@ -668,41 +696,56 @@ preferable to a more elaborate stack the owner cannot sustain.</td>
 <td>Ubuntu documents five years of standard security maintenance for LTS
 releases, with longer coverage under specified offerings; snap
 confinement distinguishes strict, classic, and development modes
-[ubuntu_release_cycle; snap_confinement].</td>
+[ubuntu_release_cycle; snap_confinement]. Ubuntu 26.04 LTS extends
+AppArmor enforcement to more daemons (OpenLDAP among them) and ships an
+experimental permission-prompting mechanism for strictly confined snaps
+[ubuntu_2604_security].</td>
 <td>Classic snaps carry no confinement, so “installed as a snap” is not
 sufficient evidence of application isolation; coverage must be matched
-to the package, release, and support entitlement.</td>
+to the package, release, and support entitlement. The
+permission-prompting experiment asks the user to adjudicate requests — a
+cognitive surface, not a kernel boundary — and its defaults still
+require review.</td>
 <td>A pragmatic supported baseline for workstation work, provided
 confinement mode and support entitlement are checked per application
-rather than assumed from the packaging name.</td>
+rather than assumed from the packaging name. The 26.04 direction moves
+Ubuntu toward mediated permissions, with the mediation burden landing on
+the operator.</td>
 </tr>
 <tr>
 <td><strong>Kicksecure</strong></td>
 <td>Kicksecure documents Debian-based hardening and a
 user/system-maintenance split with different boot roles; the split’s
-documentation labels verified boot as planned rather than shipped
-[kicksecure_hardening; kicksecure_sysmaint_split].</td>
+documentation labels verified boot as planned rather than shipped, with
+a conditional design for validating the boot chain before granting it
+trust [kicksecure_hardening; kicksecure_sysmaint_split;
+kicksecure_verified_boot].</td>
 <td>The hardening wiki explicitly contains research material,
 non-default proposals, and changes that can cause breakage; a long wiki
-page must not be mistaken for a list of shipped defaults.</td>
+page must not be mistaken for a list of shipped defaults. Verified boot
+remains a roadmap item, not an installed property.</td>
 <td>A serious candidate where reducing everyday administrative authority
 is valuable. Judge the installed release and enabled settings; the split
 is an interesting direction for separating daily use from system
-maintenance, with boot integrity still on the roadmap.</td>
+maintenance, with boot integrity still on the roadmap rather than in the
+release.</td>
 </tr>
 <tr>
 <td><strong>openSUSE Aeon</strong></td>
 <td>Aeon describes an immutable desktop based on Tumbleweed, while
 transactional-update prepares changes in a new snapshot without
-modifying the running system [opensuse_aeon;
-opensuse_transactional_update].</td>
+modifying the running system; the project still labels its releases
+release-candidate [opensuse_aeon; opensuse_transactional_update].</td>
 <td>Snapshot-based system replacement is not evidence that a compromised
 application cannot read or modify its authorized user data; the
-documented mechanism principally concerns system updates.</td>
-<td>A credible image/snapshot-oriented desktop direction. This review
-did not verify role-specific defaults for the closely related MicroOS
-server image, and records those fields as n.a. rather than inferring
-them from Aeon’s design.</td>
+documented mechanism principally concerns system updates. The
+release-candidate label is itself a caveat an operator should not read
+past.</td>
+<td>A credible image/snapshot-oriented desktop direction that has not
+completed its own stability review. This review did not verify
+role-specific defaults for the closely related MicroOS server image, and
+records those fields as n.a. rather than inferring them from Aeon’s
+design.</td>
 </tr>
 </tbody>
 </table></div>
@@ -733,16 +776,37 @@ class="citation" data-cites="sec:qubes">[@sec:qubes]</span>, it is the
 candidate that most directly engages the exploitation failure path
 defined in <span class="citation"
 data-cites="sec:threat_model">[@sec:threat_model]</span>.</p>
+<p>The release history shows a specific engineering thesis, not a pile
+of toggles. Before v4.3.0, the project faced a genuine dilemma it
+documents itself: permit unprivileged user namespaces and leave a known
+privilege-escalation surface open, or disable them and run Flatpak and
+the browser through SUID-root helper binaries — a privilege path
+secureblue was simultaneously trying to eliminate [secureblue_v430]. The
+v4.3.0 resolution moves the decision from file-system bits into SELinux
+policy: unconfined processes and the container domain are denied user
+namespaces by default, while Flatpak and the browser run in their own
+SELinux domains that are granted namespace creation. The design is in
+the same family as Ubuntu’s restricted unprivileged user namespaces
+introduced with Ubuntu 23.10, but stricter in the dimensions the project
+chooses to enforce [secureblue_v430]. The v4.4.0 cycle rebranded the
+hardened Chromium build as Trivalent — avoiding another project’s
+trademark while allowing side-by-side installation with Fedora’s stock
+Chromium [secureblue_features] — and the v4.9.1 release completed the
+removal of SUID-root programs, closing the legacy setuid privilege path
+the earlier policy work had made redundant. The direction matters more
+than any single item: hardening is migrating from user-configureable
+exceptions into shipped, policy-enforced defaults, which is exactly the
+shape the <code>application_confinement</code> property rewards.</p>
 <p>The recommendation remains conditional for three documented reasons.
 The feature list does not establish independent resistance to a capable
 adversary: this review produced no comparative exploit-success or
 patch-latency measurements, and project documentation is not a
 substitute for either. The compatibility restrictions are real —
-disabled Xwayland and constrained user namespaces will require
+disabled Xwayland and default-deny user namespaces will require
 exceptions for some workflows, and each exception is a hand-carved
-reduction of the baseline [secureblue_features]. And the strongest
-hardening is reversible by the very operator it protects: a hardening
-menu that users routinely unwind under compatibility pressure fails the
+reduction of the baseline [secureblue_v430]. And the strongest hardening
+is reversible by the very operator it protects: a hardening menu that
+users routinely unwind under compatibility pressure fails the
 <code>human_usability</code> property regardless of its design quality.
 The conditional form matters more than the candidate’s name: if
 secureblue’s supported workflow fits the owner’s applications, it can be
@@ -766,7 +830,13 @@ answered by inspecting the deployed grants, not by the packaging
 technology’s reputation. This is complete mediation applied to
 application installation [saltzer1975]: every expansion of authority
 should pass a checked interface, and the default answer should be the
-narrow one.</p>
+narrow one. Two developments in this review’s candidate set move in that
+direction: secureblue’s SELinux-scoped domain grants for Flatpak replace
+a blanket rule with a per-domain checked interface [secureblue_v430],
+and Ubuntu 26.04’s experimental snap permission prompting moves the
+grant decision from install time to use time [ubuntu_2604_security].
+Both remain init systems’ answers, not agent-era answers: neither
+mediates what an authorized agent may do with the access it holds.</p>
 <h2 id="the-desktop-versus-agent-authority-lesson">The
 desktop-versus-agent authority lesson</h2>
 <p>Every candidate in <span class="citation"

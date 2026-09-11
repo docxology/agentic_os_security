@@ -569,14 +569,22 @@ mjx-container[display="true"] {
 <p>Server selection differs from desktop selection in what dominates.
 Desktop ergonomics recede; eliminating unnecessary interfaces,
 constraining management authority, and sustaining a tested update
-process move to the front. The candidates below also target different
+process move to the front. The candidates below target different
 workloads — Kubernetes nodes, container hosts, appliances, minimal
-systems, general-purpose servers — so the comparison in <span
-class="citation" data-cites="tbl:servers">[@tbl:servers]</span> is a
-selection guide per workload, not a universal ranking. As everywhere in
-this review, judgments follow documented designs and support policies
-reviewed on {{CONFIG_REVIEW_DATE}}, not comparative penetration testing,
-and no numeric scores are assigned.</p>
+systems, general-purpose servers — so <span class="citation"
+data-cites="tbl:servers">[@tbl:servers]</span> is a selection guide per
+workload, not a universal ranking. Judgments follow documented designs
+and support policies reviewed on 2026-09-10, not comparative penetration
+testing, and no numeric scores are assigned.</p>
+<p>During the review window the integrity paths of these candidates
+moved: Talos made TPM measurement configurable in 1.12.0, Bottlerocket
+added Secure Boot in 1.15.0, Fedora CoreOS automated its bootloader
+updates, and Ubuntu Core 26 committed to a fifteen-year maintenance
+window with sealed full-disk encryption — integrity-path facts this
+section records as documented release facts rather than aspirations
+[talos_1_12_notes; talos_secureboot_docs;
+bottlerocket_security_features; fedora_coreos_updates;
+ubuntu_core_26_fde].</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Server candidates compared by documented architecture or maintenance advantage, boundary and operational caveat, and…"><table id="tbl:servers" data-responsive-table="true">
 <caption>Server candidates compared by documented architecture or
 maintenance advantage, boundary and operational caveat, and best-fit
@@ -602,11 +610,16 @@ policies; they are not measured exploit-resistance results.</caption>
 <td>Kubernetes-specific OS with no shell or interactive console, API
 management secured by mutual TLS, and atomic updates; its Secure Boot
 guide describes a signed unified kernel image containing the OS
-[talos_repo; talos_secureboot].</td>
+[talos_repo; talos_secureboot]. The 1.12.0 release made TPM measurement
+configurable — defaulting to PCR 7 while exposing PCR 11 policies — and
+switched to unified-kernel-image command-line handling by default, with
+Secure Boot documentation for both UKI and systemd-boot paths
+[talos_1_12_notes; talos_secureboot_docs].</td>
 <td>API credentials and the orchestrator remain high-value authority
 regardless of the node’s minimalism. Secure Boot depends on the
-supported boot mode, enrolled keys, and the actual deployment
-[talos_secureboot].</td>
+supported boot mode, enrolled keys, and the actual deployment;
+configurable PCRs hand the policy to the operator, and flexibility must
+be exercised to matter [talos_secureboot_docs].</td>
 <td>A leading specialized candidate for a controlled Kubernetes node
 fleet. Not a general workstation substitute; the reduced host interface
 is the product, and it ends at the API.</td>
@@ -614,13 +627,16 @@ is the product, and it ends at the API.</td>
 <tr>
 <td><strong>Bottlerocket</strong></td>
 <td>Documents a read-only root backed by <code>dm-verity</code>,
-enforcing SELinux, stateless <code>/etc</code>, kernel lockdown, no host
-shell or interpreters, and Secure Boot support in its feature history
+enforcing SELinux, stateless <code>/etc</code>, kernel lockdown
+(documented since the 1.1.0 line), no host shell or interpreters, and
+Secure Boot support since the 1.15.0 release in its feature history
 [bottlerocket_security_features].</td>
 <td>The project’s own goals distinguish host-persistence resistance,
 vulnerability mitigation, and protection between containers; these
 should not be collapsed into a promise of VM-equivalent workload
-separation [bottlerocket_security_features].</td>
+separation [bottlerocket_security_features]. Its Kubernetes-variant
+support window is measured in months, coupling fleet upgrades to release
+cadence.</td>
 <td>A leading container-host candidate where the deployment ecosystem
 fits. Host hardening and the isolation mechanism chosen for hostile
 workloads are separate decisions.</td>
@@ -629,9 +645,14 @@ workloads are separate decisions.</td>
 <td><strong>Fedora CoreOS</strong></td>
 <td>Atomic OS deployments, automated update coordination through
 Zincati, and retained previous deployments for rollback
-[fedora_coreos_updates].</td>
+[fedora_coreos_updates]. For bootc-based systems, the
+<code>bootupd</code> component now automates bootloader updates,
+extending the same update discipline to the component that used to be
+patched by hand.</td>
 <td>Updates require reboot coordination, and the automation’s benefits
-depend on a fleet policy that actually allows updates to complete.</td>
+depend on a fleet policy that actually allows updates to complete.
+Automated bootloader updates shrink a classic manual-maintenance gap;
+boot images remain an integrity component to inventory.</td>
 <td>Strong for automated container infrastructure when the operator can
 sustain its update model; an update stream that never finishes rolling
 is not an update stream.</td>
@@ -639,8 +660,9 @@ is not an update stream.</td>
 <tr>
 <td><strong>RHEL</strong></td>
 <td>Formal security-errata classification and maintenance policy provide
-an explicit basis for planning supported operation
-[redhat_errata_policy].</td>
+an explicit basis for planning supported operation, and the continuity
+of that errata stream across long lifecycle phases is itself a
+documented property [redhat_errata_policy].</td>
 <td>Coverage depends on the applicable product, lifecycle phase,
 severity, and entitlement rather than the brand alone
 [redhat_errata_policy].</td>
@@ -651,11 +673,16 @@ an accountable maintenance process are central requirements.</td>
 <td><strong>Ubuntu Core</strong></td>
 <td>An all-snap appliance and IoT edition whose security model documents
 AppArmor, seccomp, device controls, and mount namespaces for snaps
-[ubuntu_core_confinement].</td>
+[ubuntu_core_confinement]. Ubuntu Core 26, released 2026-05-19,
+documents a fifteen-year maintenance window and TPM-sealed LUKS2
+full-disk encryption, with an OP-TEE-based FDE path for supported
+hardware [ubuntu_core_26_fde].</td>
 <td>Core is not simply Ubuntu Desktop LTS with an immutability switch;
-the intended workload and packaging model differ
-[ubuntu_release_cycle].</td>
-<td>Relevant for controlled appliances with curated snap sets, not the
+the intended workload and packaging model differ [ubuntu_release_cycle].
+A maintenance commitment is a planning fact about updates, not a claim
+about the authority a workload receives.</td>
+<td>Relevant for controlled appliances with curated snap sets — now with
+an unusually long support horizon and sealed-at-rest defaults. Not the
 default answer for a general developer workstation.</td>
 </tr>
 <tr>
@@ -685,8 +712,10 @@ strongest hostile-code boundary.</td>
 <tr>
 <td><strong>NixOS, Debian, or Ubuntu server</strong></td>
 <td>Nix provides controlled build inputs and declarative system state;
-Debian and Ubuntu provide documented security-maintenance paths
-[nix_sandbox_config; debian_security; ubuntu_release_cycle].</td>
+Debian and Ubuntu provide documented security-maintenance paths, and
+Ubuntu 26.04’s AppArmor-enforcement and snap-permission work reaches
+server-side daemons too [nix_sandbox_config; debian_security;
+ubuntu_2604_security].</td>
 <td>Neither repeatable construction nor a support contract determines
 how much authority a particular agent or service receives.</td>
 <td>Strong general-purpose options when paired with narrow service
@@ -695,6 +724,35 @@ process.</td>
 </tr>
 </tbody>
 </table></div>
+<h2 id="support-windows-are-part-of-the-architecture">Support windows
+are part of the architecture</h2>
+<p>Support-policy diversity is easier to see than to state, so <span
+class="citation"
+data-cites="fig:update_windows">[@fig:update_windows]</span> plots the
+documented support or update posture of each of the 24 candidates,
+colored by category, with rows annotated where a project states no fixed
+window. Some candidates commit to dated horizons — Ubuntu Core’s
+fifteen-year window for Core 26 [ubuntu_core_26_fde], Debian’s LTS
+coverage to 2030-06-30 [debian_trixie], Fedora’s release end-of-life
+dates [fedora_release_lifecycle] — while others hold rolling or
+release-relative postures this review records as policy rather than
+months. Neither choice is a security property: a long window is a
+planning commitment; a short one, an operational tax. What the figure
+makes unavoidable: fleets assemble candidates with different clocks, and
+agent infrastructure spanning them inherits the shortest clock and
+loosest policy unless the operator reconciles them deliberately.</p>
+<figure id="fig:update_windows">
+<a class="figure-full-size-link" href="../figures/update_windows.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Documented support and update posture across the 24 candidates, drawn as horizontal timeline…"><img src="../figures/update_windows.png" style="width:100.0%"
+alt="Stated update and support windows for all 24 candidates, colored by candidate category; hatched bars mark projects whose documented policy is rolling or lifecycle-based without a fixed support window (registry.UPDATE_WINDOWS carries the per-candidate policy detail)." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>Documented support and update posture
+across the 24 candidates, drawn as horizontal timeline bars and colored
+by candidate category, with an explicit “policy-defined” annotation
+where a project states no fixed support window instead of a fabricated
+duration. The figure supports the argument of <span class="citation"
+data-cites="sec:servers">[@sec:servers]</span>: maintenance clocks are
+heterogeneous, documented, and part of the security architecture an
+operator must compose — they are not security scores.</figcaption>
+</figure>
 <h2 id="an-execution-baseline-for-untrusted-agent-workloads">An
 execution baseline for untrusted agent workloads</h2>
 <p>For running untrusted agent-generated code, the proposed baseline has
@@ -727,6 +785,56 @@ exploitation-versus-authorized-misuse distinction of <span
 class="citation"
 data-cites="sec:threat_model">[@sec:threat_model]</span> appearing in an
 operational record.</p>
+<h3
+id="agent-execution-isolation-what-the-deployed-evidence-shows">Agent-execution
+isolation: what the deployed evidence shows</h3>
+<p>The microVM layer that realizes the first element of the baseline has
+its own maintenance record. Firecracker’s jailer — the documented
+mechanism that drops each microVM into a restricted context of
+namespaces, cgroups, seccomp filtering, and a dropped-privilege user —
+is privileged host-side code [firecracker_jailer_docs]. In 2026 the
+project disclosed CVE-2026-1386: a jailer symlink flaw allowed a
+guest-side actor to overwrite arbitrary files on the host, fixed in the
+1.13.2 and 1.14.1 releases [firecracker_jailer_advisory]. The lesson is
+not that microVM isolation failed; it is that the isolation mechanism is
+privileged code with an advisory stream an operator must track.</p>
+<p>Adjacent isolation projects publish their threat-model boundaries
+explicitly. gVisor scopes its CVE accounting to the whole sandbox — any
+CVE in a component the sandbox depends on counts as a sandbox CVE, a
+conservative, falsifiable accounting [gvisor_security_policy] — and its
+SecCheck endpoint exposes sandbox-internal events to observability
+tooling, acknowledging that a sandbox needs instrumentation, not only
+walls [gvisor_seccheck]. Cloud Hypervisor’s v52.0 release fixed
+CVE-2026-45782 [cloud_hypervisor_v52]; Kata Containers has moved through
+its 3.x series toward 4.x, and libkrun integrates a lightweight VMM into
+ordinary processes. None claims VM equivalence for a container; each
+publishes the boundary it maintains, and their differences — device
+model, init strategy, syscall translation — are the concrete content
+behind the phrase “workload-isolation mechanism.”</p>
+<p>The same sober accounting applies one layer down, where the kernel
+primitives that process-level sandboxes compose live. Landlock’s ABI 11
+extended the unprivileged sandboxing interface with capability and
+namespace restriction, on the <code>NO_NEW_PRIVS</code> groundwork that
+makes a self-imposed restriction irrevocable for the process and its
+children [linux_landlock_docs]. seccomp’s user-notify mechanism gained
+argument pinning (PIN_ARGS), explicitly motivated by AI-agent sandboxes:
+a supervisor inspecting an intercepted syscall needs pointer arguments
+stable and readable at inspection time [seccomp_pin_args]. io_uring’s
+recurring CVE density is increasingly confined by sysctl policy and BPF
+filters operators can apply without patching the kernel
+[io_uring_hardening]. Ubuntu has restricted unprivileged user namespaces
+since 23.10 — the same surface secureblue now polices with SELinux,
+contested in kernel-community debate over who pays for the restriction
+[ubuntu_restricted_userns; userns_debate_lwn] — and systemd’s v258
+release tightened sandboxing defaults around
+<code>ProtectSystem=strict</code>, with
+<code>systemd-analyze security</code> exposing per-unit scoring as
+introspection, not certification. These primitives matter here for one
+reason: the coding-agent sandboxes of <span class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span> are
+built from exactly this vocabulary, and an operator who knows the
+primitives can evaluate agent-sandbox claims directly instead of taking
+them on trust.</p>
 <p>Three separations keep the baseline honest. The choice of
 <strong>host OS</strong> — Talos, Bottlerocket, CoreOS, a minimal
 Alpine, a general-purpose distribution — is a decision about the node’s
@@ -736,28 +844,27 @@ namespace sandbox — is a decision about what survives when the workload
 turns hostile. The definition of the agent’s <strong>authority over
 external systems</strong> — credentials, egress, approvals — is a
 decision about the authorized-misuse path. Choosing a minimal container
-host does not turn an ordinary container into a VM-equivalent boundary;
-Bottlerocket’s own documentation resists exactly that collapse between
-host hardening and workload separation [bottlerocket_security_features].
-Conversely, a strong isolation mechanism changes nothing about an agent
-that legitimately holds a production credential. Nix’s declarative
-construction can help assemble and replace worker environments quickly
-[nix_sandbox_config], but as <span class="citation"
-data-cites="sec:nixos">[@sec:nixos]</span> establishes, its sandbox
-concerns builds, not the runtime confinement of the thing built.</p>
+host does not make an ordinary container a VM-equivalent boundary;
+Bottlerocket’s own documentation resists that collapse
+[bottlerocket_security_features]. Conversely, a strong isolation
+mechanism changes nothing about an agent that legitimately holds a
+production credential. Nix’s declarative construction can help assemble
+and replace worker environments quickly [nix_sandbox_config], but as
+<span class="citation" data-cites="sec:nixos">[@sec:nixos]</span>
+establishes, its sandbox concerns builds, not the runtime confinement of
+the thing built.</p>
 <h2
 id="orchestrators-and-api-credentials-are-the-authority">Orchestrators
 and API credentials are the authority</h2>
 <p>On a fleet of hardened nodes, the concentrated authority sits above
 them. Talos removes the node shell and interactive console and secures
-its API with mutual TLS [talos_repo], which is a real reduction of the
-node’s trusted interface — but whoever holds the API credentials and
-controls the orchestrator holds the fleet: workload placement, secret
-distribution, and node lifecycle. The same structure repeats with every
+its API with mutual TLS [talos_repo], a real reduction of the node’s
+trusted interface — but whoever holds the API credentials and controls
+the orchestrator holds the fleet: workload placement, secret
+distribution, and node lifecycle. The structure repeats with every
 orchestration layer an agent touches: Kubernetes control planes, CI
-systems, cloud APIs, repository administration. These credentials are
-the high-value authority in the architecture, and their mediation
-belongs to the control design of <span class="citation"
+systems, cloud APIs, repository administration. Their mediation belongs
+to the control design of <span class="citation"
 data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>
 rather than to node hardening. An agent with a hardened disposable
 execution environment but an unscoped orchestrator token is, from the
@@ -775,8 +882,8 @@ OS,” is the category error this review repeatedly finds; the
 orchestration-side instantiation of the controls is developed in <span
 class="citation"
 data-cites="sec:orchestration">[@sec:orchestration]</span>, and the
-operator practices that keep the separation real in daily work in <span
-class="citation" data-cites="sec:opsec">[@sec:opsec]</span>.</p>
+operator practices in <span class="citation"
+data-cites="sec:opsec">[@sec:opsec]</span>.</p>
 </main>
 </body>
 </html>

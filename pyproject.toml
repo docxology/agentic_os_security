@@ -7,8 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentic_os_security"
-version = "0.1.0"
-license = {text = "MIT"}
+version = "0.2.0"
 description = "Deep review and prospectus of agentic security and operating systems: OpSec, cognitive security, and agentic cyber security"
 authors = [
     {name = "Daniel Ari Friedman", email = "daniel@activeinference.institute"}

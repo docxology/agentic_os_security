@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Scenario Recommendations and Confidence}{1}{0}{1}
+\beamer@subsectionintoc {1}{1}{Scenario recommendations}{3}{0}{1}
+\beamer@subsectionintoc {1}{2}{The strongest overall direction}{10}{0}{1}
+\beamer@subsectionintoc {1}{3}{Confidence tiers and evidence limits}{13}{0}{1}

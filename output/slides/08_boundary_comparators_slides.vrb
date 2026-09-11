@@ -1,0 +1,12 @@
+\frametitle{What each comparator contributes to the composition argument}
+Taken together, the comparators reinforce the review's central claim
+rather than competing with it. None of them, alone, addresses both
+failure paths of sec.~3: Whonix and Tails narrow
+the exploitation exposure of networking and state but leave authorized
+agent access untouched; seL4 and Genode narrow the trusted base without
+mediating an agent's credentials; GrapheneOS constrains applications
+without constraining what a persuaded agent may do with legitimate
+access. The synthesis --- which components, composed, cover both paths
+--- is the trust-domain architecture of
+sec.~10; the scenario-level placement of these
+comparators appears in sec.~16.

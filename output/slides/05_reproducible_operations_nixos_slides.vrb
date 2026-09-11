@@ -1,0 +1,9 @@
+\frametitle{Assessment}
+guidance (N. Project 2026f) --- and its build service is root-authority
+code with a 2026 advisory chain that must be treated as trusted base (N.
+Project 2026g, 2026k, 2026b, 2026d, 2026c). The strongest arrangement
+--- and the one this review's architecture chapters target --- uses
+Nix's declarative construction \emph{inside} a separately enforced,
+least-privilege execution architecture, where generation discipline
+supplies replaceability and the containment layer supplies what Nix
+deliberately does not.

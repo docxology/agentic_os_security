@@ -7,7 +7,7 @@ A standalone, private research project that produces a deep review and prospectu
 ## What the project does
 
 - **Evaluation matrix.** Scores 24 OS candidates against 9 properties (`containment`, `authority`, `trusted_computing_base`, `application_confinement`, `integrity`, `persistence_recovery`, `update_operations`, `supply_chain_trust`, `human_usability`) with qualitative stances (`strong | partial | weak | n_a`) — never numeric security scores — across 8 operational scenarios.
-- **Evidence registry.** 65 documented sources (official docs, advisories, incident reports, research, community) with an explicit capability baseline.
+- **Evidence registry.** 150 documented sources (official docs, advisories, incident reports, research, community) with an explicit capability baseline, plus an 8-class mitigation/defensive-stack matrix, documented update windows, and a 10-point agent mediation taxonomy.
 - **Agentic authority architecture.** 7 trust domains, 9 controls, 9 configuration invariants an agent must never be able to violate.
 - **Forecast.** Confidence-tiered (high/moderate/low) predictions for 2028–2031.
 - **Manuscript.** 18 Pandoc-markdown sections hydrated from a deterministic token pipeline and rendered to PDF/HTML from a sibling template repository.
@@ -45,7 +45,7 @@ Requires Python ≥ 3.10. Dependencies: numpy, matplotlib, pillow, pyyaml, defus
 
 ```bash
 uv run python scripts/00_preflight.py            # environment, deps, directory checks
-uv run python scripts/10_evaluation_analysis.py  # evaluation matrix + 6 figures + validation report
+uv run python scripts/10_evaluation_analysis.py  # evaluation matrix + 9 figures + validation report
 uv run python scripts/z_generate_manuscript_variables.py  # token pipeline -> output/data/manuscript_variables.json
 uv run pytest tests/ --cov=src --cov-fail-under=90        # ≥90% coverage gate on src/
 ```

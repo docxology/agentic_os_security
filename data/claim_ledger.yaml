@@ -151,7 +151,7 @@ claims:
 
   - claim_id: num_sources
     kind: number
-    value: 65
+    value: 150
     source: agentic_os_security.evidence.SOURCES
     source_tier: project_source
     freshness: active
@@ -167,7 +167,7 @@ claims:
 
   - claim_id: num_figures
     kind: number
-    value: 6
+    value: 9
     source: manuscript/config.yaml experiment.figure_registry
     source_tier: manuscript_claim
     freshness: active
@@ -191,10 +191,9 @@ claims:
 
   - claim_id: bib-entry-count
     kind: number
-    value: 71
-    source: manuscript/references.bib entry count (65 source-derived + 6
-      scholarly), documented in manuscript/AGENTS.md, manuscript/README.md,
-      manuscript/SYNTAX.md
+    value: 156
+    source: manuscript/references.bib entry count (150 source-derived + 6
+      scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md
     source_tier: manuscript_claim
     freshness: active
     artifact_path: manuscript/references.bib
@@ -263,3 +262,377 @@ claims:
     source_tier: official_source
     freshness: active
     artifact_path: src/agentic_os_security/evidence.py
+
+  # v0.2.0 extension claims (registered 2026-09-11). Values come from the
+  # approved-numbers list; sources are references.bib entry names.
+
+  - claim_id: gtg1002_autonomy_low_pct
+    kind: number
+    value: 80
+    source: anthropic_campaign_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: gtg1002_autonomy_high_pct
+    kind: number
+    value: 90
+    source: anthropic_campaign_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: gtg1002_decision_points_low
+    kind: number
+    value: 4
+    source: anthropic_campaign_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: gtg1002_decision_points_high
+    kind: number
+    value: 6
+    source: anthropic_campaign_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi_unsanctioned_actions
+    kind: number
+    value: 19
+    source: aisi_incident_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi_models_total
+    kind: number
+    value: 7
+    source: aisi_incident_pdf
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi_mythos_runs
+    kind: number
+    value: 17
+    source: aisi_incident_pdf
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi_gpt_runs
+    kind: number
+    value: 2
+    source: aisi_incident_pdf
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: gtg2002_targets_and_whonix_17
+    kind: number
+    value: 17
+    source: anthropic_misuse_aug_2025 (GTG-2002 vibe-hacking target count) and
+      whonix_18_support (Whonix 17 end of security support) — same number,
+      one claim per the approved-numbers dedupe note
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+
+  - claim_id: whonix_18_version
+    kind: number
+    value: 18
+    source: whonix_18_support
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: aixcc_identified_pct
+    kind: number
+    value: 86
+    source: darpa_aixcc_finals
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aixcc_patched_pct
+    kind: number
+    value: 68
+    source: darpa_aixcc_finals
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aixcc_real_vulns
+    kind: number
+    value: 18
+    source: darpa_aixcc_finals
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: openai_hf_actions
+    kind: number
+    value: 17600
+    source: openai_hf_incident
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: qsb_118_cve_id
+    kind: number
+    value: "CVE-2026-82636"
+    source: qsb_118
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: qsb_118_cvss
+    kind: number
+    value: 7.9
+    source: qsb_118
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: nar_recursion_cvss
+    kind: number
+    value: 7.5
+    source: nix_ghsa_vh5x
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: nix_unpack_traversal_cvss
+    kind: number
+    value: 4.3
+    source: nix_ghsa_gr92
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: reproducible_iso_pct
+    kind: number
+    value: 95.18
+    source: nixos_reproducibility_iso
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: reproducible_closure_pct
+    kind: number
+    value: 99.48
+    source: reproducible_study_2025
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: ncsc_original_assessment_date
+    kind: number
+    value: "2024-01-24"
+    source: ncsc_ai_threat_2024
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: ncsc_2027_assessment_date
+    kind: number
+    value: "2025-05-07"
+    source: ncsc_ai_cyber_threat
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi_report_published
+    kind: number
+    value: "2026-08-04"
+    source: aisi_incident_pdf
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: mcp_registry_entries
+    kind: number
+    value: 2000
+    source: mcp_registry_preview
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: ubuntu_core_maintenance_years
+    kind: number
+    value: 15
+    source: ubuntu_core_26_fde
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: bottlerocket_sb_version
+    kind: number
+    value: "1.15"
+    source: bottlerocket_security_features
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: talos_release_version
+    kind: number
+    value: "1.12"
+    source: talos_1_12_notes
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: talos_secureboot_doc_version
+    kind: number
+    value: "1.11"
+    source: talos_secureboot
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: nix_current_version
+    kind: number
+    value: "2.35"
+    source: nix_2_35_notes
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: nix_prior_version
+    kind: number
+    value: "2.34"
+    source: nix_ghsa_g3g9
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: xen_version_qubes_43
+    kind: number
+    value: "4.19"
+    source: qubes_430_release
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: qubes_430_ga_version
+    kind: number
+    value: "4.3.0"
+    source: qubes_430_release
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: sel4_release_version
+    kind: number
+    value: "16.0.0"
+    source: sel4_2026_news
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: openbsd_78_version
+    kind: number
+    value: "7.8"
+    source: openbsd_78
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: openbsd_79_version
+    kind: number
+    value: "7.9"
+    source: openbsd_79
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: sculpt_release_version
+    kind: number
+    value: "26.04"
+    source: sculpt_26_04
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: tails_current_version
+    kind: number
+    value: "7.12"
+    source: tails_7_12
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: fedora_wayland_only_releases
+    kind: number
+    value: [43, 44]
+    source: fedora_wayland_only
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: fedora_42_eol_release
+    kind: number
+    value: 42
+    source: fedora_release_lifecycle
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: debian_13_release
+    kind: number
+    value: 13
+    source: debian_trixie
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: debian_14_planned_release
+    kind: number
+    value: 14
+    source: debian_trixie
+    source_tier: official_source
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: num_mitigation_classes
+    kind: number
+    value: 8
+    source: agentic_os_security.registry.MITIGATION_CLASSES
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: defensive_stack_cells
+    kind: number
+    value: 192
+    source: agentic_os_security.registry.defensive_stack_rows()
+    source_tier: generated_metric
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: num_update_windows
+    kind: number
+    value: 24
+    source: agentic_os_security.registry.UPDATE_WINDOWS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: num_mediation_points
+    kind: number
+    value: 10
+    source: agentic_os_security.orchestration.MEDIATION_POINTS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/orchestration.py
+
+  - claim_id: num_orchestration_patterns
+    kind: number
+    value: 7
+    source: agentic_os_security.orchestration.ORCHESTRATION_PATTERNS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/orchestration.py

@@ -1,0 +1,11 @@
+\beamer@slide {why-not-a-distribution-label}{2}
+\beamer@slide {the-nine-properties}{3}
+\beamer@slide {tbl:properties}{4}
+\beamer@slide {parallel-threat-modeling-structures-and-why-a-property-matrix-still-wins-for-os-work}{7}
+\beamer@slide {the-anti-scoring-stance}{10}
+\beamer@slide {how-the-matrix-is-constructed-and-refreshed}{12}
+\beamer@slide {fig:property_matrix}{14}
+\beamer@slide {the-defensive-stack-mitigation-classes-as-a-second-lens}{15}
+\beamer@slide {fig:defensive_stack}{18}
+\beamer@slide {what-the-matrix-buys}{20}
+\beamer@slide {limitations-of-matrix-thinking}{22}

@@ -588,13 +588,18 @@ the attacker writes to.</p>
 that no component both touches untrusted input and holds broad
 authority; place the authority that must exist — credentials, approvals,
 deployment — behind interfaces too narrow for a persuaded component to
-abuse. This section defines that architecture:
-{{CONFIG_NUM_TRUST_DOMAINS}} trust domains, {{CONFIG_NUM_CONTROLS}}
+abuse. This section defines that architecture: 7 trust domains, 9
 controls that hold regardless of host distribution, and an authority
 ladder that separates what an agent may do alone from what requires a
 principal outside it. The section proposes a design; it is not a claim
 about the defaults of any distribution reviewed elsewhere in this
-document.</p>
+document. What sharpens the proposal is that the control vocabulary
+below is no longer speculative: the major shipping coding agents now
+implement versions of these controls against the same operating-system
+primitives this review’s server candidates deploy, and the convergences
+— and divergences — are documented in vendor engineering materials that
+this section cites as evidence of mechanism, not as security results
+[anthropic_sandboxing; codex_sandboxing].</p>
 <h2 id="seven-trust-domains">Seven trust domains</h2>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The seven trust domains of the proposed agentic authority architecture, with the intended contents of each and the re…"><table id="tbl:trust_domains" data-responsive-table="true">
 <caption>The seven trust domains of the proposed agentic authority
@@ -694,13 +699,16 @@ boxes.</p>
 their design rationale</h2>
 <p>The domains define where authority lives; the controls define how
 work crosses the boundaries. Each control below is stated as an
-operating rule with the design rationale that makes it
-non-negotiable.</p>
+operating rule with the design rationale that makes it non-negotiable.
+Where a shipping agent tool already implements a version of a rule, the
+rationale cites the documented implementation — as mechanism evidence,
+not as an endorsement of any tool’s security.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The nine controls of the agentic authority architecture: operating rule and design rationale for each. The rules hold…"><table id="tbl:controls" data-responsive-table="true">
 <caption>The nine controls of the agentic authority architecture:
 operating rule and design rationale for each. The rules hold regardless
 of host distribution; the rationales connect each control to a failure
-it prevents.</caption>
+it prevents, and where shipping agent tools implement a version of the
+rule, the rationale points at the documented mechanism.</caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -730,7 +738,17 @@ rewrite, and account for permitted destinations that themselves accept
 uploads or messages.</td>
 <td>A hostname allowlist is not a data-loss policy: issue trackers,
 paste sites, CI logs, and webhooks are all “allowed hosts” that
-exfiltrate. Egress control must govern channels, not merely names.</td>
+exfiltrate. Egress control must govern channels, not merely names.
+Shipping implementations confirm the mechanism is standard — Claude Code
+routes sandbox network access through a proxy that enforces an
+allowed-domains list, and documents the caveats: the proxy mediates by
+host, dynamic DNS and request-URL discrepancies need explicit attention,
+and allowed sites that accept arbitrary uploads remain channels
+[anthropic_sandboxing]; Codex disables network access by default in its
+workspace-write mode and requires it to be enabled per policy
+[codex_sandboxing]. Neither mechanism converts a hostname allowlist into
+a data-loss policy, which is why the control governs channels
+first.</td>
 </tr>
 <tr>
 <td><strong>External approvals</strong></td>
@@ -741,7 +759,15 @@ publishing.</td>
 automatically an independent security boundary: shared context material
 and correlated failure modes mean the “reviewer” can be persuaded by the
 same bytes. Independence must come from different information and
-authority, not from a second instance.</td>
+authority, not from a second instance. Shipping approval mechanics
+confirm the rule’s shape: agent tools expose explicit permission modes —
+default-prompt, accept-edits, plan, and dangerous bypass variants —
+where the default remains asking the user before consequential action,
+and Claude Code’s auto mode adds a classifier that judges whether a
+proposed action is safe enough to proceed without asking
+[anthropic_sandboxing; claude_code_auto_mode]. A classifier at the
+approval rung is an automation of triage, not a replacement for the
+independent check the rung names.</td>
 </tr>
 <tr>
 <td><strong>Operation mediation, not vague intentions</strong></td>
@@ -820,6 +846,45 @@ data-cites="sec:qubes">[@sec:qubes]</span>, <span class="citation"
 data-cites="sec:nixos">[@sec:nixos]</span>, and <span class="citation"
 data-cites="sec:desktops">[@sec:desktops]</span>; neither can be settled
 by switching distributions.</p>
+<h2 id="convergent-implementations-in-shipping-agent-tools">Convergent
+implementations in shipping agent tools</h2>
+<p>The controls above are sometimes read as a bespoke architecture this
+review invented. The engineering record says otherwise: three widely
+deployed coding agents converge on the same primitive set, assembled
+differently per platform, from a single policy model.</p>
+<p>Claude Code documents a filesystem sandbox built on bubblewrap on
+Linux and Seatbelt on macOS, network access mediated by a proxy that
+enforces an allowed-domains list, and approval machinery in which every
+command defaults to asking the user, with explicit modes for accepting
+edits and a classifier-driven auto mode for lower-risk flows; its
+documentation also names the allowlist’s limits — host-level mediation,
+DNS dynamics, sites that accept uploads — rather than overstating what a
+domain list buys [anthropic_sandboxing; claude_code_auto_mode]. Codex
+documents the same convergence from the policy-model side: one
+<code>SandboxPolicy</code> compiles to Seatbelt on macOS, to bubblewrap
+and Landlock on Linux, and to Windows DACL/appcontainer mechanisms, with
+mode presets (read-only, workspace-write, danger-full-access) and
+network off by default in the write modes [codex_sandboxing]. Gemini CLI
+ships configurable sandboxing across Seatbelt, Docker, gVisor, and
+bubblewrap backends on its supported platforms [gemini_cli_sandbox]. The
+pattern is the point: three independent vendors, one shared conclusion
+that agent containment is assembled from the same kernel-level
+primitives — namespace and MAC-framework sandboxing on the filesystem
+axis, a mediation point on the network axis, and an approval or
+classifier layer on the decision axis — that the server candidates of
+<span class="citation" data-cites="sec:servers">[@sec:servers]</span>
+expose as ordinary configuration. The convergence also marks the
+frontier of the architecture: none of these mechanisms, as documented,
+includes the credential-scoping or audit controls of this section, which
+is exactly the gap the trust-domain design addresses.</p>
+<p>The convergence has a design consequence the rationales above now
+state explicitly. Because the primitives are shared, an operator can
+evaluate any agent-sandbox claim directly: which filesystem mechanism
+(bubblewrap, Seatbelt, Landlock), whether egress is proxy-mediated or
+merely filtered, whether the network default is closed, and which
+approvals remain outside the agent. Vague answers to those four
+questions identify an agent whose containment is a convenience, not a
+boundary.</p>
 <h2 id="the-authority-ladder">The authority ladder</h2>
 <figure id="fig:authority_ladder">
 <a class="figure-full-size-link" href="../figures/authority_ladder.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The authority ladder from proposal to revocation."><img src="../figures/authority_ladder.png" style="width:100.0%"
@@ -853,7 +918,13 @@ against the outside world. An architecture that lets the agent climb
 from propose to authorize on its own has not built a ladder; it has
 built a loop, and the configuration-side invariants that prevent exactly
 that are specified and enforced in <span class="citation"
-data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>.</p>
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>.
+The permission modes of the shipping tools read as partial ladders:
+default-prompt modes place authorize with the human; accept-edits moves
+routine edit-authorization to the agent while keeping command approval;
+bypass modes remove the hinge altogether and are, in this architecture’s
+terms, a design admission rather than a mode [anthropic_sandboxing;
+codex_sandboxing].</p>
 <p>The trust domains, controls, and ladder compose into the scenarios of
 <span class="citation"
 data-cites="sec:scenarios">[@sec:scenarios]</span>: a Qubes deployment

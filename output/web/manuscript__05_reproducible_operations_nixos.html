@@ -579,6 +579,17 @@ filesystem and process namespaces, making controlled build inputs a
 starting point for reproducible construction, though the reproducibility
 project documents remaining sources of nondeterminism
 [nix_sandbox_config; nixos_reproducibility].</p>
+<p>The package manager itself has been evolving on a cadence that
+matters for security analysis. Nix 2.34 (released early 2026) tightened
+sandbox behavior — blocking extended-attribute propagation inside builds
+— and extended build tracing, and Nix 2.35.0 (June 22, 2026) continues
+that line; the 2.35 release notes also fold secrets handling into the
+manual as a first-class chapter, recognizing that credential delivery
+into builds and services is a security surface rather than an
+afterthought [nix_2_35_notes]. Version discipline is part of the
+update-operations property: an installation’s security posture is a
+function of which Nix release it actually runs, and the advisory record
+below shows the Nix releases themselves requiring prompt updates.</p>
 <p>In this review’s threat model, NixOS’s value is not confinement. It
 is the ability to make intended system state explicit, auditable, and
 replaceable — to construct, update, audit, and replace tightly scoped
@@ -602,12 +613,14 @@ exfiltrated data, and accepted remote changes survive a generation
 switch; the state a rebuild can restore is the state Nix owns. Second,
 <strong>older retained generations are potentially vulnerable software,
 not trusted recovery images</strong>: they are pinned to the package
-versions of their era, including any advisories published since. Third,
-<strong>data recovery is a separate discipline</strong> — independent
-backups and rehearsed restoration (<span class="citation"
-data-cites="sec:opsec">[@sec:opsec]</span>) — that declarative
-configuration does not substitute for. The review’s recovery scenario in
-<span class="citation"
+versions of their era, including any advisories published since — a
+concern the 2026 Nix advisories make concrete, since a generation built
+with an unpatched Nix release carries the advisory’s exposure until the
+manager itself is updated. Third, <strong>data recovery is a separate
+discipline</strong> — independent backups and rehearsed restoration
+(<span class="citation" data-cites="sec:opsec">[@sec:opsec]</span>) —
+that declarative configuration does not substitute for. The review’s
+recovery scenario in <span class="citation"
 data-cites="sec:scenarios">[@sec:scenarios]</span> therefore requires
 distinguishing deletion of an environment from revocation of any
 credentials it could have reached.</p>
@@ -630,13 +643,23 @@ inputs.</li>
 specification and filesystem/process isolation alone do not guarantee
 reproducible outputs [nix_sandbox_config; nixos_reproducibility], and
 the reproducibility project exists precisely because the gap is being
-closed package by package, not closed by declaration. Neither form of
-reproducibility, finally, establishes that the source, configuration, or
-upstream dependency is <em>safe</em> — reproducibility answers “is this
-the artifact that source produces?”, not “should anyone run this?”. This
-mirrors the review’s broader separations: authenticity from provenance,
-rollback from recovery, and containment from authority (<span
-class="citation"
+closed package by package, not closed by declaration. The 2026
+measurements quantify how far the gap has closed and where it remains:
+the NixOS ISO closure (channel <code>nixos.iso_gnome</code>) reaches
+95.18% reproducibility across its full paths
+[nixos_reproducibility_iso], while a build-closure analysis reports
+99.48% of packages rebuilding bit-for-bit [nixos_reproducibility_iso]; a
+large-scale rebuild study of Nixpkgs documents the remaining
+nondeterminism classes and their distribution across the package set
+[reproducible_study_2025]. These are measured rates for specific
+artifacts, not a general guarantee — the same discipline that keeps this
+review from scoring platforms applies to interpreting them.</p>
+<p>Neither form of reproducibility, finally, establishes that the
+source, configuration, or upstream dependency is <em>safe</em> —
+reproducibility answers “is this the artifact that source produces?”,
+not “should anyone run this?”. This mirrors the review’s broader
+separations: authenticity from provenance, rollback from recovery, and
+containment from authority (<span class="citation"
 data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>).</p>
 <h2 id="six-misconceptions-that-matter-against-offensive-agents">Six
 misconceptions that matter against offensive agents</h2>
@@ -644,7 +667,8 @@ misconceptions that matter against offensive agents</h2>
 guarantees, the source assessment’s misconception list is worth keeping
 as a standing table. <span class="citation"
 data-cites="tbl:nixos_misconceptions">[@tbl:nixos_misconceptions]</span>
-states each with the documented fact and its consequence.</p>
+states each with the documented fact and its consequence — updated where
+the 2026 record changed the facts.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Six NixOS misconceptions, the documented facts that correct them, and the consequences against offensive agents."><table id="tbl:nixos_misconceptions" data-responsive-table="true">
 <caption>Six NixOS misconceptions, the documented facts that correct
 them, and the consequences against offensive agents.</caption>
@@ -675,13 +699,16 @@ boundary around an AI agent or programs installed through Nix.</td>
 output was produced by the expected derivation
 [nix_cache_signatures].</td>
 <td>Authenticity is valuable, but a trusted supplier can still
-distribute a bad artifact; signatures do not establish provenance.</td>
+distribute a bad artifact; signatures do not establish provenance —
+which is why the provenance tooling below matters.</td>
 </tr>
 <tr>
 <td>“Putting secrets into declarative configuration is harmless.”</td>
-<td>The Nix manual warns the store is readable by all users and secrets
-can reach external caches; it recommends runtime reading with suitable
-access controls [nix_store_secrets].</td>
+<td>The Nix manual treats secret management as a first-class concern:
+the store is world-readable and secrets can reach external caches, so
+secrets belong in runtime-protected stores — now with dedicated manual
+guidance in the 2.35 documentation [nix_store_secrets;
+nix_2_35_notes].</td>
 <td>Configuration cleanliness must not become credential exposure; an
 agent with store access can read declaratively embedded secrets.</td>
 </tr>
@@ -695,21 +722,28 @@ comprehensive default policy exists.</td>
 </tr>
 <tr>
 <td>“Secure Boot is a settled, integrated default.”</td>
-<td>The wiki characterizes Lanzaboote as in development; its repository
-says work remains before upstream integration, and key management is
-outside the project’s full scope [nixos_lanzaboote_wiki;
+<td>Lanzaboote remains outside nixpkgs — its packaging PR is still open
+[lanzaboote_packaging_pr] — and its repository documents that key
+management is outside the project’s full scope; measured-boot (TPM PCR)
+support landed in April 2026, and the bootspec removal in nixpkgs broke
+v1.0.0 until v1.1.0 fixed the integration [nixos_lanzaboote_wiki;
 lanzaboote_repo].</td>
 <td>A carefully configured installation and a stock default are
 different claims; boot-integrity stance is <code>partial</code> pending
-deployment work.</td>
+upstream integration — and the version pinning is load-bearing.</td>
 </tr>
 <tr>
 <td>“The hardened profile is a safe universal upgrade.”</td>
-<td>A maintainer discussion argues the profile lacks a coherent baseline
-and warns specific restrictions can undermine browser sandboxing without
-compensating setup [nixos_hardened_profile_deprecation].</td>
-<td>Hardening menus are not defaults; unchecked combination can
-<em>reduce</em> security — the defaults-over-menus forecast in <span
+<td>The hardened profiles were <strong>removed</strong> from nixpkgs on
+March 22, 2026 (PR nixpkgs#501199), with the 26.05 release notes listing
+the removal as a backward incompatibility; the maintainer discussion
+that preceded it argued the profile lacked a coherent baseline and could
+undermine browser sandboxing, and the NixOS Hardening wiki now carries
+the composable guidance instead [nix_hardened_removed;
+nixos_hardening_wiki; nixos_hardened_profile_deprecation].</td>
+<td>Hardening menus are not defaults; the ecosystem itself concluded
+that an unmaintained blanket profile is worse than documented
+per-concern guidance — the defaults-over-menus forecast in <span
 class="citation" data-cites="sec:forecast">[@sec:forecast]</span>.</td>
 </tr>
 </tbody>
@@ -720,23 +754,39 @@ by Nix, and any secret that reached declarative configuration is
 readable by whatever that agent’s processes can read.</p>
 <h2 id="the-package-manager-is-part-of-the-trusted-computing-base">The
 package manager is part of the trusted computing base</h2>
-<p>On April 7, 2026, Nix published a security advisory describing a
-symlink-following flaw during fixed-output derivation registration that
-could allow users permitted to submit builds to gain root in multi-user
-installations, including with sandboxed Linux builds enabled; the
-advisory lists fixes across version branches, including 2.34.5 and
-2.33.4 [nix_ghsa_g3g9]. The finding is not evidence that Nix is uniquely
-unsafe, nor that the flaw remains unpatched. It is evidence for a
-structural claim: <strong>the build service is part of the trusted
-computing base</strong>. A component with root authority over the
-machine, whose input includes build submissions, is a privileged parser
-of attacker-influenced content — the same shape as the QSB-118 dom0
+<p>The 2026 advisory chain makes the trusted-computing-base argument
+with unusual clarity, because the advisories landed in sequence against
+the same component. On April 7, 2026, Nix published a security advisory
+describing a symlink-following flaw during fixed-output derivation
+registration that could allow users permitted to submit builds to gain
+root in multi-user installations, including with sandboxed Linux builds
+enabled; the advisory lists fixes across version branches, including
+2.34.5 and 2.33.4 [nix_ghsa_g3g9]. Later in the year two further
+advisories followed: one in the NAR archive parser, where unbounded
+recursion — now bounded — allowed resource exhaustion during store-path
+ingestion at high severity (CVSS 7.5) [nix_ghsa_vh5x]; and one enabling
+path traversal on <code>--unpack</code> extraction, an
+attacker-controlled path escape out of the intended destination (CVSS
+4.3) [nix_ghsa_gr92]. A third issue, a TOCTOU race in recursive-Nix
+builds, required the 2.35.0 fix to close [nix_ghsa_6h4g;
+nix_2_35_notes]. Each advisory is fixed in current releases; the
+structural observation is what matters.</p>
+<p>The finding is not evidence that Nix is uniquely unsafe, nor that the
+flaws remain unpatched. It is evidence for a structural claim:
+<strong>the build service is part of the trusted computing
+base</strong>. A component with root authority over the machine, whose
+input includes build submissions and attacker-named artifacts (NAR
+archives, tarballs, path names), is a privileged parser of
+attacker-influenced content — the same shape as the QSB-118 dom0
 injection in <span class="citation"
 data-cites="sec:qubes">[@sec:qubes]</span>, and the same lesson: prompt
 patching of the management layer is not optional hygiene but the
 update-operations property of <span class="citation"
 data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>
-doing real security work.</p>
+doing real security work. The chain also illustrates the second-order
+risk of pinned environments: a deployment frozen on an older Nix release
+accumulates advisory exposure in the very tool that delivers its other
+updates.</p>
 <p>The deployment consequence follows directly from the threat model in
 <span class="citation"
 data-cites="sec:threat_model">[@sec:threat_model]</span>: an agent
@@ -749,10 +799,32 @@ build submission belongs with agent execution (disposable, scoped), not
 with administration or the credential service — and a multi-user Nix
 installation hosting untrusted build submitters inherits a
 root-equivalent trust requirement that its operators must patch and
-monitor [nix_ghsa_g3g9]. The Nixpkgs security tracker
+monitor [nix_ghsa_g3g9; nix_ghsa_vh5x]. The Nixpkgs security tracker
 [nixos_security_tracker] coordinates vulnerability matching and
 mitigation, which supports the update-operations stance but does not by
 itself deliver patch latency.</p>
+<h2 id="provenance-from-signatures-to-verification">Provenance: from
+signatures to verification</h2>
+<p>The supply-chain-trust property asks who may introduce or approve
+executable code, and 2026 hardened the tooling that answers it. Nixpkgs
+now requires <code>meta.sourceProvenance</code> on packages — an
+explicit, machine-readable declaration of whether a build artifact
+derives from source, from an upstream binary blob, or from an unfree
+distribution — turning provenance from documentation into an enforced
+field of every package definition [nixpkgs_source_provenance].
+Verification tooling closes the loop on the binary side: sbomnix
+generates SBOMs (CycloneDX/SPDX) for a Nix closure and can attach SLSA
+provenance attestations [sbomnix]; Trustix compares independently
+rebuilt derivations at scale, exposing bit-for-bit divergence between
+builders [trustix_rebuilt]; and Determinate’s
+<code>nix provenance show</code>/<code>verify</code> commands bring
+attestation checking into the package-manager CLI itself. None of this
+converts a signature into proof of benignity — the misconception table’s
+second row still stands — but together they make the provenance half of
+the question answerable by tooling rather than trust, which is exactly
+the direction the supply-chain-trust property demands for agent-bearing
+deployments: an auditor can now ask “what does this closure claim, and
+what was independently rebuilt?” as data.</p>
 <h2 id="update-operations-the-support-clock-discipline">Update
 operations: the support-clock discipline</h2>
 <p>NixOS 26.05’s announcement specifies seven months of bug fixes and
@@ -768,7 +840,10 @@ software, and fold the tracker into the operator’s patch process
 strengths compound — because the system state is declarative, an update
 is a <em>reviewable configuration change</em> rather than an opaque
 mutation, and a failed rebuild leaves the prior generation bootable
-[nixos_rebuild_wiki].</p>
+[nixos_rebuild_wiki]. The 2026 advisory chain gives the discipline a
+concrete rhythm: each Nix release that closes an advisory is also a
+reminder that the update path itself is the artifact being
+protected.</p>
 <h2 id="composition-with-qubes">Composition with Qubes</h2>
 <p>Nix and Qubes are not competing answers: one principally organizes
 runtime trust domains, the other organizes how software environments are
@@ -781,28 +856,33 @@ templates do not receive updates from the Qubes project itself
 [qubes_templates], so a hand-built Qubes-plus-NixOS stack inherits a
 maintenance obligation for template security updates, boot support, and
 desktop integration that its owner must explicitly own
-[nixos_security_wiki; lanzaboote_repo]. Combining two attractive designs
-does not automatically improve practical security; the composition must
-be operated, patched, and reviewed as its own deployment.</p>
+[nixos_security_wiki; lanzaboote_packaging_pr]. Combining two attractive
+designs does not automatically improve practical security; the
+composition must be operated, patched, and reviewed as its own
+deployment.</p>
 <h2 id="assessment">Assessment</h2>
 <p>NixOS is especially attractive for a capable operator building
 auditable, replaceable development or server environments. On the
 candidate–property matrix its update-operations and supply-chain-trust
 stances are <code>strong</code> — declarative state, channel discipline,
-and the security tracker are documented and coherent — while its
-application-confinement stance is <code>weak</code> pending integrated
-MAC and boot-integrity baselines [nixos_security_wiki;
-nixos_lanzaboote_wiki]. It is not the default recommendation over Qubes
-for containing a hostile desktop workload, and it is not sufficient by
-itself to make a powerful autonomous coding agent safe: the sandbox that
-defines its build discipline is build-time, its secrets model demands
-deliberate handling, and its build service is root-authority code that
-must be treated as trusted base [nix_sandbox_config; nix_store_secrets;
-nix_ghsa_g3g9]. The strongest arrangement — and the one this review’s
-architecture chapters target — uses Nix’s declarative construction
-<em>inside</em> a separately enforced, least-privilege execution
-architecture, where generation discipline supplies replaceability and
-the containment layer supplies what Nix deliberately does not.</p>
+the security tracker, and now enforced provenance metadata and
+verification tooling are documented and coherent
+[nixpkgs_source_provenance; sbomnix] — while its application-confinement
+stance is <code>weak</code> pending integrated MAC and boot-integrity
+baselines [nixos_security_wiki; nixos_lanzaboote_wiki]. It is not the
+default recommendation over Qubes for containing a hostile desktop
+workload, and it is not sufficient by itself to make a powerful
+autonomous coding agent safe: the sandbox that defines its build
+discipline is build-time, its secrets model demands deliberate handling
+— now with first-class manual guidance [nix_2_35_notes] — and its build
+service is root-authority code with a 2026 advisory chain that must be
+treated as trusted base [nix_sandbox_config; nix_store_secrets;
+nix_ghsa_g3g9; nix_ghsa_vh5x; nix_ghsa_gr92]. The strongest arrangement
+— and the one this review’s architecture chapters target — uses Nix’s
+declarative construction <em>inside</em> a separately enforced,
+least-privilege execution architecture, where generation discipline
+supplies replaceability and the containment layer supplies what Nix
+deliberately does not.</p>
 </main>
 </body>
 </html>

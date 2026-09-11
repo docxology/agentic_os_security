@@ -1,0 +1,14 @@
+\frametitle{A taxonomy for the cognitive surface}
+The mapping onto this review's vocabulary is exact, and it validates the
+section's framing from an independent direction. T1 is the cognitive
+reading of the \breaktt{minimal\_shared\_state} and
+\breaktt{environment\_refresh} controls of
+sec.~10: poisoned memory is shared state never
+recognized as state --- the channel by which hostile content reaches
+future authority. T2 is the authorized-misuse path itself, named as a
+threat class: the vulnerability is not in any tool but in the gap
+between what the tools permit and what the instructions intend. Neither
+T1 nor T2 names an exploit, so neither is visible to any mechanism in
+tbl.~5 or tbl.~6; they are surfaces of
+the reasoning process, and the boundaries that constrain them are drawn
+around cognition, not around processes.

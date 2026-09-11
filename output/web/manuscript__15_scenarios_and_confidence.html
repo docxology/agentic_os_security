@@ -566,8 +566,7 @@ mjx-container[display="true"] {
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
 <h1 id="sec:scenarios">Scenario Recommendations and Confidence</h1>
-<p>The {{CONFIG_NUM_SCENARIOS}} scenarios below map the evaluation of
-<span class="citation"
+<p>The 8 scenarios below map the evaluation of <span class="citation"
 data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>
 onto recurring situations. Recommendations are conditional judgments
 from documented designs and advisories, not an absolute ordering across
@@ -580,10 +579,13 @@ data-cites="tbl:scenarios">[@tbl:scenarios]</span> compresses the
 recommendations. Each recommended direction names the architectural
 property doing the work, not merely the distribution label, because the
 properties — containment, authority, integrity, update operations, and
-the rest of the {{CONFIG_NUM_PROPERTIES}} (<span class="citation"
+the rest of the 9 (<span class="citation"
 data-cites="tbl:properties">[@tbl:properties]</span>) — are what survive
 a change of vendor.</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable data table"><table data-responsive-table="true">
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The 8 scenario recommendations: the architectural property doing the work, the direction, and the condition that woul…"><table id="tbl:scenarios" data-responsive-table="true">
+<caption>The 8 scenario recommendations: the architectural property
+doing the work, the direction, and the condition that would change
+it</caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -601,16 +603,19 @@ a change of vendor.</p>
 <td>High-risk personal workstation with distinct sensitive
 identities</td>
 <td>Qubes, with deliberately separated domains, disposable intake,
-minimal administration, and prompt updates (<span class="citation"
+minimal administration, and prompt updates; release 4.3.0’s continued
+disaggregation of the GUI and administrative stacks makes the
+compartmentalized workflow easier to keep (<span class="citation"
 data-cites="sec:qubes">[@sec:qubes]</span>)</td>
 <td>Incompatible hardware, essential unsupported software, or inability
 to sustain the compartmentalized workflow</td>
 </tr>
 <tr>
 <td>Conventional Linux desktop with a hardening priority</td>
-<td>Evaluate secureblue first against actual application requirements;
-Fedora Workstation or an atomic Fedora desktop when a more standard
-environment is more sustainable (<span class="citation"
+<td>Evaluate secureblue first against actual application requirements —
+version 4.9.1 ships a SUID-less baseline with SELinux-enforced namespace
+restrictions; Fedora Workstation or an atomic Fedora desktop when a more
+standard environment is more sustainable (<span class="citation"
 data-cites="sec:desktops">[@sec:desktops]</span>)</td>
 <td>Hardening restrictions require broad exceptions, or project
 maintenance does not meet the owner’s assurance requirements</td>
@@ -619,8 +624,13 @@ maintenance does not meet the owner’s assurance requirements</td>
 <td>Skilled operator prioritizing auditable configuration and
 replaceable environments</td>
 <td>NixOS, paired with explicit runtime confinement, boot-integrity
-decisions, runtime secret handling, and a disciplined update process
-(<span class="citation" data-cites="sec:nixos">[@sec:nixos]</span>)</td>
+decisions, runtime secret handling, and a disciplined update process;
+the project’s hardening wiki now documents a coherent baseline after the
+hardened profile’s removal, and the provenance tooling of <span
+class="citation"
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>
+strengthens the audit story (<span class="citation"
+data-cites="sec:nixos">[@sec:nixos]</span>)</td>
 <td>The custom security integration becomes too complex to review and
 maintain</td>
 </tr>
@@ -637,7 +647,8 @@ actions remain separately authorized</td>
 <tr>
 <td>Controlled Kubernetes node fleet</td>
 <td>Talos; also assess Bottlerocket where its container-host ecosystem
-fits (<span class="citation"
+fits; Talos 1.12’s configurable TPM PCR policies make its Secure Boot
+posture declarable per fleet (<span class="citation"
 data-cites="sec:servers">[@sec:servers]</span>)</td>
 <td>Orchestrator, hardware, extension, or operational requirements
 conflict with the reduced host interface</td>
@@ -682,6 +693,23 @@ authorized agent harmless — protecting local credentials from an
 already-compromised application is the workstation containment problem,
 not the anonymity problem [whonix_workstation_security]. Matching
 scenario to priority is the whole recommendation.</p>
+<p>The refresh behind these rows is current, and it is worth stating
+what changed without overstating it. Qubes 4.3.0 reached general
+availability with the GUI stack and administrative services
+disaggregated out of dom0, continuing the small-privileged-interface
+trajectory [qubes_430_release]. secureblue’s v4.9.1 ships a SUID-less
+userland with SELinux-enforced namespace restrictions, extending its
+hardening line from allocator and browser work into removing an entire
+privilege class [secureblue_v491]. NixOS 26.05 ships without the
+long-debated hardened profile — removed from nixpkgs rather than merely
+deprecated [nix_hardened_removed] — with the NixOS Hardening wiki now
+serving as the documented baseline an operator assembles from
+[nixos_hardening_wiki]. Talos 1.12 made its TPM measurement policies
+configurable, so a fleet can state which PCRs seal what
+[talos_1_12_notes]. Each release lowers the operational cost of keeping
+a recommendation that was already the architectural judgment; none of
+them changes a direction, and none converts a moderate row into a high
+one.</p>
 <h2 id="the-strongest-overall-direction">The strongest overall
 direction</h2>
 <p>The strongest synthesis across the reviews is: <strong>Qubes-like
@@ -726,7 +754,9 @@ evidence limits</h2>
 data-cites="tbl:confidence">[@tbl:confidence]</span> states what this
 review claims, with what confidence, and what limits the evidence behind
 each claim.</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable data table"><table data-responsive-table="true">
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The confidence tiers and evidence limits attached to this review’s principal claims"><table id="tbl:confidence" data-responsive-table="true">
+<caption>The confidence tiers and evidence limits attached to this
+review’s principal claims</caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -782,7 +812,7 @@ time-to-patch</td>
 <tr>
 <td>Low</td>
 <td>Any unconditional prediction of which named distribution will be
-most secure across {{CONFIG_FORECAST_HORIZON}}</td>
+most secure across 2028–2031</td>
 <td>Declined: project execution, hardware changes, ecosystem support,
 and unknown vulnerabilities can reorder the field; the review does not
 manufacture a winner</td>
@@ -797,8 +827,16 @@ precisely that it documents unsanctioned agent behavior without a
 sandbox escape [aisi_incident_report]. The moderate rows are
 architectural judgments with conditions attached, not probabilities;
 they weaken under the stated change conditions rather than under
-argument. The low-confidence row is a refusal, consistent with the
-forecast posture of <span class="citation"
+argument. It is worth noting where official posture now sits relative to
+that moderation: the CISA-led Five Eyes guidance on careful adoption of
+agentic AI services recommends sandboxed deployment, staged
+low-risk-task adoption, threat-model-based evaluation, and red-teaming
+[cisa_agentic_guidance] — a guarded-adoption posture convergent with,
+though independent of, this review’s moderate tiers. Convergence is not
+corroboration of the specific platform judgments, which remain
+assessments from documented design; it does indicate that the posture
+itself is no longer idiosyncratic. The low-confidence row is a refusal,
+consistent with the forecast posture of <span class="citation"
 data-cites="sec:forecast">[@sec:forecast]</span>.</p>
 <h3 id="evidence-limits">Evidence limits</h3>
 <p>The review relied principally on official documentation, project

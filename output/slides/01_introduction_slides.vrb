@@ -1,0 +1,3 @@
+\frametitle{Deterministic evaluation artifacts}
+dependence, so a future reviewer can re-run the pipeline against updated
+project data and diff the outcome rather than re-litigate adjectives.

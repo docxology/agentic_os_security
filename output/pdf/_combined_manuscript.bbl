@@ -1,17 +1,93 @@
-\begin{thebibliography}{71}
+\begin{thebibliography}{152}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Anthropic(2026)]{anthropic_campaign_report}
+\bibitem[3mdeb(2025)]{trenchboot_aem_uefi}
+3mdeb.
+\newblock Antievilmaid ({AEM}) on {UEFI}.
+\newblock \url{https://beta.blog.3mdeb.com/2025/2025-06-10-aem-uefi/}, 2025.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Alliance(2025)]{csa_maestro}
+Cloud~Security Alliance.
+\newblock Agentic {AI} threat modeling framework: {MAESTRO}.
+\newblock
+  \url{https://cloudsecurityalliance.org/blog/2025/02/06/agentic-ai-threat-modeling-framework-maestro},
+  2025.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Alliance(2026{\natexlab{a}})]{csa_agent_insider}
+Cloud~Security Alliance.
+\newblock {AI} agent insider threat: Autonomous compromise.
+\newblock
+  \url{https://labs.cloudsecurityalliance.org/wp-content/uploads/2026/03/AI-agent-insider-threat-autonomous-compromise-v1-csa-styled.pdf},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Alliance(2026{\natexlab{b}})]{csa_securing_swarm}
+Cloud~Security Alliance.
+\newblock Securing the swarm: Governance, attack surfaces, and zero-trust
+  architectures in multi-agent {AI} environments.
+\newblock
+  \url{https://cloudsecurityalliance.org/blog/2026/06/24/securing-the-swarm-governance-attack-surfaces-and-zero-trust-architectures-in-multi-agent-ai-environments},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Anthropic(2025{\natexlab{a}})]{anthropic_misuse_aug_2025}
+Anthropic.
+\newblock Detecting and countering misuse of {AI}: August 2025.
+\newblock
+  \url{https://www.anthropic.com/news/detecting-countering-misuse-aug-2025},
+  2025{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Anthropic(2025{\natexlab{b}})]{shade_arena}
+Anthropic.
+\newblock {SHADE-Arena}: Evaluating sabotage and monitoring in {LLM} agents.
+\newblock
+  \url{https://www.anthropic.com/research/shade-arena-sabotage-monitoring},
+  2025{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Anthropic(2026{\natexlab{a}})]{anthropic_campaign_report}
 Anthropic.
 \newblock Threat intelligence report: Ai agent-enabled cyber campaign.
 \newblock
   \url{https://www-cdn.anthropic.com/d7dd50dd1185f59be051b307150d877f2b82bd2c.pdf},
-  2026.
+  2026{\natexlab{a}}.
 \newblock Accessed 2026-09-10.
+
+\bibitem[Anthropic(2026{\natexlab{b}})]{anthropic_sandboxing}
+Anthropic.
+\newblock Claude code sandboxing.
+\newblock \url{https://www.anthropic.com/engineering/claude-code-sandboxing},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Anthropic(2026{\natexlab{c}})]{anthropic_ti_sept_2026}
+Anthropic.
+\newblock Threat intelligence report: September 2026.
+\newblock
+  \url{https://www.anthropic.com/threat-intelligence-report-september-2026},
+  2026{\natexlab{c}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Anthropic(2026{\natexlab{d}})]{claude_code_auto_mode}
+Anthropic.
+\newblock Claude code auto mode.
+\newblock \url{https://www.anthropic.com/engineering/claude-code-auto-mode},
+  2026{\natexlab{d}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Atlanta(2025)]{aixcc_atlantis_paper}
+Team Atlanta.
+\newblock {ATLANTIS}: {AI}-driven threat localization, analysis, and triage
+  intelligence system.
+\newblock \url{https://doi.org/10.48550/arxiv.2509.14589}, 2025.
+\newblock arXiv:2509.14589; Accessed 2026-09-11.
 
 \bibitem[Bottlerocket(2026)]{bottlerocket_security_features}
 AWS Bottlerocket.
@@ -21,6 +97,36 @@ AWS Bottlerocket.
   2026.
 \newblock Accessed 2026-09-10.
 
+\bibitem[Canonical(2023)]{ubuntu_restricted_userns}
+Canonical.
+\newblock Restricted unprivileged user namespaces in ubuntu 23.10.
+\newblock
+  \url{https://ubuntu.com/blog/ubuntu-23-10-restricted-unprivileged-user-namespaces},
+  2023.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Canonical(2026{\natexlab{a}})]{ubuntu_2604_security}
+Canonical.
+\newblock Ubuntu 26.04 {LTS} security updates.
+\newblock \url{https://ubuntu.com/blog/ubuntu-26-04-lts-security-updates},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Canonical(2026{\natexlab{b}})]{ubuntu_core_26_fde}
+Canonical.
+\newblock Full disk encryption in ubuntu core.
+\newblock
+  \url{https://documentation.ubuntu.com/core/explanation/full-disk-encryption/index.html},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Centre(2024)]{ncsc_ai_threat_2024}
+UK~National Cyber~Security Centre.
+\newblock The near-term impact of {AI} on the cyber threat.
+\newblock \url{https://www.ncsc.gov.uk/report/impact-of-ai-on-cyber-threat},
+  2024.
+\newblock Accessed 2026-09-11.
+
 \bibitem[Centre(2026)]{ncsc_ai_cyber_threat}
 UK~National Cyber~Security Centre.
 \newblock The impact of {AI} on the cyber threat by 2027.
@@ -28,66 +134,140 @@ UK~National Cyber~Security Centre.
   2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[community(2026{\natexlab{a}})]{lanzaboote_repo}
+\bibitem[Commission(2026)]{eu_ai_act_transparency}
+European Commission.
+\newblock Guidelines on transparency obligations under the {EU} {AI} act.
+\newblock
+  \url{https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations},
+  2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[community(2026{\natexlab{a}})]{lanzaboote_packaging_pr}
+Nix community.
+\newblock Lanzaboote packaging ({nixpkgs} pull request 496059).
+\newblock \url{https://github.com/NixOS/nixpkgs/pull/496059},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[community(2026{\natexlab{b}})]{lanzaboote_repo}
 Nix community.
 \newblock Lanzaboote: Secure boot for nixos.
 \newblock \url{https://github.com/nix-community/lanzaboote},
-  2026{\natexlab{a}}.
+  2026{\natexlab{b}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[community(2026{\natexlab{b}})]{nix_cache_signatures}
+\bibitem[community(2026{\natexlab{c}})]{nix_cache_signatures}
 Nix community.
 \newblock What guarantees do signatures by binary caches give?
 \newblock
   \url{https://discourse.nixos.org/t/what-guarantees-do-signatures-by-binary-caches-give/34802},
-  2026{\natexlab{b}}.
+  2026{\natexlab{c}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[community(2026{\natexlab{c}})]{nixos_hardened_profile_deprecation}
+\bibitem[community(2026{\natexlab{d}})]{nix_hardened_removed}
+Nix community.
+\newblock Removal of the {NixOS} hardened profile ({nixpkgs} pull request
+  501199).
+\newblock \url{https://github.com/NixOS/nixpkgs/pull/501199},
+  2026{\natexlab{d}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[community(2026{\natexlab{e}})]{nixos_hardened_profile_deprecation}
 Nix community.
 \newblock Proposal to deprecate the hardened profile.
 \newblock
   \url{https://discourse.nixos.org/t/proposal-to-deprecate-the-hardened-profile/63081},
-  2026{\natexlab{c}}.
+  2026{\natexlab{e}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[community(2026{\natexlab{d}})]{nixos_lanzaboote_wiki}
+\bibitem[community(2026{\natexlab{f}})]{nixos_hardening_wiki}
+Nix community.
+\newblock {NixOS} hardening (nixos wiki).
+\newblock \url{https://wiki.nixos.org/wiki/NixOS_Hardening},
+  2026{\natexlab{f}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[community(2026{\natexlab{g}})]{nixos_lanzaboote_wiki}
 Nix community.
 \newblock Lanzaboote (nixos wiki).
-\newblock \url{https://wiki.nixos.org/wiki/Lanzaboote}, 2026{\natexlab{d}}.
+\newblock \url{https://wiki.nixos.org/wiki/Lanzaboote}, 2026{\natexlab{g}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[community(2026{\natexlab{e}})]{nixos_rebuild_wiki}
+\bibitem[community(2026{\natexlab{h}})]{nixos_rebuild_wiki}
 Nix community.
 \newblock Nixos-rebuild (nixos wiki).
-\newblock \url{https://wiki.nixos.org/wiki/Nixos-rebuild}, 2026{\natexlab{e}}.
+\newblock \url{https://wiki.nixos.org/wiki/Nixos-rebuild}, 2026{\natexlab{h}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[community(2026{\natexlab{f}})]{nixos_rollback_data_discussion}
+\bibitem[community(2026{\natexlab{i}})]{nixos_rollback_data_discussion}
 Nix community.
 \newblock Rolling back data as well, not only nix config.
 \newblock
   \url{https://discourse.nixos.org/t/rolling-back-data-as-well-not-only-nix-config/63169},
-  2026{\natexlab{f}}.
+  2026{\natexlab{i}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[community(2026{\natexlab{g}})]{nixos_security_wiki}
+\bibitem[community(2026{\natexlab{j}})]{nixos_security_wiki}
 Nix community.
 \newblock Security (nixos wiki).
-\newblock \url{https://wiki.nixos.org/wiki/Security}, 2026{\natexlab{g}}.
+\newblock \url{https://wiki.nixos.org/wiki/Security}, 2026{\natexlab{j}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[community(2026{\natexlab{h}})]{nixos_wiki}
+\bibitem[community(2026{\natexlab{k}})]{nixos_wiki}
 Nix community.
 \newblock Nixos wiki.
-\newblock \url{https://wiki.nixos.org/wiki/NixOS}, 2026{\natexlab{h}}.
+\newblock \url{https://wiki.nixos.org/wiki/NixOS}, 2026{\natexlab{k}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[DARPA(2025)]{darpa_aixcc_results}
+\bibitem[community(2026{\natexlab{l}})]{nixpkgs_source_provenance}
+Nix community.
+\newblock Requiring meta.sourceprovenance ({nixpkgs} pull request 425478).
+\newblock \url{https://github.com/NixOS/nixpkgs/pull/425478},
+  2026{\natexlab{l}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[community(2026{\natexlab{m}})]{trustix_rebuilt}
+Nix community.
+\newblock Trustix: Distributed trust and reproducibility tracking for binary
+  caches.
+\newblock \url{https://github.com/nix-community/trustix}, 2026{\natexlab{m}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Corporation(2026)]{mitre_c0062}
+MITRE Corporation.
+\newblock Anthropic {AI}-orchestrated campaign (mitre campaign {C0062}).
+\newblock \url{https://attack.mitre.org/campaigns/C0062/}, 2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Cybersecurity and Agency(2026)]{cisa_agentic_guidance}
+Cybersecurity and Infrastructure~Security Agency.
+\newblock Careful adoption of agentic {AI} services.
+\newblock
+  \url{https://www.cisa.gov/resources-tools/resources/careful-adoption-agentic-ai-services},
+  2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[DARPA(2025{\natexlab{a}})]{darpa_aixcc_finals}
+DARPA.
+\newblock Ai cyber challenge ({AIxCC}) finals winners announcement.
+\newblock \url{https://aicyberchallenge.com/finals-winners-announcement/},
+  2025{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[DARPA(2025{\natexlab{b}})]{darpa_aixcc_results}
 DARPA.
 \newblock Aixcc results: Artificial intelligence cyber challenge final event.
-\newblock \url{https://www.darpa.mil/news/2025/aixcc-results}, 2025.
+\newblock \url{https://www.darpa.mil/news/2025/aixcc-results},
+  2025{\natexlab{b}}.
 \newblock Accessed 2026-09-10.
+
+\bibitem[Force(2026)]{ietf_agent_identity}
+Internet Engineering~Task Force.
+\newblock {AI} agent authentication and authorization
+  (draft-klrc-aiagent-auth).
+\newblock \url{https://datatracker.ietf.org/doc/draft-klrc-aiagent-auth/},
+  2026.
+\newblock Accessed 2026-09-11.
 
 \bibitem[Foundation(2026{\natexlab{a}})]{genode_sculpt}
 Genode Foundation.
@@ -101,6 +281,63 @@ GrapheneOS Foundation.
 \newblock \url{https://grapheneos.org/features}, 2026{\natexlab{b}}.
 \newblock Accessed 2026-09-10.
 
+\bibitem[Foundation(2026{\natexlab{c}})]{grapheneos_releases}
+GrapheneOS Foundation.
+\newblock Grapheneos releases.
+\newblock \url{https://grapheneos.org/releases}, 2026{\natexlab{c}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Foundation(2026{\natexlab{d}})]{a2a_protocol}
+Linux Foundation.
+\newblock Agent2agent ({A2A}) protocol specification.
+\newblock \url{https://a2a-protocol.org/latest/}, 2026{\natexlab{d}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Foundation(2025{\natexlab{a}})]{owasp_agentic_tm}
+OWASP Foundation.
+\newblock Agentic {AI} threats and mitigations.
+\newblock
+  \url{https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/},
+  2025{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Foundation(2025{\natexlab{b}})]{owasp_agentic_top10}
+OWASP Foundation.
+\newblock {OWASP} top 10 for agentic applications.
+\newblock
+  \url{https://genai.owasp.org/2025/12/09/owasp-top-10-for-agentic-applications-the-benchmark-for-agentic-security-in-the-age-of-autonomous-ai/},
+  2025{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Google(2026)]{gemini_cli_sandbox}
+Google.
+\newblock Gemini {CLI} sandboxing.
+\newblock
+  \url{https://google-gemini.github.io/gemini-cli/docs/cli/sandbox.html}, 2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Group(2026)]{gtig_prompting_autonomy}
+Google Threat~Intelligence Group.
+\newblock From prompting to autonomy: The evolution of adversarial {AI}.
+\newblock
+  \url{https://cloud.google.com/blog/topics/threat-intelligence/from-prompting-to-autonomy-the-evolution-of-adversarial-ai},
+  2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[gVisor Project(2026{\natexlab{a}})]{gvisor_seccheck}
+gVisor Project.
+\newblock Seccheck: Sandbox observability for gvisor.
+\newblock
+  \url{https://github.com/google/gvisor/blob/master/pkg/sentry/seccheck/README.md},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[gVisor Project(2026{\natexlab{b}})]{gvisor_security_policy}
+gVisor Project.
+\newblock gvisor security policy.
+\newblock \url{https://gvisor.dev/security/}, 2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
 \bibitem[Hardy(1988)]{hardy1988}
 Norm Hardy.
 \newblock The confused deputy (or why capabilities might have been invented).
@@ -113,12 +350,28 @@ Red Hat.
 \newblock \url{https://access.redhat.com/support/policy/updates/errata}, 2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Institute(2026)]{aisi_incident_report}
+\bibitem[Institute(2026{\natexlab{a}})]{aisi_control_red_team}
+UK~AI~Security Institute.
+\newblock How our new control red team is stress-testing frontier monitors.
+\newblock
+  \url{https://www.aisi.gov.uk/blog/how-our-new-control-red-team-is-stress-testing-frontier-monitors},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Institute(2026{\natexlab{b}})]{aisi_incident_pdf}
+UK~AI~Security Institute.
+\newblock Security incident {INC-2026-07-28-01}: Technical report.
+\newblock
+  \url{https://cdn.prod.website-files.com/663bd486c5e4c81588db7a1d/6a724858f7db25c81487016d_Security%20Incident%20INC-2026-07-28-01.pdf},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Institute(2026{\natexlab{c}})]{aisi_incident_report}
 UK~AI~Security Institute.
 \newblock Incident report: Unsanctioned agent behaviour during cyber testing.
 \newblock
   \url{https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing},
-  2026.
+  2026{\natexlab{c}}.
 \newblock Accessed 2026-09-10.
 
 \bibitem[Klein et~al.(2009)Klein, Andronick, Elphinstone, Heiser, Norrish,
@@ -129,19 +382,40 @@ Gerwin Klein, June Andronick, Kevin Elphinstone, Gernot Heiser, Michael
 \newblock In \emph{Proceedings of the ACM SIGOPS 22nd Symposium on Operating
   Systems Principles (SOSP)}, pages 207--220, 2009.
 
-\bibitem[Labs(2026{\natexlab{a}})]{talos_repo}
+\bibitem[Labs(2026{\natexlab{a}})]{sculpt_26_04}
+Genode Labs.
+\newblock Sculpt {OS} release 26.04.
+\newblock \url{https://genode.org/news/sculpt-os-release-26.04},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Labs(2025)]{talos_1_12_notes}
+Sidero Labs.
+\newblock Talos linux 1.12.0 release notes.
+\newblock \url{https://github.com/siderolabs/talos/releases/tag/v1.12.0}, 2025.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Labs(2026{\natexlab{b}})]{talos_repo}
 Sidero Labs.
 \newblock Talos linux.
-\newblock \url{https://github.com/siderolabs/talos}, 2026{\natexlab{a}}.
+\newblock \url{https://github.com/siderolabs/talos}, 2026{\natexlab{b}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Labs(2026{\natexlab{b}})]{talos_secureboot}
+\bibitem[Labs(2026{\natexlab{c}})]{talos_secureboot}
 Sidero Labs.
 \newblock Secure boot on bare metal talos linux.
 \newblock
   \url{https://www.talos.dev/v1.11/talos-guides/install/bare-metal-platforms/secureboot/},
-  2026{\natexlab{b}}.
+  2026{\natexlab{c}}.
 \newblock Accessed 2026-09-10.
+
+\bibitem[Labs(2026{\natexlab{d}})]{talos_secureboot_docs}
+Sidero Labs.
+\newblock Secure boot on bare-metal talos linux.
+\newblock
+  \url{https://docs.siderolabs.com/talos/v1.12/platform-specific-installations/bare-metal-platforms/secureboot},
+  2026{\natexlab{d}}.
+\newblock Accessed 2026-09-11.
 
 \bibitem[Lampson(1974)]{lampson1974}
 Butler~W. Lampson.
@@ -174,6 +448,65 @@ Kali Linux.
   2026{\natexlab{c}}.
 \newblock Accessed 2026-09-10.
 
+\bibitem[LWN.net(2026{\natexlab{a}})]{seccomp_pin_args}
+LWN.net.
+\newblock Race-free seccomp user-notify with pinned syscall arguments.
+\newblock \url{https://lwn.net/Articles/1070987/}, 2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[LWN.net(2026{\natexlab{b}})]{userns_debate_lwn}
+LWN.net.
+\newblock We need a sysctl to disable unprivileged user namespaces.
+\newblock \url{https://lwn.net/Articles/1079640/}, 2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Malka et~al.(2025)Malka, Zacchiroli, and
+  Zimmermann]{reproducible_study_2025}
+Julien Malka, Stefano Zacchiroli, and Théo Zimmermann.
+\newblock Does functional package management enable reproducible builds at
+  scale? yes.
+\newblock \url{https://arxiv.org/pdf/2501.15919}, 2025.
+\newblock arXiv:2501.15919; Accessed 2026-09-11.
+
+\bibitem[of~Standards and Technology(2026)]{nist_ai_agent_standards}
+National~Institute of~Standards and Technology.
+\newblock {NIST} {AI} agent standards initiative.
+\newblock
+  \url{https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative},
+  2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[OpenAI(2025)]{openai_disruption_oct_2025}
+OpenAI.
+\newblock Disrupting malicious uses of {AI}: October 2025.
+\newblock
+  \url{https://openai.com/global-affairs/disrupting-malicious-uses-of-ai-october-2025/},
+  2025.
+\newblock Accessed 2026-09-11.
+
+\bibitem[OpenAI(2026{\natexlab{a}})]{codex_sandboxing}
+OpenAI.
+\newblock Codex sandboxing architecture.
+\newblock \url{https://openai-codex.mintlify.app/architecture/sandboxing},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[OpenAI(2026{\natexlab{b}})]{openai_disruption_2026}
+OpenAI.
+\newblock Disrupting malicious uses of {AI}.
+\newblock
+  \url{https://openai.com/global-affairs/disrupting-malicious-uses-of-ai/},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[OpenAI(2026{\natexlab{c}})]{openai_hf_incident}
+OpenAI.
+\newblock Openai-hugging face incident technical report.
+\newblock
+  \url{https://cdn.openai.com/pdf/67869394-cb91-4c12-888c-5cbd85c7814c/OpenAI-Hugging%20Face%20Incident-Technical-Report.pdf},
+  2026{\natexlab{c}}.
+\newblock Accessed 2026-09-11.
+
 \bibitem[openSUSE(2026{\natexlab{a}})]{opensuse_aeon}
 openSUSE.
 \newblock opensuse aeon portal.
@@ -187,218 +520,396 @@ openSUSE.
   2026{\natexlab{b}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{a}})]{debian_lts}
+\bibitem[Project(2026{\natexlab{a}})]{cloud_hypervisor_v52}
+Cloud~Hypervisor Project.
+\newblock Cloud hypervisor v52.0 released.
+\newblock
+  \url{https://www.cloudhypervisor.org/blog/cloud-hypervisor-v52.0-released/},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2025{\natexlab{a}})]{debian_trixie}
+Debian Project.
+\newblock Debian 13 (trixie) release information.
+\newblock \url{https://www.debian.org/releases/trixie/index.en.html},
+  2025{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{b}})]{debian_lts}
 Debian Project.
 \newblock Debian long term support.
-\newblock \url{https://www.debian.org/lts/}, 2026{\natexlab{a}}.
+\newblock \url{https://www.debian.org/lts/}, 2026{\natexlab{b}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{b}})]{debian_security}
+\bibitem[Project(2026{\natexlab{c}})]{debian_security}
 Debian Project.
 \newblock Debian security information.
-\newblock \url{https://www.debian.org/security/}, 2026{\natexlab{b}}.
+\newblock \url{https://www.debian.org/security/}, 2026{\natexlab{c}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{c}})]{fedora_coreos_updates}
+\bibitem[Project(2026{\natexlab{d}})]{fedora_coreos_updates}
 Fedora Project.
 \newblock Fedora coreos automatic updates.
 \newblock
   \url{https://docs.fedoraproject.org/en-US/fedora-coreos/auto-updates/},
-  2026{\natexlab{c}}.
-\newblock Accessed 2026-09-10.
-
-\bibitem[Project(2026{\natexlab{d}})]{fedora_release_lifecycle}
-Fedora Project.
-\newblock Fedora release life cycle.
-\newblock \url{https://docs.fedoraproject.org/en-US/releases/lifecycle/},
   2026{\natexlab{d}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{e}})]{fedora_selinux_config}
+\bibitem[Project(2026{\natexlab{e}})]{fedora_release_lifecycle}
 Fedora Project.
-\newblock Selinux configuration (fedora wiki).
-\newblock \url{https://fedoraproject.org/wiki/SELinux/Config},
+\newblock Fedora release life cycle.
+\newblock \url{https://docs.fedoraproject.org/en-US/releases/lifecycle/},
   2026{\natexlab{e}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{f}})]{fedora_selinux_getting_started}
+\bibitem[Project(2026{\natexlab{f}})]{fedora_selinux_config}
+Fedora Project.
+\newblock Selinux configuration (fedora wiki).
+\newblock \url{https://fedoraproject.org/wiki/SELinux/Config},
+  2026{\natexlab{f}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{g}})]{fedora_selinux_getting_started}
 Fedora Project.
 \newblock Selinux getting started.
 \newblock
   \url{https://docs.fedoraproject.org/en-US/quick-docs/selinux-getting-started/},
-  2026{\natexlab{f}}.
+  2026{\natexlab{g}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{g}})]{fedora_silverblue_technical}
+\bibitem[Project(2026{\natexlab{h}})]{fedora_silverblue_technical}
 Fedora Project.
 \newblock Fedora silverblue technical information.
 \newblock
   \url{https://docs.fedoraproject.org/en-US/fedora-silverblue/technical-information/},
-  2026{\natexlab{g}}.
-\newblock Accessed 2026-09-10.
-
-\bibitem[Project(2026{\natexlab{h}})]{flatpak_permissions}
-Flatpak Project.
-\newblock Sandbox permissions reference.
-\newblock \url{https://docs.flatpak.org/en/latest/sandbox-permissions.html},
   2026{\natexlab{h}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{i}})]{kicksecure_hardening}
+\bibitem[Project(2026{\natexlab{i}})]{fedora_wayland_only}
+Fedora Project.
+\newblock Wayland-only {GNOME} ({Fedora} change proposal).
+\newblock \url{https://fedoraproject.org/wiki/Changes/WaylandOnlyGNOME},
+  2026{\natexlab{i}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{j}})]{firecracker_jailer_docs}
+Firecracker Project.
+\newblock Firecracker jailer documentation.
+\newblock
+  \url{https://github.com/firecracker-microvm/firecracker/blob/main/docs/jailer.md},
+  2026{\natexlab{j}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{k}})]{flatpak_permissions}
+Flatpak Project.
+\newblock Sandbox permissions reference.
+\newblock \url{https://docs.flatpak.org/en/latest/sandbox-permissions.html},
+  2026{\natexlab{k}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{l}})]{kicksecure_hardening}
 Kicksecure Project.
 \newblock Operating system hardening.
 \newblock \url{https://www.kicksecure.com/wiki/Operating_System_Hardening},
-  2026{\natexlab{i}}.
+  2026{\natexlab{l}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{j}})]{kicksecure_sysmaint_split}
+\bibitem[Project(2026{\natexlab{m}})]{kicksecure_sysmaint_split}
 Kicksecure Project.
 \newblock User-sysmaint split.
 \newblock \url{https://www.kicksecure.com/wiki/Dev/user-sysmaint-split},
-  2026{\natexlab{j}}.
+  2026{\natexlab{m}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{k}})]{nix_ghsa_g3g9}
+\bibitem[Project(2026{\natexlab{n}})]{kicksecure_verified_boot}
+Kicksecure Project.
+\newblock Verified boot.
+\newblock \url{https://www.kicksecure.com/wiki/Verified_Boot},
+  2026{\natexlab{n}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{o}})]{linux_landlock_docs}
+Linux~Kernel Project.
+\newblock Landlock: Unprivileged access control ({Linux} kernel documentation).
+\newblock \url{https://docs.kernel.org/userspace-api/landlock.html},
+  2026{\natexlab{o}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2025{\natexlab{b}})]{mcp_registry_preview}
+Model Context~Protocol Project.
+\newblock {MCP} registry preview.
+\newblock
+  \url{https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/},
+  2025{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2025{\natexlab{c}})]{mcp_spec_2025_11}
+Model Context~Protocol Project.
+\newblock First {MCP} anniversary: Specification evolution.
+\newblock
+  \url{https://blog.modelcontextprotocol.io/posts/2025-11-25-first-mcp-anniversary/},
+  2025{\natexlab{c}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2025{\natexlab{d}})]{mcp_spec_changelog}
+Model Context~Protocol Project.
+\newblock {MCP} specification changelog (2025-06-18).
+\newblock
+  \url{https://modelcontextprotocol.io/specification/2025-06-18/changelog},
+  2025{\natexlab{d}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2025{\natexlab{e}})]{mcp_tools_annotations}
+Model Context~Protocol Project.
+\newblock {MCP} server tools and annotations.
+\newblock
+  \url{https://modelcontextprotocol.io/specification/2025-06-18/server/tools},
+  2025{\natexlab{e}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{p}})]{nix_2_35_notes}
+NixOS Project.
+\newblock Nix 2.35 release notes.
+\newblock \url{https://nix.dev/manual/nix/2.35/release-notes/rl-2.35},
+  2026{\natexlab{p}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{q}})]{nix_ghsa_6h4g}
+NixOS Project.
+\newblock Advisory {GHSA-6h4g-g5j9-fm5f}: Nix security advisory.
+\newblock
+  \url{https://github.com/NixOS/nix/security/advisories/GHSA-6h4g-g5j9-fm5f},
+  2026{\natexlab{q}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{r}})]{nix_ghsa_g3g9}
 NixOS Project.
 \newblock Advisory {GHSA-g3g9-5vj6-r3gj}: Nix security advisory.
 \newblock
   \url{https://github.com/NixOS/nix/security/advisories/GHSA-g3g9-5vj6-r3gj},
-  2026{\natexlab{k}}.
+  2026{\natexlab{r}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{l}})]{nix_sandbox_config}
+\bibitem[Project(2026{\natexlab{s}})]{nix_ghsa_gr92}
+NixOS Project.
+\newblock Advisory {GHSA-gr92-w2r5-qw5p}: Nix security advisory.
+\newblock
+  \url{https://github.com/NixOS/nix/security/advisories/GHSA-gr92-w2r5-qw5p},
+  2026{\natexlab{s}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{t}})]{nix_ghsa_vh5x}
+NixOS Project.
+\newblock Advisory {GHSA-vh5x-56v6-4368}: Nix security advisory.
+\newblock
+  \url{https://github.com/NixOS/nix/security/advisories/GHSA-vh5x-56v6-4368},
+  2026{\natexlab{t}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{u}})]{nix_sandbox_config}
 NixOS Project.
 \newblock Nix configuration file reference.
 \newblock \url{https://nix.dev/manual/nix/2.35/command-ref/conf-file.html},
-  2026{\natexlab{l}}.
+  2026{\natexlab{u}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{m}})]{nix_store_secrets}
+\bibitem[Project(2026{\natexlab{v}})]{nix_store_secrets}
 NixOS Project.
 \newblock Store secrets.
 \newblock \url{https://nix.dev/manual/nix/2.33/store/secrets.html},
-  2026{\natexlab{m}}.
+  2026{\natexlab{v}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{n}})]{nixos_2605_announcement}
+\bibitem[Project(2026{\natexlab{w}})]{nixos_2605_announcement}
 NixOS Project.
 \newblock Announcing nixos 26.05.
 \newblock \url{https://nixos.org/blog/announcements/2026/nixos-2605/},
-  2026{\natexlab{n}}.
+  2026{\natexlab{w}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{o}})]{nixos_reproducibility}
+\bibitem[Project(2026{\natexlab{x}})]{nixos_reproducibility}
 NixOS Project.
 \newblock Reproducible builds at nixos.
-\newblock \url{https://reproducible.nixos.org/}, 2026{\natexlab{o}}.
+\newblock \url{https://reproducible.nixos.org/}, 2026{\natexlab{x}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{p}})]{nixos_security_tracker}
+\bibitem[Project(2026{\natexlab{y}})]{nixos_reproducibility_iso}
+NixOS Project.
+\newblock {NixOS} reproducibility status: Gnome iso image reconstruction.
+\newblock \url{https://reproducible.nixos.org/nixos-iso-gnome-r13y/},
+  2026{\natexlab{y}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{z}})]{nixos_security_tracker}
 NixOS Project.
 \newblock Nixos security tracker.
-\newblock \url{https://tracker.security.nixos.org/}, 2026{\natexlab{p}}.
+\newblock \url{https://tracker.security.nixos.org/}, 2026{\natexlab{z}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{q}})]{openbsd_innovations}
+\bibitem[Project(2025{\natexlab{f}})]{openbsd_78}
+OpenBSD Project.
+\newblock Openbsd 7.8.
+\newblock \url{https://www.openbsd.org/78.html}, 2025{\natexlab{f}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{{}})]{openbsd_79}
+OpenBSD Project.
+\newblock Openbsd 7.9.
+\newblock \url{https://www.openbsd.org/79.html}, 2026{\natexlab{{}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{|}})]{openbsd_errata78}
+OpenBSD Project.
+\newblock Openbsd 7.8 errata.
+\newblock \url{https://www.openbsd.org/errata78.html}, 2026{\natexlab{|}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026{\natexlab{}}})]{openbsd_innovations}
 OpenBSD Project.
 \newblock Innovations in openbsd.
-\newblock \url{https://www.openbsd.org/innovations.html}, 2026{\natexlab{q}}.
+\newblock \url{https://www.openbsd.org/innovations.html}, 2026{\natexlab{}}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{r}})]{openbsd_security}
+\bibitem[Project(2026{\natexlab{~}})]{openbsd_security}
 OpenBSD Project.
 \newblock Openbsd security page.
-\newblock \url{https://www.openbsd.org/security.html}, 2026{\natexlab{r}}.
+\newblock \url{https://www.openbsd.org/security.html}, 2026{\natexlab{~}}.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{s}})]{qsb_118}
+\bibitem[Project(2025{\natexlab{g}})]{qubes_430_release}
+Qubes~OS Project.
+\newblock Qubes {OS} 4.3.0 has been released!
+\newblock
+  \url{https://www.qubes-os.org/news/2025/12/21/qubes-os-4-3-0-has-been-released/},
+  2025{\natexlab{g}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026)]{qsb_110}
+Qubes~OS Project.
+\newblock Qubes security bulletin 110.
+\newblock \url{https://www.qubes-os.org/news/2026/03/17/qsb-110/}, 2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026)]{qsb_115}
+Qubes~OS Project.
+\newblock Qubes security bulletin 115.
+\newblock \url{https://www.qubes-os.org/news/2026/06/09/qsb-115/}, 2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026)]{qsb_116}
+Qubes~OS Project.
+\newblock Qubes security bulletin 116.
+\newblock \url{https://www.qubes-os.org/news/2026/07/28/qsb-116/}, 2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026)]{qsb_118}
 Qubes~OS Project.
 \newblock Qubes security bulletin 118.
-\newblock \url{https://www.qubes-os.org/news/2026/08/29/qsb-118/},
-  2026{\natexlab{s}}.
+\newblock \url{https://www.qubes-os.org/news/2026/08/29/qsb-118/}, 2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{t}})]{qubes_43_release_notes}
+\bibitem[Project(2026)]{qubes_43_release_notes}
 Qubes~OS Project.
 \newblock Qubes {OS} 4.3 release notes.
 \newblock
   \url{https://doc.qubes-os.org/en/latest/developer/releases/4_3/release-notes.html},
-  2026{\natexlab{t}}.
+  2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{u}})]{qubes_anti_evil_maid}
+\bibitem[Project(2026)]{qubes_43_requirements}
+Qubes~OS Project.
+\newblock Qubes {OS} 4.3 system requirements.
+\newblock
+  \url{https://doc.qubes-os.org/en/r4.3/user/hardware/system-requirements.html},
+  2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026)]{qubes_anti_evil_maid}
 Qubes~OS Project.
 \newblock Anti evil maid in qubes os.
 \newblock
   \url{https://doc.qubes-os.org/en/latest/user/security-in-qubes/anti-evil-maid.html},
-  2026{\natexlab{u}}.
+  2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{v}})]{qubes_architecture}
+\bibitem[Project(2026)]{qubes_architecture}
 Qubes~OS Project.
 \newblock Qubes os architecture.
 \newblock
   \url{https://doc.qubes-os.org/en/latest/developer/system/architecture.html},
-  2026{\natexlab{v}}.
+  2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{w}})]{qubes_disposables}
+\bibitem[Project(2026)]{qubes_devices_api}
+Qubes~OS Project.
+\newblock {Qubes} devices {API}.
+\newblock
+  \url{https://doc.qubes-os.org/projects/core-admin/en/latest/qubes-devices.html},
+  2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Project(2026)]{qubes_disposables}
 Qubes~OS Project.
 \newblock How to use disposable qubes.
 \newblock
   \url{https://doc.qubes-os.org/en/latest/user/how-to-guides/how-to-use-disposables.html},
-  2026{\natexlab{w}}.
+  2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{x}})]{qubes_faq}
+\bibitem[Project(2026)]{qubes_faq}
 Qubes~OS Project.
 \newblock Qubes os faq.
-\newblock \url{https://doc.qubes-os.org/en/latest/introduction/faq.html},
-  2026{\natexlab{x}}.
+\newblock \url{https://doc.qubes-os.org/en/latest/introduction/faq.html}, 2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{y}})]{qubes_gui_domain}
+\bibitem[Project(2026)]{qubes_gui_domain}
 Qubes~OS Project.
 \newblock Gui domain: How the qubes gui works.
 \newblock
   \url{https://doc.qubes-os.org/en/latest/user/advanced-topics/gui-domain.html},
-  2026{\natexlab{y}}.
+  2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{z}})]{qubes_gui_protocol}
+\bibitem[Project(2026)]{qubes_gui_protocol}
 Qubes~OS Project.
 \newblock Qubes gui protocol.
 \newblock \url{https://doc.qubes-os.org/en/latest/developer/system/gui.html},
-  2026{\natexlab{z}}.
+  2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{{}})]{qubes_issue_4371}
+\bibitem[Project(2026)]{qubes_issue_4371}
 Qubes~OS Project.
 \newblock Qubes os issue 4371.
-\newblock \url{https://github.com/QubesOS/qubes-issues/issues/4371},
-  2026{\natexlab{{}}.
+\newblock \url{https://github.com/QubesOS/qubes-issues/issues/4371}, 2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{|}})]{qubes_issue_7992}
+\bibitem[Project(2026)]{qubes_issue_7992}
 Qubes~OS Project.
 \newblock Qubes os issue 7992.
-\newblock \url{https://github.com/QubesOS/qubes-issues/issues/7992},
-  2026{\natexlab{|}}.
+\newblock \url{https://github.com/QubesOS/qubes-issues/issues/7992}, 2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{}}})]{qubes_qrexec}
+\bibitem[Project(2026)]{qubes_qrexec}
 Qubes~OS Project.
 \newblock Qrexec: Qubes rpc framework.
 \newblock
   \url{https://doc.qubes-os.org/en/latest/developer/services/qrexec.html},
-  2026{\natexlab{}}}.
+  2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[Project(2026{\natexlab{~}})]{qubes_qsb_index}
+\bibitem[Project(2026)]{qubes_qsb_index}
 Qubes~OS Project.
 \newblock Qubes security bulletins.
-\newblock \url{https://www.qubes-os.org/security/qsb/}, 2026{\natexlab{~}}.
+\newblock \url{https://www.qubes-os.org/security/qsb/}, 2026.
 \newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026)]{qubes_salt_administration}
+Qubes~OS Project.
+\newblock Salt administration in qubes {OS}.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/user/advanced-topics/salt.html},
+  2026.
+\newblock Accessed 2026-09-11.
 
 \bibitem[Project(2026)]{qubes_security_design_goals}
 Qubes~OS Project.
@@ -415,6 +926,12 @@ Qubes~OS Project.
   \url{https://doc.qubes-os.org/en/latest/user/templates/templates.html}, 2026.
 \newblock Accessed 2026-09-10.
 
+\bibitem[Project(2026)]{tails_7_12}
+Tails Project.
+\newblock Tails 7.12.
+\newblock \url{https://tails.net/news/version_7.12/}, 2026.
+\newblock Accessed 2026-09-11.
+
 \bibitem[Project(2026)]{tails_overview}
 Tails Project.
 \newblock About tails.
@@ -427,6 +944,15 @@ Tails Project.
 \newblock \url{https://tails.net/doc/persistent_storage/}, 2026.
 \newblock Accessed 2026-09-10.
 
+\bibitem[Project(2026)]{whonix_18_support}
+Whonix Project.
+\newblock Whonix 17 end of security support and deprecation notice: All users
+  should move to whonix 18.
+\newblock
+  \url{https://forums.whonix.org/t/whonix-17-end-of-security-support-and-deprecation-notice-all-users-should-move-to-whonix-18-as-soon-as-possible/22644},
+  2026.
+\newblock Accessed 2026-09-11.
+
 \bibitem[Project(2026)]{whonix_technical_design}
 Whonix Project.
 \newblock Whonix technical introduction.
@@ -438,6 +964,13 @@ Whonix Project.
 \newblock Whonix-workstation security.
 \newblock \url{https://www.whonix.org/wiki/Whonix-Workstation_Security}, 2026.
 \newblock Accessed 2026-09-10.
+
+\bibitem[Research(2026)]{apollo_automode}
+Apollo Research.
+\newblock Pilot auto-mode campaign: Monitoring agentic {AI} misuse.
+\newblock \url{https://apolloresearch.ai/monitoring/pilot-automode-campaign},
+  2026.
+\newblock Accessed 2026-09-11.
 
 \bibitem[Rose et~al.(2020)Rose, Borchert, Mitchell, and
   Connelly]{nist_sp800_207}
@@ -452,11 +985,25 @@ Jerome~H. Saltzer and Michael~D. Schroeder.
 \newblock \emph{Proceedings of the IEEE}, 63\penalty0 (9):\penalty0 1278--1308,
   1975.
 
-\bibitem[secureblue Project(2026)]{secureblue_features}
+\bibitem[secureblue Project(2026{\natexlab{a}})]{secureblue_features}
 secureblue Project.
 \newblock secureblue features.
-\newblock \url{https://secureblue.dev/features}, 2026.
+\newblock \url{https://secureblue.dev/features}, 2026{\natexlab{a}}.
 \newblock Accessed 2026-09-10.
+
+\bibitem[secureblue Project(2026{\natexlab{b}})]{secureblue_v430}
+secureblue Project.
+\newblock secureblue release 4.3.0.
+\newblock \url{https://github.com/secureblue/secureblue/releases/tag/v4.3.0},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[secureblue Project(2026{\natexlab{c}})]{secureblue_v491}
+secureblue Project.
+\newblock secureblue release 4.9.1.
+\newblock \url{https://github.com/secureblue/secureblue/releases/tag/v4.9.1},
+  2026{\natexlab{c}}.
+\newblock Accessed 2026-09-11.
 
 \bibitem[Security(2026)]{parrot_intended_use}
 Parrot Security.
@@ -464,11 +1011,58 @@ Parrot Security.
 \newblock \url{https://parrotsec.org/docs/introduction/what-is-parrot/}, 2026.
 \newblock Accessed 2026-09-10.
 
-\bibitem[seL4 Foundation(2026)]{sel4_verification_assumptions}
+\bibitem[seL4 Foundation(2026{\natexlab{a}})]{microkit_2_3}
+seL4 Foundation.
+\newblock Microkit 2.3.0 release notes.
+\newblock \url{https://docs.sel4.systems/releases/microkit/2.3.0},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[seL4 Foundation(2026{\natexlab{b}})]{sel4_2026_news}
+seL4 Foundation.
+\newblock sel4 news 2026.
+\newblock \url{https://www.sel4.systems/news/2026.html}, 2026{\natexlab{b}}.
+\newblock Accessed 2026-09-11.
+
+\bibitem[seL4 Foundation(2026{\natexlab{c}})]{sel4_verification_assumptions}
 seL4 Foundation.
 \newblock Assumptions of the sel4 verification.
-\newblock \url{https://sel4.systems/Verification/assumptions.html}, 2026.
+\newblock \url{https://sel4.systems/Verification/assumptions.html},
+  2026{\natexlab{c}}.
 \newblock Accessed 2026-09-10.
+
+\bibitem[Services(2026)]{firecracker_jailer_advisory}
+Amazon~Web Services.
+\newblock {CVE-2026-1386}: Arbitrary host file overwrite via symlink in
+  firecracker jailer.
+\newblock
+  \url{https://aws.amazon.com/security/security-bulletins/2026-003-AWS/}, 2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[SystemHardening(2026)]{io_uring_hardening}
+SystemHardening.
+\newblock Io-uring security and hardening: Disabling, restricting, and auditing
+  a bypass-prone syscall interface.
+\newblock
+  \url{https://www.systemshardening.com/articles/linux/io-uring-hardening/},
+  2026.
+\newblock Accessed 2026-09-11.
+
+\bibitem[Technica(2025)]{arstechnica_gtg_skepticism}
+Ars Technica.
+\newblock Researchers question anthropic claim that {AI}-assisted attack was 90
+  percent autonomous.
+\newblock
+  \url{https://arstechnica.com/security/2025/11/researchers-question-anthropic-claim-that-ai-assisted-attack-was-90-autonomous/},
+  2025.
+\newblock Accessed 2026-09-11.
+
+\bibitem[(TII)(2026)]{sbomnix}
+Technology Innovation~Institute (TII).
+\newblock sbomnix: {SBOM}, provenance, dependency graph, and vulnerability
+  tools for nix.
+\newblock \url{https://github.com/tiiuae/sbomnix}, 2026.
+\newblock Accessed 2026-09-11.
 
 \bibitem[Ubuntu(2026{\natexlab{a}})]{snap_confinement}
 Ubuntu.

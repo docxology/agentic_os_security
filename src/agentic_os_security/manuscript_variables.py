@@ -78,6 +78,9 @@ def _declared_figure_files() -> list[str]:
         "authority_ladder.png",
         "orchestration_boundaries.png",
         "forecast_horizon.png",
+        "defensive_stack.png",
+        "update_windows.png",
+        "agent_surface.png",
     ]
 
 
@@ -87,6 +90,8 @@ def _declared_data_files() -> list[str]:
         "scenario_recommendations.csv",
         "evidence_summary.json",
         "validation_report.json",
+        "defensive_stack.csv",
+        "update_windows.csv",
     ]
 
 

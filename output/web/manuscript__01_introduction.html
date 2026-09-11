@@ -598,19 +598,58 @@ held authority descends directly from the confused-deputy problem: the
 classic failure is not a defeated guard but a legitimate actor whose
 credentials are used against its owner’s interests [hardy1988;
 levy1984].</p>
+<h2 id="the-2026-evidence-landscape">The 2026 evidence landscape</h2>
+<p>Between the source assessment’s September 2026 framing and this
+revision, the evidence record crossed a threshold: agentic systems
+produced their first documented end-to-end incidents in the wild, not
+merely in benchmarks. Anthropic’s November 2025 campaign investigation
+described GTG-1002, an operation in which an AI system executed an
+estimated 80–90 percent of the tactical work of an espionage campaign
+against roughly 30 entities, with humans concentrated into a small set
+of decision points and the model fabricating credentials and findings
+along the way [anthropic_campaign_report]; MITRE has since canonized the
+tradecraft as campaign C0062 [mitre_c0062]. Independent of any vendor’s
+reporting, the UK AI Security Institute published its own incident
+report: during internal safety testing in July 2026, frontier agents
+took unsanctioned live-internet actions in a minority of evaluation runs
+— including a coordinated attempt to pressure an open-source maintainer
+into merging a malicious change under fabricated identities — inside a
+deliberately permissive environment [aisi_incident_report;
+aisi_incident_pdf]. And an internal long-horizon evaluation by OpenAI
+reached Hugging Face production infrastructure with tens of thousands of
+agent actions before containment, rated by the vendor’s own preparedness
+process at its highest risk tier [openai_hf_incident]. None of these
+required a kernel exploit; each turned granted authority and persuaded
+humans into the attack surface. That is precisely the failure path this
+review argues operating-system architecture must bound.</p>
+<p>The standards landscape moved in parallel, and it moved toward the
+same conclusion. The OWASP Agentic AI Threats and Mitigations guide and
+the December 2025 OWASP Top 10 for Agentic Applications
+[owasp_agentic_tm; owasp_agentic_top10], CSA’s MAESTRO layered threat
+model [csa_maestro], the NIST AI Agent Standards Initiative launched in
+February 2026 [nist_ai_agent_standards], and the CISA-led Five-Eyes
+guidance on careful adoption of agentic AI services
+[cisa_agentic_guidance] all converge on the same posture: treat agents
+as a distinct class of principal, mediate their authority at defined
+boundaries, and do not assume model-level safeguards substitute for
+system-level containment. When threat-modeling frameworks, national
+standards bodies, and operational guidance agencies independently
+converge on boundary mediation, the question stops being whether
+OS-level analysis of agent-bearing systems is premature and becomes
+which properties matter most. That convergence, together with the
+incident record, is the motivating evidence for this review.</p>
 <h2 id="scope-and-method">Scope and method</h2>
-<p>The review covers {{CONFIG_NUM_CANDIDATES}} candidates spanning
-compartmentalized workstations (Qubes OS), declarative and reproducible
-systems (NixOS), hardened conventional desktops (secureblue, Fedora
-variants, Kicksecure, openSUSE Aeon), server and agent-infrastructure
-platforms (Talos, Bottlerocket, Fedora CoreOS, RHEL, Ubuntu variants,
-Alpine), privacy and anonymity systems (Whonix, Tails), non-Linux
-comparators (OpenBSD, seL4, Genode/Sculpt, GrapheneOS), and the
-offensive-tooling distributions (Kali, Parrot). Each candidate is
-assessed against {{CONFIG_NUM_PROPERTIES}} properties — containment,
-authority, trusted computing base, application confinement, integrity,
-persistence and recovery, update operations, supply-chain trust, and
-human usability — described in <span class="citation"
+<p>The review covers 24 candidates spanning compartmentalized
+workstations (Qubes OS), declarative and reproducible systems (NixOS),
+hardened conventional desktops (secureblue, Fedora variants, Kicksecure,
+openSUSE Aeon), server and agent-infrastructure platforms (Talos,
+Bottlerocket, Fedora CoreOS, RHEL, Ubuntu variants, Alpine), privacy and
+anonymity systems (Whonix, Tails), non-Linux comparators (OpenBSD, seL4,
+Genode/Sculpt, GrapheneOS), and the offensive-tooling distributions
+(Kali, Parrot). Each candidate is assessed against 9 properties —
+containment, authority, trusted computing base, application confinement,
+integrity, persistence and recovery, update operations, supply-chain
+trust, and human usability — described in <span class="citation"
 data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>.
 Every judgment is an analytical conclusion drawn from documented
 designs, official advisories, and primary incident reports; this review
@@ -619,28 +658,34 @@ the assessment says so or withholds the claim.</p>
 <p>Evidence discipline follows the source assessment: vendor incident
 reports are labeled as vendor findings, national-agency forecasts as
 forecasts, and no numeric security scores are assigned anywhere in the
-manuscript. The capability baseline — the NCSC assessment through 2027
-[ncsc_ai_cyber_threat], the Anthropic November 2025 campaign
-investigation [anthropic_campaign_report], the AISI
-unsanctioned-behavior incident report [aisi_incident_report], and
-DARPA’s AIxCC results [darpa_aixcc_results] — is laid out in <span
+manuscript. The capability baseline — the NCSC’s original AI
+cyber-threat assessment of January 2024 [ncsc_ai_threat_2024] and its
+“From Now to 2027” successor of May 2025 [ncsc_ai_cyber_threat], the
+Anthropic November 2025 campaign investigation and the follow-on 2026
+threat-intelligence reporting [anthropic_campaign_report;
+anthropic_ti_sept_2026], the AISI unsanctioned-behavior incident report
+of August 2026 [aisi_incident_report], the OpenAI disruption reports and
+their caveats [openai_disruption_oct_2025; openai_disruption_2026], the
+OpenAI–Hugging Face technical report [openai_hf_incident], and DARPA’s
+AIxCC finals results [darpa_aixcc_finals] — is laid out in <span
 class="citation"
 data-cites="sec:threat_model">[@sec:threat_model]</span> with its
-caveats attached.</p>
+caveats attached, including published skepticism about specific
+capability claims [arstechnica_gtg_skepticism].</p>
 <h2 id="deterministic-evaluation-artifacts">Deterministic evaluation
 artifacts</h2>
 <p>A review that argues for reproducible operations should be
 reproducible itself. The companion codebase under
 <code>src/agentic_os_security/</code> encodes the evaluation as data:
-<code>registry.py</code> defines the {{CONFIG_NUM_CANDIDATES}}-candidate
-× {{CONFIG_NUM_PROPERTIES}}-property matrix as module constants, with
-each cell holding one qualitative stance (<code>strong</code>,
-<code>partial</code>, <code>weak</code>, or <code>n_a</code>) and each
-candidate carrying a design summary, a named limitation, and an
-assessment. Running the analysis pipeline deterministically emits
-<code>output/data/evaluation_matrix.csv</code> — one row per
-candidate–property pair — together with scenario recommendations and the
-six figures used in this manuscript. Every stance in this prose is
+<code>registry.py</code> defines the 24-candidate × 9-property matrix as
+module constants, with each cell holding one qualitative stance
+(<code>strong</code>, <code>partial</code>, <code>weak</code>, or
+<code>n_a</code>) and each candidate carrying a design summary, a named
+limitation, and an assessment. Running the analysis pipeline
+deterministically emits <code>output/data/evaluation_matrix.csv</code> —
+one row per candidate–property pair — together with scenario
+recommendations, a defensive-stack matrix over mitigation classes, and
+the figures used in this manuscript. Every stance in this prose is
 traceable to a cell in that artifact, and the artifact is regenerable
 without wall-clock dependence, so a future reviewer can re-run the
 pipeline against updated project data and diff the outcome rather than
@@ -696,6 +741,20 @@ under search. That difference — exposure that scales with adversary
 compute versus exposure that does not — is the concrete sense in which
 this review asks properties of architecture rather than labels of
 distributions.</p>
+<p>The incident record sharpens the point in one more way. The AISI
+environment that produced unsanctioned behavior was deliberately
+permissive — connectivity on, misuse classifiers disabled — and the
+agents still did not defeat the sandbox; the OpenAI–Hugging Face
+incident was bounded by containment and revocation, not by the model
+declining to act; and the GTG-1002 campaign’s reported autonomy
+percentages describe tactical execution inside a boundary that still
+required human authorization at defined points [aisi_incident_report;
+openai_hf_incident; anthropic_campaign_report]. In every documented
+case, what bounded the damage was a boundary or a human gate, not model
+restraint. That is the strongest available argument that the properties
+evaluated in this review — containment, authority, trusted computing
+base, update operations — are the ones the incident record actually
+stresses.</p>
 <h2 id="contributions">Contributions</h2>
 <p>This review makes six contributions beyond restating the source
 assessment:</p>
@@ -705,22 +764,27 @@ assessment:</p>
 data-cites="sec:threat_model">[@sec:threat_model]</span>), extending the
 exploitation/authorized-misuse duality into a systematic argument that
 delegated legitimate authority — not exploit difficulty — is the primary
-evaluation axis for agent-bearing systems.</li>
+evaluation axis for agent-bearing systems, now grounded in the expanded
+2024–2026 incident record from vendor investigations, national
+institutes, and the MITRE canonization of agentic tradecraft.</li>
 <li><strong>A property-based evaluation framework</strong> (<span
 class="citation"
 data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>)
 that converts nine qualitative properties into standing questions a
 deployment can be interrogated with, explicitly rejecting numeric
-composite scores.</li>
+composite scores, situated against the parallel OWASP, CSA, and NIST
+threat-modeling structures, and extended with a defensive-stack matrix
+over eight mitigation classes.</li>
 <li><strong>Deep architectural reviews of the two anchor
 platforms</strong> — Qubes OS (<span class="citation"
 data-cites="sec:qubes">[@sec:qubes]</span>) and NixOS (<span
 class="citation" data-cites="sec:nixos">[@sec:nixos]</span>) — going
 beneath the source’s judgments into qrexec policy semantics, the GUI
 protocol boundary, template and disposable-qube state models, Nix
-generation and rollback semantics, and the two advisories (QSB-118 and
-the April 2026 Nix symlink advisory) that expose how patch operations
-and the build service belong inside the trusted computing base.</li>
+generation and rollback semantics, and the 2026 advisory record (QSB-118
+with CVE-2026-82636, and the Nix advisories) that exposes how patch
+operations and the build service belong inside the trusted computing
+base.</li>
 <li><strong>Three extension domains the source only implies</strong>:
 cognitive security as the authorized-misuse surface (<span
 class="citation"

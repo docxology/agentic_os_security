@@ -2,127 +2,175 @@
 
 ``{#fig:orchestration_boundaries}`` -> ``output/figures/orchestration_boundaries.png``
 
-A nested-boundary diagram: the orchestrator plans and audits, the tool broker
-mediates every crossing (scoped credentials, egress, operation mediation), and
-workers execute only inside their own compartments.  Control labels are taken
-from :data:`agentic_os_security.trust_domains.CONTROLS` ids.
+Realistic deployment redesign for v0.2.0: the orchestrator delegates through
+a tool broker (MCP-shaped) to isolated workers, with the ten numbered
+mediation points from :data:`agentic_os_security.orchestration.MEDIATION_POINTS`
+keyed at the trust boundaries they police, dashed trust-boundary lines, and
+the egress proxy as a choke point on the outer edge. The pattern note comes
+from :data:`ORCHESTRATION_PATTERNS`.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
+from matplotlib.patches import Circle, FancyArrowPatch, FancyBboxPatch
 
+from ..orchestration import MEDIATION_POINTS
 from ..project_paths import figures_dir
-from ..trust_domains import CONTROLS
-from ._common import OKABE_ITO, ascii_text, new_figure, save_figure
+from ._common import OKABE_ITO, ascii_text, new_figure, save_figure, wrap_ascii
 
 __all__ = ["generate_orchestration_boundaries"]
 
-_CONTROL_LABELS: dict[str, str] = {
-    "scoped_credentials": "task-scoped credentials",
-    "egress_boundary": "boundary-controlled egress",
-    "external_approvals": "external approvals",
-    "operation_mediation": "operation mediation",
-    "independent_audit": "independent audit trail",
-    "tool_bridge_constrain": "tool-bridge constraining",
+# point_id -> (placement, x, y) in axis coords; "broker_top" places the badge
+# on the broker's upper edge at x, "worker" on a worker box, "egress" at the
+# egress crossing, "approval" on the external-approval entry point, "audit"
+# on the audit trail band, "identity" on the agent-identity crossing.
+_PLACEMENTS: dict[str, tuple[str, float, float]] = {
+    "sandbox_primitives": ("worker", 0, 0.5),
+    "egress_proxy": ("egress", 0, 0),
+    "tool_annotations": ("broker_top", 0, 0),
+    "oauth_resource_server": ("broker_top", 0, 0),
+    "url_mode_elicitation": ("broker_left", 0, 0),
+    "a2a_tls_auth": ("broker_right", 0, 0),
+    "agent_identity_exchange": ("broker_left", 0, 0),
+    "classifier_escalation": ("orchestrator", 0, 0),
+    "sandbox_observability": ("audit", 0, 0),
+    "external_approval": ("approval", 0, 0),
 }
 
 
 def generate_orchestration_boundaries(project_root: Path | str) -> Path:
-    """Render the orchestrator / tool-broker / worker isolation diagram."""
+    """Render the orchestrator / broker / worker boundary diagram."""
     root = Path(project_root)
     out = figures_dir(root) / "orchestration_boundaries.png"
 
-    control_ids = [str(control.control_id) for control in CONTROLS]
-    broker_labels = [
-        _CONTROL_LABELS.get(control_id, ascii_text(control_id.replace("_", " ")))
-        for control_id in control_ids
-        if control_id in _CONTROL_LABELS
-    ]
-
-    fig = new_figure((8.8, 6.6))
+    fig = new_figure((9.8, 7.0))
     ax = fig.add_subplot(111)
-    ax.set_xlim(0.0, 10.0)
-    ax.set_ylim(0.0, 7.0)
+    ax.set_xlim(0, 11.4)
+    ax.set_ylim(0, 8.15)
     ax.invert_yaxis()
     ax.axis("off")
 
-    def panel(x: float, y: float, w: float, h: float, edge: str, face: str, lw: float = 1.4) -> None:
+    def box(x, y, w, h, title, subtitle, edge, face, lw=1.3, dashed=False):
         ax.add_patch(
             FancyBboxPatch(
-                (x, y),
-                w,
-                h,
-                boxstyle="round,pad=0.02,rounding_size=0.18",
-                linewidth=lw,
-                edgecolor=edge,
-                facecolor=face,
+                (x, y), w, h,
+                boxstyle="round,pad=0.045,rounding_size=0.10",
+                edgecolor=edge, facecolor=face,
+                linewidth=lw, linestyle="--" if dashed else "-", zorder=2,
             )
         )
+        ax.text(x + 0.12, y + 0.16, ascii_text(title), fontsize=6.6, fontweight="bold", va="top", color=edge, zorder=3)
+        if subtitle:
+            ax.text(x + 0.12, y + 0.42, wrap_ascii(ascii_text(subtitle), width=38, max_lines=2),
+                    fontsize=5.0, va="top", color="#444444", linespacing=1.25, zorder=3)
 
-    def arrow(x0: float, y0: float, x1: float, y1: float, color: str) -> None:
+    def arrow(x0, y0, x1, y1, color, dashed=False, lw=1.1):
         ax.add_patch(
             FancyArrowPatch(
-                (x0, y0),
-                (x1, y1),
-                arrowstyle="-|>",
-                mutation_scale=13,
-                linewidth=1.3,
-                color=color,
+                (x0, y0), (x1, y1),
+                arrowstyle="-|>", mutation_scale=9,
+                color=color, linewidth=lw,
+                linestyle="--" if dashed else "-",
+                shrinkA=1, shrinkB=1, zorder=4,
             )
         )
 
+    def badge(x, y, number, color):
+        ax.add_patch(Circle((x, y), 0.17, facecolor=color, edgecolor="white", linewidth=0.7, zorder=6))
+        ax.text(x, y, str(number), fontsize=5.2, fontweight="bold", ha="center", va="center", color="white", zorder=7)
 
-    # Orchestrator boundary enclosing everything.
-    panel(0.4, 0.7, 9.2, 5.9, edge=OKABE_ITO["blue"], face="#F5F8FC", lw=1.6)
-    ax.text(0.62, 0.9, "Orchestrator (policy, approvals, audit)", fontsize=8.8, fontweight="bold", va="top", color=OKABE_ITO["blue"])
-
-
-    # Tool broker boundary enclosing the workers.
-    panel(0.9, 2.6, 8.2, 3.6, edge=OKABE_ITO["orange"], face="#FFFFFF", lw=1.8)
-    ax.text(1.05, 2.75, "Tool broker (mediation layer)", fontsize=8.4, fontweight="bold", va="top", color=OKABE_ITO["orange"])
-    ax.text(
-        9.42,
-        1.0,
-        "Broker mediation controls:\n"
-        + "\n".join(f"- {label}" for label in broker_labels),
-        fontsize=6.2,
-        ha="right",
-        va="top",
-        color="#333333",
-        linespacing=1.45,
+    points = {point.point_id: point for point in MEDIATION_POINTS}
+    numbers = {point.point_id: i + 1 for i, point in enumerate(MEDIATION_POINTS)}
+    C_AGENT, C_BROKER, C_EGRESS, C_AUDIT = (
+        OKABE_ITO["sky_blue"], OKABE_ITO["orange"], OKABE_ITO["vermillion"], OKABE_ITO["bluish_green"],
     )
-    ax.text(1.05, 3.0, "every tool call is scoped, mediated, and logged", fontsize=6.2, ha="left", va="top", color="#333333")
 
+    # --- Orchestrator zone (top). ---
+    box(0.45, 0.40, 8.1, 1.55, "Orchestrator", "plans, assigns tasks, reviews results; holds no production credentials",
+        OKABE_ITO["blue"], "#F3F7FC")
 
-    # Worker compartments (inside the broker boundary).
-    worker_boxes = ((1.6, 3.5), (4.3, 3.5), (7.0, 3.5))
-    for i, (wx, wy) in enumerate(worker_boxes):
-        panel(wx, wy, 1.4, 1.9, edge=OKABE_ITO["sky_blue"], face="#E4F2FA", lw=1.2)
-        ax.text(wx + 0.7, wy + 0.45, f"Worker {i + 1}", fontsize=7.6, fontweight="bold", ha="center", va="top")
-        ax.text(
-            wx + 0.7,
-            wy + 0.85,
-            "agent execution\ncompartment\n(no shared state)",
-            fontsize=5.8,
-            ha="center",
-            va="top",
-            color="#333333",
+    # --- Tool broker zone (middle). ---
+    box(0.45, 2.55, 8.1, 1.75, "Tool broker (MCP-shaped mediation layer)",
+        "every tool call is scoped, mediated, and logged; grants are task-scoped and revocable",
+        C_BROKER, "#FEF9F1", lw=1.7)
+
+    # --- Workers (inside broker's execution perimeter). ---
+    worker_y = 4.75
+    for i, (wx, label) in enumerate(((0.70, "worker A"), (3.65, "worker B"), (6.60, "worker C"))):
+        box(wx, worker_y, 2.6, 1.7, label, "disposable sandboxed environment", C_AGENT, "#EDF6FC", lw=1.1)
+
+    # Trust boundaries (dashed) around workers and around the broker zone.
+    for wx in (0.55, 3.50, 6.45):
+        ax.add_patch(
+            FancyBboxPatch(
+                (wx - 0.06, worker_y - 0.06), 2.72, 1.82,
+                boxstyle="round,pad=0.01,rounding_size=0.08",
+                edgecolor="#999999", facecolor="none", linestyle="--", linewidth=0.9, zorder=1,
+            )
         )
-    # Mediation arrows: orchestrator -> broker, broker -> workers, workers -> broker.
-    arrow(2.2, 2.05, 2.2, 2.55, OKABE_ITO["blue"])  # task + scoped grant down
-    ax.text(2.35, 2.3, "task + scoped grant", fontsize=6.2, ha="left", va="center", color="#333333")
-    arrow(3.2, 5.95, 3.2, 5.5, OKABE_ITO["sky_blue"])  # mediated call down to worker 1
-    arrow(6.8, 5.4, 6.8, 5.95, OKABE_ITO["sky_blue"])  # results up from worker 3
-    ax.text(3.35, 5.72, "mediated tool call", fontsize=6.2, ha="left", va="center", color="#333333")
-    ax.text(6.65, 5.72, "results", fontsize=6.2, ha="right", va="center", color="#333333")
 
-    # Egress crossing at the orchestrator edge.
-    arrow(9.0, 3.05, 9.75, 3.05, OKABE_ITO["vermillion"])
-    ax.text(9.75, 3.38, "egress only via broker", fontsize=5.9, ha="right", va="top", color=OKABE_ITO["vermillion"])
+    # --- Egress proxy choke point (outer right edge). ---
+    box(9.0, 2.55, 2.05, 1.75, "Egress proxy", "allowlist-only outbound; reachable = mediated", C_EGRESS, "#FDF0E9")
+    arrow(8.55, 3.40, 8.95, 3.40, C_EGRESS)
+    ax.text(8.72, 3.18, "only exit", fontsize=4.8, ha="center", va="top", color=C_EGRESS)
 
-    ax.set_title("Orchestration isolation boundaries: workers never bypass the broker", fontsize=10.5, pad=12)
+    # --- External approval (outside, top right). ---
+    box(9.35, 0.40, 1.95, 1.55, "Human principal", "approvals originate outside the hierarchy", OKABE_ITO["blue"], "#FFFFFF", dashed=True)
+    arrow(9.30, 1.15, 8.60, 1.15, OKABE_ITO["blue"], dashed=True)
+
+    # --- Audit trail (bottom, outside every write authority). ---
+    box(0.45, 6.95, 10.95, 0.75, "Append-only audit trail",
+        "broker decisions, credential events, approvals - beyond every agent's write authority",
+        C_AUDIT, "#F1F9F5")
+
+    # --- Flows. ---
+    arrow(2.4, 1.95, 2.4, 2.5, OKABE_ITO["blue"])  # task + scoped grant
+    ax.text(2.55, 2.24, "task + scoped grant", fontsize=5.2, ha="left", va="center", color="#333333")
+    arrow(3.4, 4.30, 2.4, 4.72, C_AGENT)  # mediated call down
+    arrow(7.9, 4.72, 7.4, 4.30, C_AGENT)  # results up
+    ax.text(3.55, 4.52, "mediated tool call", fontsize=5.2, ha="left", va="center", color="#333333")
+    ax.text(7.30, 4.52, "results", fontsize=5.2, ha="right", va="center", color="#333333")
+
+    # --- Numbered mediation badges. ---
+    badge_xy: dict[str, tuple[float, float, str]] = {
+        # id, (x, y, badge color)
+        "sandbox_primitives": (4.30, 5.55, C_AGENT),
+        "egress_proxy": (8.75, 3.62, C_EGRESS),
+        "tool_annotations": (2.72, 5.62, C_BROKER),
+        "oauth_resource_server": (4.55, 2.68, C_BROKER),
+        "url_mode_elicitation": (0.75, 3.55, C_BROKER),
+        "a2a_tls_auth": (7.95, 3.85, C_BROKER),
+        "agent_identity_exchange": (0.75, 4.20, C_BROKER),
+        "classifier_escalation": (6.20, 1.15, OKABE_ITO["blue"]),
+        "sandbox_observability": (7.20, 6.95, C_AUDIT),
+        "external_approval": (9.05, 1.15, OKABE_ITO["blue"]),
+    }
+    # draw badges with leader alignment into the legend
+    for point_id, (bx, by, color) in badge_xy.items():
+        n = numbers[point_id]
+        ax.add_patch(Circle((bx, by), 0.19, facecolor=color, edgecolor="white", linewidth=0.8, zorder=7))
+        ax.text(bx, by, str(n), fontsize=5.6, fontweight="bold", ha="center", va="center", color="white", zorder=8)
+
+    # Legend of numbered points below the diagram.
+    entries = [
+        f"{numbers[point.point_id]}  {ascii_text(point.point_id)} - {ascii_text(point.name)}"
+        for point in MEDIATION_POINTS
+    ]
+    half = (len(entries) + 1) // 2
+    leg = fig.add_axes((0.02, 0.005, 0.95, 0.125))
+    leg.axis("off")
+    leg.set_xlim(0, 2)
+    leg.set_ylim(0, half + 1.2)
+    leg.invert_yaxis()
+    leg.text(0.0, 0.1, "Mediation points (numbered as plotted; boundary detail in orchestration.MEDIATION_POINTS)",
+             fontsize=5.2, fontweight="bold", color="#444444", va="top")
+    for i, entry in enumerate(entries):
+        col = i // half
+        row = i % half
+        leg.text(col + 0.02, row + 0.95, entry, fontsize=5.2, ha="left", va="center", color="#333333")
+
+    fig.suptitle("Orchestration boundaries: workers never bypass the broker", fontsize=9.5, y=0.975)
 
     return save_figure(fig, out)

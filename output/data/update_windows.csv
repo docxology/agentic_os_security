@@ -1,0 +1,25 @@
+candidate_id,policy,months
+qubes_os,QSB advisories on a documented cadence; dom0 and template updates are user-driven; no fixed support window is stated,
+nixos,Rolling with release-based support; NixOS 26.05 support ends 2026-12-31 and successive releases overlap,
+secureblue,Tracks the Fedora Atomic rebase cadence; no independent fixed support window is stated,
+fedora_atomic,Approximately 13-month Fedora release support window requires regular rebase upgrades,13
+fedora_workstation,Approximately 13-month Fedora release support window requires regular upgrades,13
+debian_stable,Coordinated security advisory process; LTS handled separately,
+ubuntu_lts,Five years of standard security maintenance for LTS releases,60
+kicksecure,Tracks the Debian release and security-advisory cadence it builds on,
+opensuse_aeon,Rolling Tumbleweed base with transactional snapshots; no fixed support window stated,
+opensuse_microos,Rolling transactional server roles; no fixed support window stated,
+alpine_linux,Roughly two-year main-repository support versus community-repository support until the next stable release,24
+talos_linux,Supported until the second subsequent minor release; image-based upgrades track the release train,
+bottlerocket,Approximately 14-month Kubernetes-variant support window with atomic image updates,14
+fedora_coreos,Continuous Zincati-coordinated streaming updates with retained prior deployments; no fixed support window,
+rhel,"Lifecycle-based errata continuity by product, phase, severity, and entitlement rather than a fixed months window",
+ubuntu_core,15 years of maintenance for Ubuntu Core 26 with TPM-sealed full disk encryption,180
+whonix,Follows the Debian release it builds on; Whonix 17 reached end of security support in 2026 and 18 is the supported line,
+tails,7.x series tracks the Debian 13 base; releases follow the upstream base without a fixed window,
+openbsd,Current and one previous release supported; fixes delivered via errata and syspatch,12
+sel4,Kernel project; no OS-level support window defined,
+genode_sculpt,Per-release platform advancing with Genode releases; no fixed support window stated,
+grapheneos,Device- and vendor-driven support following the Pixel security update cadence; no fixed project window,
+kali_linux,Rolling release consuming the Debian security process; no fixed support window stated,
+parrot_security,Rolling release; no fixed support window stated,

@@ -582,14 +582,12 @@ properties, each phrased as a question a deployment can be interrogated
 with.</p>
 <h2 id="the-nine-properties">The nine properties</h2>
 <p><span class="citation"
-data-cites="tbl:properties">[@tbl:properties]</span> states the
-{{CONFIG_NUM_PROPERTIES}} properties used throughout the review, with
-the question each property asks and its security significance in this
-threat model.</p>
-<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The {{CONFIG_NUM_PROPERTIES}} evaluation properties: the question each property asks and its security significance in…"><table id="tbl:properties" data-responsive-table="true">
-<caption>The {{CONFIG_NUM_PROPERTIES}} evaluation properties: the
-question each property asks and its security significance in this threat
-model.</caption>
+data-cites="tbl:properties">[@tbl:properties]</span> states the 9
+properties used throughout the review, with the question each property
+asks and its security significance in this threat model.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The 9 evaluation properties: the question each property asks and its security significance in this threat model."><table id="tbl:properties" data-responsive-table="true">
+<caption>The 9 evaluation properties: the question each property asks
+and its security significance in this threat model.</caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -671,6 +669,54 @@ overlap deliberately where the underlying security properties genuinely
 interact (authority with containment, trusted computing base with update
 operations), and the overlap is visible in the analysis rather than
 averaged away.</p>
+<h2
+id="parallel-threat-modeling-structures-and-why-a-property-matrix-still-wins-for-os-work">Parallel
+threat-modeling structures, and why a property matrix still wins for OS
+work</h2>
+<p>The property matrix is not the only structured lens for agentic
+systems, and the 2025–2026 standardization wave produced alternatives
+worth naming. OWASP’s Agentic AI Threats and Mitigations guide catalogs
+threat scenarios for agent systems — memory manipulation, tool misuse,
+identity and privilege confusion — and its December 2025 Top 10 for
+Agentic Applications distills them into a ranked practitioner list
+[owasp_agentic_tm; owasp_agentic_top10]. CSA’s MAESTRO frames agentic
+risk as seven interdependent layers spanning the agent’s reasoning,
+tools, and multi-agent interconnects [csa_maestro], and its swarm
+governance work extends the framing with zero-trust patterns such as
+short-lived agent identities [csa_securing_swarm]. These structures earn
+their place: they enumerate agent-stack threats with a granularity the
+nine properties deliberately do not attempt, and the synthesis chapters
+borrow from them where agent-internal surfaces dominate (<span
+class="citation"
+data-cites="sec:cognitive_security">[@sec:cognitive_security]</span>;
+<span class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span>).</p>
+<p>For operating-system evaluation, though, the property matrix is the
+better lens. First, the alternatives are keyed to the agent stack —
+memory, tools, orchestration layers — where an OS review needs the
+boundary keyed to what a kernel or hypervisor can actually enforce:
+containment, authority, and the trust base that patches must cover. The
+2026 incident record supports the distinction: the AISI and
+OpenAI–Hugging Face incidents were bounded by sandboxes, connectivity
+policy, and revocation — OS-level mechanisms — while the persuasion of a
+human maintainer traveled through an entirely different channel
+[aisi_incident_report; openai_hf_incident]. A taxonomy that does not
+force that separation cannot rank platforms. Second, the frameworks are
+threat lists, not evaluation instruments: they say what can go wrong,
+not what a candidate’s documented design provides, whereas the nine
+properties convert to per-candidate stances that can be diffed, tested,
+and refreshed as advisories land (<span class="citation"
+data-cites="sec:qubes">[@sec:qubes]</span>; <span class="citation"
+data-cites="sec:nixos">[@sec:nixos]</span>). Third, they abstract away
+the trusted computing base — which the 2026 advisory record (QSB-118,
+the Nix advisories) shows to be decisive under automation pressure.</p>
+<p>The evidence discipline is the same one the threat model applies to
+its baseline. The NCSC’s original AI cyber-threat assessment (January
+2024) and its “From Now to 2027” successor (May 2025) supply the
+capability horizon this framework evaluates against
+[ncsc_ai_threat_2024; ncsc_ai_cyber_threat] — faster exploitation of
+known vulnerability classes, not assumed universal autonomous compromise
+— rather than any single vendor’s capability narrative.</p>
 <h2 id="the-anti-scoring-stance">The anti-scoring stance</h2>
 <p>There is no adequate evidence in this review for assigning meaningful
 universal scores, and raw vulnerability counts would not resolve the
@@ -699,16 +745,14 @@ unavailable.</p>
 constructed and refreshed</h2>
 <p>The matrix lives as data, not prose. In
 <code>src/agentic_os_security/registry.py</code>, each candidate carries
-a <code>property_stance</code> dictionary keyed by all
-{{CONFIG_NUM_PROPERTIES}} property identifiers, alongside a design
-summary, a named limitation, and an assessment. The pipeline emits the
-full {{CONFIG_NUM_CANDIDATES}}-candidate ×
-{{CONFIG_NUM_PROPERTIES}}-property table to
-<code>output/data/evaluation_matrix.csv</code> — one row per pair — and
-self-checks enforce stance-vocabulary validity and matrix completeness
-before any figure is regenerated. Stances are assigned from documented
-designs, official security documentation, project advisories, and
-primary incident reports; vendor feature lists support
+a <code>property_stance</code> dictionary keyed by all 9 property
+identifiers, alongside a design summary, a named limitation, and an
+assessment. The pipeline emits the full 24-candidate × 9-property table
+to <code>output/data/evaluation_matrix.csv</code> — one row per pair —
+and self-checks enforce stance-vocabulary validity and matrix
+completeness before any figure is regenerated. Stances are assigned from
+documented designs, official security documentation, project advisories,
+and primary incident reports; vendor feature lists support
 <code>partial</code> or <code>strong</code> stances only where the
 project itself documents the mechanism, never as measured resistance
 results.</p>
@@ -717,21 +761,82 @@ underlying documentation, an advisory, or a release note changes — for
 example, a fixed advisory can move an update-operations stance, while a
 new integration gap documented by the project can move an
 application-confinement stance. Because the matrix is deterministic data
-with the review date {{CONFIG_REVIEW_DATE}} stamped into the build, a
-future refresh produces a diffable artifact: added rows, changed
-stances, and the reasons, rather than rewritten narrative. <span
-class="citation"
+with the review date 2026-09-10 stamped into the build, a future refresh
+produces a diffable artifact: added rows, changed stances, and the
+reasons, rather than rewritten narrative. <span class="citation"
 data-cites="fig:property_matrix">[@fig:property_matrix]</span> renders
 the current matrix.</p>
 <figure id="fig:property_matrix">
-<a class="figure-full-size-link" href="../figures/property_matrix.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The candidate–property stance matrix across {{CONFIG_NUM_CANDIDATES}} candidates"><img src="../figures/property_matrix.png" style="width:100.0%"
+<a class="figure-full-size-link" href="../figures/property_matrix.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The candidate–property stance matrix across 24 candidates"><img src="../figures/property_matrix.png" style="width:100.0%"
 alt="The candidate–property stance matrix across 24 candidates and 9 properties, rendered from output/data/evaluation_matrix.csv with colorblind-safe encoding of the strong/partial/weak/n_a vocabulary." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
 <figcaption>The candidate–property stance matrix
-across {{CONFIG_NUM_CANDIDATES}} candidates and
-{{CONFIG_NUM_PROPERTIES}} properties, rendered from
+across 24 candidates and 9 properties, rendered from
 output/data/evaluation_matrix.csv with colorblind-safe encoding of the
 strong/partial/weak/n_a vocabulary.</figcaption>
 </figure>
+<h2 id="the-defensive-stack-mitigation-classes-as-a-second-lens">The
+defensive stack: mitigation classes as a second lens</h2>
+<p>The candidate–property matrix answers “how does each platform score
+on the evaluation properties?” — but an operator choosing <em>what
+combination of mechanisms</em> to deploy also needs the complementary
+question: which mitigation classes does each candidate actually ship?
+Agent-execution infrastructure now standardizes on a recognizable stack
+of kernel primitives — sandboxing namespaces, restricted user
+namespaces, seccomp filters, egress proxies — while microvisor and
+unikernel candidates push different classes (verified boot, disposable
+execution) to their limits (<span class="citation"
+data-cites="sec:servers">[@sec:servers]</span>). The defensive-stack
+matrix captures that second view as data.</p>
+<p>In <code>registry.py</code>, <code>MITIGATION_CLASSES</code> defines
+the eight mitigation classes — <code>memory_safety</code> (memory-safe
+implementation languages), <code>allocator_hardening</code> (hardened
+allocators and exploit mitigations), <code>sandboxing_primitives</code>
+(namespaces, seccomp, capability confinement),
+<code>mac_framework</code> (MAC frameworks), <code>verified_boot</code>
+(authenticated boot chains), <code>reproducible_deployment</code>
+(declarative, rebuildable state), <code>disposable_execution</code>
+(ephemeral task environments), and <code>update_automation</code>
+(prompt patch delivery). <code>DEFENSIVE_STACK</code> assigns every 24
+candidate a stance in each class, using the same
+<code>strong</code>/<code>partial</code>/<code>weak</code>/<code>n_a</code>
+vocabulary as the property matrix, grounded in the candidates’
+documented features and the 2026 research record (sandboxing stances
+reflect documented namespace and seccomp practice; verified-boot stances
+reflect measured-boot and Secure Boot implementations). The helper
+<code>defensive_stack_rows()</code> emits the full 24-candidate ×
+8-class table — 192 stance cells — and the analysis pipeline writes it
+to <code>output/data/defensive_stack.csv</code>, where the same
+self-checks that police the property matrix enforce vocabulary validity
+and completeness. <span class="citation"
+data-cites="fig:defensive_stack">[@fig:defensive_stack]</span> renders
+the matrix as a heatmap with the eight candidate categories grouped and
+a per-class coverage marginal.</p>
+<figure id="fig:defensive_stack">
+<a class="figure-full-size-link" href="../figures/defensive_stack.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The defensive-stack matrix: 24 candidates scored against eight mitigation classes"><img src="../figures/defensive_stack.png" style="width:100.0%"
+alt="Defensive stack coverage: the candidate x mitigation-class matrix (24 candidates x 8 mitigation classes = 192 cells) rendered from registry.DEFENSIVE_STACK with the same colorblind-safe strong/partial/weak/n_a encoding as the property matrix, grouped into the eight candidate categories with per-class coverage marginals." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>The defensive-stack matrix: 24 candidates
+scored against eight mitigation classes — memory safety, allocator
+hardening, sandboxing primitives, MAC framework, verified boot,
+reproducible deployment, disposable execution, and update automation —
+using the strong/partial/weak/n_a stance vocabulary, rendered from
+output/data/defensive_stack.csv with candidate categories grouped and
+per-class coverage shown as a marginal bar.</figcaption>
+</figure>
+<p>Reading the two matrices together is the point. A candidate can hold
+a <code>strong</code> containment stance (Qubes, from domain separation)
+while its memory-safety stance reflects the mixed language base of its
+tooling; a reproducibility-first candidate (NixOS) holds
+<code>strong</code> reproducible-deployment and update-automation
+stances while its sandboxing and MAC stances remain weaker (<span
+class="citation" data-cites="sec:nixos">[@sec:nixos]</span>); a
+microvisor candidate may score <code>strong</code> on verified boot and
+disposable execution while offering no MAC framework at all (<span
+class="citation" data-cites="sec:servers">[@sec:servers]</span>).
+Neither matrix substitutes for the other: the property matrix carries
+the threat-model judgments, the defensive stack names the mechanism
+inventory an operator composes from. Both are deterministic artifacts
+stamped with the review date 2026-09-10, and both refresh by diffing
+rows, not rewriting adjectives.</p>
 <h2 id="what-the-matrix-buys">What the matrix buys</h2>
 <p>Three things. First, <strong>comparability without false
 precision</strong>: two candidates can be contrasted property by
@@ -742,10 +847,9 @@ confinement weakly) rather than by how much in aggregate. Second,
 <strong>auditability</strong>: each stance is a claim about
 documentation that a reader can check against the cited source, and the
 structural invariants are test-enforced — every candidate covers every
-property, every stance is in the vocabulary, and the matrix has
-{{CONFIG_NUM_CANDIDATES}} × {{CONFIG_NUM_PROPERTIES}} cells exactly.
-Third, <strong>scenario grounding</strong>: the per-scenario
-recommendations in <span class="citation"
+property, every stance is in the vocabulary, and the matrix has 24 × 9
+cells exactly. Third, <strong>scenario grounding</strong>: the
+per-scenario recommendations in <span class="citation"
 data-cites="sec:scenarios">[@sec:scenarios]</span> select candidates by
 which properties the scenario’s threat model weights most, which is
 precisely what a label-based ranking cannot do.</p>
@@ -758,7 +862,10 @@ four limits should be kept in view.</p>
 analytical judgment from documented designs [saltzer1975]; none is a
 penetration-test result. The vocabulary encodes confidence in a
 documented capability, not a measured resistance rate against a live
-adversary.</li>
+adversary. The defensive-stack stances inherit the same limit in sharper
+form: a <code>strong</code> sandboxing stance says the project documents
+and ships the mechanism, not that the mechanism holds against a named
+attacker.</li>
 <li><strong>Properties interact.</strong> A strong containment stance
 can be nullified by a weak update-operations stance if the containment
 mechanism itself ships unpatched; a strong integrity stance does not
@@ -771,14 +878,13 @@ review could not verify a current default or security property, the cell
 says so; a future audit may legitimately move stances in either
 direction, and the diffability of the matrix is designed for exactly
 that.</li>
-<li><strong>The matrix is frozen in time at
-{{CONFIG_REVIEW_DATE}}.</strong> Projects ship; advisories land;
-trajectories noted per candidate (for instance, the GUI-domain split in
-<span class="citation" data-cites="sec:qubes">[@sec:qubes]</span> and
-boot-integrity work in <span class="citation"
-data-cites="sec:nixos">[@sec:nixos]</span>) may convert into stronger
-stances at the next refresh. Low-confidence forecasting of those
-movements is handled in <span class="citation"
+<li><strong>The matrix is frozen in time at 2026-09-10.</strong>
+Projects ship; advisories land; trajectories noted per candidate (for
+instance, the GUI-domain split in <span class="citation"
+data-cites="sec:qubes">[@sec:qubes]</span> and boot-integrity work in
+<span class="citation" data-cites="sec:nixos">[@sec:nixos]</span>) may
+convert into stronger stances at the next refresh. Low-confidence
+forecasting of those movements is handled in <span class="citation"
 data-cites="sec:forecast">[@sec:forecast]</span> rather than smuggled
 into current stances.</li>
 </ul>

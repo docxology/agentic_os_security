@@ -77,6 +77,9 @@ FIGURE_LABELS = {
     "fig:authority_ladder",
     "fig:orchestration_boundaries",
     "fig:forecast_horizon",
+    "fig:defensive_stack",
+    "fig:update_windows",
+    "fig:agent_surface",
 }
 
 TABLE_LABELS = {

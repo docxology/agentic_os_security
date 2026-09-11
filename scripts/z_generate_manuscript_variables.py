@@ -28,7 +28,19 @@ from agentic_os_security.manuscript_variables import (  # noqa: E402
 
 
 def _template_repo_root(start: Path) -> Path | None:
-    """Walk up from *start* looking for the template repo (infrastructure/ + pyproject.toml)."""
+    """Resolve the template repo root from env or by walking up from *start*.
+
+    The render pipeline's hydration runner passes ``TEMPLATE_REPO_ROOT`` so a
+    sidecar project (living outside the template repository) still injects a
+    resolved manuscript tree when run under the project's own venv.
+    """
+    import os
+
+    env_root = os.environ.get("TEMPLATE_REPO_ROOT")
+    if env_root:
+        candidate = Path(env_root)
+        if (candidate / "infrastructure").is_dir() and (candidate / "pyproject.toml").is_file():
+            return candidate
     for candidate in (start, *start.parents):
         if (candidate / "infrastructure").is_dir() and (candidate / "pyproject.toml").is_file():
             return candidate
@@ -68,6 +80,8 @@ def main() -> int:
 
     template_root = _template_repo_root(project_root)
     if template_root is not None:
+        if str(template_root) not in sys.path:
+            sys.path.insert(0, str(template_root))
         try:
             from infrastructure.rendering.manuscript_injection import write_resolved_manuscript_tree
         except ImportError:

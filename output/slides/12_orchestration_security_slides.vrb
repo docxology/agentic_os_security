@@ -1,0 +1,4 @@
+\frametitle{Mapping to the trust-domain architecture}
+them. Orchestration does not replace this architecture; it is the layer
+where the architecture's rules are either enforced by construction or
+quietly dissolved by convenience.

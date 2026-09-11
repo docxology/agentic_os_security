@@ -1,4 +1,4 @@
-"""Figure orchestration: each of the six generators writes its registered
+"""Figure orchestration: each of the nine generators writes its registered
 PNG (exists, >10KB), and two consecutive full generation runs are
 byte-identical given the same inputs (determinism contract).
 """
@@ -11,30 +11,39 @@ import pytest
 
 from agentic_os_security import project_paths
 from agentic_os_security.figures import (
+    generate_agent_surface,
     generate_authority_ladder,
+    generate_defensive_stack,
     generate_evidence_timeline,
     generate_forecast_horizon,
     generate_orchestration_boundaries,
     generate_property_matrix,
     generate_trust_domains,
+    generate_update_windows,
 )
 
 FIGURE_REGISTRY = {
     "evidence_timeline": "evidence_timeline.png",
     "property_matrix": "property_matrix.png",
+    "defensive_stack": "defensive_stack.png",
     "trust_domains": "trust_domains.png",
     "authority_ladder": "authority_ladder.png",
     "orchestration_boundaries": "orchestration_boundaries.png",
+    "agent_surface": "agent_surface.png",
     "forecast_horizon": "forecast_horizon.png",
+    "update_windows": "update_windows.png",
 }
 
 GENERATORS = {
     "evidence_timeline": generate_evidence_timeline,
     "property_matrix": generate_property_matrix,
+    "defensive_stack": generate_defensive_stack,
     "trust_domains": generate_trust_domains,
     "authority_ladder": generate_authority_ladder,
     "orchestration_boundaries": generate_orchestration_boundaries,
+    "agent_surface": generate_agent_surface,
     "forecast_horizon": generate_forecast_horizon,
+    "update_windows": generate_update_windows,
 }
 
 
@@ -47,7 +56,7 @@ def test_generator_produces_registered_png(tmp_project, name):
     assert expected.stat().st_size > 10_000, f"{expected.name} suspiciously small"
 
 
-def test_all_six_figures_present_after_full_generation(tmp_project):
+def test_all_nine_figures_present_after_full_generation(tmp_project):
     for name, generator in GENERATORS.items():
         generator(tmp_project)
     figures_dir = project_paths.figures_dir(tmp_project)

@@ -19,6 +19,9 @@ figure_types:
   - authority_ladder
   - orchestration_boundary
   - forecast_horizon
+  - defensive_stack_heatmap
+  - update_windows_timeline
+  - agent_surface_matrix
 citation_policy: official_or_scholarly
 source_policy: "Prefer primary vendor security documentation, official advisories and bulletins, government assessment reports, and canonical scholarly references. Assessments are analytical judgments from documented designs, not penetration-test results."
 review_gates:
@@ -36,6 +39,9 @@ artifact_expectations:
   - output/figures/authority_ladder.png
   - output/figures/orchestration_boundaries.png
   - output/figures/forecast_horizon.png
+  - output/figures/defensive_stack.png
+  - output/figures/update_windows.png
+  - output/figures/agent_surface.png
 benchmark_rubric:
   name: agentic-security-review-readiness
   dimensions:

@@ -1,5 +1,5 @@
-"""Analysis pipeline integration: run_analysis writes the four data
-artifacts plus all six figures, with row-count/tier-sum/verdict contracts,
+"""Analysis pipeline integration: run_analysis writes the six data
+artifacts plus all nine figures, with row-count/tier-sum/verdict contracts,
 and reruns are idempotent in validation verdicts.
 """
 
@@ -12,6 +12,18 @@ from agentic_os_security import project_paths
 from agentic_os_security.analysis.pipeline import run_analysis
 
 TIER_VOCAB = {"official", "advisory", "incident_report", "research", "community"}
+
+EXPECTED_FIGURES = {
+    "evidence_timeline.png",
+    "property_matrix.png",
+    "defensive_stack.png",
+    "trust_domains.png",
+    "authority_ladder.png",
+    "orchestration_boundaries.png",
+    "agent_surface.png",
+    "forecast_horizon.png",
+    "update_windows.png",
+}
 
 
 def _find_int_mapping_with_sum(obj, total):
@@ -41,31 +53,57 @@ def test_run_analysis_writes_data_artifacts_and_figures(tmp_project):
 
     assert (data_dir / "evaluation_matrix.csv").exists()
     assert (data_dir / "scenario_recommendations.csv").exists()
+    assert (data_dir / "defensive_stack.csv").exists()
+    assert (data_dir / "update_windows.csv").exists()
     assert (data_dir / "evidence_summary.json").exists()
     assert (data_dir / "validation_report.json").exists()
+    assert (project_paths.figures_dir(tmp_project) / "figure_registry.json").exists()
 
-    expected_figures = {
-        "evidence_timeline.png",
-        "property_matrix.png",
-        "trust_domains.png",
-        "authority_ladder.png",
-        "orchestration_boundaries.png",
-        "forecast_horizon.png",
-    }
-    assert {p.name for p in figures_dir.glob("*.png")} == expected_figures
+    produced = {p.name for p in figures_dir.glob("*.png")}
+    assert produced == EXPECTED_FIGURES
+    assert summary["figures_generated"] == 9
+    assert summary["figure_registry_entries"] == 9
+
+    registry = json.loads(
+        (project_paths.figures_dir(tmp_project) / "figure_registry.json").read_text(encoding="utf-8")
+    )
+    assert len(registry) == 9
+    assert all("section" in entry and "filename" in entry for entry in registry.values())
 
 
 def test_evaluation_matrix_has_216_data_rows_plus_header(tmp_project):
     run_analysis(tmp_project)
-    matrix_path = project_paths.data_dir(tmp_project) / "evaluation_matrix.csv"
-    with matrix_path.open(newline="", encoding="utf-8") as handle:
-        reader = csv.reader(handle)
-        header = next(reader)
-        rows = list(reader)
-    assert header == ["candidate_id", "candidate_name", "property_id", "stance"]
-    assert len(rows) == 216
-    assert len({(row[0], row[2]) for row in rows}) == 216
-    assert all(row[3] in {"strong", "partial", "weak", "n_a"} for row in rows)
+    path = project_paths.data_dir(tmp_project) / "evaluation_matrix.csv"
+    with path.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.reader(handle))
+    assert len(rows) == 217
+    assert rows[0] == ["candidate_id", "candidate_name", "property_id", "stance"]
+    assert all(row[3] in {"strong", "partial", "weak", "n_a"} for row in rows[1:])
+
+
+def test_defensive_stack_has_192_data_rows_plus_header(tmp_project):
+    run_analysis(tmp_project)
+    path = project_paths.data_dir(tmp_project) / "defensive_stack.csv"
+    with path.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.reader(handle))
+    assert len(rows) == 193
+    assert rows[0] == ["candidate_id", "candidate_name", "class_id", "stance"]
+    assert all(row[3] in {"strong", "partial", "weak", "n_a"} for row in rows[1:])
+    assert len({(row[0], row[2]) for row in rows[1:]}) == 192
+
+
+def test_update_windows_has_24_data_rows_plus_header(tmp_project):
+    run_analysis(tmp_project)
+    path = project_paths.data_dir(tmp_project) / "update_windows.csv"
+    with path.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.reader(handle))
+    assert len(rows) == 25
+    assert rows[0] == ["candidate_id", "policy", "months"]
+    assert len({row[0] for row in rows[1:]}) == 24
+    # months is blank (no fixed window) or a positive integer
+    for row in rows[1:]:
+        if row[2]:
+            assert int(row[2]) > 0
 
 
 def test_scenario_recommendations_has_eight_rows(tmp_project):
@@ -73,21 +111,21 @@ def test_scenario_recommendations_has_eight_rows(tmp_project):
     path = project_paths.data_dir(tmp_project) / "scenario_recommendations.csv"
     with path.open(newline="", encoding="utf-8") as handle:
         rows = list(csv.reader(handle))
-    assert len(rows) == 9  # header + 8 scenarios
+    assert len(rows) == 9
     assert len({row[0] for row in rows[1:]}) == 8
 
 
-def test_evidence_summary_tier_counts_sum_to_65(tmp_project):
+def test_evidence_summary_tier_counts_sum_to_150(tmp_project):
     run_analysis(tmp_project)
     summary = json.loads(
         (project_paths.data_dir(tmp_project) / "evidence_summary.json").read_text(
             encoding="utf-8"
         )
     )
-    tier_counts = summary.get("tier_counts") or _find_int_mapping_with_sum(summary, 65)
-    assert tier_counts is not None, "no tier-count mapping summing to 65"
+    tier_counts = summary.get("tier_counts") or _find_int_mapping_with_sum(summary, 150)
+    assert tier_counts is not None, "no tier-count mapping summing to 150"
     assert set(tier_counts) == TIER_VOCAB
-    assert sum(tier_counts.values()) == 65
+    assert sum(tier_counts.values()) == 150
     assert "capability_baseline" in summary or any(
         "baseline" in key for key in summary
     )

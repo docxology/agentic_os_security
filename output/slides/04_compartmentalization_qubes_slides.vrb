@@ -1,0 +1,11 @@
+\frametitle{Assessment}
+friction, or the dominant adversary is physical or firmware-level rather
+than content-driven; the anti-evil-maid and Secure Boot paths have
+specific hardware requirements that must be verified per machine, though
+the TrenchBoot UEFI port broadens the eligible set (Project 2026a,
+2026k; {3mdeb} 2025). None of this is a claim that Qubes resists a
+measured attacker with a known probability --- it is an architectural
+judgment from documented design (Project 2026i), and under the threat
+model of sec.~3 its defining bet is the right one:
+separate the domains, mediate the crossings, and keep the privileged
+core small enough to patch before automation finds the seam.

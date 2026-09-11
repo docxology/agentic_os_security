@@ -584,10 +584,13 @@ already been granted [aisi_incident_report]. This section treats OpSec
 as the reviewable extension of the trust-domain architecture of <span
 class="citation"
 data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>: the
-{{CONFIG_NUM_TRUST_DOMAINS}} domains and {{CONFIG_NUM_CONTROLS}}
-controls define what the system separates; operator discipline
-determines whether those separations survive contact with daily
-work.</p>
+7 domains and 9 controls define what the system separates; operator
+discipline determines whether those separations survive contact with
+daily work. Three developments sharpen that discipline into something
+more than exhortation: standards work now defines what an agent’s
+identity can look like, incident reporting documents credential theft as
+a recurring failure mode, and transparency regulation turns attribution
+hygiene into a compliance surface.</p>
 <h2 id="identity-compartmentalization-across-agent-contexts">Identity
 compartmentalization across agent contexts</h2>
 <p>The trust-domain design separates <code>personal_identity</code> from
@@ -616,6 +619,40 @@ user-approved crossings of the very boundary the identity plan maintains
 authenticated session into the agent’s domain has attacked the workflow,
 not escaped the hypervisor, and no operating-system choice reverses
 that.</p>
+<h2
+id="agent-identity-workload-identity-token-exchange-and-downscoped-tokens">Agent
+identity: workload identity, token exchange, and downscoped tokens</h2>
+<p>The identity practices above are currently operator discipline
+because no ratified standard yet defines how an autonomous agent
+authenticates as itself. Standards work is converging on an answer. An
+IETF draft for AI-agent authentication composes three existing
+mechanisms: workload identity from the SPIFFE and WIMSE families, so an
+agent holds a cryptographically attestable workload identity rather than
+a borrowed user account; OAuth 2.0 token exchange (RFC 8693), so a task
+receives its own credential by exchanging an attestable identity against
+policy; and transaction tokens, so each credential binds a specific
+subject, audience, and set of requested authorities for a limited time
+[ietf_agent_identity]. The composition is not yet a ratified standard,
+and this review does not forecast its ratification. Its shape, however,
+is already the shape the trust-domain design asks for: an agent identity
+that is distinct from the operator’s, minted per task, bound to a
+specific audience, narrowed to the authorities the task requires, and
+short-lived.</p>
+<p>Short-lived downscoped tokens are the operational core of that shape,
+and they can be built today without waiting for the draft: a
+token-issuing service exchanges a workload attestation for a credential
+whose scope is the task’s tool grants and whose expiry is the task’s
+lifetime. This is the scoped-credentials control of <span
+class="citation" data-cites="tbl:controls">[@tbl:controls]</span>
+implemented at the identity layer, and it composes with the
+orchestration-layer capability handoffs of <span class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span>: the token an
+executor presents to a tool broker is exactly the narrow, unforgeable
+reference the delegation analysis there demands. Until such machinery is
+standard, the fallback remains the four practices above — and the design
+intent is worth recording now, because operators who structure agent
+work around distinct, downscoped, task-lifetime identities will need no
+re-architecture when the standards land.</p>
 <h2 id="data-loss-path-analysis">Data-loss path analysis</h2>
 <p>Every egress-capable destination is a disclosure decision, and the
 set is larger than it looks. Model providers receive the task context
@@ -641,6 +678,16 @@ inference changes the transport but not the structure of the decision:
 the model service, the agent execution domain, and credential mediation
 should remain separated with explicit authentication between them,
 because shared compute is not a reason to share trust.</p>
+<p>Official guidance now frames the same decision from the adoption
+side. The CISA-led Five Eyes guidance on careful adoption of agentic AI
+services recommends sandboxed deployment, threat-model-based evaluation,
+red-teaming, and — most directly relevant to the egress decision —
+limiting early agent deployments to low-risk tasks until the surrounding
+controls are demonstrated [cisa_agentic_guidance]. Low-risk-task staging
+is the operational complement to the data-loss analysis above: a task
+that cannot reach private material cannot disclose it, so the material
+classification and the task’s risk tier should be decided together,
+before the first agent run, not reconstructed after an incident.</p>
 <h2 id="tool-bridge-grants-as-the-opsec-surface">Tool-bridge grants as
 the OpSec surface</h2>
 <p>Tool bridges — the filesystem, browser, repository, CI, cloud, and
@@ -686,6 +733,23 @@ different requirement from concealing that the activity occurs, which is
 the distinct province of the anonymity-focused systems reviewed in <span
 class="citation"
 data-cites="sec:comparators">[@sec:comparators]</span>.</p>
+<p>Attribution hygiene is also becoming a regulated surface. The
+European Union’s AI Act transparency obligations, applicable from 2
+August 2026, require that people interacting with AI systems be informed
+of the AI nature of the interaction and — where autonomous agents act on
+someone’s behalf — of the natural person or legal entity on whose behalf
+the agent acts; the European Commission’s guidelines name AI-agent
+disclosure duties explicitly [eu_ai_act_transparency]. An operator
+deploying agents into EU-reachable workflows therefore needs the
+attribution layer to answer two questions by design: that an AI system
+is acting, and whose authority it acts under. This coincides with,
+rather than conflicts with, the hygiene above: the accurate provenance
+record that incident response needs is the same record that disclosure
+compliance requires, and both are served by making agent identity
+explicit at the identity layer rather than reconstructing it from logs.
+Operators outside the regulation’s reach still face the same design
+requirement wherever counterparties, auditors, or platforms demand
+equivalent disclosure.</p>
 <h2 id="credential-hygiene-short-lived-service-scoped">Credential
 hygiene: short-lived, service-scoped</h2>
 <p>The credential plan follows the scoped-credentials control: prefer
@@ -705,6 +769,29 @@ configuration can reach external caches, so the documented practice is
 to read secrets at runtime under access control [nix_store_secrets].
 Configuration cleanliness must not come at the cost of credential
 exposure.</p>
+<h2 id="credential-theft-as-the-observed-failure-mode">Credential theft
+as the observed failure mode</h2>
+<p>The credential-theft pattern is no longer hypothetical. Anthropic’s
+September 2026 threat-intelligence report — the vendor’s account of
+activity observed on its own platform — documents threat actors
+obtaining legitimate API keys by theft and credential abuse, then
+driving coding and agent tooling under the stolen identity; the report’s
+designated threat-activity identifiers GTG-50020 and GTG-50021 describe
+key-harvesting operations against agent platforms, and the report
+assesses that “vibe hacking” — attackers using coding agents directly in
+extortion and intrusion work — persists as the top observed AI-enabled
+threat [anthropic_ti_sept_2026]. The pattern matters to operator OpSec
+because it is the authorized-misuse path executed with the operator’s
+own authority: an attacker holding a valid agent-platform API key needs
+no exploit at all, only the standing grants that key carries. Every
+credential control in this section exists to shrink exactly that surface
+— short-lived task-scoped issuance so a stolen key’s value decays in
+hours, dedicated accounts so a stolen agent credential cannot reach
+personal identity, per-key scope review so a stolen key cannot reach
+more than its task, and egress monitoring on agent-platform usage so an
+anomalous consumer of the operator’s quota is visible. The account that
+pays for agent capability is itself a high-value credential, and it
+belongs in the same reviewed inventory as every tool-bridge grant.</p>
 <h2 id="the-intake-discipline">The intake discipline</h2>
 <p>Treat returned code, documents, and build artifacts as untrusted
 until checked. A diff produced by an agent is untrusted input into the
@@ -743,7 +830,11 @@ injection under specified conditions, fixed in
 under such advisories is an operator OpSec property, not only a vendor
 property. Recovery that has never been rehearsed (<span class="citation"
 data-cites="tbl:controls">[@tbl:controls]</span>, rehearsed recovery) is
-a plan-shaped hope.</p>
+a plan-shaped hope. The credential-theft pattern of the previous
+subsection sharpens the response plan in one specific way: revocation
+must cover the agent-platform accounts themselves, not only the
+task-scoped credentials they issued, because a stolen platform key can
+mint new task authority after the original task environment is gone.</p>
 <h2 id="zero-trust-applied-to-agent-tool-calls">Zero trust applied to
 agent tool calls</h2>
 <p>Zero-trust architecture removes implicit trust derived from network
@@ -764,7 +855,11 @@ data-cites="sec:orchestration">[@sec:orchestration]</span> and the
 configuration separation of <span class="citation"
 data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>:
 place the decision point outside the agent, and make the decision
-context rich enough to audit after the fact.</p>
+context rich enough to audit after the fact. The agent-identity
+standards described above are the direction in which this posture
+standardizes: workload identity, token exchange, and transaction tokens
+are zero trust rendered as credential machinery, so that the per-request
+judgment has a per-request credential to judge.</p>
 </main>
 </body>
 </html>

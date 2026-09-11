@@ -85,7 +85,7 @@ def test_config_tokens_match_canonical_constants(tmp_project):
     variables = manuscript_variables.generate_variables(
         tmp_project, require_analysis_outputs=False
     )
-    assert variables["CONFIG_VERSION"] == "0.1.0"
+    assert variables["CONFIG_VERSION"] == "0.2.0"
     assert variables["CONFIG_REVIEW_DATE"] == "2026-09-10"
     assert variables["CONFIG_FORECAST_HORIZON"] == "2028–2031"
     assert variables["CONFIG_NUM_CANDIDATES"] == "24"
@@ -94,7 +94,7 @@ def test_config_tokens_match_canonical_constants(tmp_project):
     assert variables["CONFIG_NUM_TRUST_DOMAINS"] == "7"
     assert variables["CONFIG_NUM_CONTROLS"] == "9"
     assert variables["CONFIG_NUM_INVARIANTS"] == "9"
-    assert variables["CONFIG_NUM_SOURCES"] == "65"
+    assert variables["CONFIG_NUM_SOURCES"] == "150"
     for keyword in EXPECTED_KEYWORDS:
         assert keyword in variables["CONFIG_KEYWORDS"], keyword
 
@@ -105,7 +105,7 @@ def test_result_tokens_derived_from_registry_and_forecasts(tmp_project):
     )
     assert variables["RESULT_MATRIX_CELLS"] == "216"
     assert variables["RESULT_MATRIX_COVERAGE_PCT"] == "100.0"
-    assert variables["RESULT_NUM_FIGURES"] == "6"
+    assert variables["RESULT_NUM_FIGURES"] == "9"
 
     stance_counts = registry.stance_counts()
     assert variables["RESULT_STANCE_STRONG_COUNT"] == str(stance_counts["strong"])

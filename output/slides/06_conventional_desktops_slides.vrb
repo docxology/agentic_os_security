@@ -1,0 +1,11 @@
+\frametitle{The desktop-versus-agent authority lesson}
+the authority architecture of sec.~10 governing
+what crosses that boundary. The property vocabulary of
+sec.~4 makes the distinction exact:
+\breaktt{application\_confinement} constrains applications;
+\texttt{authority} constrains what a component may already do without
+exploiting anything. A desktop can be strong on the first and still
+grant an agent catastrophic authority under the second. Scenario-level
+guidance for choosing among these candidates, including the conditions
+that would change the secureblue-first ordering, appears in
+sec.~16.
