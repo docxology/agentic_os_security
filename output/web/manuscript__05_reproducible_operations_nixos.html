@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>05_reproducible_operations_nixos.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+
+<style>
+:root {
+  --brand-1: #5b6ee0;
+  --web-bg: #f8f8f8;
+  --web-surface: #ffffff;
+  --web-text: #2c3e50;
+  --web-border: #bdc3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-1: #7e8ce8;
+    --web-bg: #0f1420;
+    --web-surface: #161c2b;
+    --web-text: #e6eaf2;
+    --web-border: #2a3447;
+  }
+}
+.theorem-box {
+  border-left: 4px solid var(--brand-1);
+  background: var(--web-surface);
+  padding: 0.6em 1em;
+  margin: 1.1em 0;
+  border-radius: 0 4px 4px 0;
+}
+.theorem-box.definition { border-left-style: dashed; }
+.theorem-box > p:first-child { margin-top: 0; }
+.theorem-box > p:last-child { margin-bottom: 0; }
+.figure-long-description {
+  border: 1px solid var(--web-border);
+  border-radius: 4px;
+  margin-block: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.figure-long-description > summary { cursor: pointer; font-weight: 700; }
+.figure-long-description > p { max-width: 80ch; overflow-wrap: anywhere; }
+.figure-exact-values { max-width: 80ch; overflow-wrap: anywhere; }
+code { overflow-wrap: anywhere; word-break: break-word; }
+pre {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre code { overflow-wrap: inherit; white-space: inherit; word-break: inherit; }
+div.sourceCode { max-width: 100%; overflow: visible; }
+pre.sourceCode { background: #2c3e50; color: #ecf0f1; }
+pre.sourceCode code,
+pre.sourceCode code span { color: inherit; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+mjx-container[display="true"] { max-width: 100%; overflow: visible; }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--brand-1);
+  outline-offset: 3px;
+}
+.table-scroll > table { margin-block: 0; min-width: 100%; width: max-content; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Liberation Serif', 'Times New Roman', serif;
+  line-height: 1.6;
+  width: min(100%, 800px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #1a1a1a;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main,
+nav,
+section,
+article,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  transform: translateY(-120%);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.skip-link:visited {
+  color: #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  figure img {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+code {
+  background-color: #ecf0f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  overflow-wrap: inherit;
+  white-space: inherit;
+  word-break: inherit;
+}
+
+div.sourceCode {
+  max-width: 100%;
+  overflow: visible;
+}
+
+pre.sourceCode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+pre.sourceCode code,
+pre.sourceCode code span {
+  color: inherit;
+}
+
+pre > code.sourceCode {
+  white-space: pre-wrap;
+}
+
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.table-scroll > table {
+  margin-block: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+figure {
+  max-width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1f6f8b;
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #b91c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: #8f1d1d;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.toc {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.toc a,
+#TOC a {
+  color: #b91c1c;
+  display: inline-block;
+  min-height: 28px;
+  line-height: 1.5;
+  padding-block: 2px;
+}
+
+.toc li,
+#TOC li {
+  margin-block: 1px;
+}
+
+.math {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
+.figure {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* A reading column keeps prose comfortable, but dense scientific figures need
+   a larger inspection surface.  The rendered image remains responsive and the
+   explicit link opens its source-resolution asset without changing the PDF. */
+.figure-full-size-link {
+  color: inherit;
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.figure-full-size-link img {
+  cursor: zoom-in;
+  margin-bottom: 0.45rem;
+}
+
+.figure-full-size-label {
+  color: #1f6f8b;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.figure-full-size-link:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 4px;
+}
+
+@media (min-width: 1000px) {
+  /* Wide figure links stay within the viewport but extend beyond the prose
+     column. Do not clip their labels at the narrower body boundary. */
+  body {
+    overflow-x: visible;
+  }
+
+  .figure-full-size-link {
+    left: 50%;
+    max-width: none;
+    position: relative;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100vw - 3rem));
+  }
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.figure-long-description,
+.figure-exact-values {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:nixos">Reproducible Operations: NixOS in Depth</h1>
+<h2 id="the-model-declarative-configuration-generations-rollback">The
+model: declarative configuration, generations, rollback</h2>
+<p>NixOS expresses an entire system — packages, services, users, kernel
+settings — as a declarative configuration evaluated by the Nix package
+manager, and activates changes as numbered <em>generations</em>
+[nixos_wiki]. Activation builds a new system closure, atomically
+switches to it, and leaves prior generations bootable, so
+<code>nixos-rebuild</code> can roll the system configuration back to an
+earlier point [nixos_rebuild_wiki]. Nix builds run in isolated
+filesystem and process namespaces, making controlled build inputs a
+starting point for reproducible construction, though the reproducibility
+project documents remaining sources of nondeterminism
+[nix_sandbox_config; nixos_reproducibility].</p>
+<p>In this review’s threat model, NixOS’s value is not confinement. It
+is the ability to make intended system state explicit, auditable, and
+replaceable — to construct, update, audit, and replace tightly scoped
+environments that are separately isolated. A deployment whose
+configuration is a reviewed, versioned artifact can answer “what exactly
+is running here?” in a way an imperatively mutated machine cannot, which
+is the foundation the authority architecture in <span class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>
+builds on when an agent proposes configuration changes.</p>
+<h2 id="rollback-is-not-recovery">Rollback is not recovery</h2>
+<p>Generation rollback switches <em>system configuration</em>
+generations; it does not restore mutable state [nixos_rebuild_wiki]. The
+community discussion of rolling back data as well as configuration
+documents the mismatch that arises when a service’s database has
+migrated but its software is rolled back
+[nixos_rollback_data_discussion]. Three consequences follow for the
+persistence-and-recovery property.</p>
+<p>First, <strong>rollback is not a malware-remediation plan</strong>. A
+compromised agent’s files in <code>/home</code>, stolen credentials,
+exfiltrated data, and accepted remote changes survive a generation
+switch; the state a rebuild can restore is the state Nix owns. Second,
+<strong>older retained generations are potentially vulnerable software,
+not trusted recovery images</strong>: they are pinned to the package
+versions of their era, including any advisories published since. Third,
+<strong>data recovery is a separate discipline</strong> — independent
+backups and rehearsed restoration (<span class="citation"
+data-cites="sec:opsec">[@sec:opsec]</span>) — that declarative
+configuration does not substitute for. The review’s recovery scenario in
+<span class="citation"
+data-cites="sec:scenarios">[@sec:scenarios]</span> therefore requires
+distinguishing deletion of an environment from revocation of any
+credentials it could have reached.</p>
+<h2
+id="reproducible-deployment-versus-verified-reproducible-builds">Reproducible
+deployment versus verified reproducible builds</h2>
+<p>The most misused word in this space is “reproducible,” and NixOS is
+where the confusion does real security harm. Two distinct claims must be
+kept apart [nixos_reproducibility]:</p>
+<ul>
+<li><strong>Reproducible deployment</strong>: a system can be recreated
+from its declarative configuration — the same expression yields a
+coherent, working system. NixOS provides this well [nixos_wiki].</li>
+<li><strong>Verified reproducible builds</strong>: every package has
+been independently rebuilt and compared bit-for-bit against the binary
+actually deployed, proving the artifact corresponds to its claimed
+inputs.</li>
+</ul>
+<p>The first does not imply the second. The Nix sandbox’s dependency
+specification and filesystem/process isolation alone do not guarantee
+reproducible outputs [nix_sandbox_config; nixos_reproducibility], and
+the reproducibility project exists precisely because the gap is being
+closed package by package, not closed by declaration. Neither form of
+reproducibility, finally, establishes that the source, configuration, or
+upstream dependency is <em>safe</em> — reproducibility answers “is this
+the artifact that source produces?”, not “should anyone run this?”. This
+mirrors the review’s broader separations: authenticity from provenance,
+rollback from recovery, and containment from authority (<span
+class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>).</p>
+<h2 id="six-misconceptions-that-matter-against-offensive-agents">Six
+misconceptions that matter against offensive agents</h2>
+<p>Because Nix’s vocabulary sounds stronger than its documented
+guarantees, the source assessment’s misconception list is worth keeping
+as a standing table. <span class="citation"
+data-cites="tbl:nixos_misconceptions">[@tbl:nixos_misconceptions]</span>
+states each with the documented fact and its consequence.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Six NixOS misconceptions, the documented facts that correct them, and the consequences against offensive agents."><table id="tbl:nixos_misconceptions" data-responsive-table="true">
+<caption>Six NixOS misconceptions, the documented facts that correct
+them, and the consequences against offensive agents.</caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Misconception</th>
+<th>Documented fact</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“The Nix sandbox confines everything I run.”</td>
+<td>The documented sandbox concerns builds, including specified
+exceptions such as network access for fixed-output derivations
+[nix_sandbox_config].</td>
+<td>The sandbox is a build-time mechanism, not a runtime security
+boundary around an AI agent or programs installed through Nix.</td>
+</tr>
+<tr>
+<td>“A signed cache artifact is proven to match reviewed source.”</td>
+<td>Cache signatures distinguish trusting a signer from proving an
+output was produced by the expected derivation
+[nix_cache_signatures].</td>
+<td>Authenticity is valuable, but a trusted supplier can still
+distribute a bad artifact; signatures do not establish provenance.</td>
+</tr>
+<tr>
+<td>“Putting secrets into declarative configuration is harmless.”</td>
+<td>The Nix manual warns the store is readable by all users and secrets
+can reach external caches; it recommends runtime reading with suitable
+access controls [nix_store_secrets].</td>
+<td>Configuration cleanliness must not become credential exposure; an
+agent with store access can read declaratively embedded secrets.</td>
+</tr>
+<tr>
+<td>“NixOS already has a fully integrated mandatory-access-control
+baseline.”</td>
+<td>The wiki documents incomplete SELinux integration and, as of April
+2026, incomplete AppArmor integration [nixos_security_wiki].</td>
+<td>Confinement is possible but not presumed; do not assume a
+comprehensive default policy exists.</td>
+</tr>
+<tr>
+<td>“Secure Boot is a settled, integrated default.”</td>
+<td>The wiki characterizes Lanzaboote as in development; its repository
+says work remains before upstream integration, and key management is
+outside the project’s full scope [nixos_lanzaboote_wiki;
+lanzaboote_repo].</td>
+<td>A carefully configured installation and a stock default are
+different claims; boot-integrity stance is <code>partial</code> pending
+deployment work.</td>
+</tr>
+<tr>
+<td>“The hardened profile is a safe universal upgrade.”</td>
+<td>A maintainer discussion argues the profile lacks a coherent baseline
+and warns specific restrictions can undermine browser sandboxing without
+compensating setup [nixos_hardened_profile_deprecation].</td>
+<td>Hardening menus are not defaults; unchecked combination can
+<em>reduce</em> security — the defaults-over-menus forecast in <span
+class="citation" data-cites="sec:forecast">[@sec:forecast]</span>.</td>
+</tr>
+</tbody>
+</table></div>
+<p>For agent-bearing deployments the first and third rows bind hardest:
+an autonomous agent executing on a NixOS host is <em>not</em> sandboxed
+by Nix, and any secret that reached declarative configuration is
+readable by whatever that agent’s processes can read.</p>
+<h2 id="the-package-manager-is-part-of-the-trusted-computing-base">The
+package manager is part of the trusted computing base</h2>
+<p>On April 7, 2026, Nix published a security advisory describing a
+symlink-following flaw during fixed-output derivation registration that
+could allow users permitted to submit builds to gain root in multi-user
+installations, including with sandboxed Linux builds enabled; the
+advisory lists fixes across version branches, including 2.34.5 and
+2.33.4 [nix_ghsa_g3g9]. The finding is not evidence that Nix is uniquely
+unsafe, nor that the flaw remains unpatched. It is evidence for a
+structural claim: <strong>the build service is part of the trusted
+computing base</strong>. A component with root authority over the
+machine, whose input includes build submissions, is a privileged parser
+of attacker-influenced content — the same shape as the QSB-118 dom0
+injection in <span class="citation"
+data-cites="sec:qubes">[@sec:qubes]</span>, and the same lesson: prompt
+patching of the management layer is not optional hygiene but the
+update-operations property of <span class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>
+doing real security work.</p>
+<p>The deployment consequence follows directly from the threat model in
+<span class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span>: an agent
+allowed to submit attacker-controlled builds should not share a trust
+domain with the owner’s most valuable credentials merely because the
+builds use Nix. In the trust-domain architecture of <span
+class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>,
+build submission belongs with agent execution (disposable, scoped), not
+with administration or the credential service — and a multi-user Nix
+installation hosting untrusted build submitters inherits a
+root-equivalent trust requirement that its operators must patch and
+monitor [nix_ghsa_g3g9]. The Nixpkgs security tracker
+[nixos_security_tracker] coordinates vulnerability matching and
+mitigation, which supports the update-operations stance but does not by
+itself deliver patch latency.</p>
+<h2 id="update-operations-the-support-clock-discipline">Update
+operations: the support-clock discipline</h2>
+<p>NixOS 26.05’s announcement specifies seven months of bug fixes and
+security updates, ending December 31, 2026 [nixos_2605_announcement]. A
+stable configuration revision is a point-in-time choice, not a
+permanently safe one: after support ends, an unchanged deployment
+accumulates unpatched vulnerabilities while its configuration remains
+byte-identical. The update-operations property therefore binds
+declarative systems as hard as any other: establish an explicit
+channel-update and rebuild cadence, treat held-back generations as aging
+software, and fold the tracker into the operator’s patch process
+[nixos_security_tracker; nixos_2605_announcement]. This is where Nix’s
+strengths compound — because the system state is declarative, an update
+is a <em>reviewable configuration change</em> rather than an opaque
+mutation, and a failed rebuild leaves the prior generation bootable
+[nixos_rebuild_wiki].</p>
+<h2 id="composition-with-qubes">Composition with Qubes</h2>
+<p>Nix and Qubes are not competing answers: one principally organizes
+runtime trust domains, the other organizes how software environments are
+constructed. The natural composition uses Nix to construct the contents
+of compartmentalized qubes — declarative, reviewable, replaceable
+environments inside a containment architecture. The Qubes NixOS-template
+issue documents community work toward exactly this [qubes_issue_7992],
+but the integration is not a product: Qubes warns that community
+templates do not receive updates from the Qubes project itself
+[qubes_templates], so a hand-built Qubes-plus-NixOS stack inherits a
+maintenance obligation for template security updates, boot support, and
+desktop integration that its owner must explicitly own
+[nixos_security_wiki; lanzaboote_repo]. Combining two attractive designs
+does not automatically improve practical security; the composition must
+be operated, patched, and reviewed as its own deployment.</p>
+<h2 id="assessment">Assessment</h2>
+<p>NixOS is especially attractive for a capable operator building
+auditable, replaceable development or server environments. On the
+candidate–property matrix its update-operations and supply-chain-trust
+stances are <code>strong</code> — declarative state, channel discipline,
+and the security tracker are documented and coherent — while its
+application-confinement stance is <code>weak</code> pending integrated
+MAC and boot-integrity baselines [nixos_security_wiki;
+nixos_lanzaboote_wiki]. It is not the default recommendation over Qubes
+for containing a hostile desktop workload, and it is not sufficient by
+itself to make a powerful autonomous coding agent safe: the sandbox that
+defines its build discipline is build-time, its secrets model demands
+deliberate handling, and its build service is root-authority code that
+must be treated as trusted base [nix_sandbox_config; nix_store_secrets;
+nix_ghsa_g3g9]. The strongest arrangement — and the one this review’s
+architecture chapters target — uses Nix’s declarative construction
+<em>inside</em> a separately enforced, least-privilege execution
+architecture, where generation discipline supplies replaceability and
+the containment layer supplies what Nix deliberately does not.</p>
+</main>
+</body>
+</html>

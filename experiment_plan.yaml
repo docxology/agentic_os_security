@@ -1,0 +1,45 @@
+# Declared review conditions for the agentic-security evaluation.
+# These overlays are validation inputs only; they do not execute autonomous agents.
+conditions:
+  - name: compartmentalization_centered
+    role: reference
+    description: "Workstation threat model centered on separating risky daily computing from sensitive identities and administration (Qubes-like)."
+  - name: reproducible_operations
+    role: proposed
+    description: "Declarative, rebuildable environment construction paired with separately enforced confinement (Nix-like)."
+  - name: conventional_hardened
+    role: variant
+    description: "Recognizable conventional desktop with documented hardening baseline (secureblue/Fedora class)."
+  - name: disposable_agent_execution
+    role: variant
+    description: "Autonomous agents run in disposable task VMs with externally mediated credentials and controlled egress."
+metrics:
+  primary:
+    name: matrix_coverage
+    direction: maximize
+    description: "Share of candidate-by-property cells with an explicit stance (strong/partial/weak/n_a), never a numeric security score."
+protocol: "Evaluate every candidate against all nine properties using documented designs and advisories only; record n_a where evidence is absent; refresh stances when vendor documentation changes."
+expected_figures:
+  - fig:evidence_timeline
+  - fig:property_matrix
+  - fig:trust_domains
+  - fig:authority_ladder
+  - fig:orchestration_boundaries
+  - fig:forecast_horizon
+expected_tables:
+  - tbl:properties
+  - tbl:offensive_evidence
+  - tbl:qubes_limits
+  - tbl:nixos_misconceptions
+  - tbl:desktops
+  - tbl:servers
+  - tbl:comparators
+  - tbl:trust_domains
+  - tbl:controls
+  - tbl:invariants
+  - tbl:scenarios
+  - tbl:confidence
+baselines:
+  - compartmentalization_centered
+ablations:
+  - disposable_agent_execution

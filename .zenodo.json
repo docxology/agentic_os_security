@@ -1,0 +1,27 @@
+{
+  "creators": [
+    {
+      "affiliation": "Active Inference Institute",
+      "name": "Friedman, Daniel Ari",
+      "orcid": "0000-0001-6232-9096"
+    }
+  ],
+  "description": "Deep review and prospectus on agentic security and operating systems in the emerging present and future of OpSec, Cognitive Security, and Agentic Cyber Security (2026).",
+  "keywords": [
+    "agentic security",
+    "operating systems",
+    "compartmentalization",
+    "Qubes OS",
+    "NixOS",
+    "threat modeling",
+    "cognitive security",
+    "operational security",
+    "agent orchestration",
+    "offensive AI"
+  ],
+  "license": "MIT",
+  "title": "Agentic Security and Operating Systems",
+  "upload_type": "publication",
+  "publication_type": "report",
+  "version": "0.1.0"
+}

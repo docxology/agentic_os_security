@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>11_opsec_for_agent_operators.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+
+<style>
+:root {
+  --brand-1: #5b6ee0;
+  --web-bg: #f8f8f8;
+  --web-surface: #ffffff;
+  --web-text: #2c3e50;
+  --web-border: #bdc3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-1: #7e8ce8;
+    --web-bg: #0f1420;
+    --web-surface: #161c2b;
+    --web-text: #e6eaf2;
+    --web-border: #2a3447;
+  }
+}
+.theorem-box {
+  border-left: 4px solid var(--brand-1);
+  background: var(--web-surface);
+  padding: 0.6em 1em;
+  margin: 1.1em 0;
+  border-radius: 0 4px 4px 0;
+}
+.theorem-box.definition { border-left-style: dashed; }
+.theorem-box > p:first-child { margin-top: 0; }
+.theorem-box > p:last-child { margin-bottom: 0; }
+.figure-long-description {
+  border: 1px solid var(--web-border);
+  border-radius: 4px;
+  margin-block: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.figure-long-description > summary { cursor: pointer; font-weight: 700; }
+.figure-long-description > p { max-width: 80ch; overflow-wrap: anywhere; }
+.figure-exact-values { max-width: 80ch; overflow-wrap: anywhere; }
+code { overflow-wrap: anywhere; word-break: break-word; }
+pre {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre code { overflow-wrap: inherit; white-space: inherit; word-break: inherit; }
+div.sourceCode { max-width: 100%; overflow: visible; }
+pre.sourceCode { background: #2c3e50; color: #ecf0f1; }
+pre.sourceCode code,
+pre.sourceCode code span { color: inherit; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+mjx-container[display="true"] { max-width: 100%; overflow: visible; }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--brand-1);
+  outline-offset: 3px;
+}
+.table-scroll > table { margin-block: 0; min-width: 100%; width: max-content; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Liberation Serif', 'Times New Roman', serif;
+  line-height: 1.6;
+  width: min(100%, 800px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #1a1a1a;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main,
+nav,
+section,
+article,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  transform: translateY(-120%);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.skip-link:visited {
+  color: #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  figure img {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+code {
+  background-color: #ecf0f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  overflow-wrap: inherit;
+  white-space: inherit;
+  word-break: inherit;
+}
+
+div.sourceCode {
+  max-width: 100%;
+  overflow: visible;
+}
+
+pre.sourceCode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+pre.sourceCode code,
+pre.sourceCode code span {
+  color: inherit;
+}
+
+pre > code.sourceCode {
+  white-space: pre-wrap;
+}
+
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.table-scroll > table {
+  margin-block: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+figure {
+  max-width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1f6f8b;
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #b91c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: #8f1d1d;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.toc {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.toc a,
+#TOC a {
+  color: #b91c1c;
+  display: inline-block;
+  min-height: 28px;
+  line-height: 1.5;
+  padding-block: 2px;
+}
+
+.toc li,
+#TOC li {
+  margin-block: 1px;
+}
+
+.math {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
+.figure {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* A reading column keeps prose comfortable, but dense scientific figures need
+   a larger inspection surface.  The rendered image remains responsive and the
+   explicit link opens its source-resolution asset without changing the PDF. */
+.figure-full-size-link {
+  color: inherit;
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.figure-full-size-link img {
+  cursor: zoom-in;
+  margin-bottom: 0.45rem;
+}
+
+.figure-full-size-label {
+  color: #1f6f8b;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.figure-full-size-link:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 4px;
+}
+
+@media (min-width: 1000px) {
+  /* Wide figure links stay within the viewport but extend beyond the prose
+     column. Do not clip their labels at the narrower body boundary. */
+  body {
+    overflow-x: visible;
+  }
+
+  .figure-full-size-link {
+    left: 50%;
+    max-width: none;
+    position: relative;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100vw - 3rem));
+  }
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.figure-long-description,
+.figure-exact-values {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:opsec">Operator OpSec for Agent Work</h1>
+<p>Operating-system compartmentalization constrains what a compromised
+component can reach. Operator operational security constrains what a
+correctly functioning agent is allowed to do. The threat model of <span
+class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span> separates
+exploitation from authorized misuse, and the two defenses divide along
+that line: isolation architectures raise the cost of the exploitation
+path, while OpSec is the operator-side discipline for the
+authorized-misuse path, where no kernel exploit is necessary because the
+agent already holds a valid credential, an enabled integration, and a
+standing authorization. The AISI incident report makes the distinction
+concrete in its own incident report: agents took out-of-scope internet
+actions in 10 of 122 test runs without escaping the sandbox, because
+internet access was intentionally available and the authority to act had
+already been granted [aisi_incident_report]. This section treats OpSec
+as the reviewable extension of the trust-domain architecture of <span
+class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>: the
+{{CONFIG_NUM_TRUST_DOMAINS}} domains and {{CONFIG_NUM_CONTROLS}}
+controls define what the system separates; operator discipline
+determines whether those separations survive contact with daily
+work.</p>
+<h2 id="identity-compartmentalization-across-agent-contexts">Identity
+compartmentalization across agent contexts</h2>
+<p>The trust-domain design separates <code>personal_identity</code> from
+<code>agent_execution</code> (<span class="citation"
+data-cites="tbl:trust_domains">[@tbl:trust_domains]</span>). That
+separation exists at the operating-system layer only if it also exists
+at the identity layer. An operator who signs in to an agent-driven
+workflow with a personal single-sign-on identity has fused the two
+domains regardless of how well the machine is compartmentalized: the
+agent’s ambient session then speaks for the person, and every boundary
+inside the machine becomes an implementation detail the credential route
+ignores.</p>
+<p>Four practices keep the domains distinct. First, dedicated accounts
+for agent-mediated services, enrolled in their own multi-factor factors,
+so that agent work never borrows the operator’s personal identity.
+Second, no ambient production session inside an agent execution
+environment: cached browser sessions, cloud CLI tokens, and ssh-agent
+keys stay in the domains that own them. Third, identity lifetime aligned
+with task lifetime: an account minted for a task expires with the task,
+which caps the value of any exfiltrated session material. Fourth,
+deliberate handling of the human-authorized transfer paths that
+compartmentalized systems deliberately provide — clipboard export,
+cross-domain copy, shared browser profiles — because these are
+user-approved crossings of the very boundary the identity plan maintains
+[qubes_gui_protocol]. An attacker who persuades the operator to move an
+authenticated session into the agent’s domain has attacked the workflow,
+not escaped the hypervisor, and no operating-system choice reverses
+that.</p>
+<h2 id="data-loss-path-analysis">Data-loss path analysis</h2>
+<p>Every egress-capable destination is a disclosure decision, and the
+set is larger than it looks. Model providers receive the task context
+itself: prompts, attached documents, repository contents, error
+messages. Repository forges receive pushed branches and issue text. CI
+systems receive logs that often embed environment variables and secrets.
+Error-reporting and telemetry channels receive exception payloads.
+Messaging integrations receive whatever an agent decides to summarize. A
+hostname allowlist is not a complete data-loss policy, because a
+permitted destination that itself accepts uploads or messages is a data
+destination in its own right (<span class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>).</p>
+<p>The sharpest instance is the model provider itself. The decision to
+transmit private code or documents to a hosted model is a separate
+trust-boundary decision that no operating-system choice can resolve:
+once transmitted, retention policy, staff access, training use, and the
+provider’s own breach exposure are outside the workstation’s authority
+entirely. This is a decision to classify material before it enters a
+task environment, not after; after an agent has read private material,
+assume it can leave by any egress the task’s tools permit. Contractual
+terms about data handling are policy commitments, not containment. Local
+inference changes the transport but not the structure of the decision:
+the model service, the agent execution domain, and credential mediation
+should remain separated with explicit authentication between them,
+because shared compute is not a reason to share trust.</p>
+<h2 id="tool-bridge-grants-as-the-opsec-surface">Tool-bridge grants as
+the OpSec surface</h2>
+<p>Tool bridges — the filesystem, browser, repository, CI, cloud, and
+messaging integrations through which agents act — are the OpSec surface
+proper. Each bridge is a standing grant of authority: a filesystem root
+the agent may read or write, a browser profile it may drive, a
+repository it may push to, a CI pipeline it may trigger, a cloud API
+scope it may exercise, a messaging channel it may post to. These grants
+must be reviewed as grants, not as features. An isolated process with a
+powerful API token is still a powerful actor: disposability of the
+environment does not dispose of the grant, and an agent inside a
+disposable qube holding an owner-scoped cloud credential carries the
+owner’s cloud authority until that credential expires or is revoked
+[qubes_disposables].</p>
+<p>Complete mediation [saltzer1975] is the governing principle: every
+privileged operation crosses a checked channel, and the tool broker of
+<span class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span> is the
+natural enforcement point. Operator discipline makes the grants
+enumerable, task-scoped, revocable, and logged. The review question for
+each bridge is the authority question of <span class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>
+asked one layer up: what can this integration read, transmit, sign, or
+change, and does any single task actually need all of that?</p>
+<h2 id="attribution-and-footprint-hygiene">Attribution and footprint
+hygiene</h2>
+<p>Agent traffic is identifiable. Model API endpoints, client user
+agents, commit metadata, issue formatting, and activity timing all
+distinguish agent-driven work from ordinary operator work. Footprint
+hygiene means deciding deliberately what agent activity discloses,
+rather than letting defaults decide. Use separate accounts or tenants
+for agent-driven commits, issues, and messages, so that a compromised or
+mistaken agent cannot speak with the operator’s personal voice or reach
+the audiences tied to the personal identity. Keep provenance accurate
+rather than laundered: an agent-generated change should be recorded as
+agent-generated, because obscuring agent authorship destroys exactly the
+record that incident response and the audit obligations of <span
+class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span> depend on.
+This hygiene is credential protection, not anonymity: the goal is that
+agent activity cannot be replayed as the operator’s identity — a
+different requirement from concealing that the activity occurs, which is
+the distinct province of the anonymity-focused systems reviewed in <span
+class="citation"
+data-cites="sec:comparators">[@sec:comparators]</span>.</p>
+<h2 id="credential-hygiene-short-lived-service-scoped">Credential
+hygiene: short-lived, service-scoped</h2>
+<p>The credential plan follows the scoped-credentials control: prefer
+short-lived, repository- or service-specific credentials issued per task
+and expiring with it, and never hand an agent the owner’s general cloud
+identity merely because a task sometimes needs a deployment (<span
+class="citation" data-cites="tbl:controls">[@tbl:controls]</span>). The
+practical compromise is ambient session tokens. Cached cloud CLI
+credentials, browser session cookies, and long-lived personal access
+tokens already exist in the environment, are easy to forget, and are
+precisely what an agent picks up when it inspects its surroundings. The
+defense is structural rather than exhortative: keep ambient tokens out
+of the <code>agent_execution</code> domain instead of trying to teach
+the agent restraint. Declarative environments add their own trap on this
+point: the Nix store is readable by all users, and secrets embedded in
+configuration can reach external caches, so the documented practice is
+to read secrets at runtime under access control [nix_store_secrets].
+Configuration cleanliness must not come at the cost of credential
+exposure.</p>
+<h2 id="the-intake-discipline">The intake discipline</h2>
+<p>Treat returned code, documents, and build artifacts as untrusted
+until checked. A diff produced by an agent is untrusted input into the
+trusted codebase; a document it produced is untrusted input into the
+document pipeline; a binary it built is untrusted until its construction
+is accounted for. No automatic promotion of an agent’s home directory,
+working tree, or container image into a trusted environment (<span
+class="citation" data-cites="tbl:controls">[@tbl:controls]</span>,
+minimal shared state). The vendor evidence cuts both ways here: DARPA’s
+AIxCC results demonstrate that machine-generated patches for real
+vulnerabilities are achievable [darpa_aixcc_results], while the
+Anthropic campaign investigation — the investigating vendor’s report —
+found agents overstating findings and fabricating unusable credentials
+[anthropic_campaign_report]. Generation quality and acceptance authority
+remain separate questions; the review that admits generated material is
+the same independent review that <span class="citation"
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>
+requires for generated policy.</p>
+<h2 id="rehearsed-incident-response-for-agent-era-compromise">Rehearsed
+incident response for agent-era compromise</h2>
+<p>Authorized misuse leaves no exploit artifacts: no crash, no dropped
+binary, no anomalous fault trace. The response therefore cannot depend
+on detecting the compromise before acting, and the working assumption
+must be that everything the task could touch was exfiltrated or altered.
+The rehearsed sequence is: revoke every credential the task environment
+could reach — a superset of those it demonstrably used; destroy and
+rebuild the environment from known-good configuration; treat data
+already transmitted as disclosed; restore from independent backups.
+Distinguish deleting an environment from revoking the credentials it
+could access: deletion without revocation leaves live authority in
+unknown hands. Environment refresh between tasks and prompt patching of
+management and transfer paths belong to the same discipline — QSB-118
+documented a route from an already-compromised qube to dom0 command
+injection under specified conditions, fixed in
+<code>qubes-core-dom0-linux</code> 4.3.22 [qsb_118], and recovery speed
+under such advisories is an operator OpSec property, not only a vendor
+property. Recovery that has never been rehearsed (<span class="citation"
+data-cites="tbl:controls">[@tbl:controls]</span>, rehearsed recovery) is
+a plan-shaped hope.</p>
+<h2 id="zero-trust-applied-to-agent-tool-calls">Zero trust applied to
+agent tool calls</h2>
+<p>Zero-trust architecture removes implicit trust derived from network
+location or prior approval: every access request is evaluated per
+request against policy, and the policy decision point is separate from
+the resource it guards [nist_sp800_207]. Agent tool calls have exactly
+this shape. A task’s prior approval is not a standing authorization; a
+request’s origin inside a trusted agent is not evidence of legitimacy;
+each call is judged on the operation requested, the artifact named, the
+destination addressed, the scope claimed, and the expiry asserted.
+Operation mediation is zero trust stated operationally (<span
+class="citation" data-cites="tbl:controls">[@tbl:controls]</span>): a
+service that permits “sign this exact artifact for this release” is
+checkable per request, while “use the signing key responsibly” is not
+checkable at all. Zero trust for agent work therefore lands on the same
+design point as the orchestration boundaries of <span class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span> and the
+configuration separation of <span class="citation"
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>:
+place the decision point outside the agent, and make the decision
+context rich enough to audit after the fact.</p>
+</main>
+</body>
+</html>

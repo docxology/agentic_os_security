@@ -1,0 +1,64 @@
+{
+  "all_green": true,
+  "checks": [
+    {
+      "check": "matrix_completeness",
+      "detail": "216 rows (expected 216 = 24 x 9)",
+      "status": "green"
+    },
+    {
+      "check": "matrix_uniqueness",
+      "detail": "216 unique (candidate, property) pairs",
+      "status": "green"
+    },
+    {
+      "check": "stance_vocabulary",
+      "detail": "all stances in strong|partial|weak|n_a",
+      "status": "green"
+    },
+    {
+      "check": "forecast_counts",
+      "detail": "14 forecasts: {'high': 5, 'moderate': 4, 'low': 5}",
+      "status": "green"
+    },
+    {
+      "check": "source_url_uniqueness",
+      "detail": "65 unique URLs across 65 sources",
+      "status": "green"
+    },
+    {
+      "check": "scenario_count",
+      "detail": "8 scenarios",
+      "status": "green"
+    },
+    {
+      "check": "trust_domain_count",
+      "detail": "7 trust domains",
+      "status": "green"
+    },
+    {
+      "check": "control_count",
+      "detail": "9 controls",
+      "status": "green"
+    },
+    {
+      "check": "invariant_count",
+      "detail": "9 invariants",
+      "status": "green"
+    },
+    {
+      "check": "authority_ladder",
+      "detail": "propose -> stage -> authorize -> exercise -> audit -> revoke",
+      "status": "green"
+    }
+  ],
+  "evaluation_matrix": "evaluation_matrix.csv",
+  "generated_at": "2026-09-10T12:00:00+00:00",
+  "matrix_cells": 216,
+  "stance_counts": {
+    "n_a": 6,
+    "partial": 122,
+    "strong": 30,
+    "weak": 58
+  }
+}

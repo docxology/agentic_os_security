@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>03_evaluation_framework.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+
+<style>
+:root {
+  --brand-1: #5b6ee0;
+  --web-bg: #f8f8f8;
+  --web-surface: #ffffff;
+  --web-text: #2c3e50;
+  --web-border: #bdc3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-1: #7e8ce8;
+    --web-bg: #0f1420;
+    --web-surface: #161c2b;
+    --web-text: #e6eaf2;
+    --web-border: #2a3447;
+  }
+}
+.theorem-box {
+  border-left: 4px solid var(--brand-1);
+  background: var(--web-surface);
+  padding: 0.6em 1em;
+  margin: 1.1em 0;
+  border-radius: 0 4px 4px 0;
+}
+.theorem-box.definition { border-left-style: dashed; }
+.theorem-box > p:first-child { margin-top: 0; }
+.theorem-box > p:last-child { margin-bottom: 0; }
+.figure-long-description {
+  border: 1px solid var(--web-border);
+  border-radius: 4px;
+  margin-block: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.figure-long-description > summary { cursor: pointer; font-weight: 700; }
+.figure-long-description > p { max-width: 80ch; overflow-wrap: anywhere; }
+.figure-exact-values { max-width: 80ch; overflow-wrap: anywhere; }
+code { overflow-wrap: anywhere; word-break: break-word; }
+pre {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre code { overflow-wrap: inherit; white-space: inherit; word-break: inherit; }
+div.sourceCode { max-width: 100%; overflow: visible; }
+pre.sourceCode { background: #2c3e50; color: #ecf0f1; }
+pre.sourceCode code,
+pre.sourceCode code span { color: inherit; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+mjx-container[display="true"] { max-width: 100%; overflow: visible; }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--brand-1);
+  outline-offset: 3px;
+}
+.table-scroll > table { margin-block: 0; min-width: 100%; width: max-content; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Liberation Serif', 'Times New Roman', serif;
+  line-height: 1.6;
+  width: min(100%, 800px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #1a1a1a;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main,
+nav,
+section,
+article,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  transform: translateY(-120%);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.skip-link:visited {
+  color: #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  figure img {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+code {
+  background-color: #ecf0f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  overflow-wrap: inherit;
+  white-space: inherit;
+  word-break: inherit;
+}
+
+div.sourceCode {
+  max-width: 100%;
+  overflow: visible;
+}
+
+pre.sourceCode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+pre.sourceCode code,
+pre.sourceCode code span {
+  color: inherit;
+}
+
+pre > code.sourceCode {
+  white-space: pre-wrap;
+}
+
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.table-scroll > table {
+  margin-block: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+figure {
+  max-width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1f6f8b;
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #b91c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: #8f1d1d;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.toc {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.toc a,
+#TOC a {
+  color: #b91c1c;
+  display: inline-block;
+  min-height: 28px;
+  line-height: 1.5;
+  padding-block: 2px;
+}
+
+.toc li,
+#TOC li {
+  margin-block: 1px;
+}
+
+.math {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
+.figure {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* A reading column keeps prose comfortable, but dense scientific figures need
+   a larger inspection surface.  The rendered image remains responsive and the
+   explicit link opens its source-resolution asset without changing the PDF. */
+.figure-full-size-link {
+  color: inherit;
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.figure-full-size-link img {
+  cursor: zoom-in;
+  margin-bottom: 0.45rem;
+}
+
+.figure-full-size-label {
+  color: #1f6f8b;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.figure-full-size-link:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 4px;
+}
+
+@media (min-width: 1000px) {
+  /* Wide figure links stay within the viewport but extend beyond the prose
+     column. Do not clip their labels at the narrower body boundary. */
+  body {
+    overflow-x: visible;
+  }
+
+  .figure-full-size-link {
+    left: 50%;
+    max-width: none;
+    position: relative;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100vw - 3rem));
+  }
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.figure-long-description,
+.figure-exact-values {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:evaluation_framework">Evaluation Framework: Properties over
+Labels</h1>
+<h2 id="why-not-a-distribution-label">Why not a distribution label</h2>
+<p>“Secure Linux” is not a property of a distribution; it is an outcome
+of a deployment matching a threat model. Distribution labels hide
+exactly the heterogeneity that matters: one candidate may pair a strong
+containment architecture with a weak update-operations story, another
+may have excellent supply-chain discipline and no runtime confinement at
+all. A single label collapses those differences into a ranking question
+that no available evidence answers — and ranking invites the numeric
+composite scores (“Qubes 9.4” style) that this review refuses, for
+reasons given below. The alternative, inherited from the source
+assessment, is to evaluate every candidate against a fixed set of
+properties, each phrased as a question a deployment can be interrogated
+with.</p>
+<h2 id="the-nine-properties">The nine properties</h2>
+<p><span class="citation"
+data-cites="tbl:properties">[@tbl:properties]</span> states the
+{{CONFIG_NUM_PROPERTIES}} properties used throughout the review, with
+the question each property asks and its security significance in this
+threat model.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The {{CONFIG_NUM_PROPERTIES}} evaluation properties: the question each property asks and its security significance in…"><table id="tbl:properties" data-responsive-table="true">
+<caption>The {{CONFIG_NUM_PROPERTIES}} evaluation properties: the
+question each property asks and its security significance in this threat
+model.</caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Property</th>
+<th>Question to ask</th>
+<th>Security significance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Containment</td>
+<td>What remains protected after the browser or agent is fully
+controlled?</td>
+<td>A prevention failure should not automatically become whole-machine
+compromise.</td>
+</tr>
+<tr>
+<td>Authority</td>
+<td>What can the process already read, transmit, sign, or change?</td>
+<td>Excessive legitimate permissions can bypass the need for an exploit;
+this is the authorized-misuse axis from <span class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span>.</td>
+</tr>
+<tr>
+<td>Trusted computing base</td>
+<td>Which privileged components must all remain correct?</td>
+<td>A small, carefully constrained boundary is preferable to many
+privileged integrations; it is also what patch operations must cover
+[saltzer1975].</td>
+</tr>
+<tr>
+<td>Application confinement</td>
+<td>Are permissions restrictive by default and actually compatible with
+the applications?</td>
+<td>A theoretical policy is not protection if users routinely disable
+it.</td>
+</tr>
+<tr>
+<td>Integrity</td>
+<td>What verifies the boot chain and deployed software, and who holds
+the keys?</td>
+<td>Authenticity, runtime integrity, and resistance to rollback are
+distinct properties, not one checkbox.</td>
+</tr>
+<tr>
+<td>Persistence and recovery</td>
+<td>Which state survives replacement or reboot?</td>
+<td>Rebuilding the system is insufficient if malicious user state or
+stolen credentials survive.</td>
+</tr>
+<tr>
+<td>Update operations</td>
+<td>How quickly do fixes reach every active environment?</td>
+<td>A strong architecture with neglected templates or pinned
+dependencies can lose its advantage — the QSB-118 lesson in <span
+class="citation" data-cites="sec:qubes">[@sec:qubes]</span>.</td>
+</tr>
+<tr>
+<td>Supply-chain trust</td>
+<td>Who may introduce or approve new executable code?</td>
+<td>Reproducibility and signatures answer different questions from
+whether code is benign [nixos_reproducibility].</td>
+</tr>
+<tr>
+<td>Human usability</td>
+<td>Will the owner preserve the intended boundaries during real
+work?</td>
+<td>Sustainable security is more valuable than a configuration abandoned
+under pressure.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The properties are evaluation criteria, not a scoring model. They
+overlap deliberately where the underlying security properties genuinely
+interact (authority with containment, trusted computing base with update
+operations), and the overlap is visible in the analysis rather than
+averaged away.</p>
+<h2 id="the-anti-scoring-stance">The anti-scoring stance</h2>
+<p>There is no adequate evidence in this review for assigning meaningful
+universal scores, and raw vulnerability counts would not resolve the
+comparison either: they conflate disclosure volume with exposure, and
+they are confounded by project size, patch latency, and measurement
+effort. Worse, composite scores create false precision across
+incommensurable properties — trading a point of “usability” against a
+point of “containment” implies an exchange rate that no operator’s
+actual threat model supplies. This is the same discipline that separates
+reproducible deployment from verified reproducible builds
+[nixos_reproducibility] and authenticity from provenance: properties
+that answer different questions must stay separate.</p>
+<p>Instead, every candidate–property cell receives one qualitative
+stance: <strong>strong</strong>, <strong>partial</strong>,
+<strong>weak</strong>, or <strong>n_a</strong>. A <code>strong</code>
+stance means the documented design directly and coherently addresses the
+property in this threat model. <code>partial</code> means the property
+is addressed with material conditions, integration gaps, or operator
+obligations attached. <code>weak</code> means the documented design
+provides little of what the property asks. <code>n_a</code> marks
+candidates for which the property is out of scope or unverified by
+available evidence — used rather than guessed, because absence of a
+confirmed feature in this review is not proof the feature is
+unavailable.</p>
+<h2 id="how-the-matrix-is-constructed-and-refreshed">How the matrix is
+constructed and refreshed</h2>
+<p>The matrix lives as data, not prose. In
+<code>src/agentic_os_security/registry.py</code>, each candidate carries
+a <code>property_stance</code> dictionary keyed by all
+{{CONFIG_NUM_PROPERTIES}} property identifiers, alongside a design
+summary, a named limitation, and an assessment. The pipeline emits the
+full {{CONFIG_NUM_CANDIDATES}}-candidate ×
+{{CONFIG_NUM_PROPERTIES}}-property table to
+<code>output/data/evaluation_matrix.csv</code> — one row per pair — and
+self-checks enforce stance-vocabulary validity and matrix completeness
+before any figure is regenerated. Stances are assigned from documented
+designs, official security documentation, project advisories, and
+primary incident reports; vendor feature lists support
+<code>partial</code> or <code>strong</code> stances only where the
+project itself documents the mechanism, never as measured resistance
+results.</p>
+<p>Refresh is a deliberate operation: a stance changes when the
+underlying documentation, an advisory, or a release note changes — for
+example, a fixed advisory can move an update-operations stance, while a
+new integration gap documented by the project can move an
+application-confinement stance. Because the matrix is deterministic data
+with the review date {{CONFIG_REVIEW_DATE}} stamped into the build, a
+future refresh produces a diffable artifact: added rows, changed
+stances, and the reasons, rather than rewritten narrative. <span
+class="citation"
+data-cites="fig:property_matrix">[@fig:property_matrix]</span> renders
+the current matrix.</p>
+<figure id="fig:property_matrix">
+<a class="figure-full-size-link" href="../figures/property_matrix.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The candidate–property stance matrix across {{CONFIG_NUM_CANDIDATES}} candidates"><img src="../figures/property_matrix.png" style="width:100.0%"
+alt="The candidate–property stance matrix across {{CONFIG_NUM_CANDIDATES}} candidates and {{CONFIG_NUM_PROPERTIES}} properties, rendered from output/data/evaluation_matrix.csv with colorblind-safe encoding of the strong/partial/weak/n_a vocabulary." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>The candidate–property stance matrix
+across {{CONFIG_NUM_CANDIDATES}} candidates and
+{{CONFIG_NUM_PROPERTIES}} properties, rendered from
+output/data/evaluation_matrix.csv with colorblind-safe encoding of the
+strong/partial/weak/n_a vocabulary.</figcaption>
+</figure>
+<h2 id="what-the-matrix-buys">What the matrix buys</h2>
+<p>Three things. First, <strong>comparability without false
+precision</strong>: two candidates can be contrasted property by
+property, and the contrast shows <em>where</em> they differ (Qubes holds
+containment strongly and application confinement partially; NixOS holds
+update operations and supply-chain trust strongly and application
+confinement weakly) rather than by how much in aggregate. Second,
+<strong>auditability</strong>: each stance is a claim about
+documentation that a reader can check against the cited source, and the
+structural invariants are test-enforced — every candidate covers every
+property, every stance is in the vocabulary, and the matrix has
+{{CONFIG_NUM_CANDIDATES}} × {{CONFIG_NUM_PROPERTIES}} cells exactly.
+Third, <strong>scenario grounding</strong>: the per-scenario
+recommendations in <span class="citation"
+data-cites="sec:scenarios">[@sec:scenarios]</span> select candidates by
+which properties the scenario’s threat model weights most, which is
+precisely what a label-based ranking cannot do.</p>
+<h2 id="limitations-of-matrix-thinking">Limitations of matrix
+thinking</h2>
+<p>A matrix is a discipline for judgment, not a substitute for it, and
+four limits should be kept in view.</p>
+<ul>
+<li><strong>Stances are not measurements.</strong> Every cell is an
+analytical judgment from documented designs [saltzer1975]; none is a
+penetration-test result. The vocabulary encodes confidence in a
+documented capability, not a measured resistance rate against a live
+adversary.</li>
+<li><strong>Properties interact.</strong> A strong containment stance
+can be nullified by a weak update-operations stance if the containment
+mechanism itself ships unpatched; a strong integrity stance does not
+constrain what an authorized agent does with verified software.
+Cell-level reading without row-level synthesis will mislead, which is
+why the scenario chapters, not the matrix, carry the
+recommendations.</li>
+<li><strong>Unverified defaults are a standing gap.</strong> Where this
+review could not verify a current default or security property, the cell
+says so; a future audit may legitimately move stances in either
+direction, and the diffability of the matrix is designed for exactly
+that.</li>
+<li><strong>The matrix is frozen in time at
+{{CONFIG_REVIEW_DATE}}.</strong> Projects ship; advisories land;
+trajectories noted per candidate (for instance, the GUI-domain split in
+<span class="citation" data-cites="sec:qubes">[@sec:qubes]</span> and
+boot-integrity work in <span class="citation"
+data-cites="sec:nixos">[@sec:nixos]</span>) may convert into stronger
+stances at the next refresh. Low-confidence forecasting of those
+movements is handled in <span class="citation"
+data-cites="sec:forecast">[@sec:forecast]</span> rather than smuggled
+into current stances.</li>
+</ul>
+<p>With the framework fixed, the next two sections apply it in depth to
+the two anchor platforms whose properties the rest of the architecture
+inherits: Qubes OS for containment [qubes_architecture] and NixOS for
+reproducible operations [nixos_wiki].</p>
+</main>
+</body>
+</html>

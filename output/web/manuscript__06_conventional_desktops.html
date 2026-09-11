@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>06_conventional_desktops.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+
+<style>
+:root {
+  --brand-1: #5b6ee0;
+  --web-bg: #f8f8f8;
+  --web-surface: #ffffff;
+  --web-text: #2c3e50;
+  --web-border: #bdc3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-1: #7e8ce8;
+    --web-bg: #0f1420;
+    --web-surface: #161c2b;
+    --web-text: #e6eaf2;
+    --web-border: #2a3447;
+  }
+}
+.theorem-box {
+  border-left: 4px solid var(--brand-1);
+  background: var(--web-surface);
+  padding: 0.6em 1em;
+  margin: 1.1em 0;
+  border-radius: 0 4px 4px 0;
+}
+.theorem-box.definition { border-left-style: dashed; }
+.theorem-box > p:first-child { margin-top: 0; }
+.theorem-box > p:last-child { margin-bottom: 0; }
+.figure-long-description {
+  border: 1px solid var(--web-border);
+  border-radius: 4px;
+  margin-block: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.figure-long-description > summary { cursor: pointer; font-weight: 700; }
+.figure-long-description > p { max-width: 80ch; overflow-wrap: anywhere; }
+.figure-exact-values { max-width: 80ch; overflow-wrap: anywhere; }
+code { overflow-wrap: anywhere; word-break: break-word; }
+pre {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre code { overflow-wrap: inherit; white-space: inherit; word-break: inherit; }
+div.sourceCode { max-width: 100%; overflow: visible; }
+pre.sourceCode { background: #2c3e50; color: #ecf0f1; }
+pre.sourceCode code,
+pre.sourceCode code span { color: inherit; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+mjx-container[display="true"] { max-width: 100%; overflow: visible; }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--brand-1);
+  outline-offset: 3px;
+}
+.table-scroll > table { margin-block: 0; min-width: 100%; width: max-content; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Liberation Serif', 'Times New Roman', serif;
+  line-height: 1.6;
+  width: min(100%, 800px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #1a1a1a;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main,
+nav,
+section,
+article,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  transform: translateY(-120%);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.skip-link:visited {
+  color: #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  figure img {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+code {
+  background-color: #ecf0f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  overflow-wrap: inherit;
+  white-space: inherit;
+  word-break: inherit;
+}
+
+div.sourceCode {
+  max-width: 100%;
+  overflow: visible;
+}
+
+pre.sourceCode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+pre.sourceCode code,
+pre.sourceCode code span {
+  color: inherit;
+}
+
+pre > code.sourceCode {
+  white-space: pre-wrap;
+}
+
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.table-scroll > table {
+  margin-block: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+figure {
+  max-width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1f6f8b;
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #b91c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: #8f1d1d;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.toc {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.toc a,
+#TOC a {
+  color: #b91c1c;
+  display: inline-block;
+  min-height: 28px;
+  line-height: 1.5;
+  padding-block: 2px;
+}
+
+.toc li,
+#TOC li {
+  margin-block: 1px;
+}
+
+.math {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
+.figure {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* A reading column keeps prose comfortable, but dense scientific figures need
+   a larger inspection surface.  The rendered image remains responsive and the
+   explicit link opens its source-resolution asset without changing the PDF. */
+.figure-full-size-link {
+  color: inherit;
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.figure-full-size-link img {
+  cursor: zoom-in;
+  margin-bottom: 0.45rem;
+}
+
+.figure-full-size-label {
+  color: #1f6f8b;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.figure-full-size-link:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 4px;
+}
+
+@media (min-width: 1000px) {
+  /* Wide figure links stay within the viewport but extend beyond the prose
+     column. Do not clip their labels at the narrower body boundary. */
+  body {
+    overflow-x: visible;
+  }
+
+  .figure-full-size-link {
+    left: 50%;
+    max-width: none;
+    position: relative;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100vw - 3rem));
+  }
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.figure-long-description,
+.figure-exact-values {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:desktops">Conventional Desktops and Hardening
+Candidates</h1>
+<p>The two preceding sections examined the architectural poles of this
+review: hypervisor-based compartmentalization in <span class="citation"
+data-cites="sec:qubes">[@sec:qubes]</span> and declarative, rebuildable
+operations in <span class="citation"
+data-cites="sec:nixos">[@sec:nixos]</span>. Most operators, however,
+will run a conventional Linux desktop for the foreseeable future, so the
+desktop candidates deserve the same property-based scrutiny rather than
+a distribution-label comparison. This section evaluates seven
+desktop-focused candidates against the nine properties of <span
+class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>,
+with particular attention to <code>application_confinement</code>,
+<code>integrity</code>, and <code>human_usability</code>: whether
+shipped defaults actually constrain applications, whether boot and
+update paths verify what runs, and whether a real operator will sustain
+the configuration. All judgments follow from documented designs and
+advisories reviewed on {{CONFIG_REVIEW_DATE}}; none rests on a
+comparative penetration test, and none is expressed as a numeric
+score.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Desktop candidates compared by documented security-relevant design, important limitation, and analytical assessment.…"><table id="tbl:desktops" data-responsive-table="true">
+<caption>Desktop candidates compared by documented security-relevant
+design, important limitation, and analytical assessment. Judgments are
+analytical, derived from documented designs and project documentation;
+they are not results of a comparative penetration test.</caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Candidate</th>
+<th>Documented security-relevant design</th>
+<th>Important limitation</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fedora Silverblue / Kinoite</strong></td>
+<td>Silverblue documents read-only system paths with writable
+<code>/etc</code> and <code>/var</code>, and Fedora enforces SELinux as
+its default baseline [fedora_silverblue_technical;
+fedora_selinux_config].</td>
+<td>Persistent writable state remains, and approximately 13 months of
+release support require regular upgrades to a new release
+[fedora_release_lifecycle]. Silverblue-specific details should not be
+transplanted onto Kinoite without checking each image.</td>
+<td>A credible atomic-desktop direction inside the Fedora ecosystem:
+image-based system updates and an enforcing MAC baseline by default. Its
+documented claims concern system paths and update mechanics, not
+containment of a compromised application’s access to that application’s
+own data.</td>
+</tr>
+<tr>
+<td><strong>Fedora Workstation</strong></td>
+<td>Fedora’s documented baseline includes SELinux enforcement without
+choosing an atomic variant [fedora_selinux_config].</td>
+<td>SELinux policy and application sandboxing must be evaluated as
+deployed; the existence of a kernel access-control mechanism does not by
+itself establish a tight sandbox for each application
+[fedora_selinux_getting_started].</td>
+<td>A defensible compatibility-first choice when the operator preserves
+the baseline and places dangerous work in separate isolation. An atomic
+variant does not automatically win every runtime-security comparison
+against it.</td>
+</tr>
+<tr>
+<td><strong>secureblue</strong></td>
+<td>The project documents a Fedora Atomic base, broad
+<code>hardened_malloc</code> deployment, a confined Trivalent browser,
+removal of SUID-root programs, restrictive application settings, and
+signed-container policy [secureblue_features].</td>
+<td>The same documentation records compatibility-affecting restrictions,
+including disabled Xwayland and restrictions on user namespaces with
+specific supported exceptions [secureblue_features]. These are
+project-documented measures, not measured superiority results.</td>
+<td>The most compelling conventional security-focused desktop candidate
+in this review, conditional on application compatibility, update
+reliability, and the operator not undoing the hardening to restore
+convenience.</td>
+</tr>
+<tr>
+<td><strong>Debian stable</strong></td>
+<td>Debian operates a coordinated security-advisory process and
+recommends unattended security upgrades; LTS extends stable support
+under a separate group from the Debian security team [debian_security;
+debian_lts].</td>
+<td>A maintenance policy is not evidence of strong isolation between
+arbitrary desktop applications, and the two support phases are organized
+differently; conflating them misstates who maintains what.</td>
+<td>A sound conservative platform when deliberately configured for the
+actual workload. A well-maintained, narrowly configured installation is
+preferable to a more elaborate stack the owner cannot sustain.</td>
+</tr>
+<tr>
+<td><strong>Ubuntu LTS</strong></td>
+<td>Ubuntu documents five years of standard security maintenance for LTS
+releases, with longer coverage under specified offerings; snap
+confinement distinguishes strict, classic, and development modes
+[ubuntu_release_cycle; snap_confinement].</td>
+<td>Classic snaps carry no confinement, so “installed as a snap” is not
+sufficient evidence of application isolation; coverage must be matched
+to the package, release, and support entitlement.</td>
+<td>A pragmatic supported baseline for workstation work, provided
+confinement mode and support entitlement are checked per application
+rather than assumed from the packaging name.</td>
+</tr>
+<tr>
+<td><strong>Kicksecure</strong></td>
+<td>Kicksecure documents Debian-based hardening and a
+user/system-maintenance split with different boot roles; the split’s
+documentation labels verified boot as planned rather than shipped
+[kicksecure_hardening; kicksecure_sysmaint_split].</td>
+<td>The hardening wiki explicitly contains research material,
+non-default proposals, and changes that can cause breakage; a long wiki
+page must not be mistaken for a list of shipped defaults.</td>
+<td>A serious candidate where reducing everyday administrative authority
+is valuable. Judge the installed release and enabled settings; the split
+is an interesting direction for separating daily use from system
+maintenance, with boot integrity still on the roadmap.</td>
+</tr>
+<tr>
+<td><strong>openSUSE Aeon</strong></td>
+<td>Aeon describes an immutable desktop based on Tumbleweed, while
+transactional-update prepares changes in a new snapshot without
+modifying the running system [opensuse_aeon;
+opensuse_transactional_update].</td>
+<td>Snapshot-based system replacement is not evidence that a compromised
+application cannot read or modify its authorized user data; the
+documented mechanism principally concerns system updates.</td>
+<td>A credible image/snapshot-oriented desktop direction. This review
+did not verify role-specific defaults for the closely related MicroOS
+server image, and records those fields as n.a. rather than inferring
+them from Aeon’s design.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two honesty notes apply to the table. First, the Aeon entry
+deliberately withholds claims about the openSUSE MicroOS server image:
+this review did not verify all current MicroOS role-specific defaults or
+a distinct boot-integrity baseline, and the analysis treats those fields
+as n.a. rather than inferring server behavior from a desktop sibling
+that shares the transactional-update mechanism
+[opensuse_transactional_update]. Second, “immutable” is treated
+throughout as a statement about particular system paths and update
+mechanisms, never as a guarantee against runtime data theft from a
+compromised application.</p>
+<h2 id="why-secureblue-is-interesting-without-crowning-it">Why
+secureblue is interesting, without crowning it</h2>
+<p>secureblue’s distinguishing proposition is not that the system is
+image-based. Its documented feature set combines allocator hardening
+through <code>hardened_malloc</code>, a specifically confined browser,
+removal of legacy privilege paths such as SUID-root programs, restricted
+desktop features, and efforts to retain supported sandbox use while
+limiting other namespace access [secureblue_features]. That combination
+addresses more of the runtime attack surface than immutability alone,
+because it hardens the memory-error exploitation path and the browser —
+the two components most exposed to hostile content — rather than only
+the update mechanism. For a user who needs a recognizable conventional
+Linux desktop rather than the compartmentalized workflow of <span
+class="citation" data-cites="sec:qubes">[@sec:qubes]</span>, it is the
+candidate that most directly engages the exploitation failure path
+defined in <span class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span>.</p>
+<p>The recommendation remains conditional for three documented reasons.
+The feature list does not establish independent resistance to a capable
+adversary: this review produced no comparative exploit-success or
+patch-latency measurements, and project documentation is not a
+substitute for either. The compatibility restrictions are real —
+disabled Xwayland and constrained user namespaces will require
+exceptions for some workflows, and each exception is a hand-carved
+reduction of the baseline [secureblue_features]. And the strongest
+hardening is reversible by the very operator it protects: a hardening
+menu that users routinely unwind under compatibility pressure fails the
+<code>human_usability</code> property regardless of its design quality.
+The conditional form matters more than the candidate’s name: if
+secureblue’s supported workflow fits the owner’s applications, it can be
+preferable to assembling a large custom hardening stack; if exceptions
+proliferate, a more standard environment that is actually maintained may
+deliver more security than an abandoned hardened one.</p>
+<h2 id="the-flatpak-permission-grants-warning">The Flatpak
+permission-grants warning</h2>
+<p>Flatpak’s documentation describes a restrictive basic sandbox, but
+also permission grants that expand access and explicitly warns about
+unrestricted bus access on the session or system D-Bus
+[flatpak_permissions]. The practical consequence cuts against two common
+shorthand judgments. Neither “uses Flatpak” nor “has SELinux” is
+evidence that a particular application is confined to anything the
+operator would approve: a permission grant can hand an application
+access to files, devices, or the entire message bus, and the grant was
+usually made once, at install time, in exchange for the application
+running at all. The question that matters — which files, devices,
+services, and credentials this specific application can reach — is
+answered by inspecting the deployed grants, not by the packaging
+technology’s reputation. This is complete mediation applied to
+application installation [saltzer1975]: every expansion of authority
+should pass a checked interface, and the default answer should be the
+narrow one.</p>
+<h2 id="the-desktop-versus-agent-authority-lesson">The
+desktop-versus-agent authority lesson</h2>
+<p>Every candidate in <span class="citation"
+data-cites="tbl:desktops">[@tbl:desktops]</span> optimizes the desktop’s
+own attack surface: how its browser, allocator, update path, and
+application sandbox resist exploitation. None of them, as documented,
+answers the authorized-misuse path. A shell agent running on even the
+best-hardened desktop in this table holds whatever credentials and file
+access the operator’s daily environment holds; allocator hardening and
+confined browsers do not mediate what an autonomous agent with a cloud
+token may read, transmit, or change. The lesson generalizes across the
+whole candidate set: a hardened desktop is a platform for trust
+boundaries, not a substitute for drawing them around autonomous agents.
+Agent work with untrusted dependencies belongs in a separate trust
+domain — a disposable VM, a separate container host, or a separate
+machine — with the authority architecture of <span class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>
+governing what crosses that boundary. The property vocabulary of <span
+class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>
+makes the distinction exact: <code>application_confinement</code>
+constrains applications; <code>authority</code> constrains what a
+component may already do without exploiting anything. A desktop can be
+strong on the first and still grant an agent catastrophic authority
+under the second. Scenario-level guidance for choosing among these
+candidates, including the conditions that would change the
+secureblue-first ordering, appears in <span class="citation"
+data-cites="sec:scenarios">[@sec:scenarios]</span>.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,495 @@
+\begin{thebibliography}{71}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Anthropic(2026)]{anthropic_campaign_report}
+Anthropic.
+\newblock Threat intelligence report: Ai agent-enabled cyber campaign.
+\newblock
+  \url{https://www-cdn.anthropic.com/d7dd50dd1185f59be051b307150d877f2b82bd2c.pdf},
+  2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Bottlerocket(2026)]{bottlerocket_security_features}
+AWS Bottlerocket.
+\newblock Bottlerocket security features.
+\newblock
+  \url{https://github.com/bottlerocket-os/bottlerocket/blob/develop/SECURITY_FEATURES.md},
+  2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Centre(2026)]{ncsc_ai_cyber_threat}
+UK~National Cyber~Security Centre.
+\newblock The impact of {AI} on the cyber threat by 2027.
+\newblock \url{https://www.ncsc.gov.uk/report/impact-ai-cyber-threat-now-2027},
+  2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[community(2026{\natexlab{a}})]{lanzaboote_repo}
+Nix community.
+\newblock Lanzaboote: Secure boot for nixos.
+\newblock \url{https://github.com/nix-community/lanzaboote},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[community(2026{\natexlab{b}})]{nix_cache_signatures}
+Nix community.
+\newblock What guarantees do signatures by binary caches give?
+\newblock
+  \url{https://discourse.nixos.org/t/what-guarantees-do-signatures-by-binary-caches-give/34802},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[community(2026{\natexlab{c}})]{nixos_hardened_profile_deprecation}
+Nix community.
+\newblock Proposal to deprecate the hardened profile.
+\newblock
+  \url{https://discourse.nixos.org/t/proposal-to-deprecate-the-hardened-profile/63081},
+  2026{\natexlab{c}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[community(2026{\natexlab{d}})]{nixos_lanzaboote_wiki}
+Nix community.
+\newblock Lanzaboote (nixos wiki).
+\newblock \url{https://wiki.nixos.org/wiki/Lanzaboote}, 2026{\natexlab{d}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[community(2026{\natexlab{e}})]{nixos_rebuild_wiki}
+Nix community.
+\newblock Nixos-rebuild (nixos wiki).
+\newblock \url{https://wiki.nixos.org/wiki/Nixos-rebuild}, 2026{\natexlab{e}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[community(2026{\natexlab{f}})]{nixos_rollback_data_discussion}
+Nix community.
+\newblock Rolling back data as well, not only nix config.
+\newblock
+  \url{https://discourse.nixos.org/t/rolling-back-data-as-well-not-only-nix-config/63169},
+  2026{\natexlab{f}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[community(2026{\natexlab{g}})]{nixos_security_wiki}
+Nix community.
+\newblock Security (nixos wiki).
+\newblock \url{https://wiki.nixos.org/wiki/Security}, 2026{\natexlab{g}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[community(2026{\natexlab{h}})]{nixos_wiki}
+Nix community.
+\newblock Nixos wiki.
+\newblock \url{https://wiki.nixos.org/wiki/NixOS}, 2026{\natexlab{h}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[DARPA(2025)]{darpa_aixcc_results}
+DARPA.
+\newblock Aixcc results: Artificial intelligence cyber challenge final event.
+\newblock \url{https://www.darpa.mil/news/2025/aixcc-results}, 2025.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Foundation(2026{\natexlab{a}})]{genode_sculpt}
+Genode Foundation.
+\newblock Sculpt os: The genode desktop operating system.
+\newblock \url{https://genode.org/download/sculpt}, 2026{\natexlab{a}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Foundation(2026{\natexlab{b}})]{grapheneos_features}
+GrapheneOS Foundation.
+\newblock Grapheneos features.
+\newblock \url{https://grapheneos.org/features}, 2026{\natexlab{b}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Hardy(1988)]{hardy1988}
+Norm Hardy.
+\newblock The confused deputy (or why capabilities might have been invented).
+\newblock \emph{ACM SIGOPS Operating Systems Review}, 22\penalty0 (4):\penalty0
+  36--44, 1988.
+
+\bibitem[Hat(2026)]{redhat_errata_policy}
+Red Hat.
+\newblock Errata support policy and update life cycle.
+\newblock \url{https://access.redhat.com/support/policy/updates/errata}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Institute(2026)]{aisi_incident_report}
+UK~AI~Security Institute.
+\newblock Incident report: Unsanctioned agent behaviour during cyber testing.
+\newblock
+  \url{https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing},
+  2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Klein et~al.(2009)Klein, Andronick, Elphinstone, Heiser, Norrish,
+  Robinson, Sewell, Tuch, and Winwood]{klein2009}
+Gerwin Klein, June Andronick, Kevin Elphinstone, Gernot Heiser, Michael
+  Norrish, Ihor Robinson, David Sewell, Harvey Tuch, and Simon Winwood.
+\newblock sel4: Formal verification of an {OS} kernel.
+\newblock In \emph{Proceedings of the ACM SIGOPS 22nd Symposium on Operating
+  Systems Principles (SOSP)}, pages 207--220, 2009.
+
+\bibitem[Labs(2026{\natexlab{a}})]{talos_repo}
+Sidero Labs.
+\newblock Talos linux.
+\newblock \url{https://github.com/siderolabs/talos}, 2026{\natexlab{a}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Labs(2026{\natexlab{b}})]{talos_secureboot}
+Sidero Labs.
+\newblock Secure boot on bare metal talos linux.
+\newblock
+  \url{https://www.talos.dev/v1.11/talos-guides/install/bare-metal-platforms/secureboot/},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Lampson(1974)]{lampson1974}
+Butler~W. Lampson.
+\newblock Protection.
+\newblock \emph{ACM Operating Systems Review}, 8\penalty0 (1):\penalty0 18--24,
+  1974.
+
+\bibitem[Levy(1984)]{levy1984}
+Henry~M. Levy.
+\newblock \emph{Capability-Based Computer Systems}.
+\newblock Butterworth-Heinemann (Digital Press), 1984.
+
+\bibitem[Linux(2026{\natexlab{a}})]{alpine_design}
+Alpine Linux.
+\newblock About alpine linux.
+\newblock \url{https://alpinelinux.org/about/}, 2026{\natexlab{a}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Linux(2026{\natexlab{b}})]{alpine_support_scope}
+Alpine Linux.
+\newblock Alpine linux releases.
+\newblock \url{https://alpinelinux.org/releases/}, 2026{\natexlab{b}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Linux(2026{\natexlab{c}})]{kali_intended_use}
+Kali Linux.
+\newblock Should i use kali linux?
+\newblock
+  \url{https://www.kali.org/docs/introduction/should-i-use-kali-linux/},
+  2026{\natexlab{c}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[openSUSE(2026{\natexlab{a}})]{opensuse_aeon}
+openSUSE.
+\newblock opensuse aeon portal.
+\newblock \url{https://en.opensuse.org/Portal:Aeon}, 2026{\natexlab{a}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[openSUSE(2026{\natexlab{b}})]{opensuse_transactional_update}
+openSUSE.
+\newblock Transactional updates in opensuse.
+\newblock \url{https://en.opensuse.org/Transactional-update},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{a}})]{debian_lts}
+Debian Project.
+\newblock Debian long term support.
+\newblock \url{https://www.debian.org/lts/}, 2026{\natexlab{a}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{b}})]{debian_security}
+Debian Project.
+\newblock Debian security information.
+\newblock \url{https://www.debian.org/security/}, 2026{\natexlab{b}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{c}})]{fedora_coreos_updates}
+Fedora Project.
+\newblock Fedora coreos automatic updates.
+\newblock
+  \url{https://docs.fedoraproject.org/en-US/fedora-coreos/auto-updates/},
+  2026{\natexlab{c}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{d}})]{fedora_release_lifecycle}
+Fedora Project.
+\newblock Fedora release life cycle.
+\newblock \url{https://docs.fedoraproject.org/en-US/releases/lifecycle/},
+  2026{\natexlab{d}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{e}})]{fedora_selinux_config}
+Fedora Project.
+\newblock Selinux configuration (fedora wiki).
+\newblock \url{https://fedoraproject.org/wiki/SELinux/Config},
+  2026{\natexlab{e}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{f}})]{fedora_selinux_getting_started}
+Fedora Project.
+\newblock Selinux getting started.
+\newblock
+  \url{https://docs.fedoraproject.org/en-US/quick-docs/selinux-getting-started/},
+  2026{\natexlab{f}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{g}})]{fedora_silverblue_technical}
+Fedora Project.
+\newblock Fedora silverblue technical information.
+\newblock
+  \url{https://docs.fedoraproject.org/en-US/fedora-silverblue/technical-information/},
+  2026{\natexlab{g}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{h}})]{flatpak_permissions}
+Flatpak Project.
+\newblock Sandbox permissions reference.
+\newblock \url{https://docs.flatpak.org/en/latest/sandbox-permissions.html},
+  2026{\natexlab{h}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{i}})]{kicksecure_hardening}
+Kicksecure Project.
+\newblock Operating system hardening.
+\newblock \url{https://www.kicksecure.com/wiki/Operating_System_Hardening},
+  2026{\natexlab{i}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{j}})]{kicksecure_sysmaint_split}
+Kicksecure Project.
+\newblock User-sysmaint split.
+\newblock \url{https://www.kicksecure.com/wiki/Dev/user-sysmaint-split},
+  2026{\natexlab{j}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{k}})]{nix_ghsa_g3g9}
+NixOS Project.
+\newblock Advisory {GHSA-g3g9-5vj6-r3gj}: Nix security advisory.
+\newblock
+  \url{https://github.com/NixOS/nix/security/advisories/GHSA-g3g9-5vj6-r3gj},
+  2026{\natexlab{k}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{l}})]{nix_sandbox_config}
+NixOS Project.
+\newblock Nix configuration file reference.
+\newblock \url{https://nix.dev/manual/nix/2.35/command-ref/conf-file.html},
+  2026{\natexlab{l}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{m}})]{nix_store_secrets}
+NixOS Project.
+\newblock Store secrets.
+\newblock \url{https://nix.dev/manual/nix/2.33/store/secrets.html},
+  2026{\natexlab{m}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{n}})]{nixos_2605_announcement}
+NixOS Project.
+\newblock Announcing nixos 26.05.
+\newblock \url{https://nixos.org/blog/announcements/2026/nixos-2605/},
+  2026{\natexlab{n}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{o}})]{nixos_reproducibility}
+NixOS Project.
+\newblock Reproducible builds at nixos.
+\newblock \url{https://reproducible.nixos.org/}, 2026{\natexlab{o}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{p}})]{nixos_security_tracker}
+NixOS Project.
+\newblock Nixos security tracker.
+\newblock \url{https://tracker.security.nixos.org/}, 2026{\natexlab{p}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{q}})]{openbsd_innovations}
+OpenBSD Project.
+\newblock Innovations in openbsd.
+\newblock \url{https://www.openbsd.org/innovations.html}, 2026{\natexlab{q}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{r}})]{openbsd_security}
+OpenBSD Project.
+\newblock Openbsd security page.
+\newblock \url{https://www.openbsd.org/security.html}, 2026{\natexlab{r}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{s}})]{qsb_118}
+Qubes~OS Project.
+\newblock Qubes security bulletin 118.
+\newblock \url{https://www.qubes-os.org/news/2026/08/29/qsb-118/},
+  2026{\natexlab{s}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{t}})]{qubes_43_release_notes}
+Qubes~OS Project.
+\newblock Qubes {OS} 4.3 release notes.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/developer/releases/4_3/release-notes.html},
+  2026{\natexlab{t}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{u}})]{qubes_anti_evil_maid}
+Qubes~OS Project.
+\newblock Anti evil maid in qubes os.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/user/security-in-qubes/anti-evil-maid.html},
+  2026{\natexlab{u}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{v}})]{qubes_architecture}
+Qubes~OS Project.
+\newblock Qubes os architecture.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/developer/system/architecture.html},
+  2026{\natexlab{v}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{w}})]{qubes_disposables}
+Qubes~OS Project.
+\newblock How to use disposable qubes.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/user/how-to-guides/how-to-use-disposables.html},
+  2026{\natexlab{w}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{x}})]{qubes_faq}
+Qubes~OS Project.
+\newblock Qubes os faq.
+\newblock \url{https://doc.qubes-os.org/en/latest/introduction/faq.html},
+  2026{\natexlab{x}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{y}})]{qubes_gui_domain}
+Qubes~OS Project.
+\newblock Gui domain: How the qubes gui works.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/user/advanced-topics/gui-domain.html},
+  2026{\natexlab{y}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{z}})]{qubes_gui_protocol}
+Qubes~OS Project.
+\newblock Qubes gui protocol.
+\newblock \url{https://doc.qubes-os.org/en/latest/developer/system/gui.html},
+  2026{\natexlab{z}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{{}})]{qubes_issue_4371}
+Qubes~OS Project.
+\newblock Qubes os issue 4371.
+\newblock \url{https://github.com/QubesOS/qubes-issues/issues/4371},
+  2026{\natexlab{{}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{|}})]{qubes_issue_7992}
+Qubes~OS Project.
+\newblock Qubes os issue 7992.
+\newblock \url{https://github.com/QubesOS/qubes-issues/issues/7992},
+  2026{\natexlab{|}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{}}})]{qubes_qrexec}
+Qubes~OS Project.
+\newblock Qrexec: Qubes rpc framework.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/developer/services/qrexec.html},
+  2026{\natexlab{}}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026{\natexlab{~}})]{qubes_qsb_index}
+Qubes~OS Project.
+\newblock Qubes security bulletins.
+\newblock \url{https://www.qubes-os.org/security/qsb/}, 2026{\natexlab{~}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026)]{qubes_security_design_goals}
+Qubes~OS Project.
+\newblock Security design goals in qubes os.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/developer/system/security-design-goals.html},
+  2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026)]{qubes_templates}
+Qubes~OS Project.
+\newblock Templates in qubes os.
+\newblock
+  \url{https://doc.qubes-os.org/en/latest/user/templates/templates.html}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026)]{tails_overview}
+Tails Project.
+\newblock About tails.
+\newblock \url{https://tails.net/about/index.en.html}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026)]{tails_persistent_storage}
+Tails Project.
+\newblock Persistent storage in tails.
+\newblock \url{https://tails.net/doc/persistent_storage/}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026)]{whonix_technical_design}
+Whonix Project.
+\newblock Whonix technical introduction.
+\newblock \url{https://www.whonix.org/wiki/Dev/Technical_Introduction}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Project(2026)]{whonix_workstation_security}
+Whonix Project.
+\newblock Whonix-workstation security.
+\newblock \url{https://www.whonix.org/wiki/Whonix-Workstation_Security}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Rose et~al.(2020)Rose, Borchert, Mitchell, and
+  Connelly]{nist_sp800_207}
+Scott Rose, Oliver Borchert, Stu Mitchell, and Sean Connelly.
+\newblock Zero trust architecture.
+\newblock NIST Special Publication 800-207, National Institute of Standards and
+  Technology, 2020.
+
+\bibitem[Saltzer and Schroeder(1975)]{saltzer1975}
+Jerome~H. Saltzer and Michael~D. Schroeder.
+\newblock The protection of information in computer systems.
+\newblock \emph{Proceedings of the IEEE}, 63\penalty0 (9):\penalty0 1278--1308,
+  1975.
+
+\bibitem[secureblue Project(2026)]{secureblue_features}
+secureblue Project.
+\newblock secureblue features.
+\newblock \url{https://secureblue.dev/features}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Security(2026)]{parrot_intended_use}
+Parrot Security.
+\newblock What is parrot?
+\newblock \url{https://parrotsec.org/docs/introduction/what-is-parrot/}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[seL4 Foundation(2026)]{sel4_verification_assumptions}
+seL4 Foundation.
+\newblock Assumptions of the sel4 verification.
+\newblock \url{https://sel4.systems/Verification/assumptions.html}, 2026.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Ubuntu(2026{\natexlab{a}})]{snap_confinement}
+Ubuntu.
+\newblock Snap confinement.
+\newblock
+  \url{https://documentation.ubuntu.com/security/security-features/privilege-restriction/snap-confinement/},
+  2026{\natexlab{a}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Ubuntu(2026{\natexlab{b}})]{ubuntu_core_confinement}
+Ubuntu.
+\newblock Security and sandboxing in ubuntu core.
+\newblock
+  \url{https://documentation.ubuntu.com/core/explanation/security-and-sandboxing/},
+  2026{\natexlab{b}}.
+\newblock Accessed 2026-09-10.
+
+\bibitem[Ubuntu(2026{\natexlab{c}})]{ubuntu_release_cycle}
+Ubuntu.
+\newblock Ubuntu release cycle.
+\newblock \url{https://ubuntu.com/about/release-cycle}, 2026{\natexlab{c}}.
+\newblock Accessed 2026-09-10.
+
+\end{thebibliography}

@@ -1,0 +1,67 @@
+# Agentic OS Security — project configuration
+# Standalone project; not part of the template uv workspace.
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic_os_security"
+version = "0.1.0"
+license = {text = "MIT"}
+description = "Deep review and prospectus of agentic security and operating systems: OpSec, cognitive security, and agentic cyber security"
+authors = [
+    {name = "Daniel Ari Friedman", email = "daniel@activeinference.institute"}
+]
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24.0",
+    "matplotlib>=3.7.0",
+    "pillow>=12.3.0",
+    "pyyaml>=6.0",
+    "defusedxml>=0.7.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.3",
+    "pytest-cov>=4.1.0",
+    "pygments>=2.20.0",
+]
+
+[tool.pytest.ini_options]
+# RASP Strict Assertion: Tests must be clearly separated and structurally identifiable
+pythonpath = [".", "src"]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+# `--strict-markers` prevents typos in marker definitions
+addopts = "-v --tb=short --strict-markers"
+markers = [
+    "slow: subprocess and full-pipeline integration checks kept for release profiles",
+]
+
+[tool.coverage.run]
+# We only calculate coverage for primary source code (`src/`),
+# so test code cannot artificially inflate the metric.
+source = ["src"]
+branch = true
+omit = [
+    "tests/*",
+    "*/__init__.py",
+    "*/test_*.py",
+]
+
+[tool.coverage.report]
+# ≥90% on src/ is the enforced gate.
+fail_under = 90
+show_missing = true
+precision = 2
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]
+
+[tool.uv]
+# Standalone project environment: `uv sync` from the project root.

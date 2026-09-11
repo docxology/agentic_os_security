@@ -1,0 +1,4 @@
+# Pure-src project: no infrastructure imports are permitted under src/.
+# Scripts may detect a template-repo parent for manuscript variable injection
+# only; the detection lives in the script itself, not in src/.
+allow_infrastructure_imports: []

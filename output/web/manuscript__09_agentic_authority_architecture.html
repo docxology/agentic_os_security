@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>09_agentic_authority_architecture.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+
+<style>
+:root {
+  --brand-1: #5b6ee0;
+  --web-bg: #f8f8f8;
+  --web-surface: #ffffff;
+  --web-text: #2c3e50;
+  --web-border: #bdc3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-1: #7e8ce8;
+    --web-bg: #0f1420;
+    --web-surface: #161c2b;
+    --web-text: #e6eaf2;
+    --web-border: #2a3447;
+  }
+}
+.theorem-box {
+  border-left: 4px solid var(--brand-1);
+  background: var(--web-surface);
+  padding: 0.6em 1em;
+  margin: 1.1em 0;
+  border-radius: 0 4px 4px 0;
+}
+.theorem-box.definition { border-left-style: dashed; }
+.theorem-box > p:first-child { margin-top: 0; }
+.theorem-box > p:last-child { margin-bottom: 0; }
+.figure-long-description {
+  border: 1px solid var(--web-border);
+  border-radius: 4px;
+  margin-block: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.figure-long-description > summary { cursor: pointer; font-weight: 700; }
+.figure-long-description > p { max-width: 80ch; overflow-wrap: anywhere; }
+.figure-exact-values { max-width: 80ch; overflow-wrap: anywhere; }
+code { overflow-wrap: anywhere; word-break: break-word; }
+pre {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre code { overflow-wrap: inherit; white-space: inherit; word-break: inherit; }
+div.sourceCode { max-width: 100%; overflow: visible; }
+pre.sourceCode { background: #2c3e50; color: #ecf0f1; }
+pre.sourceCode code,
+pre.sourceCode code span { color: inherit; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+mjx-container[display="true"] { max-width: 100%; overflow: visible; }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--brand-1);
+  outline-offset: 3px;
+}
+.table-scroll > table { margin-block: 0; min-width: 100%; width: max-content; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Liberation Serif', 'Times New Roman', serif;
+  line-height: 1.6;
+  width: min(100%, 800px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #1a1a1a;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main,
+nav,
+section,
+article,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  transform: translateY(-120%);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.skip-link:visited {
+  color: #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  figure img {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+code {
+  background-color: #ecf0f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  overflow-wrap: inherit;
+  white-space: inherit;
+  word-break: inherit;
+}
+
+div.sourceCode {
+  max-width: 100%;
+  overflow: visible;
+}
+
+pre.sourceCode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+pre.sourceCode code,
+pre.sourceCode code span {
+  color: inherit;
+}
+
+pre > code.sourceCode {
+  white-space: pre-wrap;
+}
+
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.table-scroll > table {
+  margin-block: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+figure {
+  max-width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1f6f8b;
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #b91c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: #8f1d1d;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.toc {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.toc a,
+#TOC a {
+  color: #b91c1c;
+  display: inline-block;
+  min-height: 28px;
+  line-height: 1.5;
+  padding-block: 2px;
+}
+
+.toc li,
+#TOC li {
+  margin-block: 1px;
+}
+
+.math {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
+.figure {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* A reading column keeps prose comfortable, but dense scientific figures need
+   a larger inspection surface.  The rendered image remains responsive and the
+   explicit link opens its source-resolution asset without changing the PDF. */
+.figure-full-size-link {
+  color: inherit;
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.figure-full-size-link img {
+  cursor: zoom-in;
+  margin-bottom: 0.45rem;
+}
+
+.figure-full-size-label {
+  color: #1f6f8b;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.figure-full-size-link:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 4px;
+}
+
+@media (min-width: 1000px) {
+  /* Wide figure links stay within the viewport but extend beyond the prose
+     column. Do not clip their labels at the narrower body boundary. */
+  body {
+    overflow-x: visible;
+  }
+
+  .figure-full-size-link {
+    left: 50%;
+    max-width: none;
+    position: relative;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100vw - 3rem));
+  }
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.figure-long-description,
+.figure-exact-values {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:agentic_authority">Agentic Authority Architecture</h1>
+<h2 id="the-governing-rule">The governing rule</h2>
+<p>Every architecture in this review answers the exploitation path
+defined in <span class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span>: harden
+components so that a compromise of one does not become a compromise of
+all. The authorized-misuse path needs a different instrument. Its
+governing rule is simple to state and expensive to honor: <strong>a
+component exposed to untrusted input must not simultaneously hold broad
+authority over valuable assets.</strong> A browser parses hostile web
+content, an agent reads hostile repositories and documents, a parser
+processes attacker-shaped files — and each of those components is, in
+the agent era, a candidate for total persuasion rather than mere
+compromise. The rule is the classical protection problem of
+[lampson1974] restated for agents: the question is never only whether a
+component can be broken, but who may exercise which authority through
+it. It is also the confused-deputy hazard of [hardy1988] made
+continuous: the deputy now reads its instructions from the same channel
+the attacker writes to.</p>
+<p>The rule converts directly into architecture. Split the system so
+that no component both touches untrusted input and holds broad
+authority; place the authority that must exist — credentials, approvals,
+deployment — behind interfaces too narrow for a persuaded component to
+abuse. This section defines that architecture:
+{{CONFIG_NUM_TRUST_DOMAINS}} trust domains, {{CONFIG_NUM_CONTROLS}}
+controls that hold regardless of host distribution, and an authority
+ladder that separates what an agent may do alone from what requires a
+principal outside it. The section proposes a design; it is not a claim
+about the defaults of any distribution reviewed elsewhere in this
+document.</p>
+<h2 id="seven-trust-domains">Seven trust domains</h2>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The seven trust domains of the proposed agentic authority architecture, with the intended contents of each and the re…"><table id="tbl:trust_domains" data-responsive-table="true">
+<caption>The seven trust domains of the proposed agentic authority
+architecture, with the intended contents of each and the restrictions
+that must be preserved for the domain’s boundary to mean
+anything.</caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Trust domain</th>
+<th>Intended contents</th>
+<th>Restrictions to preserve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Administration</strong></td>
+<td>OS management, policy changes, trusted update operations.</td>
+<td>No routine browsing, repository builds, document parsing, or
+agent-generated commands without independent review.</td>
+</tr>
+<tr>
+<td><strong>Personal identity</strong></td>
+<td>Sensitive browser sessions and personal accounts.</td>
+<td>Not colocated with untrusted development dependencies or a
+general-purpose autonomous agent.</td>
+</tr>
+<tr>
+<td><strong>Credential service</strong></td>
+<td>Non-exportable keys where feasible; narrowly scoped signing and
+credential-issuance operations.</td>
+<td>Expose specific operations rather than raw secrets or an
+unrestricted shell; require approval from outside the agent for
+consequential operations.</td>
+</tr>
+<tr>
+<td><strong>Agent execution</strong></td>
+<td>One task or repository, temporary working files, tightly scoped
+tools.</td>
+<td>Disposable VM or comparable isolation; no host home directory, broad
+credential directory, privileged container socket, or ambient production
+session.</td>
+</tr>
+<tr>
+<td><strong>Browsing and intake</strong></td>
+<td>Untrusted websites, downloads, email attachments.</td>
+<td>Kept separate from administration and signing; anything crossing
+into trusted work is explicitly reviewed.</td>
+</tr>
+<tr>
+<td><strong>Release and deployment</strong></td>
+<td>Reviewed build outputs; narrowly authorized deployment actions.</td>
+<td>The agent may propose a change but must not be able to alter the
+approval policy or approve its own release.</td>
+</tr>
+<tr>
+<td><strong>Recovery</strong></td>
+<td>Known-good configuration, independent backups, recovery
+credentials.</td>
+<td>Kept beyond the destructive authority of the daily workstation and
+its agent.</td>
+</tr>
+</tbody>
+</table></div>
+<figure id="fig:trust_domains">
+<a class="figure-full-size-link" href="../figures/trust_domains.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The seven trust domains of the proposed agentic authority architecture"><img src="../figures/trust_domains.png" style="width:100.0%"
+alt="The seven trust domains of the proposed agentic authority architecture and the boundaries between them. Administration, personal identity, and the credential service hold assets whose loss is not recoverable by rebuilding; agent execution and browsing/intake meet hostile input and are deliberately disposable; release/deployment mediates what leaves; recovery sits beyond the destructive authority of everything else. The architecture’s objective is real separation of authority, not maximizing the number of compartments." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>The seven trust domains of the proposed
+agentic authority architecture and the boundaries between them.
+Administration, personal identity, and the credential service hold
+assets whose loss is not recoverable by rebuilding; agent execution and
+browsing/intake meet hostile input and are deliberately disposable;
+release/deployment mediates what leaves; recovery sits beyond the
+destructive authority of everything else. The architecture’s objective
+is real separation of authority, not maximizing the number of
+compartments.</figcaption>
+</figure>
+<p>The table and <span class="citation"
+data-cites="fig:trust_domains">[@fig:trust_domains]</span> encode two
+design judgments. First, hostile-input domains and authority domains are
+different kinds of places: agent execution and browsing/intake are
+deliberately cheap to destroy, while administration, identity, and
+credentials are deliberately expensive to enter. Second, the mapping
+onto concrete platforms varies — for a Qubes deployment these roles
+become a manageable number of qubes with narrow qrexec policies
+[qubes_architecture; qubes_qrexec]; for a conventional workstation the
+highest-risk execution moves to the separate VM host or machine
+described in <span class="citation"
+data-cites="sec:servers">[@sec:servers]</span>. The objective in both
+cases is the same: real separation of authority, not a diagram with many
+boxes.</p>
+<h2 id="nine-controls-and-their-design-rationale">Nine controls and
+their design rationale</h2>
+<p>The domains define where authority lives; the controls define how
+work crosses the boundaries. Each control below is stated as an
+operating rule with the design rationale that makes it
+non-negotiable.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The nine controls of the agentic authority architecture: operating rule and design rationale for each. The rules hold…"><table id="tbl:controls" data-responsive-table="true">
+<caption>The nine controls of the agentic authority architecture:
+operating rule and design rationale for each. The rules hold regardless
+of host distribution; the rationales connect each control to a failure
+it prevents.</caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Control</th>
+<th>Operating rule</th>
+<th>Design rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Task-scoped credentials</strong></td>
+<td>Prefer short-lived, repository- or service-specific credentials;
+never hand the agent the owner’s general cloud identity because a task
+occasionally needs a deployment.</td>
+<td>An agent can only misuse authority it holds. Scoping bounds the
+authorized-misuse blast radius at issuance time, which is the last
+moment the choice is fully under the principal’s control.</td>
+</tr>
+<tr>
+<td><strong>Boundary-controlled egress</strong></td>
+<td>Allow only required destinations, at a boundary the agent cannot
+rewrite, and account for permitted destinations that themselves accept
+uploads or messages.</td>
+<td>A hostname allowlist is not a data-loss policy: issue trackers,
+paste sites, CI logs, and webhooks are all “allowed hosts” that
+exfiltrate. Egress control must govern channels, not merely names.</td>
+</tr>
+<tr>
+<td><strong>External approvals</strong></td>
+<td>Require an independent human or deterministic policy check for
+production changes, secret access, account administration, and
+publishing.</td>
+<td>A second AI instance reading the same hostile material is not
+automatically an independent security boundary: shared context material
+and correlated failure modes mean the “reviewer” can be persuaded by the
+same bytes. Independence must come from different information and
+authority, not from a second instance.</td>
+</tr>
+<tr>
+<td><strong>Operation mediation, not vague intentions</strong></td>
+<td>Services expose constrained operations — “sign this exact artifact
+for this release” — never “use the signing key responsibly.” Approval
+context includes the artifact, destination, scope, and expiration.</td>
+<td>Vague intentions are unenforceable because nothing checks compliance
+against them. Mediated operations give the approver a concrete object to
+accept or reject and give the audit trail something to record; this is
+the confused-deputy fix of [hardy1988] applied at the API surface.</td>
+</tr>
+<tr>
+<td><strong>Minimal shared state</strong></td>
+<td>Transfer only the files a task needs; treat returned code,
+documents, and build artifacts as untrusted until checked; never
+automatically promote an agent’s home directory or development image
+into a trusted environment.</td>
+<td>Shared state is the channel by which hostile content reaches
+authority. Every unreviewed promotion is a boundary crossing performed
+by the agent rather than the policy.</td>
+</tr>
+<tr>
+<td><strong>Environment refresh</strong></td>
+<td>Destroy task environments when work ends; apply updates before
+creating the next ones. Distinguish deletion of an environment from
+revocation of credentials it could access.</td>
+<td>Refresh caps how long a foothold persists, but deletion touches only
+the environment: credentials already issued outlive it and must be
+revoked on their own schedule. Conflating the two leaves live authority
+attributed to a dead machine.</td>
+</tr>
+<tr>
+<td><strong>Tool-bridge constraining</strong></td>
+<td>Review filesystem, browser, repository, CI, cloud, and messaging
+integrations as explicit grants of authority, scoped like any other
+credential.</td>
+<td>An isolated process with a powerful API token is still a powerful
+actor: the tool bridge is where isolation boundaries and API authority
+meet, and unreviewed bridges are the agent-era equivalent of an
+unconfined daemon holding a root key.</td>
+</tr>
+<tr>
+<td><strong>Independent audit trail</strong></td>
+<td>Record tool use, permission grants, policy changes, and deployment
+decisions outside the execution environment; make the record sufficient
+to reconstruct what happened.</td>
+<td>The record must survive the thing being audited and must capture
+actions, not agent prose. An audit trail inside the environment the
+agent controls is a draft the agent can edit.</td>
+</tr>
+<tr>
+<td><strong>Rehearsed recovery</strong></td>
+<td>Test rebuilding the environment, revoking credentials, recovering
+keys, and restoring data — before the incident. Assume a rebuild cannot
+undo data already exfiltrated or remote changes already accepted.</td>
+<td>Recovery rehearsal converts a theoretical plan into a measured
+capability. Its honest limit is temporal: restoration acts on the
+future; exfiltration and accepted remote changes are in the past and are
+addressed only by revocation and downstream containment.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two further trust-boundary decisions concern the models themselves.
+For <strong>local inference</strong>, compute is not authority: do not
+attach sensitive credentials to an inference environment merely because
+it needs substantial GPU resources. A reasonable design separates the
+model service from agent execution and from credential mediation, with
+explicit authentication between them — the model service is a component,
+not a trusted co-resident. For <strong>hosted models</strong>, the
+decision to transmit private code, documents, or credentials to a
+provider is an independent trust-boundary decision that no
+operating-system choice resolves: it determines who else processes the
+material, under what retention, under which jurisdiction. Both decisions
+sit above the host-distribution comparisons of <span class="citation"
+data-cites="sec:qubes">[@sec:qubes]</span>, <span class="citation"
+data-cites="sec:nixos">[@sec:nixos]</span>, and <span class="citation"
+data-cites="sec:desktops">[@sec:desktops]</span>; neither can be settled
+by switching distributions.</p>
+<h2 id="the-authority-ladder">The authority ladder</h2>
+<figure id="fig:authority_ladder">
+<a class="figure-full-size-link" href="../figures/authority_ladder.png" target="_blank" rel="noopener" aria-label="Open full-size figure, The authority ladder from proposal to revocation."><img src="../figures/authority_ladder.png" style="width:100.0%"
+alt="The authority ladder from proposal to revocation. An agent may autonomously occupy the lower rungs — proposing changes and staging artifacts — while authorize marks the rung that must lie outside the agent’s own control, exercised by a human principal or deterministic policy. Audit and revoke remain principal powers that survive destruction of the execution environment: the record lives outside the environment, and revocation acts on credentials the environment no longer holds." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>The authority ladder from proposal to
+revocation. An agent may autonomously occupy the lower rungs — proposing
+changes and staging artifacts — while authorize marks the rung that must
+lie outside the agent’s own control, exercised by a human principal or
+deterministic policy. Audit and revoke remain principal powers that
+survive destruction of the execution environment: the record lives
+outside the environment, and revocation acts on credentials the
+environment no longer holds.</figcaption>
+</figure>
+<p>The ladder in <span class="citation"
+data-cites="fig:authority_ladder">[@fig:authority_ladder]</span> gives
+the architecture its operating rhythm across six rungs:
+<strong>propose</strong>, <strong>stage</strong>,
+<strong>authorize</strong>, <strong>exercise</strong>,
+<strong>audit</strong>, <strong>revoke</strong>. An agent may propose
+and stage freely — generating configurations, preparing artifacts,
+drafting deployments — because nothing at those rungs changes the world.
+Authorization is the hinge: it must be exercised outside the agent, by
+the human principal or by deterministic policy, and the approval context
+is a mediated operation with artifact, destination, scope, and
+expiration. Exercise happens under whatever scopes the authorization
+granted, no more. Audit and revoke are not afterthoughts but standing
+rungs: the audit record lives outside the execution environment so it
+survives the environment’s destruction, and revocation is the only rung
+that addresses what a rebuild cannot — authority already exercised
+against the outside world. An architecture that lets the agent climb
+from propose to authorize on its own has not built a ladder; it has
+built a loop, and the configuration-side invariants that prevent exactly
+that are specified and enforced in <span class="citation"
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>.</p>
+<p>The trust domains, controls, and ladder compose into the scenarios of
+<span class="citation"
+data-cites="sec:scenarios">[@sec:scenarios]</span>: a Qubes deployment
+realizes the domains as qubes with narrow communication policies
+[qubes_architecture], a conventional workstation realizes them through
+the separate execution infrastructure of <span class="citation"
+data-cites="sec:servers">[@sec:servers]</span>, and the orchestration
+layer realizes the ladder over fleets as described in <span
+class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span>. The operator
+behaviors that keep the separation real — and the cognitive failure
+modes that erode it — are the subjects of <span class="citation"
+data-cites="sec:opsec">[@sec:opsec]</span> and <span class="citation"
+data-cites="sec:cognitive_security">[@sec:cognitive_security]</span>.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,658 @@
+"""Evidence base: 65 source-derived references and the capability baseline.
+
+``SOURCES`` carries exactly the 65 source-derived bibliography keys of
+the shared brief with their pinned URLs — the same key/URL pairs the
+BibTeX contract enforces in ``manuscript/references.bib`` and that
+manuscript prose may cite. Tiers classify how a claim is attributed:
+
+- ``official`` — vendor or project documentation and release policy.
+- ``advisory`` — coordinated security advisories and trackers.
+- ``incident_report`` — the reporting party's own incident or
+  campaign account (vendor findings, not independent measurements).
+- ``research`` — research programs and assessment bodies.
+- ``community`` — community wikis and developer discussions used for
+  specific integration caveats.
+
+``CAPABILITY_BASELINE`` pins the offensive/defensive AI numbers the
+source assessment reports (NCSC forecast, Anthropic campaign, AISI
+testing incident, DARPA AIxCC, QSB-118 fix, NixOS 26.05 support end).
+Every number is the reporting party's own figure with the attribution
+caveats recorded in the matching ``Source.claims``.
+
+No I/O at import time; the module is a pure constant surface.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+__all__ = ["Source", "TIER_VOCAB", "SOURCES", "CAPABILITY_BASELINE", "sources_by_tier"]
+
+
+@dataclass(frozen=True)
+class Source:
+    """One source-derived reference: key, attribution metadata, tier, claims."""
+
+    key: str
+    title: str
+    publisher: str
+    year: int
+    url: str
+    tier: str
+    claims: tuple[str, ...]
+
+
+#: Attribution-tier vocabulary for :data:`SOURCES`.
+TIER_VOCAB: tuple[str, ...] = ("official", "advisory", "incident_report", "research", "community")
+
+#: The 65 source-derived references — keys and URLs exactly as pinned by the
+#: brief's BibTeX contract (key/URL parity with ``manuscript/references.bib``).
+SOURCES: tuple[Source, ...] = (
+    Source(
+        "redhat_errata_policy",
+        "Support policy for updates and errata",
+        "Red Hat",
+        2026,
+        "https://access.redhat.com/support/policy/updates/errata",
+        "official",
+        ("Formal security-errata classification and maintenance phases underpin RHEL's supported-operation planning.",),
+    ),
+    Source(
+        "alpine_design",
+        "About Alpine Linux",
+        "Alpine Linux",
+        2026,
+        "https://alpinelinux.org/about/",
+        "official",
+        ("Small musl/BusyBox-based system documenting PIE and stack-smashing protection for userland binaries.",),
+    ),
+    Source(
+        "alpine_support_scope",
+        "Alpine Linux releases",
+        "Alpine Linux",
+        2026,
+        "https://alpinelinux.org/releases/",
+        "official",
+        ("Roughly two-year main-repository support versus community-repository support only until the next stable release.",),
+    ),
+    Source(
+        "nixos_hardened_profile_deprecation",
+        "Proposal to deprecate the hardened profile",
+        "NixOS Discourse",
+        2026,
+        "https://discourse.nixos.org/t/proposal-to-deprecate-the-hardened-profile/63081",
+        "community",
+        ("Maintainer discussion argues the profile lacks a coherent baseline and particular restrictions can undermine browser sandboxing without compensating setup.",),
+    ),
+    Source(
+        "nixos_rollback_data_discussion",
+        "Rolling back data as well, not only Nix config",
+        "NixOS Discourse",
+        2026,
+        "https://discourse.nixos.org/t/rolling-back-data-as-well-not-only-nix-config/63169",
+        "community",
+        ("Community discussion of the mismatch when a service's database has migrated but its software is rolled back.",),
+    ),
+    Source(
+        "nix_cache_signatures",
+        "What guarantees do signatures by binary caches give?",
+        "NixOS Discourse",
+        2026,
+        "https://discourse.nixos.org/t/what-guarantees-do-signatures-by-binary-caches-give/34802",
+        "community",
+        ("Trusting a cache signer is distinct from proving an output was produced by the expected derivation.",),
+    ),
+    Source(
+        "qubes_43_release_notes",
+        "Qubes OS 4.3 release notes",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/developer/releases/4_3/release-notes.html",
+        "official",
+        ("GUI/admin-domain splitting, new device-assignment mechanisms, and initial Wayland-related work.",),
+    ),
+    Source(
+        "qubes_qrexec",
+        "Qrexec: policy-controlled inter-domain services",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/developer/services/qrexec.html",
+        "official",
+        ("Qrexec mediates every cross-domain communication through explicit policy rather than free connectivity.",),
+    ),
+    Source(
+        "qubes_architecture",
+        "Qubes OS architecture",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/developer/system/architecture.html",
+        "official",
+        ("Application domains under the bare-metal Xen hypervisor with networking kept out of the privileged administrative domain.",),
+    ),
+    Source(
+        "qubes_gui_protocol",
+        "GUI protocol",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/developer/system/gui.html",
+        "official",
+        ("Keyboard and mouse events are directed to the focused domain; inter-domain clipboard transfer requires explicit user action.",),
+    ),
+    Source(
+        "qubes_security_design_goals",
+        "Security design goals",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/developer/system/security-design-goals.html",
+        "official",
+        ("Isolation between applications within the same qube is explicitly not promised.",),
+    ),
+    Source(
+        "qubes_faq",
+        "Qubes OS FAQ",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/introduction/faq.html",
+        "official",
+        ("Dom0 compromise is described as fatal to the security model; a successful hypervisor escape could compromise the whole system.",),
+    ),
+    Source(
+        "qubes_gui_domain",
+        "GUI domain",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/user/advanced-topics/gui-domain.html",
+        "official",
+        ("Advanced GUI-domain deployment modes are distinguished; some are suitable only for testing.",),
+    ),
+    Source(
+        "qubes_disposables",
+        "How to use disposable qubes",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/user/how-to-guides/how-to-use-disposables.html",
+        "official",
+        ("Disposable qubes discard their changes when their lifecycle ends, supporting disposable hostile intake.",),
+    ),
+    Source(
+        "qubes_anti_evil_maid",
+        "Anti Evil Maid",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/user/security-in-qubes/anti-evil-maid.html",
+        "official",
+        ("The documented AEM path has specific TPM/Intel TXT requirements and operational hazards.",),
+    ),
+    Source(
+        "qubes_templates",
+        "Templates",
+        "Qubes OS Project",
+        2026,
+        "https://doc.qubes-os.org/en/latest/user/templates/templates.html",
+        "official",
+        ("Template-backed qubes see a read-only root; community templates receive no Qubes-project updates.",),
+    ),
+    Source(
+        "fedora_coreos_updates",
+        "Fedora CoreOS auto-updates",
+        "Fedora Project",
+        2026,
+        "https://docs.fedoraproject.org/en-US/fedora-coreos/auto-updates/",
+        "official",
+        ("Atomic deployments with Zincati-coordinated updates and retained previous deployments for rollback.",),
+    ),
+    Source(
+        "fedora_silverblue_technical",
+        "Fedora Silverblue technical information",
+        "Fedora Project",
+        2026,
+        "https://docs.fedoraproject.org/en-US/fedora-silverblue/technical-information/",
+        "official",
+        ("Read-only system paths with writable /etc and /var on the atomic desktop.",),
+    ),
+    Source(
+        "fedora_selinux_getting_started",
+        "SELinux getting started",
+        "Fedora Project",
+        2026,
+        "https://docs.fedoraproject.org/en-US/quick-docs/selinux-getting-started/",
+        "official",
+        ("The existence of SELinux does not by itself establish a tight sandbox for each application as deployed.",),
+    ),
+    Source(
+        "fedora_release_lifecycle",
+        "Fedora release lifecycle",
+        "Fedora Project",
+        2026,
+        "https://docs.fedoraproject.org/en-US/releases/lifecycle/",
+        "official",
+        ("Approximately 13-month release support window requires regular upgrades.",),
+    ),
+    Source(
+        "flatpak_permissions",
+        "Flatpak sandbox permissions",
+        "Flatpak",
+        2026,
+        "https://docs.flatpak.org/en/latest/sandbox-permissions.html",
+        "official",
+        ("A restrictive basic sandbox coexists with permission grants that expand access, including a warning about unrestricted bus access.",),
+    ),
+    Source(
+        "ubuntu_core_confinement",
+        "Ubuntu Core security and sandboxing",
+        "Canonical",
+        2026,
+        "https://documentation.ubuntu.com/core/explanation/security-and-sandboxing/",
+        "official",
+        ("AppArmor, seccomp, device controls, and mount namespaces documented for snaps on the all-snap appliance edition.",),
+    ),
+    Source(
+        "snap_confinement",
+        "Snap confinement",
+        "Canonical",
+        2026,
+        "https://documentation.ubuntu.com/security/security-features/privilege-restriction/snap-confinement/",
+        "official",
+        ("Strict, classic, and development snap modes are distinguished; classic snaps have no confinement.",),
+    ),
+    Source(
+        "opensuse_aeon",
+        "Portal:Aeon",
+        "openSUSE",
+        2026,
+        "https://en.opensuse.org/Portal:Aeon",
+        "official",
+        ("Immutable Tumbleweed-based desktop.",),
+    ),
+    Source(
+        "opensuse_transactional_update",
+        "Transactional update",
+        "openSUSE",
+        2026,
+        "https://en.opensuse.org/Transactional-update",
+        "official",
+        ("Changes are prepared in a new snapshot without modifying the running system.",),
+    ),
+    Source(
+        "fedora_selinux_config",
+        "SELinux/Config",
+        "Fedora Project",
+        2026,
+        "https://fedoraproject.org/wiki/SELinux/Config",
+        "official",
+        ("SELinux enforcing documented as the Fedora default baseline.",),
+    ),
+    Source(
+        "genode_sculpt",
+        "Genode / Sculpt",
+        "Genode Labs",
+        2026,
+        "https://genode.org/download/sculpt",
+        "official",
+        ("General-purpose OS from a microkernel architecture with capability-based security, sandboxed drivers, and VMs; 26.04 release in day-to-day use by its developers.",),
+    ),
+    Source(
+        "nix_ghsa_g3g9",
+        "GHSA-g3g9-5vj6-r3gj: symlink-following flaw during fixed-output derivation registration",
+        "NixOS",
+        2026,
+        "https://github.com/NixOS/nix/security/advisories/GHSA-g3g9-5vj6-r3gj",
+        "advisory",
+        ("Users permitted to submit builds could gain root in multi-user installations including with sandboxed Linux builds; fixes listed for 2.34.5 and 2.33.4.",),
+    ),
+    Source(
+        "qubes_issue_4371",
+        "Secure Boot engineering discussion (qubes-issues 4371)",
+        "Qubes OS Project",
+        2026,
+        "https://github.com/QubesOS/qubes-issues/issues/4371",
+        "community",
+        ("Merely signing the bootloader or Xen is insufficient for boot integrity.",),
+    ),
+    Source(
+        "qubes_issue_7992",
+        "Qubes NixOS-template integration (qubes-issues 7992)",
+        "Qubes OS Project",
+        2026,
+        "https://github.com/QubesOS/qubes-issues/issues/7992",
+        "community",
+        ("Community NixOS-template work in progress; integration and maintenance risk remains.",),
+    ),
+    Source(
+        "bottlerocket_security_features",
+        "Bottlerocket security features",
+        "Bottlerocket OS",
+        2026,
+        "https://github.com/bottlerocket-os/bottlerocket/blob/develop/SECURITY_FEATURES.md",
+        "official",
+        ("Read-only dm-verity root, enforcing SELinux, stateless /etc, kernel lockdown, no host shell; goals distinguish host persistence resistance, vulnerability mitigation, and protection between containers.",),
+    ),
+    Source(
+        "lanzaboote_repo",
+        "Lanzaboote",
+        "nix-community",
+        2026,
+        "https://github.com/nix-community/lanzaboote",
+        "official",
+        ("Work remains before upstream integration; key management is explicitly outside the project's full scope.",),
+    ),
+    Source(
+        "talos_repo",
+        "Talos Linux",
+        "Sidero Labs",
+        2026,
+        "https://github.com/siderolabs/talos",
+        "official",
+        ("Kubernetes-specific OS with no shell or interactive console, API-only mutual-TLS management, and atomic updates.",),
+    ),
+    Source(
+        "grapheneos_features",
+        "GrapheneOS features",
+        "GrapheneOS Foundation",
+        2026,
+        "https://grapheneos.org/features",
+        "official",
+        ("Hardening atop Android's security model keeps even Google Play inside the standard app sandbox.",),
+    ),
+    Source(
+        "nix_store_secrets",
+        "Nix store secrets",
+        "NixOS",
+        2026,
+        "https://nix.dev/manual/nix/2.33/store/secrets.html",
+        "official",
+        ("The store is readable by all users and secrets can reach external caches; read secrets at runtime with suitable access controls.",),
+    ),
+    Source(
+        "nix_sandbox_config",
+        "Nix sandbox configuration",
+        "NixOS",
+        2026,
+        "https://nix.dev/manual/nix/2.35/command-ref/conf-file.html",
+        "official",
+        ("The documented sandbox concerns builds, with specified exceptions such as network access for fixed-output derivations.",),
+    ),
+    Source(
+        "nixos_2605_announcement",
+        "NixOS 26.05 release announcement",
+        "NixOS",
+        2026,
+        "https://nixos.org/blog/announcements/2026/nixos-2605/",
+        "official",
+        ("Seven months of bug fixes and security updates ending 2026-12-31.",),
+    ),
+    Source(
+        "parrot_intended_use",
+        "What is Parrot?",
+        "Parrot Security",
+        2026,
+        "https://parrotsec.org/docs/introduction/what-is-parrot/",
+        "official",
+        ("Documents hardening measures while the core remains tuned for security and forensics.",),
+    ),
+    Source(
+        "nixos_reproducibility",
+        "NixOS reproducibility project",
+        "NixOS",
+        2026,
+        "https://reproducible.nixos.org/",
+        "official",
+        ("Dependency specification and sandboxing alone do not guarantee reproducible outputs; remaining sources of nondeterminism are documented.",),
+    ),
+    Source(
+        "secureblue_features",
+        "secureblue features",
+        "secureblue",
+        2026,
+        "https://secureblue.dev/features",
+        "official",
+        ("Fedora Atomic base, broad hardened_malloc, confined Trivalent browser, SUID-root removal, Xwayland disabled, user-namespace restrictions with documented exceptions, signed-container policy.",),
+    ),
+    Source(
+        "sel4_verification_assumptions",
+        "seL4 verification assumptions",
+        "seL4 Foundation",
+        2026,
+        "https://sel4.systems/Verification/assumptions.html",
+        "official",
+        ("Proofs are scoped by explicit assumptions including boot, hardware, and DMA-related qualifications.",),
+    ),
+    Source(
+        "tails_overview",
+        "About Tails",
+        "Tor Project",
+        2026,
+        "https://tails.net/about/index.en.html",
+        "official",
+        ("Amnesic live environment with Tor networking.",),
+    ),
+    Source(
+        "tails_persistent_storage",
+        "Tails Persistent Storage",
+        "Tor Project",
+        2026,
+        "https://tails.net/doc/persistent_storage/",
+        "official",
+        ("Optional encrypted Persistent Storage; information exposed during the active session is not recoverable afterward.",),
+    ),
+    Source(
+        "nixos_security_tracker",
+        "Nixpkgs security tracker",
+        "NixOS",
+        2026,
+        "https://tracker.security.nixos.org/",
+        "advisory",
+        ("Coordinates matching and mitigation of vulnerabilities in Nixpkgs.",),
+    ),
+    Source(
+        "ubuntu_release_cycle",
+        "Ubuntu release cycle",
+        "Canonical",
+        2026,
+        "https://ubuntu.com/about/release-cycle",
+        "official",
+        ("Five years of standard security maintenance for LTS releases; Core is not Ubuntu Desktop LTS with an immutability switch.",),
+    ),
+    Source(
+        "nixos_lanzaboote_wiki",
+        "Lanzaboote",
+        "NixOS Wiki",
+        2026,
+        "https://wiki.nixos.org/wiki/Lanzaboote",
+        "community",
+        ("Lanzaboote characterized as in development.",),
+    ),
+    Source(
+        "nixos_wiki",
+        "NixOS",
+        "NixOS Wiki",
+        2026,
+        "https://wiki.nixos.org/wiki/NixOS",
+        "community",
+        ("Declarative system configuration with generation-based activation and rollback.",),
+    ),
+    Source(
+        "nixos_rebuild_wiki",
+        "Nixos-rebuild",
+        "NixOS Wiki",
+        2026,
+        "https://wiki.nixos.org/wiki/Nixos-rebuild",
+        "community",
+        ("Documented operation switches system generations; rollback does not restore mutable service state.",),
+    ),
+    Source(
+        "nixos_security_wiki",
+        "Security",
+        "NixOS Wiki",
+        2026,
+        "https://wiki.nixos.org/wiki/Security",
+        "community",
+        ("Incomplete SELinux integration and, as of April 2026, incomplete AppArmor integration.",),
+    ),
+    Source(
+        "anthropic_campaign_report",
+        "Anthropic campaign investigation",
+        "Anthropic",
+        2025,
+        "https://www-cdn.anthropic.com/d7dd50dd1185f59be051b307150d877f2b82bd2c.pdf",
+        "incident_report",
+        ("November 2025 investigation reported a campaign targeting roughly 30 entities with a handful of validated intrusions and substantial agent involvement; the model sometimes overstated findings or fabricated unusable credentials.",),
+    ),
+    Source(
+        "aisi_incident_report",
+        "Incident report: unsanctioned agent behaviour during cyber testing",
+        "UK AI Security Institute",
+        2026,
+        "https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing",
+        "incident_report",
+        ("July 25-28, 2026 testing: out-of-scope internet actions in 10 of 122 runs; agents did not escape the VM sandbox; internet access was intentionally available and classifiers disabled; no real-world harm found.",),
+    ),
+    Source(
+        "darpa_aixcc_results",
+        "DARPA AI Cyber Challenge results",
+        "DARPA",
+        2025,
+        "https://www.darpa.mil/news/2025/aixcc-results",
+        "research",
+        ("Competition systems discovered and patched real, non-synthetic flaws in the competition's software.",),
+    ),
+    Source(
+        "debian_lts",
+        "Debian LTS",
+        "Debian",
+        2026,
+        "https://www.debian.org/lts/",
+        "official",
+        ("LTS extends stable support under a separate group from the Debian security team.",),
+    ),
+    Source(
+        "debian_security",
+        "Debian security",
+        "Debian",
+        2026,
+        "https://www.debian.org/security/",
+        "official",
+        ("Coordinated security-advisory process recommending unattended security upgrades.",),
+    ),
+    Source(
+        "kali_intended_use",
+        "Should I use Kali Linux?",
+        "Offensive Security",
+        2026,
+        "https://www.kali.org/docs/introduction/should-i-use-kali-linux/",
+        "official",
+        ("Penetration testing and security auditing documented as the distribution's purpose.",),
+    ),
+    Source(
+        "kicksecure_sysmaint_split",
+        "Dev/user-sysmaint split",
+        "Kicksecure",
+        2026,
+        "https://www.kicksecure.com/wiki/Dev/user-sysmaint-split",
+        "official",
+        ("User/sysmaintenance boot-role split; verified boot labeled planned.",),
+    ),
+    Source(
+        "kicksecure_hardening",
+        "Operating system hardening",
+        "Kicksecure",
+        2026,
+        "https://www.kicksecure.com/wiki/Operating_System_Hardening",
+        "official",
+        ("Debian-based hardening documentation explicitly contains research and non-default proposals that can cause breakage.",),
+    ),
+    Source(
+        "ncsc_ai_cyber_threat",
+        "The impact of AI on the cyber threat through 2027",
+        "UK NCSC",
+        2026,
+        "https://www.ncsc.gov.uk/report/impact-ai-cyber-threat-now-2027",
+        "research",
+        ("AI is already assisting reconnaissance, vulnerability research, exploit development, and social engineering; increasingly effective exploitation of known vulnerabilities forecast through 2027; fully automated end-to-end advanced attacks unlikely within that horizon.",),
+    ),
+    Source(
+        "openbsd_innovations",
+        "OpenBSD innovations",
+        "OpenBSD",
+        2026,
+        "https://www.openbsd.org/innovations.html",
+        "official",
+        ("Sustained whole-system mitigation discipline including privilege separation and W^X.",),
+    ),
+    Source(
+        "openbsd_security",
+        "OpenBSD security",
+        "OpenBSD",
+        2026,
+        "https://www.openbsd.org/security.html",
+        "official",
+        ("Secure-by-default service choices and system-wide hardening.",),
+    ),
+    Source(
+        "qsb_118",
+        "QSB-118: arbitrary command injection into dom0 via qvm-copy-to-vm",
+        "Qubes OS Project",
+        2026,
+        "https://www.qubes-os.org/news/2026/08/29/qsb-118/",
+        "advisory",
+        ("An already compromised qube could inject an arbitrary command into dom0 when the user initiated qvm-copy-to-vm from dom0; qubes-core-dom0-linux 4.3.22 in dom0 is the fixing package for Qubes 4.3.",),
+    ),
+    Source(
+        "qubes_qsb_index",
+        "Qubes security bulletins",
+        "Qubes OS Project",
+        2026,
+        "https://www.qubes-os.org/security/qsb/",
+        "advisory",
+        ("Advisory index includes processor and Xen vulnerabilities; strong compartmentalization is not physical separation.",),
+    ),
+    Source(
+        "talos_secureboot",
+        "Talos Linux Secure Boot",
+        "Sidero Labs",
+        2026,
+        "https://www.talos.dev/v1.11/talos-guides/install/bare-metal-platforms/secureboot/",
+        "official",
+        ("Signed unified kernel image containing the OS; depends on supported boot mode, enrolled keys, and actual deployment.",),
+    ),
+    Source(
+        "whonix_technical_design",
+        "Whonix technical introduction",
+        "Whonix",
+        2026,
+        "https://www.whonix.org/wiki/Dev/Technical_Introduction",
+        "official",
+        ("Gateway/workstation split targets anonymity.",),
+    ),
+    Source(
+        "whonix_workstation_security",
+        "Whonix Workstation security",
+        "Whonix",
+        2026,
+        "https://www.whonix.org/wiki/Whonix-Workstation_Security",
+        "official",
+        ("Compromise exposes the workstation's credentials and browser data; it does not make an authorized agent harmless.",),
+    ),
+)
+
+#: Pinned offensive/defensive AI capability numbers reported by the source
+#: assessment (attribution caveats recorded in the matching :data:`SOURCES`
+#: entries; these are reporting-party figures, not independent measurements).
+CAPABILITY_BASELINE: dict = {
+    "ncsc_horizon_year": 2027,
+    "anthropic_targeted_entities": 30,
+    "aisi_runs_total": 122,
+    "aisi_unsanctioned_runs": 10,
+    "aisi_incident_days": "2026-07-25..28",
+    "aixcc_year": 2025,
+    "qsb_118_fix_package": "qubes-core-dom0-linux 4.3.22",
+    "nixos_2605_support_end": "2026-12-31",
+}
+
+
+def sources_by_tier() -> dict[str, int]:
+    """Return the number of sources per tier, all 5 tiers present."""
+    counts = {tier: 0 for tier in TIER_VOCAB}
+    for source in SOURCES:
+        counts[source.tier] += 1
+    return counts

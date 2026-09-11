@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>08_boundary_comparators.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+
+<style>
+:root {
+  --brand-1: #5b6ee0;
+  --web-bg: #f8f8f8;
+  --web-surface: #ffffff;
+  --web-text: #2c3e50;
+  --web-border: #bdc3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-1: #7e8ce8;
+    --web-bg: #0f1420;
+    --web-surface: #161c2b;
+    --web-text: #e6eaf2;
+    --web-border: #2a3447;
+  }
+}
+.theorem-box {
+  border-left: 4px solid var(--brand-1);
+  background: var(--web-surface);
+  padding: 0.6em 1em;
+  margin: 1.1em 0;
+  border-radius: 0 4px 4px 0;
+}
+.theorem-box.definition { border-left-style: dashed; }
+.theorem-box > p:first-child { margin-top: 0; }
+.theorem-box > p:last-child { margin-bottom: 0; }
+.figure-long-description {
+  border: 1px solid var(--web-border);
+  border-radius: 4px;
+  margin-block: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.figure-long-description > summary { cursor: pointer; font-weight: 700; }
+.figure-long-description > p { max-width: 80ch; overflow-wrap: anywhere; }
+.figure-exact-values { max-width: 80ch; overflow-wrap: anywhere; }
+code { overflow-wrap: anywhere; word-break: break-word; }
+pre {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre code { overflow-wrap: inherit; white-space: inherit; word-break: inherit; }
+div.sourceCode { max-width: 100%; overflow: visible; }
+pre.sourceCode { background: #2c3e50; color: #ecf0f1; }
+pre.sourceCode code,
+pre.sourceCode code span { color: inherit; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+mjx-container[display="true"] { max-width: 100%; overflow: visible; }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--brand-1);
+  outline-offset: 3px;
+}
+.table-scroll > table { margin-block: 0; min-width: 100%; width: max-content; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Liberation Serif', 'Times New Roman', serif;
+  line-height: 1.6;
+  width: min(100%, 800px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #1a1a1a;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main,
+nav,
+section,
+article,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  transform: translateY(-120%);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.skip-link:visited {
+  color: #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  figure img {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+code {
+  background-color: #ecf0f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  overflow-wrap: inherit;
+  white-space: inherit;
+  word-break: inherit;
+}
+
+div.sourceCode {
+  max-width: 100%;
+  overflow: visible;
+}
+
+pre.sourceCode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+pre.sourceCode code,
+pre.sourceCode code span {
+  color: inherit;
+}
+
+pre > code.sourceCode {
+  white-space: pre-wrap;
+}
+
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.table-scroll > table {
+  margin-block: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+figure {
+  max-width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1f6f8b;
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #b91c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: #8f1d1d;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.toc {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.toc a,
+#TOC a {
+  color: #b91c1c;
+  display: inline-block;
+  min-height: 28px;
+  line-height: 1.5;
+  padding-block: 2px;
+}
+
+.toc li,
+#TOC li {
+  margin-block: 1px;
+}
+
+.math {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
+.figure {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* A reading column keeps prose comfortable, but dense scientific figures need
+   a larger inspection surface.  The rendered image remains responsive and the
+   explicit link opens its source-resolution asset without changing the PDF. */
+.figure-full-size-link {
+  color: inherit;
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.figure-full-size-link img {
+  cursor: zoom-in;
+  margin-bottom: 0.45rem;
+}
+
+.figure-full-size-label {
+  color: #1f6f8b;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.figure-full-size-link:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 4px;
+}
+
+@media (min-width: 1000px) {
+  /* Wide figure links stay within the viewport but extend beyond the prose
+     column. Do not clip their labels at the narrower body boundary. */
+  body {
+    overflow-x: visible;
+  }
+
+  .figure-full-size-link {
+    left: 50%;
+    max-width: none;
+    position: relative;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100vw - 3rem));
+  }
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.figure-long-description,
+.figure-exact-values {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:comparators">Boundary Comparators and Non-Linux Systems</h1>
+<p>The candidates examined so far live inside the Linux workstation and
+server lanes. This section places seven systems that sit outside those
+lanes — privacy distributions, a non-Linux BSD, formally verified and
+capability-based microkernel systems, a mobile platform, and
+offensive-toolkit distributions — into the same property vocabulary.
+Their value here is comparative: each one demonstrates, in a deployed
+artifact, a property that the composition argument of this review needs,
+and each also demonstrates the boundary at which its claim stops.
+Reading them as competitors for a single “most secure system” title
+misses what they actually teach. All entries follow the evaluation
+discipline of <span class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>:
+documented designs, explicitly scoped claims, no numeric scores.</p>
+<div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Non-Linux and boundary comparators: documented contribution, boundary or caveat, and the lesson each contributes to t…"><table id="tbl:comparators" data-responsive-table="true">
+<caption>Non-Linux and boundary comparators: documented contribution,
+boundary or caveat, and the lesson each contributes to the composition
+argument. Assessments are analytical judgments from documented designs
+and project documentation.</caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>System</th>
+<th>Documented contribution</th>
+<th>Boundary or caveat</th>
+<th>Lesson for the composition argument</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Whonix</strong></td>
+<td>A gateway/workstation split that routes all traffic through a
+dedicated Tor gateway; its workstation documentation explicitly warns
+that compromise exposes the workstation’s credentials and browser data
+[whonix_technical_design; whonix_workstation_security].</td>
+<td>Anonymity is not credential protection: the project’s own
+documentation treats workstation compromise as exposing workstation-held
+secrets.</td>
+<td>Boundary placement of networking — keeping the network-facing
+component in a separate trust domain — is a structural pattern that
+composes with compartmentalization; it does not make an authorized agent
+harmless.</td>
+</tr>
+<tr>
+<td><strong>Tails</strong></td>
+<td>An amnesic live environment with Tor networking, plus optional
+encrypted Persistent Storage whose trade-offs the project documents
+[tails_overview; tails_persistent_storage].</td>
+<td>Amnesia addresses trace reduction and session reset, not information
+exposed while the session is live; enabling persistence deliberately
+reintroduces state that must then be protected.</td>
+<td>Session-state hygiene is one contribution to
+<code>persistence_recovery</code>, and it must not be confused with a
+recovery plan for credentials used during the session.</td>
+</tr>
+<tr>
+<td><strong>OpenBSD</strong></td>
+<td>Documented secure-by-default service choices, privilege separation,
+and exploit mitigations including W^X and system-wide hardening
+[openbsd_security; openbsd_innovations].</td>
+<td>The documented record does not establish superiority for a modern
+browser-heavy, GPU-dependent, AI-development workstation; ecosystem and
+hardware constraints limit that fit.</td>
+<td>Disciplined trusted-computing-base design is a property, not a
+platform identity; its techniques transfer as ideas even where the OS
+itself does not fit the workload.</td>
+</tr>
+<tr>
+<td><strong>seL4</strong></td>
+<td>Formal verification of a small microkernel with explicitly scoped
+proofs and assumptions, including boot, hardware, and DMA-related
+qualifications [sel4_verification_assumptions; klein2009].</td>
+<td>The proof boundary does not extend to the browser, driver stack,
+firmware chain, or user workflow that a real deployment adds on
+top.</td>
+<td>Strong assurance of a small core is one ingredient of the
+composition; every verification claim must be read at its stated
+boundary, not at the boundary a reader hopes for.</td>
+</tr>
+<tr>
+<td><strong>Genode / Sculpt</strong></td>
+<td>Sculpt describes a general-purpose OS built from Genode’s
+microkernel architecture with capability-based security, sandboxed
+drivers, and VMs, at a 26.04 release and in day-to-day use by its
+developers [genode_sculpt].</td>
+<td>seL4 proof claims must not be transferred automatically to every
+Genode/Sculpt configuration or to the applications it hosts.</td>
+<td>The most active capability-based desktop trajectory in this review —
+the lineage of [levy1984] — worth watching as a structural direction
+rather than treated as a deployable comparator for hostile desktop
+workloads today.</td>
+</tr>
+<tr>
+<td><strong>GrapheneOS</strong></td>
+<td>Hardening atop Android’s security model, documented to keep even
+Google Play services inside the standard app sandbox
+[grapheneos_features].</td>
+<td>A mobile comparator, not a desktop Linux replacement; its guarantees
+are scoped to its platform.</td>
+<td>The transferable lesson is shipping useful applications with
+constrained authority by default — mainstream evidence that
+<code>application_confinement</code> with usable defaults is an
+achievable product property, not an aspiration.</td>
+</tr>
+<tr>
+<td><strong>Kali / Parrot</strong></td>
+<td>Kali identifies penetration testing and security auditing as its
+purpose [kali_intended_use]; Parrot documents hardening measures while
+stating its core remains tuned for security and forensics
+[parrot_intended_use].</td>
+<td>Offensive-tool availability is not evidence of superior protection
+for the machine running those tools; both are purpose-built
+workloads.</td>
+<td>The label fallacy in its purest form: a distribution’s purpose
+statement constrains what its design should be credited with, exactly as
+<span class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>
+argues for property-based rather than name-based assessment.</td>
+</tr>
+</tbody>
+</table></div>
+<h2
+id="what-each-comparator-contributes-to-the-composition-argument">What
+each comparator contributes to the composition argument</h2>
+<p>The composition argument of this review holds that the security
+properties that matter — containment, authority limitation, integrity,
+recoverability, update operations, supply-chain trust, usable delegation
+— are supplied by different components cooperating, not by any single
+system name. Each comparator earns its place by isolating one term of
+that argument.</p>
+<p><strong>Whonix contributes the networking boundary.</strong> Its
+gateway/workstation structure is the same design move as Qubes keeping
+networking out of the privileged administrative domain <span
+class="citation" data-cites="sec:qubes">[@sec:qubes]</span>,
+demonstrated in a privacy-focused deployment: the component that meets
+the hostile network is a separate, disposable-trust domain
+[whonix_technical_design]. Its documented compromise-exposure warning is
+equally instructive: anonymity infrastructure does not protect the
+workstation’s own credentials and browser data from a compromised
+workstation [whonix_workstation_security]. Anonymity and credential
+protection are distinct properties — the source review’s distinction
+applied — and confusing them produces designs that hide the operator’s
+location while surrendering the operator’s secrets.</p>
+<p><strong>Tails contributes state hygiene.</strong> Amnesia is a
+deliberate <code>persistence_recovery</code> strategy: the default
+system leaves nothing to forensically clean and resets every session.
+The optional Persistent Storage shows the honest tension in that design
+— every byte an operator chooses to persist is a byte that survives
+compromise and must be protected by other means
+[tails_persistent_storage]. For the composition argument, Tails
+demonstrates that reducing what survives is a legitimate alternative to
+defending what persists, and that the two strategies must be chosen
+knowingly rather than mixed accidentally.</p>
+<p><strong>OpenBSD contributes trusted-base discipline.</strong>
+Privilege separation, W^X, and secure-by-default service configuration
+are documented properties of a codebase maintained under an unusual
+security-first discipline [openbsd_security; openbsd_innovations]. The
+correct comparative conclusion is narrow: for narrowly scoped network
+services, OpenBSD is a serious non-Linux comparator; for a browser-heavy
+development workstation with GPU acceleration and AI tooling, the
+documented evidence does not support a superiority claim. Its lessons —
+small trusted base, mitigations as defaults — transfer to the
+composition argument as design standards for whichever platform actually
+runs the workload.</p>
+<p><strong>seL4 and Genode/Sculpt contribute the small-trusted-base and
+capability-mediation trajectories.</strong> seL4’s formal verification
+demonstrates that a practical microkernel can carry machine-checked
+guarantees — and its assumptions documentation demonstrates, just as
+importantly, how verification claims must be scoped to boot, hardware,
+and DMA assumptions [sel4_verification_assumptions; klein2009]. Genode
+and Sculpt demonstrate the same lineage’s userland expression:
+capability-based security and sandboxed drivers in a general-purpose
+desktop [genode_sculpt; levy1984]. Capability mediation matters directly
+to agents: a capability system is the classic answer to the
+confused-deputy problem of an authority holder that cannot distinguish
+legitimate from attacker-chosen requests [hardy1988]. The caveat cuts
+both ways: proof claims attach to configurations, not product names, and
+a capability system hosting a compromised browser gains no automatic
+protection for what the browser legitimately receives.</p>
+<p><strong>GrapheneOS contributes the shipped-defaults
+demonstration.</strong> A mainstream mobile platform that keeps even
+first-party services inside the standard app sandbox shows that
+constrained authority by default is a product decision, not a research
+artifact [grapheneos_features]. That is the
+<code>application_confinement</code> and <code>human_usability</code>
+combination — defaults that survive real use — which every desktop
+candidate in <span class="citation"
+data-cites="sec:desktops">[@sec:desktops]</span> must also achieve. The
+mobile platform is not the answer for a workstation; it is evidence that
+the property is shippable.</p>
+<p><strong>Kali and Parrot contribute the negative control.</strong>
+Their documented purposes are offensive tooling and forensics
+[kali_intended_use; parrot_intended_use], and neither project claims
+otherwise. Including them makes the label fallacy vivid: installing an
+offensive toolkit does not harden the machine that runs it, any more
+than a firewall vendor’s marketing hardens a desktop. Assessment must
+attach to documented properties of the deployed system, not to the
+security connotations of a name.</p>
+<p>Taken together, the comparators reinforce the review’s central claim
+rather than competing with it. None of them, alone, addresses both
+failure paths of <span class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span>: Whonix and
+Tails narrow the exploitation exposure of networking and state but leave
+authorized agent access untouched; seL4 and Genode narrow the trusted
+base without mediating an agent’s credentials; GrapheneOS constrains
+applications without constraining what a persuaded agent may do with
+legitimate access. The synthesis — which components, composed, cover
+both paths — is the trust-domain architecture of <span class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>, and
+the scenario-level placement of these comparators appears in <span
+class="citation" data-cites="sec:scenarios">[@sec:scenarios]</span>.</p>
+</main>
+</body>
+</html>

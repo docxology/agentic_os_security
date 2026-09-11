@@ -1,0 +1,265 @@
+# Claim ledger — numeric claims registered for the agentic_os_security review.
+#
+# Every number that appears in manuscript prose or analysis artifacts
+# traces to a claim here. Fields:
+#
+#   claim_id:    unique slug.
+#   kind:        always "number" for this ledger.
+#   value:       the registered value.
+#   source:      where the number comes from (bib key, constant name, or
+#                manuscript token).
+#   source_tier: project_source (source document), generated_metric
+#                (computed by analysis), manuscript_claim (prose-level
+#                contract constant), official_source (reporting party's
+#                own figure; attribution caveats apply).
+#   freshness:   "active" while the claim is in force.
+#   artifact_path: file or bib key where the claim is enforced/stated.
+#
+# Attribution discipline (mirrors the source): official_source claims are
+# the reporting party's own figures — Anthropic's is an investigating
+# vendor's report, AISI's is its own incident report; none is an
+# independently measured universal agent capability rate.
+
+claims:
+  - claim_id: ncsc_horizon_year
+    kind: number
+    value: 2027
+    source: ncsc_ai_cyber_threat
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: anthropic_targeted_entities
+    kind: number
+    value: 30
+    source: anthropic_campaign_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi_runs_total
+    kind: number
+    value: 122
+    source: aisi_incident_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi_unsanctioned_runs
+    kind: number
+    value: 10
+    source: aisi_incident_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aixcc_year
+    kind: number
+    value: 2025
+    source: darpa_aixcc_results
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: qsb_118_fix_version
+    kind: number
+    value: "4.3.22"
+    source: qsb_118
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: review_date
+    kind: number
+    value: "2026-09-10"
+    source: manuscript/config.yaml experiment.review_date
+    source_tier: manuscript_claim
+    freshness: active
+    artifact_path: manuscript/config.yaml
+
+  - claim_id: forecast_horizon
+    kind: number
+    value: [2028, 2031]
+    source: manuscript/config.yaml experiment.forecast_horizon
+    source_tier: manuscript_claim
+    freshness: active
+    artifact_path: manuscript/config.yaml
+
+  - claim_id: matrix_stance_cells
+    kind: number
+    value: 216
+    source: agentic_os_security.registry.matrix_rows()
+    source_tier: generated_metric
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: matrix_coverage_pct
+    kind: number
+    value: 100.0
+    source: agentic_os_security.registry.matrix_rows()
+    source_tier: generated_metric
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: num_candidates
+    kind: number
+    value: 24
+    source: agentic_os_security.registry.CANDIDATES
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: num_properties
+    kind: number
+    value: 9
+    source: agentic_os_security.registry.PROPERTIES
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: num_scenarios
+    kind: number
+    value: 8
+    source: agentic_os_security.registry.SCENARIOS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/registry.py
+
+  - claim_id: num_trust_domains
+    kind: number
+    value: 7
+    source: agentic_os_security.trust_domains.TRUST_DOMAINS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/trust_domains.py
+
+  - claim_id: num_controls
+    kind: number
+    value: 9
+    source: agentic_os_security.trust_domains.CONTROLS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/trust_domains.py
+
+  - claim_id: num_configuration_invariants
+    kind: number
+    value: 9
+    source: agentic_os_security.trust_domains.CONFIGURATION_INVARIANTS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/trust_domains.py
+
+  - claim_id: num_sources
+    kind: number
+    value: 65
+    source: agentic_os_security.evidence.SOURCES
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: num_forecasts
+    kind: number
+    value: 14
+    source: agentic_os_security.forecasts.FORECASTS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/forecasts.py
+
+  - claim_id: num_figures
+    kind: number
+    value: 6
+    source: manuscript/config.yaml experiment.figure_registry
+    source_tier: manuscript_claim
+    freshness: active
+    artifact_path: manuscript/config.yaml
+
+  - claim_id: nixos_2605_support_end
+    kind: number
+    value: "2026-12-31"
+    source: nixos_2605_announcement
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi_incident_days
+    kind: number
+    value: "2026-07-25..28"
+    source: aisi_incident_report
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: bib-entry-count
+    kind: number
+    value: 71
+    source: manuscript/references.bib entry count (65 source-derived + 6
+      scholarly), documented in manuscript/AGENTS.md, manuscript/README.md,
+      manuscript/SYNTAX.md
+    source_tier: manuscript_claim
+    freshness: active
+    artifact_path: manuscript/references.bib
+
+  - claim_id: references-section-number
+    kind: number
+    value: 99
+    source: section file number of manuscript/99_references.md (H1 "References",
+      label {#sec:references}); the references section is generated, not
+      hand-written
+    source_tier: manuscript_claim
+    freshness: active
+    artifact_path: manuscript/99_references.md
+
+  - claim_id: anti-scoring-illustration
+    kind: number
+    value: 9.4
+    source: manuscript/03_evaluation_framework.md and manuscript/SYNTAX.md
+      anti-scoring rhetoric — "Qubes 9.4" style numeric composite score;
+      deliberately fictional illustration of what the review refuses, NOT a
+      measured or claimed score
+    source_tier: manuscript_claim
+    freshness: active
+    artifact_path: manuscript/03_evaluation_framework.md
+
+  - claim_id: qubes-43-release-family
+    kind: number
+    value: 4.3
+    source: qsb_118 (QSB-118 fix domain — qubes-core-dom0-linux 4.3.22 in
+      dom0 fixes Qubes 4.3); also the Qubes 4.3 release family
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: nixos-2605-release
+    kind: number
+    value: 26.05
+    source: nixos_2605_announcement (NixOS 26.05 release announcement)
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: nixos-2605-support-end-day
+    kind: number
+    value: 31
+    source: nixos_2605_announcement — NixOS 26.05 support ends 2026-12-31,
+      day 31 of the support-end month
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi-incident-start-day
+    kind: number
+    value: 25
+    source: aisi_incident_report — incident testing started July 25, 2026
+      (aisi_incident_days "2026-07-25..28" start day)
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: aisi-incident-end-day
+    kind: number
+    value: 28
+    source: aisi_incident_report (incident testing ended July 28, 2026) and
+      qsb_118 (QSB-118 disclosure August 28, 2026) — both fall on day 28
+    source_tier: official_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py

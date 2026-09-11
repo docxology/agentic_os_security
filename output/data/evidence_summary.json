@@ -1,0 +1,21 @@
+{
+  "capability_baseline": {
+    "aisi_incident_days": "2026-07-25..28",
+    "aisi_runs_total": 122,
+    "aisi_unsanctioned_runs": 10,
+    "aixcc_year": 2025,
+    "anthropic_targeted_entities": 30,
+    "ncsc_horizon_year": 2027,
+    "nixos_2605_support_end": "2026-12-31",
+    "qsb_118_fix_package": "qubes-core-dom0-linux 4.3.22"
+  },
+  "generated_at": "2026-09-10T12:00:00+00:00",
+  "num_sources": 65,
+  "source_tier_counts": {
+    "advisory": 4,
+    "community": 9,
+    "incident_report": 2,
+    "official": 48,
+    "research": 2
+  }
+}

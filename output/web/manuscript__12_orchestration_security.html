@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>12_orchestration_security.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+
+<style>
+:root {
+  --brand-1: #5b6ee0;
+  --web-bg: #f8f8f8;
+  --web-surface: #ffffff;
+  --web-text: #2c3e50;
+  --web-border: #bdc3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-1: #7e8ce8;
+    --web-bg: #0f1420;
+    --web-surface: #161c2b;
+    --web-text: #e6eaf2;
+    --web-border: #2a3447;
+  }
+}
+.theorem-box {
+  border-left: 4px solid var(--brand-1);
+  background: var(--web-surface);
+  padding: 0.6em 1em;
+  margin: 1.1em 0;
+  border-radius: 0 4px 4px 0;
+}
+.theorem-box.definition { border-left-style: dashed; }
+.theorem-box > p:first-child { margin-top: 0; }
+.theorem-box > p:last-child { margin-bottom: 0; }
+.figure-long-description {
+  border: 1px solid var(--web-border);
+  border-radius: 4px;
+  margin-block: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.figure-long-description > summary { cursor: pointer; font-weight: 700; }
+.figure-long-description > p { max-width: 80ch; overflow-wrap: anywhere; }
+.figure-exact-values { max-width: 80ch; overflow-wrap: anywhere; }
+code { overflow-wrap: anywhere; word-break: break-word; }
+pre {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre code { overflow-wrap: inherit; white-space: inherit; word-break: inherit; }
+div.sourceCode { max-width: 100%; overflow: visible; }
+pre.sourceCode { background: #2c3e50; color: #ecf0f1; }
+pre.sourceCode code,
+pre.sourceCode code span { color: inherit; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+mjx-container[display="true"] { max-width: 100%; overflow: visible; }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--brand-1);
+  outline-offset: 3px;
+}
+.table-scroll > table { margin-block: 0; min-width: 100%; width: max-content; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Liberation Serif', 'Times New Roman', serif;
+  line-height: 1.6;
+  width: min(100%, 800px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #1a1a1a;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main,
+nav,
+section,
+article,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  transform: translateY(-120%);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.skip-link:visited {
+  color: #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  figure img {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+code {
+  background-color: #ecf0f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  overflow-wrap: inherit;
+  white-space: inherit;
+  word-break: inherit;
+}
+
+div.sourceCode {
+  max-width: 100%;
+  overflow: visible;
+}
+
+pre.sourceCode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+pre.sourceCode code,
+pre.sourceCode code span {
+  color: inherit;
+}
+
+pre > code.sourceCode {
+  white-space: pre-wrap;
+}
+
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.table-scroll > table {
+  margin-block: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+figure {
+  max-width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1f6f8b;
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #b91c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: #8f1d1d;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.toc {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.toc a,
+#TOC a {
+  color: #b91c1c;
+  display: inline-block;
+  min-height: 28px;
+  line-height: 1.5;
+  padding-block: 2px;
+}
+
+.toc li,
+#TOC li {
+  margin-block: 1px;
+}
+
+.math {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
+.figure {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* A reading column keeps prose comfortable, but dense scientific figures need
+   a larger inspection surface.  The rendered image remains responsive and the
+   explicit link opens its source-resolution asset without changing the PDF. */
+.figure-full-size-link {
+  color: inherit;
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.figure-full-size-link img {
+  cursor: zoom-in;
+  margin-bottom: 0.45rem;
+}
+
+.figure-full-size-label {
+  color: #1f6f8b;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.figure-full-size-link:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 4px;
+}
+
+@media (min-width: 1000px) {
+  /* Wide figure links stay within the viewport but extend beyond the prose
+     column. Do not clip their labels at the narrower body boundary. */
+  body {
+    overflow-x: visible;
+  }
+
+  .figure-full-size-link {
+    left: 50%;
+    max-width: none;
+    position: relative;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100vw - 3rem));
+  }
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.figure-long-description,
+.figure-exact-values {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:orchestration">Securing Agent Orchestration</h1>
+<p>Multi-agent systems introduce a security surface that single-agent
+analysis misses: the orchestration layer that decomposes tasks,
+dispatches workers, aggregates results, and holds credentials on their
+behalf. Compartmentalization at the operating-system layer separates
+trust domains, but an orchestration layer recreates privileged
+intermediaries in software above the OS. If that layer is compromised —
+or merely persuaded — every domain it can reach is reachable at once.
+This section treats orchestration as a first-class security surface with
+its own trust boundaries, its own least-privilege requirements, and its
+own audit obligations, extending the authority architecture of <span
+class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>.</p>
+<h2 id="the-orchestrator-as-privileged-intermediary">The orchestrator as
+privileged intermediary</h2>
+<p>The orchestrator concentrates three kinds of authority. Through task
+decomposition it decides which worker sees which material, and so
+controls the information flow that determines what each agent can be
+influenced by. Through result aggregation it decides which outputs are
+promoted, and so hostile content that reaches it can be laundered into
+accepted results. Through credential custody it mints, distributes, and
+revokes task credentials, and so its own compromise is credential
+compromise for every task it supervises. Under the evaluation framework
+of <span class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>,
+the trusted-computing-base question reappears one layer up: which
+components must remain correct for the compartmentalization below to
+matter. An orchestrator with unconstrained reach is that answer’s
+weakest term, and treating it as a convenience rather than a security
+component is the first orchestration failure.</p>
+<h2
+id="planner-executor-tool-broker-where-authority-concentrates">Planner,
+executor, tool broker: where authority concentrates</h2>
+<p>The common pattern splits three roles. The planner decomposes intent
+into assignments. Executors run one task each inside isolated
+environments — disposable VMs or comparable workers, matching the
+agent-hosting baseline of <span class="citation"
+data-cites="sec:servers">[@sec:servers]</span>. The tool broker mediates
+every privileged operation the executors request across filesystem,
+browser, repository, CI, cloud, and messaging APIs. Authority
+concentrates at two points: the planner, whose instructions workers
+accept as legitimate, and the broker, whose policy decides which
+operations pass. Both deserve the scrutiny the trusted-computing-base
+property demands.</p>
+<p>The broker is where complete mediation [saltzer1975] either happens
+or fails. Qubes’ qrexec is the mature precedent: every inter-domain
+request traverses a policy-mediated channel, and the policy — not the
+requesting domain — decides what passes [qubes_qrexec]. An orchestration
+tool broker should carry the same property: executors never touch API
+endpoints directly; the broker validates each requested operation
+against task-scoped policy and forwards only what passes. Where a
+deployment skips the broker and lets executors call cloud or messaging
+APIs directly, the orchestration diagram flatters a system that has, in
+authority terms, a single wide domain.</p>
+<h2 id="least-privilege-orchestration">Least-privilege
+orchestration</h2>
+<p>Least privilege [saltzer1975] applied to orchestration yields
+concrete rules. Each task receives credentials minted for its scope and
+expiry — per-task credentials — never the operator’s standing identity
+(<span class="citation" data-cites="sec:opsec">[@sec:opsec]</span>).
+Authority transfers between components as capability handoffs: narrow,
+unforgeable references to specific operations rather than ambient
+tokens, in the tradition of capability-based systems [levy1984]; a
+capability to read one repository is not a token with owner scope.
+Executors hold no direct network or API authority beyond the broker
+channel. Workers exchange artifacts through the broker rather than
+through a shared home directory or scratch volume, because shared
+mutable state accumulates authority — whatever lands there becomes
+reachable by every later task that shares it, which is the
+minimal-shared-state control of <span class="citation"
+data-cites="tbl:controls">[@tbl:controls]</span> restated
+structurally.</p>
+<h2 id="delegation-chains-and-the-confused-deputy">Delegation chains and
+the confused deputy</h2>
+<p>An agent-to-agent delegation chain is a sequence of deputies.
+Lampson’s protection analysis frames the general problem of a program
+exercising authority on a client’s behalf [lampson1974], and Hardy’s
+confused-deputy case gives the failure its mechanism: a program holding
+more authority than its clients can be tricked into exercising that
+authority on an attacker’s behalf by shaping the request’s contents
+rather than its provenance [hardy1988]. Multi-agent orchestration
+industrializes this shape. Each delegation hop adds an interpretation
+step in which attacker-influenced context — a poisoned repository,
+hostile content in an earlier worker’s result, a crafted issue or
+document — can reshape what the next agent believes it was asked to do.
+The orchestrator then forwards the reshaped request under its own
+legitimate credentials: the confused deputy with an API surface, and
+with standing authority no individual worker possesses.</p>
+<p>The mitigation is structural rather than behavioral. Authority must
+never be derived from message content: the broker validates the
+operation itself — artifact identity, destination, scope, expiry — not
+the orchestrator’s description of the operation. Artifacts crossing a
+delegation boundary are integrity-checked and provenance-recorded before
+they influence any downstream request. And delegation can only narrow
+authority: a worker returns requests that preserve or reduce scope,
+never requests that expand it, and the broker rejects expansions as a
+matter of policy. These three rules convert the deputy from a trusted
+forwarder into a checked channel.</p>
+<figure id="fig:orchestration_boundaries">
+<a class="figure-full-size-link" href="../figures/orchestration_boundaries.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Orchestration boundaries: a planner decomposes a task into worker assignments"><img src="../figures/orchestration_boundaries.png" style="width:100.0%"
+alt="Orchestration boundaries: a planner decomposes a task into worker assignments; executors run one isolated task environment each; a tool broker mediates every privileged filesystem, browser, CI, cloud, and messaging operation against task-scoped policy; approval for consequential actions originates outside the orchestration hierarchy; and an append-only audit trail beyond every agent’s write authority records broker decisions, credential events, and approvals." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>Orchestration boundaries: a planner
+decomposes a task into worker assignments; executors run one isolated
+task environment each; a tool broker mediates every privileged
+filesystem, browser, CI, cloud, and messaging operation against
+task-scoped policy; approval for consequential actions originates
+outside the orchestration hierarchy; and an append-only audit trail
+beyond every agent’s write authority records broker decisions,
+credential events, and approvals.</figcaption>
+</figure>
+<p>The boundaries in <span class="citation"
+data-cites="fig:orchestration_boundaries">[@fig:orchestration_boundaries]</span>
+are the orchestration-layer rendering of the trust-domain design:
+executors instantiate the <code>agent_execution</code> domain, broker
+policy carries the <code>credential_service</code> restrictions,
+external approval embodies the <code>administration</code> and
+<code>release_deployment</code> requirements, and the audit trail
+belongs to the recovery domain of <span class="citation"
+data-cites="tbl:trust_domains">[@tbl:trust_domains]</span>.</p>
+<h2 id="approval-chains-across-agent-hierarchies">Approval chains across
+agent hierarchies</h2>
+<p>The configuration invariant that no component may approve its own
+policy changes (<span class="citation"
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>)
+applies with full force here: an orchestrator that can propose a
+consequential operation and also approve it has collapsed the separation
+between proposal and authorization that the authority ladder of <span
+class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>
+maintains across its rungs. Approval must originate outside the
+hierarchy — a human principal, or a deterministic policy check with no
+stake in the task’s completion. A second AI instance reading the same
+hostile material is not an independent approval boundary: it shares the
+attacker’s channel into the first agent’s context (<span
+class="citation"
+data-cites="sec:cognitive_security">[@sec:cognitive_security]</span>).
+Approval context should carry the operation’s full parameters —
+artifact, destination, scope, expiration — so the approver decides about
+the actual operation rather than about a summary of it; and the approval
+path itself, like the transfer paths of <span class="citation"
+data-cites="sec:qubes">[@sec:qubes]</span>, is a high-value component
+whose compromise routes around every other control.</p>
+<h2 id="auditability-of-multi-agent-decisions">Auditability of
+multi-agent decisions</h2>
+<p>Multi-agent decisions are hard to reconstruct because intent is
+distributed: no single transcript contains why a task evolved as it did,
+and agent prose is a poor record of authority events. The audit
+obligation (<span class="citation"
+data-cites="tbl:controls">[@tbl:controls]</span>, independent audit)
+therefore attaches to the structure. Record every tool-broker decision
+with its full request context; record every credential mint, use, and
+revocation; record every delegation edge — which planner asked which
+worker for what, with which inputs and which returned artifacts. The
+record lives outside every agent’s write authority and outside the
+orchestrator’s, because rewriting the audit trail is one of the
+{{CONFIG_NUM_INVARIANTS}} configuration invariants of <span
+class="citation"
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>.
+Make the record useful for reconstructing what happened: timestamps,
+operation parameters, policy verdicts, and approver identities, not
+collected narration.</p>
+<h2 id="mapping-to-the-trust-domain-architecture">Mapping to the
+trust-domain architecture</h2>
+<p>The mapping closes the loop with <span class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>. The
+orchestrator’s decomposition and aggregation role sits adjacent to
+<code>administration</code>, with no standing production credentials of
+its own. Executors instantiate <code>agent_execution</code> under its
+restrictions: no host home, no broad credential directory, no ambient
+production session. The broker instantiates the
+<code>credential_service</code> discipline: it exposes specific
+operations, not raw secrets or shells. Result intake applies the
+<code>browsing_intake</code> restrictions: aggregated worker output is
+untrusted material, reviewed before promotion. Deployment endpoints
+apply the <code>release_deployment</code> rule: agents may propose, but
+external approval must be unalterable by any of the proposing parties.
+The audit trail and known-good configuration instantiate
+<code>recovery</code>, beyond the destructive authority of everything
+above them. Orchestration does not replace this architecture; it is the
+layer where the architecture’s rules are either enforced by construction
+or quietly dissolved by convenience.</p>
+</main>
+</body>
+</html>

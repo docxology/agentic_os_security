@@ -1,0 +1,52 @@
+domain: agentic_security_research
+display_name: Agentic Security and Operating Systems
+required_packages:
+  - numpy
+  - matplotlib
+  - pytest
+preferred_outputs:
+  - pdf
+  - html
+validation_gates:
+  - experiment_method_design
+  - artifact_manifest
+  - evidence_grounding
+  - render_validation
+figure_types:
+  - evidence_timeline
+  - property_matrix
+  - trust_domain_diagram
+  - authority_ladder
+  - orchestration_boundary
+  - forecast_horizon
+citation_policy: official_or_scholarly
+source_policy: "Prefer primary vendor security documentation, official advisories and bulletins, government assessment reports, and canonical scholarly references. Assessments are analytical judgments from documented designs, not penetration-test results."
+review_gates:
+  - evidence_grounding
+  - render_validation
+artifact_expectations:
+  - output/data/manuscript_variables.json
+  - output/data/evaluation_matrix.csv
+  - output/data/scenario_recommendations.csv
+  - output/data/evidence_summary.json
+  - output/data/validation_report.json
+  - output/figures/evidence_timeline.png
+  - output/figures/property_matrix.png
+  - output/figures/trust_domains.png
+  - output/figures/authority_ladder.png
+  - output/figures/orchestration_boundaries.png
+  - output/figures/forecast_horizon.png
+benchmark_rubric:
+  name: agentic-security-review-readiness
+  dimensions:
+    - name: output_validity
+      weight: 1.0
+    - name: reproducibility_bundle
+      weight: 1.0
+    - name: artifact_manifest
+      weight: 1.0
+    - name: evidence_grounding
+      weight: 2.0
+    - name: render_success
+      weight: 1.0
+llm_prompt_guidance: "Use the evaluation matrix, evidence registry, and manuscript variables as the evidence source; do not invent numeric results or security scores."

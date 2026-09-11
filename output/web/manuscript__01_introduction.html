@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>01_introduction.md.web</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+
+<link data-template-favicon rel="icon" href="favicon.ico">
+
+<style>
+:root {
+  --brand-1: #5b6ee0;
+  --web-bg: #f8f8f8;
+  --web-surface: #ffffff;
+  --web-text: #2c3e50;
+  --web-border: #bdc3c7;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand-1: #7e8ce8;
+    --web-bg: #0f1420;
+    --web-surface: #161c2b;
+    --web-text: #e6eaf2;
+    --web-border: #2a3447;
+  }
+}
+.theorem-box {
+  border-left: 4px solid var(--brand-1);
+  background: var(--web-surface);
+  padding: 0.6em 1em;
+  margin: 1.1em 0;
+  border-radius: 0 4px 4px 0;
+}
+.theorem-box.definition { border-left-style: dashed; }
+.theorem-box > p:first-child { margin-top: 0; }
+.theorem-box > p:last-child { margin-bottom: 0; }
+.figure-long-description {
+  border: 1px solid var(--web-border);
+  border-radius: 4px;
+  margin-block: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+.figure-long-description > summary { cursor: pointer; font-weight: 700; }
+.figure-long-description > p { max-width: 80ch; overflow-wrap: anywhere; }
+.figure-exact-values { max-width: 80ch; overflow-wrap: anywhere; }
+code { overflow-wrap: anywhere; word-break: break-word; }
+pre {
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+pre code { overflow-wrap: inherit; white-space: inherit; word-break: inherit; }
+div.sourceCode { max-width: 100%; overflow: visible; }
+pre.sourceCode { background: #2c3e50; color: #ecf0f1; }
+pre.sourceCode code,
+pre.sourceCode code span { color: inherit; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+mjx-container[display="true"] { max-width: 100%; overflow: visible; }
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+.table-scroll:focus-visible {
+  outline: 3px solid var(--brand-1);
+  outline-offset: 3px;
+}
+.table-scroll > table { margin-block: 0; min-width: 100%; width: max-content; }
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Liberation Serif', 'Times New Roman', serif;
+  line-height: 1.6;
+  width: min(100%, 800px);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  color: #1a1a1a;
+  overflow-wrap: break-word;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+main,
+nav,
+section,
+article,
+figure,
+figcaption {
+  min-width: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.65rem 0.9rem;
+  transform: translateY(-120%);
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-family: sans-serif;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.skip-link:visited {
+  color: #ffffff;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  figure img {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  body {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+code {
+  background-color: #ecf0f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Liberation Mono', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+pre {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 100%;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+pre code {
+  overflow-wrap: inherit;
+  white-space: inherit;
+  word-break: inherit;
+}
+
+div.sourceCode {
+  max-width: 100%;
+  overflow: visible;
+}
+
+pre.sourceCode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+pre.sourceCode code,
+pre.sourceCode code span {
+  color: inherit;
+}
+
+pre > code.sourceCode {
+  white-space: pre-wrap;
+}
+
+pre > code.sourceCode > span {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-gutter: stable;
+}
+
+.table-scroll:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.table-scroll > table {
+  margin-block: 0;
+  min-width: 100%;
+  width: max-content;
+}
+
+figure {
+  max-width: 100%;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid #bdc3c7;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #1f6f8b;
+  color: white;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  color: #b91c1c;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.14em;
+  overflow-wrap: anywhere;
+}
+
+a:visited {
+  color: #8f1d1d;
+}
+
+a:hover {
+  text-decoration-thickness: 0.14em;
+}
+
+a:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 3px;
+}
+
+.toc {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.toc a,
+#TOC a {
+  color: #b91c1c;
+  display: inline-block;
+  min-height: 28px;
+  line-height: 1.5;
+  padding-block: 2px;
+}
+
+.toc li,
+#TOC li {
+  margin-block: 1px;
+}
+
+.math {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+mjx-container[display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible;
+  padding-bottom: 0.25rem;
+}
+
+.figure {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.figure img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* A reading column keeps prose comfortable, but dense scientific figures need
+   a larger inspection surface.  The rendered image remains responsive and the
+   explicit link opens its source-resolution asset without changing the PDF. */
+.figure-full-size-link {
+  color: inherit;
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+
+.figure-full-size-link img {
+  cursor: zoom-in;
+  margin-bottom: 0.45rem;
+}
+
+.figure-full-size-label {
+  color: #1f6f8b;
+  display: inline-block;
+  font-family: sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 0.14em;
+}
+
+.figure-full-size-link:focus-visible {
+  outline: 3px solid #1f6f8b;
+  outline-offset: 4px;
+}
+
+@media (min-width: 1000px) {
+  /* Wide figure links stay within the viewport but extend beyond the prose
+     column. Do not clip their labels at the narrower body boundary. */
+  body {
+    overflow-x: visible;
+  }
+
+  .figure-full-size-link {
+    left: 50%;
+    max-width: none;
+    position: relative;
+    transform: translateX(-50%);
+    width: min(1080px, calc(100vw - 3rem));
+  }
+}
+
+.figure-caption {
+  font-style: italic;
+  color: #4b5563;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.figure-long-description,
+.figure-exact-values {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" tabindex="-1">
+<h1 id="sec:introduction">Introduction: Agents Arrive at the Kernel
+Boundary</h1>
+<h2 id="why-this-review-now">Why this review, now</h2>
+<p>Operating-system security has been organized around a stable
+adversary model for most of four decades: a technically capable attacker
+who supplies hostile content or code and attempts to turn one vulnerable
+component into a foothold [saltzer1975; lampson1974]. That model
+produced real progress — memory-safety defaults, privilege separation,
+mandatory access control, verified kernels [klein2009] — all aimed at
+raising the cost of the <em>first</em> exploit. Agentic AI changes the
+economics on both sides of that boundary at once. On the offensive side,
+automation makes repeated probing, adapting known exploits, enumerating
+configurations, and chaining partial opportunities cheaper and faster
+[ncsc_ai_cyber_threat]. On the defensive side, agents themselves become
+principals inside the system: a coding agent with repository
+credentials, a research agent with browser access, an operations agent
+with deployment authority. Each is a new subject of security analysis,
+and none of the classical isolation designs was built with a
+semi-autonomous, persuadable executor in mind.</p>
+<p>The result is an asymmetry that this review treats as its organizing
+problem. Attacker capability improves quickly because probing is cheap;
+the isolation boundaries an operating system enforces change slowly,
+because kernel interfaces, hypervisors, package pipelines, and
+credential stores are structural commitments. When the fast variable
+moves against a slow variable, the correct response is not to predict
+which distribution wins. It is to ask what property of a system keeps
+the damage bounded when — not if — an exposed component fails, and what
+property prevents an agent’s <em>legitimate</em> authority from becoming
+the attack path. This distinction between exploitation difficulty and
+held authority descends directly from the confused-deputy problem: the
+classic failure is not a defeated guard but a legitimate actor whose
+credentials are used against its owner’s interests [hardy1988;
+levy1984].</p>
+<h2 id="scope-and-method">Scope and method</h2>
+<p>The review covers {{CONFIG_NUM_CANDIDATES}} candidates spanning
+compartmentalized workstations (Qubes OS), declarative and reproducible
+systems (NixOS), hardened conventional desktops (secureblue, Fedora
+variants, Kicksecure, openSUSE Aeon), server and agent-infrastructure
+platforms (Talos, Bottlerocket, Fedora CoreOS, RHEL, Ubuntu variants,
+Alpine), privacy and anonymity systems (Whonix, Tails), non-Linux
+comparators (OpenBSD, seL4, Genode/Sculpt, GrapheneOS), and the
+offensive-tooling distributions (Kali, Parrot). Each candidate is
+assessed against {{CONFIG_NUM_PROPERTIES}} properties — containment,
+authority, trusted computing base, application confinement, integrity,
+persistence and recovery, update operations, supply-chain trust, and
+human usability — described in <span class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>.
+Every judgment is an analytical conclusion drawn from documented
+designs, official advisories, and primary incident reports; this review
+contains no penetration testing, and where defaults were not verifiable
+the assessment says so or withholds the claim.</p>
+<p>Evidence discipline follows the source assessment: vendor incident
+reports are labeled as vendor findings, national-agency forecasts as
+forecasts, and no numeric security scores are assigned anywhere in the
+manuscript. The capability baseline — the NCSC assessment through 2027
+[ncsc_ai_cyber_threat], the Anthropic November 2025 campaign
+investigation [anthropic_campaign_report], the AISI
+unsanctioned-behavior incident report [aisi_incident_report], and
+DARPA’s AIxCC results [darpa_aixcc_results] — is laid out in <span
+class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span> with its
+caveats attached.</p>
+<h2 id="deterministic-evaluation-artifacts">Deterministic evaluation
+artifacts</h2>
+<p>A review that argues for reproducible operations should be
+reproducible itself. The companion codebase under
+<code>src/agentic_os_security/</code> encodes the evaluation as data:
+<code>registry.py</code> defines the {{CONFIG_NUM_CANDIDATES}}-candidate
+× {{CONFIG_NUM_PROPERTIES}}-property matrix as module constants, with
+each cell holding one qualitative stance (<code>strong</code>,
+<code>partial</code>, <code>weak</code>, or <code>n_a</code>) and each
+candidate carrying a design summary, a named limitation, and an
+assessment. Running the analysis pipeline deterministically emits
+<code>output/data/evaluation_matrix.csv</code> — one row per
+candidate–property pair — together with scenario recommendations and the
+six figures used in this manuscript. Every stance in this prose is
+traceable to a cell in that artifact, and the artifact is regenerable
+without wall-clock dependence, so a future reviewer can re-run the
+pipeline against updated project data and diff the outcome rather than
+re-litigate adjectives.</p>
+<h2 id="what-changes-at-the-operating-system-boundary-specifically">What
+changes at the operating-system boundary specifically</h2>
+<p>It is worth being precise about where agents touch OS-level security,
+because “AI changes everything” claims obscure the actual interface
+points. An agent on a conventional desktop typically holds: filesystem
+access through ordinary user permissions (reading documents the operator
+would read, writing anywhere the user can); credential access through
+environment variables, config files, agents, and browser sessions
+reachable in the same account; network egress through whatever the
+account can reach; and process-spawning authority through the same
+shells the user employs. On container- or VM-hosted deployments it may
+additionally hold, or appear to hold, the container runtime socket — a
+boundary whose compromise is host compromise. None of these is exotic:
+they are the ordinary permissions of a desktop program, which is exactly
+the point. An agent is not a new kind of kernel object; it is a new
+<em>consumer</em> of the broadest permission set the host already
+grants, with a persuasion-driven control plane instead of a GUI.</p>
+<p>This is why the review is about operating systems rather than model
+safety alone. Every mitigation that matters at these interface points —
+what filesystem a process can mount, which sockets it can open, which
+keys it can load, which package repositories it can push to — is an
+operating-system mechanism or a service the operating system mediates.
+And the two failure paths from <span class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span> land
+differently on each: exploitation pressure lands on the kernel and its
+exposure surface (parsers, drivers, the hypervisor, the container
+runtime), while authorized-misuse pressure lands on the permission set
+(the agent’s group membership, its token grants, its egress policy). A
+hardened desktop that closes exploit paths but hands an agent an
+owner-level cloud identity has defended one path and surrendered the
+other. The candidate evaluations in <span class="citation"
+data-cites="sec:qubes">[@sec:qubes]</span>, <span class="citation"
+data-cites="sec:nixos">[@sec:nixos]</span>, <span class="citation"
+data-cites="sec:desktops">[@sec:desktops]</span>, and <span
+class="citation" data-cites="sec:servers">[@sec:servers]</span> are read
+through exactly this lens: what does the platform’s permission model say
+about a principal whose behavior is content-influenced?</p>
+<p>The offense-side asymmetry deserves equal specificity. What
+automation cheapens is <em>search</em>: probing candidate targets,
+mutating exploits against known bug classes, enumerating exposed
+configurations, and chaining partial capabilities across many attempts
+[ncsc_ai_cyber_threat]. What it does not cheapen is the
+<em>structural</em> cost of crossing an isolation boundary that was
+designed against it — a hypervisor boundary, a capability-mediated RPC
+policy, a credential that is not held. Systems whose defense is “the
+attacker must find and chain vulnerabilities” face more search; systems
+whose defense is “the attacker has nothing to chain to” do not degrade
+under search. That difference — exposure that scales with adversary
+compute versus exposure that does not — is the concrete sense in which
+this review asks properties of architecture rather than labels of
+distributions.</p>
+<h2 id="contributions">Contributions</h2>
+<p>This review makes six contributions beyond restating the source
+assessment:</p>
+<ol type="1">
+<li><strong>A two-path threat model with authority as the axis</strong>
+(<span class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span>), extending the
+exploitation/authorized-misuse duality into a systematic argument that
+delegated legitimate authority — not exploit difficulty — is the primary
+evaluation axis for agent-bearing systems.</li>
+<li><strong>A property-based evaluation framework</strong> (<span
+class="citation"
+data-cites="sec:evaluation_framework">[@sec:evaluation_framework]</span>)
+that converts nine qualitative properties into standing questions a
+deployment can be interrogated with, explicitly rejecting numeric
+composite scores.</li>
+<li><strong>Deep architectural reviews of the two anchor
+platforms</strong> — Qubes OS (<span class="citation"
+data-cites="sec:qubes">[@sec:qubes]</span>) and NixOS (<span
+class="citation" data-cites="sec:nixos">[@sec:nixos]</span>) — going
+beneath the source’s judgments into qrexec policy semantics, the GUI
+protocol boundary, template and disposable-qube state models, Nix
+generation and rollback semantics, and the two advisories (QSB-118 and
+the April 2026 Nix symlink advisory) that expose how patch operations
+and the build service belong inside the trusted computing base.</li>
+<li><strong>Three extension domains the source only implies</strong>:
+cognitive security as the authorized-misuse surface (<span
+class="citation"
+data-cites="sec:cognitive_security">[@sec:cognitive_security]</span>),
+operator OpSec for agent work (<span class="citation"
+data-cites="sec:opsec">[@sec:opsec]</span>), and orchestration security
+for multi-agent systems (<span class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span>).</li>
+<li><strong>An authority architecture</strong> (<span class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>) that
+maps trust domains and controls onto both compartmentalized and
+conventional hosts, with configuration invariants enforced independently
+of the agent being constrained (<span class="citation"
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>).</li>
+<li><strong>A calibrated forecast and scenario set</strong> (<span
+class="citation" data-cites="sec:forecast">[@sec:forecast]</span>; <span
+class="citation" data-cites="sec:scenarios">[@sec:scenarios]</span>)
+using explicit confidence vocabulary, including negative forecasts that
+name what would be overconfident to claim.</li>
+</ol>
+<h2 id="readers-guide">Reader’s guide</h2>
+<p>Readers who want the threat framing first should read <span
+class="citation"
+data-cites="sec:threat_model">[@sec:threat_model]</span> before the
+platform reviews. Readers evaluating a specific platform can jump
+directly: compartmentalization-oriented workstation operators to <span
+class="citation" data-cites="sec:qubes">[@sec:qubes]</span>, operators
+prioritizing auditable and replaceable environments to <span
+class="citation" data-cites="sec:nixos">[@sec:nixos]</span>,
+conventional hardened desktops to <span class="citation"
+data-cites="sec:desktops">[@sec:desktops]</span>, and server or
+agent-execution infrastructure to <span class="citation"
+data-cites="sec:servers">[@sec:servers]</span>. Non-Linux and specialty
+systems are compared in <span class="citation"
+data-cites="sec:comparators">[@sec:comparators]</span>. The synthesis
+chapters — <span class="citation"
+data-cites="sec:agentic_authority">[@sec:agentic_authority]</span>,
+<span class="citation"
+data-cites="sec:cognitive_security">[@sec:cognitive_security]</span>,
+<span class="citation" data-cites="sec:opsec">[@sec:opsec]</span>, <span
+class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span>, and <span
+class="citation"
+data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>
+— build the architecture this review actually recommends for
+agent-bearing systems, and <span class="citation"
+data-cites="sec:scenarios">[@sec:scenarios]</span> condenses it into
+per-situation recommendations with named conditions that would change
+them. Zero-trust architecture [nist_sp800_207] is treated as a design
+vocabulary for mediated authority rather than a product label; the
+recommendation sections assume its default-deny posture wherever an
+agent touches credentials, egress, or approvals.</p>
+<h2 id="position">Position</h2>
+<p>The strongest design target is not an operating system that promises
+never to be compromised. It is a system in which a compromised browser,
+package, document viewer, or agent holds little authority, cannot
+silently acquire more, and can be replaced without preserving its
+foothold. Qubes OS and NixOS each advance one half of that target —
+Qubes by separating runtime trust domains, Nix by making intended system
+state explicit and replaceable — and the concluding assessment (<span
+class="citation" data-cites="sec:conclusion">[@sec:conclusion]</span>)
+argues their properties compose rather than compete. The rest of this
+review earns that position property by property.</p>
+</main>
+</body>
+</html>

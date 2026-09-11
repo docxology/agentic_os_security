@@ -1,0 +1,166 @@
+# Agentic OS Security — manuscript configuration
+# Meta-artifact linking manuscript prose to the execution layer. Loaded by
+# `yaml.safe_load` inside `infrastructure/rendering/_pdf_combined_renderer.py`
+# (manuscript metadata) and `scripts/z_generate_manuscript_variables.py`
+# (review parameters).
+
+# Consumed by: `infrastructure/rendering/pdf_renderer.py` and `infrastructure/reporting/pipeline_report_model.py`
+paper:
+  title: "Agentic Security and Operating Systems"
+  subtitle: "A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security in the Emerging Present and Future"
+  version: "0.1.0"
+  date: "2026-09-10" # Auto-generated via `infrastructure/validation/output/validator.py` if empty
+
+# Consumed by: `infrastructure.publishing.extract_publication_metadata` (in `infrastructure/publishing/metadata.py`)
+authors:
+  - name: "Daniel Ari Friedman"
+    orcid: "0000-0001-6232-9096"
+    email: "daniel@activeinference.institute"
+    affiliation: "Active Inference Institute"
+    corresponding: true
+
+# Publication posture: PRIVATE for now. No DOI, no deposits, no bookends.
+publication:
+  doi: ""
+  version_doi: ""
+  version_record: ""
+  github_repository: "docxology/agentic_os_security"
+  repository_url: "https://github.com/docxology/agentic_os_security"
+  published_artifacts: {}
+  transmission_bookends:
+    enabled: false
+  deposit_filename:
+    enabled: false
+    topic: ""
+  journal: ""
+  volume: ""
+  pages: ""
+  year: "2026"
+keywords:
+  - "agentic security"
+  - "operating systems"
+  - "compartmentalization"
+  - "capability mediation"
+  - "Qubes OS"
+  - "NixOS"
+  - "threat modeling"
+  - "cognitive security"
+  - "operational security"
+  - "agent orchestration"
+  - "offensive AI"
+  - "reproducible builds"
+
+metadata:
+  license: "MIT"
+  language: "en"
+
+# Private project: no steganography profile.
+steganography:
+  enabled: false
+
+# Render format toggles — gate per-renderer in infrastructure/rendering/pipeline.py.
+render:
+  formats:
+    pdf: true
+    html: true
+    slides: false
+    docx: false
+    epub: false
+
+# LLM reviews disabled for this private review project.
+llm:
+  reviews:
+    enabled: false
+  translations:
+    enabled: false
+
+# Consumed by: `infrastructure/reporting/pipeline_report_model.py` and CI/CD gates
+# ZERO-MOCK TOLERANCE: Any failure blocks manuscript rendering
+testing:
+  max_test_failures: 0
+  max_infra_test_failures: 0
+  max_project_test_failures: 0
+
+# Review parameters — read by analysis modules and manuscript variable generation.
+experiment:
+  review_date: "2026-09-10"
+  forecast_horizon: [2028, 2031]
+  property_ids:
+    - containment
+    - authority
+    - trusted_computing_base
+    - application_confinement
+    - integrity
+    - persistence_recovery
+    - update_operations
+    - supply_chain_trust
+    - human_usability
+  matrix_stance_vocab: [strong, partial, weak, n_a]
+  candidate_ids:
+    - qubes_os
+    - nixos
+    - secureblue
+    - fedora_atomic
+    - fedora_workstation
+    - debian_stable
+    - ubuntu_lts
+    - kicksecure
+    - opensuse_aeon
+    - opensuse_microos
+    - alpine_linux
+    - talos_linux
+    - bottlerocket
+    - fedora_coreos
+    - rhel
+    - ubuntu_core
+    - whonix
+    - tails
+    - openbsd
+    - sel4
+    - genode_sculpt
+    - grapheneos
+    - kali_linux
+    - parrot_security
+  candidate_categories:
+    - compartmentalized
+    - reproducible
+    - desktop
+    - server
+    - anonymity
+    - high_assurance
+    - mobile
+    - offensive_toolkit
+  scenario_ids:
+    - high_risk_workstation
+    - conventional_hardened_desktop
+    - auditable_operator
+    - autonomous_agent_hosting
+    - kubernetes_fleet
+    - enterprise_server
+    - anonymity_traces
+    - high_assurance_research
+  trust_domain_ids:
+    - administration
+    - personal_identity
+    - credential_service
+    - agent_execution
+    - browsing_intake
+    - release_deployment
+    - recovery
+  control_ids:
+    - scoped_credentials
+    - egress_boundary
+    - external_approvals
+    - operation_mediation
+    - minimal_shared_state
+    - environment_refresh
+    - tool_bridge_constrain
+    - independent_audit
+    - rehearsed_recovery
+  figure_registry:
+    - fig:evidence_timeline -> evidence_timeline.png
+    - fig:property_matrix -> property_matrix.png
+    - fig:trust_domains -> trust_domains.png
+    - fig:authority_ladder -> authority_ladder.png
+    - fig:orchestration_boundaries -> orchestration_boundaries.png
+    - fig:forecast_horizon -> forecast_horizon.png

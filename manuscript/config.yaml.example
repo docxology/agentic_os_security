@@ -1,0 +1,76 @@
+# Reference copy of `config.yaml` for new forks of this project.
+# Keep in sync with `config.yaml`; the private-posture fields (empty DOI,
+# disabled bookends/steganography) are the intended defaults for forks.
+
+paper:
+  title: "Agentic Security and Operating Systems"
+  subtitle: "A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security in the Emerging Present and Future"
+  version: "0.1.0"
+  date: "2026-09-10"
+
+authors:
+  - name: "Your Name"
+    orcid: "0000-0000-0000-0000"
+    email: "you@example.com"
+    affiliation: "Your Affiliation"
+    corresponding: true
+
+publication:
+  doi: ""
+  version_doi: ""
+  version_record: ""
+  github_repository: "your-org/agentic_os_security"
+  repository_url: "https://github.com/your-org/agentic_os_security"
+  published_artifacts: {}
+  transmission_bookends:
+    enabled: false
+  deposit_filename:
+    enabled: false
+    topic: ""
+  journal: ""
+  volume: ""
+  pages: ""
+  year: "2026"
+
+keywords:
+  - "agentic security"
+  - "operating systems"
+
+metadata:
+  license: "MIT"
+  language: "en"
+
+steganography:
+  enabled: false
+
+render:
+  formats:
+    pdf: true
+    html: true
+    slides: false
+    docx: false
+    epub: false
+
+llm:
+  reviews:
+    enabled: false
+  translations:
+    enabled: false
+
+testing:
+  max_test_failures: 0
+  max_infra_test_failures: 0
+  max_project_test_failures: 0
+
+experiment:
+  review_date: "2026-09-10"
+  forecast_horizon: [2028, 2031]
+  property_ids: [containment, authority, trusted_computing_base, application_confinement, integrity, persistence_recovery, update_operations, supply_chain_trust, human_usability]
+  matrix_stance_vocab: [strong, partial, weak, n_a]
+  candidate_ids: [qubes_os, nixos]
+  candidate_categories: [compartmentalized, reproducible]
+  scenario_ids: [high_risk_workstation]
+  trust_domain_ids: [administration]
+  control_ids: [scoped_credentials]
+  figure_registry:
+    - fig:evidence_timeline -> evidence_timeline.png

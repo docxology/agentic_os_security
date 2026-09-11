@@ -1,0 +1,217 @@
+candidate_id,candidate_name,property_id,stance
+qubes_os,Qubes OS,containment,strong
+qubes_os,Qubes OS,authority,partial
+qubes_os,Qubes OS,trusted_computing_base,partial
+qubes_os,Qubes OS,application_confinement,partial
+qubes_os,Qubes OS,integrity,partial
+qubes_os,Qubes OS,persistence_recovery,strong
+qubes_os,Qubes OS,update_operations,partial
+qubes_os,Qubes OS,supply_chain_trust,partial
+qubes_os,Qubes OS,human_usability,partial
+nixos,NixOS,containment,weak
+nixos,NixOS,authority,weak
+nixos,NixOS,trusted_computing_base,partial
+nixos,NixOS,application_confinement,weak
+nixos,NixOS,integrity,partial
+nixos,NixOS,persistence_recovery,partial
+nixos,NixOS,update_operations,strong
+nixos,NixOS,supply_chain_trust,partial
+nixos,NixOS,human_usability,partial
+secureblue,secureblue,containment,partial
+secureblue,secureblue,authority,partial
+secureblue,secureblue,trusted_computing_base,partial
+secureblue,secureblue,application_confinement,strong
+secureblue,secureblue,integrity,partial
+secureblue,secureblue,persistence_recovery,partial
+secureblue,secureblue,update_operations,partial
+secureblue,secureblue,supply_chain_trust,partial
+secureblue,secureblue,human_usability,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),containment,weak
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),authority,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),trusted_computing_base,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),application_confinement,weak
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),integrity,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),persistence_recovery,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),update_operations,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),supply_chain_trust,partial
+fedora_atomic,Fedora Atomic (Silverblue/Kinoite),human_usability,strong
+fedora_workstation,Fedora Workstation,containment,weak
+fedora_workstation,Fedora Workstation,authority,partial
+fedora_workstation,Fedora Workstation,trusted_computing_base,partial
+fedora_workstation,Fedora Workstation,application_confinement,weak
+fedora_workstation,Fedora Workstation,integrity,weak
+fedora_workstation,Fedora Workstation,persistence_recovery,weak
+fedora_workstation,Fedora Workstation,update_operations,partial
+fedora_workstation,Fedora Workstation,supply_chain_trust,partial
+fedora_workstation,Fedora Workstation,human_usability,strong
+debian_stable,Debian stable,containment,weak
+debian_stable,Debian stable,authority,weak
+debian_stable,Debian stable,trusted_computing_base,partial
+debian_stable,Debian stable,application_confinement,weak
+debian_stable,Debian stable,integrity,weak
+debian_stable,Debian stable,persistence_recovery,weak
+debian_stable,Debian stable,update_operations,partial
+debian_stable,Debian stable,supply_chain_trust,partial
+debian_stable,Debian stable,human_usability,strong
+ubuntu_lts,Ubuntu LTS,containment,weak
+ubuntu_lts,Ubuntu LTS,authority,weak
+ubuntu_lts,Ubuntu LTS,trusted_computing_base,partial
+ubuntu_lts,Ubuntu LTS,application_confinement,weak
+ubuntu_lts,Ubuntu LTS,integrity,weak
+ubuntu_lts,Ubuntu LTS,persistence_recovery,weak
+ubuntu_lts,Ubuntu LTS,update_operations,strong
+ubuntu_lts,Ubuntu LTS,supply_chain_trust,partial
+ubuntu_lts,Ubuntu LTS,human_usability,strong
+kicksecure,Kicksecure,containment,partial
+kicksecure,Kicksecure,authority,partial
+kicksecure,Kicksecure,trusted_computing_base,partial
+kicksecure,Kicksecure,application_confinement,weak
+kicksecure,Kicksecure,integrity,weak
+kicksecure,Kicksecure,persistence_recovery,weak
+kicksecure,Kicksecure,update_operations,partial
+kicksecure,Kicksecure,supply_chain_trust,partial
+kicksecure,Kicksecure,human_usability,partial
+opensuse_aeon,openSUSE Aeon,containment,weak
+opensuse_aeon,openSUSE Aeon,authority,partial
+opensuse_aeon,openSUSE Aeon,trusted_computing_base,partial
+opensuse_aeon,openSUSE Aeon,application_confinement,weak
+opensuse_aeon,openSUSE Aeon,integrity,partial
+opensuse_aeon,openSUSE Aeon,persistence_recovery,weak
+opensuse_aeon,openSUSE Aeon,update_operations,partial
+opensuse_aeon,openSUSE Aeon,supply_chain_trust,partial
+opensuse_aeon,openSUSE Aeon,human_usability,strong
+opensuse_microos,openSUSE MicroOS,containment,weak
+opensuse_microos,openSUSE MicroOS,authority,partial
+opensuse_microos,openSUSE MicroOS,trusted_computing_base,partial
+opensuse_microos,openSUSE MicroOS,application_confinement,weak
+opensuse_microos,openSUSE MicroOS,integrity,partial
+opensuse_microos,openSUSE MicroOS,persistence_recovery,partial
+opensuse_microos,openSUSE MicroOS,update_operations,partial
+opensuse_microos,openSUSE MicroOS,supply_chain_trust,partial
+opensuse_microos,openSUSE MicroOS,human_usability,partial
+alpine_linux,Alpine Linux,containment,weak
+alpine_linux,Alpine Linux,authority,weak
+alpine_linux,Alpine Linux,trusted_computing_base,strong
+alpine_linux,Alpine Linux,application_confinement,weak
+alpine_linux,Alpine Linux,integrity,partial
+alpine_linux,Alpine Linux,persistence_recovery,weak
+alpine_linux,Alpine Linux,update_operations,weak
+alpine_linux,Alpine Linux,supply_chain_trust,partial
+alpine_linux,Alpine Linux,human_usability,partial
+talos_linux,Talos Linux,containment,strong
+talos_linux,Talos Linux,authority,partial
+talos_linux,Talos Linux,trusted_computing_base,partial
+talos_linux,Talos Linux,application_confinement,partial
+talos_linux,Talos Linux,integrity,strong
+talos_linux,Talos Linux,persistence_recovery,strong
+talos_linux,Talos Linux,update_operations,strong
+talos_linux,Talos Linux,supply_chain_trust,partial
+talos_linux,Talos Linux,human_usability,partial
+bottlerocket,Bottlerocket,containment,partial
+bottlerocket,Bottlerocket,authority,partial
+bottlerocket,Bottlerocket,trusted_computing_base,partial
+bottlerocket,Bottlerocket,application_confinement,partial
+bottlerocket,Bottlerocket,integrity,strong
+bottlerocket,Bottlerocket,persistence_recovery,strong
+bottlerocket,Bottlerocket,update_operations,strong
+bottlerocket,Bottlerocket,supply_chain_trust,partial
+bottlerocket,Bottlerocket,human_usability,partial
+fedora_coreos,Fedora CoreOS,containment,weak
+fedora_coreos,Fedora CoreOS,authority,partial
+fedora_coreos,Fedora CoreOS,trusted_computing_base,partial
+fedora_coreos,Fedora CoreOS,application_confinement,weak
+fedora_coreos,Fedora CoreOS,integrity,partial
+fedora_coreos,Fedora CoreOS,persistence_recovery,partial
+fedora_coreos,Fedora CoreOS,update_operations,partial
+fedora_coreos,Fedora CoreOS,supply_chain_trust,partial
+fedora_coreos,Fedora CoreOS,human_usability,partial
+rhel,RHEL,containment,weak
+rhel,RHEL,authority,partial
+rhel,RHEL,trusted_computing_base,partial
+rhel,RHEL,application_confinement,weak
+rhel,RHEL,integrity,weak
+rhel,RHEL,persistence_recovery,weak
+rhel,RHEL,update_operations,strong
+rhel,RHEL,supply_chain_trust,strong
+rhel,RHEL,human_usability,partial
+ubuntu_core,Ubuntu Core,containment,partial
+ubuntu_core,Ubuntu Core,authority,partial
+ubuntu_core,Ubuntu Core,trusted_computing_base,partial
+ubuntu_core,Ubuntu Core,application_confinement,strong
+ubuntu_core,Ubuntu Core,integrity,partial
+ubuntu_core,Ubuntu Core,persistence_recovery,partial
+ubuntu_core,Ubuntu Core,update_operations,strong
+ubuntu_core,Ubuntu Core,supply_chain_trust,strong
+ubuntu_core,Ubuntu Core,human_usability,partial
+whonix,Whonix,containment,partial
+whonix,Whonix,authority,weak
+whonix,Whonix,trusted_computing_base,partial
+whonix,Whonix,application_confinement,weak
+whonix,Whonix,integrity,weak
+whonix,Whonix,persistence_recovery,weak
+whonix,Whonix,update_operations,partial
+whonix,Whonix,supply_chain_trust,partial
+whonix,Whonix,human_usability,partial
+tails,Tails,containment,weak
+tails,Tails,authority,partial
+tails,Tails,trusted_computing_base,partial
+tails,Tails,application_confinement,weak
+tails,Tails,integrity,weak
+tails,Tails,persistence_recovery,strong
+tails,Tails,update_operations,partial
+tails,Tails,supply_chain_trust,partial
+tails,Tails,human_usability,partial
+openbsd,OpenBSD,containment,partial
+openbsd,OpenBSD,authority,partial
+openbsd,OpenBSD,trusted_computing_base,partial
+openbsd,OpenBSD,application_confinement,partial
+openbsd,OpenBSD,integrity,partial
+openbsd,OpenBSD,persistence_recovery,weak
+openbsd,OpenBSD,update_operations,partial
+openbsd,OpenBSD,supply_chain_trust,partial
+openbsd,OpenBSD,human_usability,partial
+sel4,seL4,containment,strong
+sel4,seL4,authority,n_a
+sel4,seL4,trusted_computing_base,strong
+sel4,seL4,application_confinement,n_a
+sel4,seL4,integrity,partial
+sel4,seL4,persistence_recovery,n_a
+sel4,seL4,update_operations,n_a
+sel4,seL4,supply_chain_trust,n_a
+sel4,seL4,human_usability,n_a
+genode_sculpt,Genode / Sculpt,containment,strong
+genode_sculpt,Genode / Sculpt,authority,strong
+genode_sculpt,Genode / Sculpt,trusted_computing_base,partial
+genode_sculpt,Genode / Sculpt,application_confinement,partial
+genode_sculpt,Genode / Sculpt,integrity,partial
+genode_sculpt,Genode / Sculpt,persistence_recovery,partial
+genode_sculpt,Genode / Sculpt,update_operations,weak
+genode_sculpt,Genode / Sculpt,supply_chain_trust,weak
+genode_sculpt,Genode / Sculpt,human_usability,partial
+grapheneos,GrapheneOS,containment,partial
+grapheneos,GrapheneOS,authority,partial
+grapheneos,GrapheneOS,trusted_computing_base,partial
+grapheneos,GrapheneOS,application_confinement,strong
+grapheneos,GrapheneOS,integrity,partial
+grapheneos,GrapheneOS,persistence_recovery,partial
+grapheneos,GrapheneOS,update_operations,partial
+grapheneos,GrapheneOS,supply_chain_trust,partial
+grapheneos,GrapheneOS,human_usability,strong
+kali_linux,Kali Linux,containment,weak
+kali_linux,Kali Linux,authority,weak
+kali_linux,Kali Linux,trusted_computing_base,partial
+kali_linux,Kali Linux,application_confinement,weak
+kali_linux,Kali Linux,integrity,weak
+kali_linux,Kali Linux,persistence_recovery,weak
+kali_linux,Kali Linux,update_operations,partial
+kali_linux,Kali Linux,supply_chain_trust,partial
+kali_linux,Kali Linux,human_usability,partial
+parrot_security,Parrot Security,containment,weak
+parrot_security,Parrot Security,authority,weak
+parrot_security,Parrot Security,trusted_computing_base,partial
+parrot_security,Parrot Security,application_confinement,weak
+parrot_security,Parrot Security,integrity,weak
+parrot_security,Parrot Security,persistence_recovery,weak
+parrot_security,Parrot Security,update_operations,partial
+parrot_security,Parrot Security,supply_chain_trust,partial
+parrot_security,Parrot Security,human_usability,partial
