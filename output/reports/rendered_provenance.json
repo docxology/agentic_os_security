@@ -1,0 +1,155 @@
+{
+  "consumed_manuscript": [
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/00_abstract.md",
+      "source_sha256": "fc01550aa86e754d69df2faa484688edaff5b5b16fa9ffc1afa18fa27108e69a"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/01_introduction.md",
+      "source_sha256": "1e9f84379bd0a83eb3aafae75907aebc226f85c0a98685b2759af946d22efbfd"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/02_threat_model.md",
+      "source_sha256": "ed259d4104a73a8f0afbc5a390369fda8d995856a8f7fabc379e5cfedf1becb4"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/03_evaluation_framework.md",
+      "source_sha256": "ce4e8e3c7637886624fb33c880093ead56bcde60ee6ec7942b8f6a37320fbfcf"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/04_compartmentalization_qubes.md",
+      "source_sha256": "54ee8627854548bbbae2ff7da82d12d251c03f235619cb87bf954c024232a458"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/05_reproducible_operations_nixos.md",
+      "source_sha256": "c833c135e657475de23b786817ab1cb39b514bffc6a98467655efa3e3101492a"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/06_conventional_desktops.md",
+      "source_sha256": "461bb13b640df421b5c8d2eb1f0cc61ad757a6f4714eb31c231da3d862359422"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/07_servers_agent_infrastructure.md",
+      "source_sha256": "8e2951920c50cc7351c26a5dcd2e140bf50d6ca6c09552b6469c281f4a0c1218"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/08_boundary_comparators.md",
+      "source_sha256": "e99f5711fb30be7ca15bd0afc58be065b4aaec01d988da430c5231494a9707b8"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/09_agentic_authority_architecture.md",
+      "source_sha256": "36ee24165e197dc52d882a4f54ebe326b3da2b195acf4d2b5fe28eaa37513534"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/10_cognitive_security.md",
+      "source_sha256": "6cd1c3812ffba8a401cda590160ac6eb2ef03b351eba6ff50f4f8bc7beb61216"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/11_opsec_for_agent_operators.md",
+      "source_sha256": "5228728599a4bd743741070d76520cb1fc6dd75799e81334f9339e09ed372762"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/12_orchestration_security.md",
+      "source_sha256": "4bfede6eae47ea0c0c15ba50b84a425ffc37f367845b0b1fa06a48824d365cb1"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/13_configuration_authorization.md",
+      "source_sha256": "553bea41a73bf465048912d3ffe1231150847711541d2c81537c14fba94a26a6"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/14_forecast_2028_2031.md",
+      "source_sha256": "308753c271c25bfc25f266a2bc7eb5fa1df260e0f88e813c037a7986ad64f1cc"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/15_scenarios_and_confidence.md",
+      "source_sha256": "1fb1354544f1e0c6fbf7407f8ff3b29bc73a3616ee9dee361a610b0405301cd5"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/16_conclusion.md",
+      "source_sha256": "ca2dfd9c8c320731765b198cecfb96c1ab78a3ab657eecf460e8989db1a87318"
+    },
+    {
+      "rendered_path": "output/web/_combined_manuscript.md",
+      "rendered_sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "source_path": "manuscript/99_references.md",
+      "source_sha256": "58f110c1e99a98fadf4cadf9ee563cf0db4842e6fadaef30a2691a84334b684e"
+    }
+  ],
+  "evidence_files": {
+    "artifact_manifest": {
+      "path": "output/reports/artifact_manifest.json",
+      "sha256": "fc8ed098ce776af338e46e57338e2cc720b4640caa0f0c33763f80303c86f771",
+      "size_bytes": 10467
+    },
+    "combined_manuscript": {
+      "path": "output/web/_combined_manuscript.md",
+      "sha256": "b75701b1de22d7b8775e534626aa122c05d55454ad2a0ed864b9219e07183cc1",
+      "size_bytes": 169480
+    },
+    "composition_manifest": {
+      "path": "output/reports/manuscript_composition.json",
+      "sha256": "9d07248ea2bf84924ffde54b383d02dab9fca28211121b1e5a8ea66b8f46d867",
+      "size_bytes": 4130
+    },
+    "validation_report": {
+      "path": "output/reports/validation_report.json",
+      "sha256": "3cfb89a5f6f508e8a00e3b422652609194a2a5f508b12dafb08cc88febceabb7",
+      "size_bytes": 13407
+    }
+  },
+  "evidence_mode": "validated-co-snapshot-fingerprint-bridge",
+  "fingerprints": {
+    "config": {
+      "file_count": 18,
+      "sha256": "614ed70b0fda21168f4c134d0e610a7c732f9ff81c25b62c3f7747597d55e2d1"
+    },
+    "output": {
+      "file_count": 34,
+      "sha256": "aa4907a6aec3a69eced01a6d90c3ecf55ea94edbf1161ef705441331155e850e"
+    },
+    "source": {
+      "file_count": 48,
+      "sha256": "a7d9302f85aeb35acaa68cb7c681c32aeb9f58057caaf65011e683e5245c120e"
+    },
+    "stage": {
+      "file_count": 1350,
+      "sha256": "c8b3fc974f3cc45f4fcbd7865212f9ffb83c4b42a1672c5822f26e0ea35eaa13"
+    }
+  },
+  "project": "working/agentic_os_security",
+  "schema_version": "template-rendered-provenance-v2"
+}

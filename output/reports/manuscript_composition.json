@@ -116,6 +116,6 @@
     }
   ],
   "ordered_inputs_sha256": "33bf2e17e6eb3885ccd732b89c0f9692391c0cd520adbdcfe6900aec5a921e04",
-  "project": "agentic_os_security",
+  "project": "working/agentic_os_security",
   "schema_version": "template-manuscript-composition-v1"
 }

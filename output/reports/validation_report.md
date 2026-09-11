@@ -1,6 +1,6 @@
 # Validation Report
 
-**Generated:** 2026-09-11T01:01:54Z
+**Generated:** 2026-09-10T20:53:16Z
 
 ## Validation Checks
 
@@ -13,4 +13,3 @@
 - ✅ PASS: Evidence registry
 - ✅ PASS: Project design overlays
 - ✅ PASS: Artifact manifest
-- ❌ FAIL: Rendered provenance inputs
