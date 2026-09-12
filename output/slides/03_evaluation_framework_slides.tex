@@ -216,8 +216,8 @@
 
 \begin{document}
 
-\section{Evaluation Framework: Nine Properties over Distribution
-Labels}\label{sec:evaluation_framework}
+\section{Evaluation Framework: Nine Properties over Distribution Labels,
+with a Formal Stance Model}\label{sec:evaluation_framework}
 
 \begin{frame}[allowframebreaks]{Why not a distribution label}
 \protect\phantomsection\label{why-not-a-distribution-label}
@@ -397,6 +397,47 @@ documented design provides little of what the property asks.
 unverified by available evidence --- used rather than guessed, because
 absence of a confirmed feature in this review is not proof the feature
 is unavailable.
+\end{frame}
+
+\begin{frame}[allowframebreaks]{A formal stance model}
+\protect\phantomsection\label{a-formal-stance-model}
+The vocabulary is small enough to state formally, and the formal
+statement is worth writing down because it fixes what the matrix claims
+and what it refuses to claim. Let \(C\) be the set of 24 candidates,
+\(P\) the set of 9 properties, and
+\(S = \{\textit{strong}, \textit{partial}, \textit{weak}\}\) the stance
+vocabulary. The evaluation matrix is then a single function
+
+\begin{equation}\protect\phantomsection\label{eq:stance_mapping}{\sigma\colon C \times P \to S \cup \{\textit{n/a}\}}\end{equation}
+
+assigning exactly one stance to each candidate--property pair. Read as a
+function, eq.~\ref{eq:stance_mapping} makes two commitments that prose
+leaves implicit. It is \textbf{total}: the pipeline refuses to emit
+figures until all 216 cells are defined, so no candidate escapes
+evaluation by omission. And it is \textbf{qualitative}: the codomain
+carries no numbers, so the matrix cannot be averaged or ranked without
+an explicit modeling step --- the step the anti-scoring stance above
+\end{frame}
+
+\begin{frame}[allowframebreaks]{A formal stance model}
+declines to supply.
+
+The stance words themselves carry a preference structure rather than a
+measurement scale, and the review reads them as ordered:
+
+\begin{equation}\protect\phantomsection\label{eq:stance_order}{\textit{strong} \succ \textit{partial} \succ \textit{weak}}\end{equation}
+
+meaning that a candidate whose documented design earns the left-hand
+stance dominates a candidate that earns the right-hand stance \emph{on
+that property}. eq.~\ref{eq:stance_order} defines an ordering over
+postures, not distances between them: no arithmetic over stances is
+meaningful, and no rung is a probability. Notably, \(n_a\) does not
+appear in eq.~\ref{eq:stance_order} at all --- an unverified or
+out-of-scope cell sits outside the preference order entirely, which is
+what stops ``we could not verify'' from masquerading as ``we verified it
+is weak.'' The formal model thus encodes exactly the discipline the
+vocabulary was built for: total coverage, ordered confidence in
+documented designs, and honesty about the unverified.
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{How the matrix is constructed

@@ -1,7 +1,7 @@
 {
   "fig:agent_surface": {
     "caption": "Which mediation point constrains which agent capability class; filled numbered cells mark the primary control, and the right marginal counts how many distinct controls cover each capability.",
-    "figure_id": "figure_007",
+    "figure_id": "figure_009",
     "filename": "agent_surface.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:agent_surface",
@@ -57,7 +57,7 @@
   },
   "fig:forecast_horizon": {
     "caption": "Fourteen forecasts placed on the 2026\u20132031 horizon by confidence tier; high-confidence architectural bets cluster early, while low-confidence rows are explicit refusals to predict a distribution winner.",
-    "figure_id": "figure_008",
+    "figure_id": "figure_010",
     "filename": "forecast_horizon.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:forecast_horizon",
@@ -71,7 +71,7 @@
   },
   "fig:orchestration_boundaries": {
     "caption": "A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing.",
-    "figure_id": "figure_006",
+    "figure_id": "figure_008",
     "filename": "orchestration_boundaries.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:orchestration_boundaries",
@@ -81,6 +81,20 @@
     },
     "placement": "h",
     "section": "Securing Agent Orchestration",
+    "width": "0.9\\textwidth"
+  },
+  "fig:os_stack": {
+    "caption": "Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer.",
+    "figure_id": "figure_007",
+    "filename": "os_stack.png",
+    "generated_by": "10_evaluation_analysis.py",
+    "label": "fig:os_stack",
+    "metadata": {
+      "alt_text": "Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer.",
+      "source": "agentic_os_security evaluation pipeline"
+    },
+    "placement": "h",
+    "section": "Servers and Agent-Execution Infrastructure",
     "width": "0.9\\textwidth"
   },
   "fig:property_matrix": {
@@ -113,7 +127,7 @@
   },
   "fig:update_windows": {
     "caption": "Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category.",
-    "figure_id": "figure_009",
+    "figure_id": "figure_006",
     "filename": "update_windows.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:update_windows",

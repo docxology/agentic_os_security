@@ -2,7 +2,7 @@
 
 AI agents now hold genuine system authority: they execute code, touch credentials, open network egress, parse hostile documents, and in many deployments initiate or approve changes to the very infrastructure they run on. This review, dated 2026-09-10, examines what that shift does to operating-system security. The primary scenario is a technically capable operator whose workstation faces both **exploitation** — an attacker compromising a browser, parser, dependency, or agent tool and then crossing a boundary — and **authorized misuse** — an attacker persuading an agent to use its existing, legitimate access to exfiltrate secrets or authorize consequential actions. The second path requires no kernel exploit at all, which reframes the evaluation: the axis of analysis is the authority a component already holds, not merely the difficulty of exploiting it.
 
-This revision (0.3.0) refreshes the evidence base through September 11, 2026. The offensive baseline expands from four primary sources to the incident record now available: the NCSC assessments of January 2024 and May 2025, the Anthropic campaign investigation of November 2025 — whose tradecraft MITRE has canonized as campaign C0062 — the August 2025 "vibe hacking" report and the September 2026 threat-intelligence report on credential theft, OpenAI's disruption reporting and its October 2025 counterpoint, Google GTIG's analysis of an autonomous credential-harvesting campaign, the OpenAI–Hugging Face evaluation incident of July 2026, the UK AI Security Institute's unsanctioned-behavior incident (nineteen out-of-scope actions across seven models), and DARPA's AIxCC finals, where AI systems identified and patched vulnerabilities, including real, non-synthetic ones, at measured rates. The platform reviews absorb the 2026 record: Qubes 4.3.0 (Xen 4.19, the sys-gui split, the Devices API, the salt management model, and the QSB-118 dom0 injection, CVE-2026-82636) and Nix 2.34/2.35 with its advisory chain, the removal of the hardened profiles, and 95.18 percent measured ISO reproducibility. The analysis is situated against the standards landscape — the OWASP Agentic AI Threats and Mitigations guide and the December 2025 Top 10 for Agentic Applications, CSA's MAESTRO framework, the NIST AI Agent Standards Initiative, and the CISA-led Five-Eyes adoption guidance — and against the convergent sandboxing practice of the major coding agents, which together motivate the OS-level lens this review applies. A defensive-stack matrix (24 candidates against eight mitigation classes) joins the candidate–property matrix as a second deterministic artifact.
+This revision (0.4.0) refreshes the evidence base through September 11, 2026. The offensive baseline expands from four primary sources to the incident record now available: the NCSC assessments of January 2024 and May 2025, the Anthropic campaign investigation of November 2025 — whose tradecraft MITRE has canonized as campaign C0062 — the August 2025 "vibe hacking" report and the September 2026 threat-intelligence report on credential theft, OpenAI's disruption reporting and its October 2025 counterpoint, Google GTIG's analysis of an autonomous credential-harvesting campaign, the OpenAI–Hugging Face evaluation incident of July 2026, the UK AI Security Institute's unsanctioned-behavior incident (nineteen out-of-scope actions across seven models), and DARPA's AIxCC finals, where AI systems identified and patched vulnerabilities, including real, non-synthetic ones, at measured rates. The platform reviews absorb the 2026 record: Qubes 4.3.0 (Xen 4.19, the sys-gui split, the Devices API, the salt management model, and the QSB-118 dom0 injection, CVE-2026-82636) and Nix 2.34/2.35 with its advisory chain, the removal of the hardened profiles, and 95.18 percent measured ISO reproducibility. The analysis is situated against the standards landscape — the OWASP Agentic AI Threats and Mitigations guide and the December 2025 Top 10 for Agentic Applications, CSA's MAESTRO framework, the NIST AI Agent Standards Initiative, and the CISA-led Five-Eyes adoption guidance — and against the convergent sandboxing practice of the major coding agents, which together motivate the OS-level lens this review applies. A defensive-stack matrix (24 candidates against eight mitigation classes) joins the candidate–property matrix as a second deterministic artifact.
 
 The review extends the underlying architectural assessment into three domains the source treatment only touches implicitly: **cognitive security** (the authorized-misuse surface, where persuasion substitutes for exploitation), **operator OpSec** (the practices that keep compartmentalization real under workload pressure), and **agent-orchestration security** (the boundary design of multi-agent systems themselves). Deep reviews of Qubes OS and NixOS anchor the analysis.
 
@@ -15,7 +15,7 @@ The review extends the underlying architectural assessment into three domains th
 ```
 
 
-# Introduction: Offensive AI Agents Arrive at the Operating-System Boundary {#sec:introduction}
+# Introduction: Offensive AI Agents Arrive at the Operating-System Boundary — Why Agent Capability Reshapes OS Security {#sec:introduction}
 
 ## Why this review, now
 
@@ -75,7 +75,7 @@ The strongest design target is not an operating system that promises never to be
 ```
 
 
-# Threat Model: Two Ways to Lose — Exploitation and Authorized Misuse {#sec:threat_model}
+# Threat Model: Two Ways to Lose — Exploitation and Authorized Misuse under Offensive Automation {#sec:threat_model}
 
 ## The primary scenario
 
@@ -145,7 +145,7 @@ From this baseline the review adopts a standing forecast discipline: offensive a
 ```
 
 
-# Evaluation Framework: Nine Properties over Distribution Labels {#sec:evaluation_framework}
+# Evaluation Framework: Nine Properties over Distribution Labels, with a Formal Stance Model {#sec:evaluation_framework}
 
 ## Why not a distribution label
 
@@ -183,6 +183,20 @@ The evidence discipline is the same one the threat model applies to its baseline
 There is no adequate evidence in this review for assigning meaningful universal scores, and raw vulnerability counts would not resolve the comparison either: they conflate disclosure volume with exposure, and they are confounded by project size, patch latency, and measurement effort. Worse, composite scores create false precision across incommensurable properties — trading a point of "usability" against a point of "containment" implies an exchange rate that no operator's actual threat model supplies. This is the same discipline that separates reproducible deployment from verified reproducible builds [@nixos_reproducibility] and authenticity from provenance: properties that answer different questions must stay separate.
 
 Instead, every candidate–property cell receives one qualitative stance: **strong**, **partial**, **weak**, or **n_a**. A `strong` stance means the documented design directly and coherently addresses the property in this threat model. `partial` means the property is addressed with material conditions, integration gaps, or operator obligations attached. `weak` means the documented design provides little of what the property asks. `n_a` marks candidates for which the property is out of scope or unverified by available evidence — used rather than guessed, because absence of a confirmed feature in this review is not proof the feature is unavailable.
+
+## A formal stance model
+
+The vocabulary is small enough to state formally, and the formal statement is worth writing down because it fixes what the matrix claims and what it refuses to claim. Let $C$ be the set of 24 candidates, $P$ the set of 9 properties, and $S = \{\textit{strong}, \textit{partial}, \textit{weak}\}$ the stance vocabulary. The evaluation matrix is then a single function
+
+$$\sigma\colon C \times P \to S \cup \{\textit{n/a}\}$$ {#eq:stance_mapping}
+
+assigning exactly one stance to each candidate–property pair. Read as a function, [@eq:stance_mapping] makes two commitments that prose leaves implicit. It is **total**: the pipeline refuses to emit figures until all 216 cells are defined, so no candidate escapes evaluation by omission. And it is **qualitative**: the codomain carries no numbers, so the matrix cannot be averaged or ranked without an explicit modeling step — the step the anti-scoring stance above declines to supply.
+
+The stance words themselves carry a preference structure rather than a measurement scale, and the review reads them as ordered:
+
+$$\textit{strong} \succ \textit{partial} \succ \textit{weak}$$ {#eq:stance_order}
+
+meaning that a candidate whose documented design earns the left-hand stance dominates a candidate that earns the right-hand stance *on that property*. [@eq:stance_order] defines an ordering over postures, not distances between them: no arithmetic over stances is meaningful, and no rung is a probability. Notably, $n_a$ does not appear in [@eq:stance_order] at all — an unverified or out-of-scope cell sits outside the preference order entirely, which is what stops "we could not verify" from masquerading as "we verified it is weak." The formal model thus encodes exactly the discipline the vocabulary was built for: total coverage, ordered confidence in documented designs, and honesty about the unverified.
 
 ## How the matrix is constructed and refreshed
 
@@ -224,7 +238,7 @@ With the framework fixed, the next two sections apply it in depth to the two anc
 ```
 
 
-# Compartmentalization: Qubes OS Under Offensive-Agent Load {#sec:qubes}
+# Compartmentalization: Qubes OS Under Offensive-Agent Load — Capabilities and Limits {#sec:qubes}
 
 ## Architectural foundation: separation under Xen
 
@@ -362,7 +376,7 @@ NixOS is especially attractive for a capable operator building auditable, replac
 ```
 
 
-# Conventional Desktops: Hardening Candidates and Compatibility Costs {#sec:desktops}
+# Conventional Desktops: Hardening Candidates, Compatibility Costs, and Agent Isolation {#sec:desktops}
 
 The two preceding sections examined the architectural poles of this review: hypervisor-based compartmentalization in [@sec:qubes] and declarative, rebuildable operations in [@sec:nixos]. Most operators, however, will run a conventional Linux desktop for the foreseeable future, so the desktop candidates deserve the same property-based scrutiny rather than a distribution-label comparison. This section evaluates seven desktop-focused candidates against the nine properties of [@sec:evaluation_framework], with particular attention to `application_confinement`, `integrity`, and `human_usability`: whether shipped defaults actually constrain applications, whether boot and update paths verify what runs, and whether a real operator will sustain the configuration. All judgments follow from documented designs, release notes, and advisories reviewed on 2026-09-10; none rests on a comparative penetration test, and none is expressed as a numeric score.
 
@@ -405,7 +419,7 @@ Every candidate in [@tbl:desktops] optimizes the desktop's own attack surface: h
 ```
 
 
-# Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline {#sec:servers}
+# Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline and the Operating-System Stack {#sec:servers}
 
 Server selection differs from desktop selection in what dominates. Desktop ergonomics recede; eliminating unnecessary interfaces, constraining management authority, and sustaining a tested update process move to the front. The candidates below target different workloads — Kubernetes nodes, container hosts, appliances, minimal systems, general-purpose servers — so [@tbl:servers] is a selection guide per workload, not a universal ranking. Judgments follow documented designs and support policies reviewed on 2026-09-10, not comparative penetration testing, and no numeric scores are assigned.
 
@@ -428,6 +442,12 @@ During the review window the integrity paths of these candidates moved: Talos ma
 
 Support-policy diversity is easier to see than to state, so [@fig:update_windows] plots the documented support or update posture of each of the 24 candidates, colored by category, with rows annotated where a project states no fixed window. Some candidates commit to dated horizons — Ubuntu Core's fifteen-year window for Core 26 [@ubuntu_core_26_fde], Debian's LTS coverage to 2030-06-30 [@debian_trixie], Fedora's release end-of-life dates [@fedora_release_lifecycle] — while others hold rolling or release-relative postures this review records as policy rather than months. Neither choice is a security property: a long window is a planning commitment; a short one, an operational tax. What the figure makes unavoidable: fleets assemble candidates with different clocks, and agent infrastructure spanning them inherits the shortest clock and loosest policy unless the operator reconciles them deliberately.
 
+Formally, the review records each candidate's support posture as a function
+
+$$W(c) \in \mathbb{N} \cup \{\infty\}$$ {#eq:update_window_semantics}
+
+where a finite value is the project's committed coverage in months and $W(c) = \infty$ marks a rolling or release-relative policy rather than an indefinite guarantee. The reading this section carries forward is monotone: risk grows as the committed window is exhausted, because a candidate operating inside its window still converts maintenance into scheduled, tested operations, while one at or past the boundary converts them into unplanned exposure [@eq:update_window_semantics].
+
 ![Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category.](../figures/update_windows.png){#fig:update_windows width=100%}
 
 ## An execution baseline for untrusted agent workloads
@@ -446,6 +466,14 @@ The same sober accounting applies one layer down, where the kernel primitives th
 
 Three separations keep the baseline honest. The choice of **host OS** — Talos, Bottlerocket, CoreOS, a minimal Alpine, a general-purpose distribution — is a decision about the node's own attack surface and update discipline. The choice of **workload-isolation mechanism** — VM, microVM, container, namespace sandbox — is a decision about what survives when the workload turns hostile. The definition of the agent's **authority over external systems** — credentials, egress, approvals — is a decision about the authorized-misuse path. Choosing a minimal container host does not make an ordinary container a VM-equivalent boundary; Bottlerocket's own documentation resists that collapse [@bottlerocket_security_features]. Conversely, a strong isolation mechanism changes nothing about an agent that legitimately holds a production credential. Nix's declarative construction can help assemble and replace worker environments quickly [@nix_sandbox_config], but as [@sec:nixos] establishes, its sandbox concerns builds, not the runtime confinement of the thing built.
 
+Viewed together, the baseline's four elements occupy a specific slice of a larger structure. [@fig:os_stack] arranges the operating-system security stack as eight ordered layers, from hardware and firmware at the top, through the hypervisor and the kernel's access-control primitives, down to the agent runtime and its tool bridge; the right-hand columns record how strongly each candidate class in this review covers each layer. Formally, the stack is a defense sequence
+
+$$L_1 \prec L_2 \prec \cdots \prec L_8$$ {#eq:stack_layering}
+
+with one design obligation: a compromise at layer $i$ must not grant authority at layer $i+1$ [@eq:stack_layering]. The disposable-isolation baseline concentrates on layers four through six. The sandbox runtime layer — bubblewrap, seatbelt, gVisor, jailer-style wrappers composing the kernel primitives of the layer above — is where this section's advisory record lives: Firecracker's jailer is privileged host-side code with its own CVE stream [@firecracker_jailer_docs; @firecracker_jailer_advisory], and gVisor accounts for CVEs across the whole sandbox precisely because that layer is attack surface rather than wall [@gvisor_security_policy]. The container and microVM runtime layer is the baseline's first element made concrete: microVM VMMs, Kata-style pods, libkrun, and systemd sandboxing are the mechanisms that turn "cheap to destroy" into an instantiated disposable unit. The update and provisioning layer keeps those runtimes honest over time — A/B atomic replacement, transactional-update, reproducible and signed updates — the discipline Bottlerocket documents for its host and Fedora CoreOS and MicroOS implement for theirs [@bottlerocket_security_features; @fedora_coreos_updates; @opensuse_transactional_update]. Read in this order, the baseline is not a substitute for the stack; it is a demand that these layers exist, are patched, and are composed so that a compromise in the agent runtime inherits nothing from the layers beneath it.
+
+![Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer.](../figures/os_stack.png){#fig:os_stack width=100%}
+
 ## Orchestrators and API credentials are the authority
 
 On a fleet of hardened nodes, the concentrated authority sits above them. Talos removes the node shell and interactive console and secures its API with mutual TLS [@talos_repo], a real reduction of the node's trusted interface — but whoever holds the API credentials and controls the orchestrator holds the fleet: workload placement, secret distribution, and node lifecycle. The structure repeats with every orchestration layer an agent touches: Kubernetes control planes, CI systems, cloud APIs, repository administration. Their mediation belongs to the control design of [@sec:agentic_authority] rather than to node hardening. An agent with a hardened disposable execution environment but an unscoped orchestrator token is, from the adversary's perspective, an agent with the fleet.
@@ -459,7 +487,7 @@ The operational consequence is a division of labor. Node candidates in [@tbl:ser
 ```
 
 
-# Boundary Comparators: What Non-Linux Systems Teach {#sec:comparators}
+# Boundary Comparators: What Non-Linux and Specialized Systems Teach {#sec:comparators}
 
 The candidates examined so far live inside the Linux workstation and server lanes. This section places seven systems that sit outside those lanes — privacy distributions, a non-Linux BSD, formally verified and capability-based microkernel systems, a mobile platform, and offensive-toolkit distributions — into the same property vocabulary. Their value here is comparative: each one demonstrates, in a deployed artifact, a property that the composition argument of this review needs, and each also demonstrates the boundary at which its claim stops. Reading them as competitors for a single "most secure system" title misses what they actually teach. All entries follow the evaluation discipline of [@sec:evaluation_framework]: documented designs, explicitly scoped claims, no numeric scores.
 
@@ -530,7 +558,9 @@ The table and [@fig:trust_domains] encode two design judgments. First, hostile-i
 
 ## Nine controls and their design rationale
 
-The domains define where authority lives; the controls define how work crosses the boundaries. Each control below is stated as an operating rule with the design rationale that makes it non-negotiable. Where a shipping agent tool already implements a version of a rule, the rationale cites the documented implementation — as mechanism evidence, not as an endorsement of any tool's security. The nine are also a composed defense rather than a stack of independent toggles: Defense Composition Algebra treats layered controls as formal objects whose composition — coverage interactions included, not just their count — determines what an attacker must defeat, and the set below is chosen so that each control closes a failure the others leave open [@cif_formal_2026].
+The domains define where authority lives; the controls define how work crosses the boundaries. Each control below is stated as an operating rule with the design rationale that makes it non-negotiable. Where a shipping agent tool already implements a version of a rule, the rationale cites the documented implementation — as mechanism evidence, not as an endorsement of any tool's security. The nine are also a composed defense rather than a stack of independent toggles: Defense Composition Algebra treats layered controls as formal objects whose composition — coverage interactions included, not just their count — determines what an attacker must defeat [@cif_formal_2026]. In its notation, a defense over the eight mitigation classes is a composition of per-class layers, written as in [@eq:defense_composition], and the set below is chosen so that each control closes a failure the others leave open.
+
+$$D = d_1 \circ d_2 \circ \cdots \circ d_8$$ {#eq:defense_composition}
 
 : The nine controls of the agentic authority architecture: operating rule and design rationale for each. The rules hold regardless of host distribution; the rationales connect each control to a failure it prevents, and where shipping agent tools implement a version of the rule, the rationale points at the documented mechanism. {#tbl:controls}
 
@@ -560,7 +590,9 @@ The convergence has a design consequence the rationales above now state explicit
 
 ![The six-rung authority ladder as a swimlane across human principal, orchestrator and agent, and tool broker; hatched cells mark exercise paths an agent must never hold without external authorization.](../figures/authority_ladder.png){#fig:authority_ladder width=100%}
 
-The ladder in [@fig:authority_ladder] gives the architecture its operating rhythm across six rungs: **propose**, **stage**, **authorize**, **exercise**, **audit**, **revoke**. An agent may propose and stage freely — generating configurations, preparing artifacts, drafting deployments — because nothing at those rungs changes the world. Authorization is the hinge: it must be exercised outside the agent, by the human principal or by deterministic policy, and the approval context is a mediated operation with artifact, destination, scope, and expiration. Exercise happens under whatever scopes the authorization granted, no more. Audit and revoke are not afterthoughts but standing rungs: the audit record lives outside the execution environment so it survives the environment's destruction, and revocation is the only rung that addresses what a rebuild cannot — authority already exercised against the outside world. An architecture that lets the agent climb from propose to authorize on its own has not built a ladder; it has built a loop, and the configuration-side invariants that prevent exactly that are specified and enforced in [@sec:configuration_authorization]. The permission modes of the shipping tools read as partial ladders: default-prompt modes place authorize with the human; accept-edits moves routine edit-authorization to the agent while keeping command approval; bypass modes remove the hinge altogether and are, in this architecture's terms, a design admission rather than a mode [@anthropic_sandboxing; @codex_sandboxing].
+The ladder in [@fig:authority_ladder] gives the architecture its operating rhythm across six rungs: **propose**, **stage**, **authorize**, **exercise**, **audit**, **revoke**, ordered as in [@eq:authority_ladder_order]. An agent may propose and stage freely — generating configurations, preparing artifacts, drafting deployments — because nothing at those rungs changes the world. Authorization is the hinge: it must be exercised outside the agent, by the human principal or by deterministic policy, and the approval context is a mediated operation with artifact, destination, scope, and expiration. Exercise happens under whatever scopes the authorization granted, no more. Audit and revoke are not afterthoughts but standing rungs: the audit record lives outside the execution environment so it survives the environment's destruction, and revocation is the only rung that addresses what a rebuild cannot — authority already exercised against the outside world. An architecture that lets the agent climb from propose to authorize on its own has not built a ladder; it has built a loop, and the configuration-side invariants that prevent exactly that are specified and enforced in [@sec:configuration_authorization]. The permission modes of the shipping tools read as partial ladders: default-prompt modes place authorize with the human; accept-edits moves routine edit-authorization to the agent while keeping command approval; bypass modes remove the hinge altogether and are, in this architecture's terms, a design admission rather than a mode [@anthropic_sandboxing; @codex_sandboxing].
+
+$$\textit{propose} \prec \textit{stage} \prec \textit{authorize} \prec \textit{exercise} \prec \textit{audit} \prec \textit{revoke}$$ {#eq:authority_ladder_order}
 
 The authorize/exercise split is also what keeps delegated trust bounded. Formal treatments of agent trust bound a delegate's effective trust by what it was authorized to exercise rather than by what it can reach, and the ladder encodes that bound structurally: authorization fixes the scope, exercise consumes it, and no rung is reachable that lets the agent enlarge its own authorization [@cif_formal_2026]. The orchestration section extends the same bound across agent-to-agent delegation chains, where unbounded trust would otherwise amplify with each hop [@sec:orchestration].
 
@@ -769,7 +801,9 @@ An agent-to-agent delegation chain is a sequence of deputies. Lampson's protecti
 
 The mitigation is structural rather than behavioral. Authority must never be derived from message content: the broker validates the operation itself — artifact identity, destination, scope, expiry — not the orchestrator's description of the operation. Artifacts crossing a delegation boundary are integrity-checked and provenance-recorded before they influence any downstream request. And delegation can only narrow authority: a worker returns requests that preserve or reduce scope, never requests that expand it, and the broker rejects expansions as a matter of policy. These three rules convert the deputy from a trusted forwarder into a checked channel.
 
-The formal grounding for these rules is δ-bounded delegation: each hop in an agent-to-agent chain is permitted to narrow the authority it passes, never to widen it, so trust cannot amplify across a delegation chain no matter how many intermediaries it traverses [@cif_formal_2026]. That formal model is not left as a statement of intent — its bounded-delegation and trust-boundedness properties have been exercised computationally, with implementations validating the no-amplification guarantee on constructed delegation scenarios [@cif_validation_2026].
+The formal grounding for these rules is δ-bounded delegation ([@eq:delegation_bound]): each hop in an agent-to-agent chain is permitted to narrow the authority it passes, never to widen it, so trust cannot amplify across a delegation chain no matter how many intermediaries it traverses [@cif_formal_2026]. That formal model is not left as a statement of intent — its bounded-delegation and trust-boundedness properties have been exercised computationally, with implementations validating the no-amplification guarantee on constructed delegation scenarios [@cif_validation_2026].
+
+$$\mathrm{trust}(a \to c) \le \delta \cdot \mathrm{trust}(a \to b)$$ {#eq:delegation_bound}
 
 ![A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing.](../figures/orchestration_boundaries.png){#fig:orchestration_boundaries width=100%}
 
@@ -813,7 +847,7 @@ The mapping closes the loop with [@sec:agentic_authority]. The orchestrator's de
 ```
 
 
-# Configuration Generation Is Not Authorization {#sec:configuration_authorization}
+# Configuration Generation Is Not Authorization: Review Invariants and Enforcer Independence {#sec:configuration_authorization}
 
 An AI agent can write a declarative configuration, an access-control policy, or a deployment change as fluently as it writes code. Generation is not the security event. The security event is whatever independently enforces the boundary between what the agent may change and what it may only request — above all, the mechanisms that constrain the agent itself. This section deepens that argument, states the 9 review invariants that an agent must never be able to violate, and locates the separation of policy writing, policy approval, and permission exercise inside the authority architecture of [@sec:agentic_authority].
 
@@ -833,7 +867,9 @@ Provenance inspection, in particular, is maturing from a manual discipline into 
 
 ## The review invariants
 
-[@tbl:invariants] states the review invariants: what an agent must never be able to do, the failure each invariant closes, and where enforcement must live.
+[@tbl:invariants] states the review invariants: what an agent must never be able to do, the failure each invariant closes, and where enforcement must live. Formally, each invariant is an unreachable-state predicate ([@eq:invariant_predicate]): no state reachable from agent-writable configuration may violate an invariant.
+
+$$\forall g \in G_{\mathrm{agent}}\colon \neg\,\mathrm{reachable}(g, \mathrm{violate}(\iota_i))$$ {#eq:invariant_predicate}
 
 | Invariant: the agent must never be able to | Failure the invariant closes | Enforcement point |
 | --- | --- | --- |
@@ -991,7 +1027,7 @@ The prospectus is therefore specific about what to build next:
 - **Disposable execution with external approval chains**, in which task environments are rebuilt rather than trusted, and consequential actions require an approval no component in the hierarchy can grant itself.
 - **Auditable declarative baselines** in which intended system state is explicit, reviewable, reproducibly deployable — and independently authorized before deployment.
 
-The 9 figures and the underlying analysis artifacts are reproducible from the repository's own pipeline, because a prospectus about independently rebuildable environments should be one. The composition that matters is not any single system. It is the set of boundaries an operator can actually keep: workstations that compartmentalize, operations that rebuild, updates that authenticate, and agents that can propose everything while authorizing almost nothing. Building those, in pieces that someone demonstrably maintains, is the work this horizon rewards.
+The 10 figures and the underlying analysis artifacts are reproducible from the repository's own pipeline, because a prospectus about independently rebuildable environments should be one. The composition that matters is not any single system. It is the set of boundaries an operator can actually keep: workstations that compartmentalize, operations that rebuild, updates that authenticate, and agents that can propose everything while authorizing almost nothing. Building those, in pieces that someone demonstrably maintains, is the work this horizon rewards.
 
 
 

@@ -1,23 +1,29 @@
-"""Graphical abstract (cover figure) — NOT a manuscript figure.
+"""Graphical abstract (cover figure) v2 — NOT a manuscript figure.
 
-``output/figures/graphical_abstract.png`` — a wide 16:9 cover layout with no
-``{#fig:...}`` label. It stays out of the manuscript figure registry and out
-of ``RESULT_NUM_FIGURES``; the cover embed references the PNG path directly.
+``output/figures/graphical_abstract.png`` — a tall portrait cover layout
+(9.6 x 11.8 in @ 300 dpi) with no ``{#fig:...}`` label. It stays out of the
+manuscript figure registry and out of ``RESULT_NUM_FIGURES``; the cover
+embed scales it by the title-page height fraction.
 
-Layout (left to right, bottom band):
-1. Left: the two failure paths — exploitation of the OS boundary by
-   offensive agents, and authorized misuse by sanctioned agents.
-2. Center: the nine evaluation properties as chips; each chip carries a
-   mini stacked bar of the 24-candidate stance distribution computed from
+v2 layout (top to bottom, three side-by-side columns, thesis band):
+1. Title strip: thesis headline + the 24 x 9 evaluation scope in words.
+2. Left column: the two failure paths — exploitation of the
+   operating-system boundary by offensive agents, and authorized misuse by
+   sanctioned agents.
+3. Middle column: the nine evaluation properties, each with a mini stacked
+   bar of the 24-candidate stance distribution computed from
    :func:`agentic_os_security.registry.matrix_rows`.
-3. Right: the eight candidate classes with stance glyph counts summed over
-   the class's candidates.
-4. Bottom band: the composition thesis — containment + reproducible
+4. Right column: the eight candidate classes as horizontal stacked bars
+   with full-word counts ("7 strong / 34 partial / 22 weak" style) summed
+   over the class's candidates — no letter codes anywhere on the figure.
+5. Bottom band: the composition thesis — containment + reproducible
    operations + boot integrity + capability-limited agents as one design
    target.
 
-Same byte-determinism contract as every figure generator: fixed fonts, no
-wall-clock, no pyplot state, metadata stripped on save.
+Typography floor: 15.5 pt on the canvas (>= 11 pt effective at the cover's
+0.72 height fraction). Same byte-determinism contract as every figure
+generator: fixed fonts, no wall-clock, no pyplot state, metadata stripped
+on save.
 """
 
 from __future__ import annotations
@@ -34,11 +40,9 @@ from ._common import (
     CATEGORY_LABELS,
     OKABE_ITO,
     STANCE_COLORS,
-    STANCE_GLYPHS,
     ascii_text,
     new_figure,
     save_figure,
-    wrap_ascii,
 )
 
 __all__ = ["generate_graphical_abstract"]
@@ -50,14 +54,22 @@ _COMPOSE = OKABE_ITO["bluish_green"]
 _INK = "#222222"
 _SOFT = "#555555"
 
-_THESIS_PARTS = (
-    "Qubes-like containment",
-    "Nix-like reproducibility",
-    "Boot integrity",
-    "Capability-limited agents",
-)
+#: On-canvas typography floor: 15.5 pt keeps every glyph at >= 11 pt
+#: effective after the title page scales the cover by height fraction 0.72.
+_BODY = 15.5
+_BOLD = 17.0
+_HEADER = 15.5
+
+_CANVAS_W = 9.6
+_CANVAS_H = 11.8
 
 _STANCE_ORDER = ("strong", "partial", "weak", "n_a")
+_STANCE_WORDS = {
+    "strong": "strong",
+    "partial": "partial",
+    "weak": "weak",
+    "n_a": "not assessed",
+}
 
 
 def _stance_tallies() -> tuple[dict[str, Counter], dict[str, Counter]]:
@@ -69,6 +81,51 @@ def _stance_tallies() -> tuple[dict[str, Counter], dict[str, Counter]]:
         per_property[property_id][stance] += 1
         per_category.setdefault(category_of[candidate_id], Counter())[stance] += 1
     return per_property, per_category
+
+
+def _counts_lines(tallies: Counter) -> list[str]:
+    """Full-word stance counts, e.g. ``["7 strong / 34 partial / 22 weak"]``.
+
+    Zero-count stances are omitted; ``n_a`` renders as "not assessed".
+    Segments pack greedily into at most two lines that fit the class
+    column (36 characters at the 15.5 pt body size).
+    """
+    parts = [
+        f"{tallies[stance]} {_STANCE_WORDS[stance]}"
+        for stance in ("strong", "partial", "weak")
+        if tallies[stance]
+    ]
+    if tallies["n_a"]:
+        parts.append(f"{tallies['n_a']} not assessed")
+    lines: list[str] = []
+    current = ""
+    for part in parts:
+        candidate = f"{current} / {part}" if current else part
+        if len(candidate) <= 36 or not current:
+            current = candidate
+        else:
+            lines.append(current)
+            current = part
+    if current:
+        lines.append(current)
+    return lines
+
+
+def _wrap_name(name: str, width: int = 18) -> list[str]:
+    """Greedy word wrap for a property name (at most three lines)."""
+    words = ascii_text(name).split()
+    display: list[str] = []
+    current = ""
+    for word in words:
+        candidate = f"{current} {word}" if current else word
+        if len(candidate) <= width or not current:
+            current = candidate
+        else:
+            display.append(current)
+            current = word
+    if current:
+        display.append(current)
+    return display
 
 
 def _chip(
@@ -96,13 +153,13 @@ def _chip(
     )
 
 
-def _arrow(ax, x0: float, y0: float, x1: float, y1: float, color: str, lw: float = 2.2) -> None:
+def _arrow(ax, x0: float, y0: float, x1: float, y1: float, color: str, lw: float = 2.6) -> None:
     ax.add_patch(
         FancyArrowPatch(
             (x0, y0),
             (x1, y1),
             arrowstyle="-|>",
-            mutation_scale=22,
+            mutation_scale=26,
             linewidth=lw,
             color=color,
             shrinkA=0,
@@ -112,239 +169,258 @@ def _arrow(ax, x0: float, y0: float, x1: float, y1: float, color: str, lw: float
     )
 
 
+def _stacked_bar(
+    ax,
+    x: float,
+    y: float,
+    w: float,
+    h: float,
+    tallies: Counter,
+) -> None:
+    """Horizontal stance bar; segment widths proportional to the counts."""
+    total = sum(tallies.values()) or 1
+    cursor = x
+    for stance in _STANCE_ORDER:
+        seg = w * tallies[stance] / total
+        if seg <= 0:
+            continue
+        ax.add_patch(
+            Rectangle(
+                (cursor, y),
+                seg,
+                h,
+                facecolor=STANCE_COLORS[stance],
+                edgecolor="white",
+                linewidth=0.5,
+                zorder=3,
+            )
+        )
+        cursor += seg
+
+
 def generate_graphical_abstract(project_root: Path | str) -> Path:
-    """Render the 16:9 cover graphical abstract at 300 dpi."""
+    """Render the tall portrait cover graphical abstract at 300 dpi."""
     root = Path(project_root)
     out = figures_dir(root) / "graphical_abstract.png"
 
     per_property, per_category = _stance_tallies()
     n_candidates = len(CANDIDATES)
+    n_properties = len(PROPERTIES)
     properties = list(PROPERTIES)
+    categories = [cat for cat in CATEGORY_LABELS if cat in per_category]
 
-    # Canvas: 12.8 x 7.2 inches, absolute inch coordinates.
-    fig = new_figure((12.8, 7.2))
+    # Canvas: 9.6 x 11.8 inches, absolute inch coordinates.
+    fig = new_figure((_CANVAS_W, _CANVAS_H))
     fig.subplots_adjust(left=0, right=1, top=1, bottom=0)
     ax = fig.add_axes((0, 0, 1, 1))
-    ax.set_xlim(0, 12.8)
-    ax.set_ylim(0, 7.2)
+    ax.set_xlim(0, _CANVAS_W)
+    ax.set_ylim(0, _CANVAS_H)
     ax.axis("off")
 
-    # --- Title band. ---
+    # --- Title strip. ---
     ax.text(
-        6.4,
-        6.88,
-        ascii_text("Securing AI agents at the operating-system boundary: the composition that matters"),
-        fontsize=18.5,
+        _CANVAS_W / 2,
+        11.40,
+        ascii_text("Securing AI agents at the operating-system boundary"),
+        fontsize=21.0,
         fontweight="bold",
         ha="center",
         va="center",
         color=_INK,
     )
     ax.text(
-        6.4,
-        6.58,
-        ascii_text(f"{n_candidates} operating systems x 9 properties - two failure paths, one composed defense"),
-        fontsize=11.5,
-        ha="center",
-        va="center",
-        color=_SOFT,
-    )
-
-    # --- Left panel: the two failure paths (x 0.28 - 2.80). ---
-    ax.text(1.54, 6.30, "TWO FAILURE PATHS", fontsize=11, fontweight="bold", ha="center", va="center", color=_SOFT)
-
-    _chip(ax, 0.28, 4.42, 2.52, 1.30, "#FBE9E4", _EXPLOIT, lw=1.8)
-    ax.text(1.54, 5.42, "Exploitation", fontsize=14.5, fontweight="bold", ha="center", va="center", color=_INK)
-    ax.text(
-        1.54,
-        4.88,
-        wrap_ascii("Offensive AI agents attack the OS boundary itself", width=30, max_lines=3),
-        fontsize=10,
+        _CANVAS_W / 2,
+        11.04,
+        ascii_text("the composition that matters"),
+        fontsize=21.0,
+        fontweight="bold",
         ha="center",
         va="center",
         color=_INK,
-        linespacing=1.35,
     )
-
-    _chip(ax, 0.28, 2.78, 2.52, 1.30, "#FCF2E4", _MISUSE, lw=1.8)
-    ax.text(1.54, 3.78, "Authorized misuse", fontsize=14.5, fontweight="bold", ha="center", va="center", color=_INK)
     ax.text(
-        1.54,
-        3.24,
-        wrap_ascii("Sanctioned agents exceed intent from inside the boundary", width=30, max_lines=3),
-        fontsize=10,
-        ha="center",
-        va="center",
-        color=_INK,
-        linespacing=1.35,
-    )
-
-    ax.text(
-        1.54,
-        2.20,
-        "the same 9 properties\nscore both paths",
-        fontsize=9.5,
-        style="italic",
+        _CANVAS_W / 2,
+        10.70,
+        ascii_text(f"{n_candidates} operating systems x {n_properties} properties"),
+        fontsize=_BODY,
         ha="center",
         va="center",
         color=_SOFT,
-        linespacing=1.4,
     )
     ax.text(
-        1.54,
-        1.78,
-        "S = strong - P = partial - W = weak",
-        fontsize=9,
-        style="italic",
+        _CANVAS_W / 2,
+        10.42,
+        ascii_text("two failure paths, one composed defense"),
+        fontsize=_BODY,
         ha="center",
         va="center",
         color=_SOFT,
     )
 
-    # --- Center panel: the nine property chips, 3 x 3 (x 3.20 - 8.10). ---
-    ax.text(5.65, 6.30, "NINE PROPERTIES", fontsize=11, fontweight="bold", ha="center", va="center", color=_SOFT)
-    chip_w, chip_h = 1.48, 1.06
-    gap_x, gap_y = 0.23, 0.24
-    grid_x0 = 5.65 - (3 * chip_w + 2 * gap_x) / 2  # 3.20
-    grid_y0 = 2.42  # bottom row base
-    for idx, prop in enumerate(properties):
-        col, row = idx % 3, idx // 3
-        cx = grid_x0 + col * (chip_w + gap_x)
-        cy = grid_y0 + (2 - row) * (chip_h + gap_y)
-        _chip(ax, cx, cy, chip_w, chip_h, "#F5F8FB", _ACCENT, lw=1.3)
-        ax.text(
-            cx + chip_w / 2,
-            cy + chip_h - 0.33,
-            wrap_ascii(ascii_text(prop.name), width=17, max_lines=2),
-            fontsize=10,
-            fontweight="bold",
-            ha="center",
-            va="center",
-            color=_INK,
-            linespacing=1.15,
-        )
-        # Mini stacked stance bar across the 24 candidates.
-        tallies = per_property[prop.property_id]
-        total = sum(tallies.values()) or 1
-        bar_x, bar_y, bar_h = cx + 0.12, cy + 0.17, 0.17
-        bar_w = chip_w - 0.24
-        x_cursor = bar_x
-        for stance in _STANCE_ORDER:
-            seg = bar_w * tallies[stance] / total
-            ax.add_patch(
-                Rectangle(
-                    (x_cursor, bar_y),
-                    seg,
-                    bar_h,
-                    facecolor=STANCE_COLORS[stance],
-                    edgecolor="white",
-                    linewidth=0.4,
-                    zorder=3,
-                )
-            )
-            x_cursor += seg
+    # Column frame: content zone y 9.86 (top) -> 2.02 (bottom).
+    zone_top = 9.86
+    zone_bottom = 2.02
 
-    # --- Right panel: candidate classes with stance glyphs (x 8.65 - 12.55). ---
-    ax.text(10.60, 6.30, "CANDIDATE CLASSES", fontsize=11, fontweight="bold", ha="center", va="center", color=_SOFT)
-    categories = [cat for cat in CATEGORY_LABELS if cat in per_category]
-    row_h = 0.56
-    y_cursor = 5.55
-    for category in categories:
-        label = ascii_text(CATEGORY_LABELS[category])
-        tallies = per_category[category]
-        glyphs = "  ".join(
-            f"{STANCE_GLYPHS[stance]}{tallies[stance]}"
-            for stance in ("strong", "partial", "weak")
-        )
-        ax.add_patch(
-            Rectangle(
-                (8.68, y_cursor - 0.13),
-                0.26,
-                0.26,
-                facecolor=CATEGORY_COLORS[category],
-                edgecolor="#888888",
-                linewidth=0.5,
-                zorder=3,
-            )
-        )
-        ax.text(9.06, y_cursor, label, fontsize=11, ha="left", va="center", color=_INK)
-        ax.text(
-            11.16,
-            y_cursor,
-            glyphs,
-            fontsize=10.5,
-            fontweight="bold",
-            ha="left",
-            va="center",
-            color=_SOFT,
-        )
-        y_cursor -= row_h
-    # --- Flow arrows: failure paths -> properties -> classes -> thesis. ---
-    _arrow(ax, 2.86, 4.55, 3.10, 4.10, _EXPLOIT)
-    _arrow(ax, 2.86, 3.35, 3.10, 3.80, _MISUSE)
-    _arrow(ax, 8.18, 4.00, 8.60, 4.00, _ACCENT)
-    _arrow(ax, 5.65, 2.38, 5.65, 1.42, _COMPOSE)
+    # Column headers.
+    ax.text(1.23, 10.10, "FAILURE PATHS", fontsize=_HEADER, fontweight="bold", ha="center", va="center", color=_SOFT)
+    ax.text(3.88, 10.10, "NINE PROPERTIES", fontsize=_HEADER, fontweight="bold", ha="center", va="center", color=_SOFT)
+    ax.text(7.40, 10.10, "EIGHT CANDIDATE CLASSES", fontsize=_HEADER, fontweight="bold", ha="center", va="center", color=_SOFT)
 
-    # --- Bottom band: the composition thesis (y 0.28 - 1.34). ---
-    _chip(ax, 0.28, 0.28, 12.24, 1.06, "#E9F5F0", _COMPOSE, lw=1.8)
+    # --- Left column (x 0.28 - 2.18): the two failure paths. ---
+    _chip(ax, 0.28, 7.30, 1.90, 2.30, "#FBE9E4", _EXPLOIT, lw=2.0)
+    ax.text(1.23, 9.22, "Exploitation", fontsize=_BOLD, fontweight="bold", ha="center", va="center", color=_INK)
     ax.text(
-        1.22,
-        0.81,
-        "THE\nCOMPOSITION",
-        fontsize=10.5,
-        fontweight="bold",
-        ha="center",
-        va="center",
-        color=_COMPOSE,
-        linespacing=1.3,
-    )
-    part_w, part_h = 1.94, 0.62
-    x_cursor = 2.05
-    for i, part in enumerate(_THESIS_PARTS):
-        _chip(ax, x_cursor, 0.50, part_w, part_h, "white", _COMPOSE, lw=1.1)
-        ax.text(
-            x_cursor + part_w / 2,
-            0.81,
-            wrap_ascii(ascii_text(part), width=15, max_lines=2),
-            fontsize=10.5,
-            fontweight="bold",
-            ha="center",
-            va="center",
-            color=_INK,
-            linespacing=1.15,
-        )
-        if i < len(_THESIS_PARTS) - 1:
-            ax.text(
-                x_cursor + part_w + 0.14,
-                0.81,
-                "+",
-                fontsize=16,
-                fontweight="bold",
-                ha="center",
-                va="center",
-                color=_COMPOSE,
-            )
-        x_cursor += part_w + 0.28
-    ax.text(
-        x_cursor + 0.12,
-        0.81,
-        "=",
-        fontsize=16,
-        fontweight="bold",
-        ha="center",
-        va="center",
-        color=_COMPOSE,
-    )
-    ax.text(
-        x_cursor + 1.10,
-        0.81,
-        "one design\ntarget",
-        fontsize=11.5,
-        fontweight="bold",
+        1.23,
+        8.25,
+        "Offensive agents\nattack the\noperating-system\nboundary",
+        fontsize=_BODY,
         ha="center",
         va="center",
         color=_INK,
         linespacing=1.25,
+    )
+
+    _chip(ax, 0.28, 4.60, 1.90, 2.30, "#FCF2E4", _MISUSE, lw=2.0)
+    ax.text(
+        1.23,
+        6.52,
+        "Authorized\nmisuse",
+        fontsize=_BOLD,
+        fontweight="bold",
+        ha="center",
+        va="center",
+        color=_INK,
+        linespacing=1.2,
+    )
+    ax.text(
+        1.23,
+        5.55,
+        "Sanctioned\nagents exceed\nintent from\ninside the\nboundary",
+        fontsize=_BODY,
+        ha="center",
+        va="center",
+        color=_INK,
+        linespacing=1.25,
+    )
+
+    ax.text(
+        1.23,
+        3.40,
+        "the same nine\nproperties\nscore both\npaths",
+        fontsize=_BODY,
+        style="italic",
+        ha="center",
+        va="center",
+        color=_SOFT,
+        linespacing=1.35,
+    )
+
+    # --- Middle column (x 2.58 - 5.18): the nine properties. ---
+    col_b_x, col_b_w = 2.58, 2.60
+    pitch_b = 0.83
+    for idx, prop in enumerate(properties):
+        row_top = zone_top - idx * pitch_b
+        for line_idx, line in enumerate(_wrap_name(prop.name)):
+            ax.text(
+                col_b_x,
+                row_top - 0.16 - line_idx * 0.24,
+                line,
+                fontsize=_BODY,
+                fontweight="bold",
+                ha="left",
+                va="center",
+                color=_INK,
+            )
+        _stacked_bar(ax, col_b_x, row_top - 0.72, col_b_w - 0.24, 0.15, per_property[prop.property_id])
+
+    # --- Right column (x 5.48 - 9.32): candidate classes, full-word counts. ---
+    col_c_x, col_c_w = 5.48, 3.84
+    pitch_c = 0.98
+    for idx, category in enumerate(categories):
+        row_top = zone_top - idx * pitch_c
+        label = ascii_text(CATEGORY_LABELS[category])
+        tallies = per_category[category]
+        ax.add_patch(
+            Rectangle(
+                (col_c_x, row_top - 0.28),
+                0.26,
+                0.26,
+                facecolor=CATEGORY_COLORS[category],
+                edgecolor="#888888",
+                linewidth=0.6,
+                zorder=3,
+            )
+        )
+        ax.text(col_c_x + 0.40, row_top - 0.15, label, fontsize=_BODY, fontweight="bold", ha="left", va="center", color=_INK)
+        count_lines = _counts_lines(tallies)
+        if len(count_lines) == 1:
+            ax.text(
+                col_c_x + 0.40,
+                row_top - 0.42,
+                count_lines[0],
+                fontsize=_BODY,
+                ha="left",
+                va="center",
+                color=_SOFT,
+            )
+        else:
+            ax.text(
+                col_c_x + 0.40,
+                row_top - 0.36,
+                count_lines[0],
+                fontsize=_BODY,
+                ha="left",
+                va="center",
+                color=_SOFT,
+            )
+            ax.text(
+                col_c_x + 0.40,
+                row_top - 0.58,
+                count_lines[1],
+                fontsize=_BODY,
+                ha="left",
+                va="center",
+                color=_SOFT,
+            )
+        _stacked_bar(ax, col_c_x, row_top - 0.88, col_c_w, 0.14, tallies)
+
+    # --- Flow arrows: failure paths -> properties -> classes -> thesis. ---
+    _arrow(ax, 2.20, 8.40, 2.54, 8.10, _EXPLOIT)
+    _arrow(ax, 2.20, 5.75, 2.54, 6.05, _MISUSE)
+    _arrow(ax, 5.20, 5.90, 5.44, 5.90, _ACCENT)
+    _arrow(ax, 7.40, zone_bottom, 7.40, 1.78, _COMPOSE)
+
+    # --- Bottom band: the composition thesis (y 0.30 - 1.72, full width). ---
+    _chip(ax, 0.28, 0.30, 9.04, 1.42, "#E9F5F0", _COMPOSE, lw=2.0)
+    ax.text(
+        _CANVAS_W / 2,
+        1.42,
+        "THE COMPOSITION THESIS",
+        fontsize=_HEADER,
+        fontweight="bold",
+        ha="center",
+        va="center",
+        color=_COMPOSE,
+    )
+    ax.text(
+        _CANVAS_W / 2,
+        1.02,
+        ascii_text("Qubes-like containment + Nix-like reproducibility + verified boot"),
+        fontsize=16.0,
+        fontweight="bold",
+        ha="center",
+        va="center",
+        color=_INK,
+    )
+    ax.text(
+        _CANVAS_W / 2,
+        0.66,
+        ascii_text("+ capability-limited agents = one design target"),
+        fontsize=16.0,
+        fontweight="bold",
+        ha="center",
+        va="center",
+        color=_INK,
     )
 
     return save_figure(fig, out)

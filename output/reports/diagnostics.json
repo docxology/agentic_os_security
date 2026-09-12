@@ -1,0 +1,58 @@
+{
+  "project_name": "working/agentic_os_security",
+  "total_events": 5,
+  "errors": 0,
+  "warnings": 5,
+  "events": [
+    {
+      "severity": "WARNING",
+      "category": "MARKDOWN_MATH",
+      "message": "Use isolated $$ display blocks; inline or unbalanced $$ is not allowed",
+      "code": "MARKDOWN.MATH_DOLLAR_DISPLAY",
+      "file_path": "/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/manuscript/03_evaluation_framework.md",
+      "line_number": null,
+      "fix_suggestion": "Put display math on its own line(s), for example $$x = y$$ or a paired $$ block.",
+      "context": {}
+    },
+    {
+      "severity": "WARNING",
+      "category": "MARKDOWN_MATH",
+      "message": "Use isolated $$ display blocks; inline or unbalanced $$ is not allowed",
+      "code": "MARKDOWN.MATH_DOLLAR_DISPLAY",
+      "file_path": "/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/manuscript/07_servers_agent_infrastructure.md",
+      "line_number": null,
+      "fix_suggestion": "Put display math on its own line(s), for example $$x = y$$ or a paired $$ block.",
+      "context": {}
+    },
+    {
+      "severity": "WARNING",
+      "category": "MARKDOWN_MATH",
+      "message": "Use isolated $$ display blocks; inline or unbalanced $$ is not allowed",
+      "code": "MARKDOWN.MATH_DOLLAR_DISPLAY",
+      "file_path": "/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/manuscript/09_agentic_authority_architecture.md",
+      "line_number": null,
+      "fix_suggestion": "Put display math on its own line(s), for example $$x = y$$ or a paired $$ block.",
+      "context": {}
+    },
+    {
+      "severity": "WARNING",
+      "category": "MARKDOWN_MATH",
+      "message": "Use isolated $$ display blocks; inline or unbalanced $$ is not allowed",
+      "code": "MARKDOWN.MATH_DOLLAR_DISPLAY",
+      "file_path": "/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/manuscript/12_orchestration_security.md",
+      "line_number": null,
+      "fix_suggestion": "Put display math on its own line(s), for example $$x = y$$ or a paired $$ block.",
+      "context": {}
+    },
+    {
+      "severity": "WARNING",
+      "category": "MARKDOWN_MATH",
+      "message": "Use isolated $$ display blocks; inline or unbalanced $$ is not allowed",
+      "code": "MARKDOWN.MATH_DOLLAR_DISPLAY",
+      "file_path": "/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/manuscript/13_configuration_authorization.md",
+      "line_number": null,
+      "fix_suggestion": "Put display math on its own line(s), for example $$x = y$$ or a paired $$ block.",
+      "context": {}
+    }
+  ]
+}

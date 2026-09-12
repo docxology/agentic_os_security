@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 14:22
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 15:47
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1578,28 +1578,28 @@ Package caption Info: End \AtBeginDocument code.
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
 put/slides/07_servers_agent_infrastructure_slides.nav)
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.8961pt on input line 220.
+(Font)              scaled to size 7.8961pt on input line 221.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.64008pt on input line 220.
+(Font)              scaled to size 5.64008pt on input line 221.
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
-20.
+21.
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 11.28131pt on input line 220.
+(Font)              scaled to size 11.28131pt on input line 221.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.89691pt on input line 220.
+(Font)              scaled to size 7.89691pt on input line 221.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.64066pt on input line 220.
+(Font)              scaled to size 5.64066pt on input line 221.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.27914pt on input line 220.
+(Font)              scaled to size 11.27914pt on input line 221.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.8954pt on input line 220.
+(Font)              scaled to size 7.8954pt on input line 221.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.63957pt on input line 220.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 220
+(Font)              scaled to size 5.63957pt on input line 221.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 221
 .
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1608,7 +1608,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (/usr/local/texlive/2026/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 220
+LaTeX Font Info:    Trying to load font information for U+msb on input line 221
 .
 
 (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1638,13 +1638,13 @@ put/slides/07_servers_agent_infrastructure_slides.vrb) [3
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
 put/slides/07_servers_agent_infrastructure_slides.vrb)
-Overfull \vbox (24.51534pt too high) detected at line 370
+Overfull \vbox (36.51534pt too high) detected at line 374
  []
 
 [4
 
 ]
-Overfull \vbox (29.53085pt too high) detected at line 370
+Overfull \vbox (41.53085pt too high) detected at line 374
  []
 
 [5
@@ -1658,11 +1658,24 @@ Overfull \vbox (29.53085pt too high) detected at line 370
 ] [8
 
 ]
-File: ../figures/update_windows.png Graphic file (type bmp)
-<../figures/update_windows.png>
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.18091pt on input line 413.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.15076pt on input line 413.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.18155pt on input line 413.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.15129pt on input line 413.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.18036pt on input line 413.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.1503pt on input line 413.
  [9
 
-] [10
+]
+File: ../figures/update_windows.png Graphic file (type bmp)
+<../figures/update_windows.png>
+ [10
 
 ] [11
 
@@ -1670,12 +1683,7 @@ File: ../figures/update_windows.png Graphic file (type bmp)
 
 ] [13
 
-]
-\openout4 = `07_servers_agent_infrastructure_slides.vrb'.
-
-
-(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/07_servers_agent_infrastructure_slides.vrb) [14
+] [14
 
 ]
 \openout4 = `07_servers_agent_infrastructure_slides.vrb'.
@@ -1712,11 +1720,42 @@ put/slides/07_servers_agent_infrastructure_slides.vrb) [18
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
 put/slides/07_servers_agent_infrastructure_slides.vrb) [19
 
-] [20
+]
+\openout4 = `07_servers_agent_infrastructure_slides.vrb'.
 
-] [21
 
-] [22
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/07_servers_agent_infrastructure_slides.vrb) [20
+
+]
+\openout4 = `07_servers_agent_infrastructure_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/07_servers_agent_infrastructure_slides.vrb) [21
+
+]
+\openout4 = `07_servers_agent_infrastructure_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/07_servers_agent_infrastructure_slides.vrb) [22
+
+]
+\openout4 = `07_servers_agent_infrastructure_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/07_servers_agent_infrastructure_slides.vrb
+File: ../figures/os_stack.png Graphic file (type bmp)
+<../figures/os_stack.png>
+) [23
+
+] [24
+
+] [25
+
+] [26
 
 ]
 \tf@nav=\write5
@@ -1737,14 +1776,14 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32424 strings out of 468168
- 649239 string characters out of 5432815
+ 32497 strings out of 468168
+ 651850 string characters out of 5432815
  1213452 words of memory out of 5000000
- 60564 multiletter control sequences out of 15000+600000
- 631264 words of font info for 73 fonts, out of 8000000 for 9000
+ 60623 multiletter control sequences out of 15000+600000
+ 633200 words of font info for 85 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1124b,750s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/07_servers_agent_infrastructure_slides.pdf (22 page
+c_os_security/output/slides/07_servers_agent_infrastructure_slides.pdf (26 page
 s).

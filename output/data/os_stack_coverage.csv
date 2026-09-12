@@ -1,0 +1,65 @@
+archetype_id,archetype,layer_id,layer,stance
+compartmentalized,Compartmentalized,hardware_firmware,Hardware and firmware,partial
+compartmentalized,Compartmentalized,hypervisor,Hypervisor,strong
+compartmentalized,Compartmentalized,kernel_lsm,Kernel and LSM,partial
+compartmentalized,Compartmentalized,sandbox_runtime,Sandbox runtime,strong
+compartmentalized,Compartmentalized,container_microvm_runtime,Container and microVM runtime,partial
+compartmentalized,Compartmentalized,update_provisioning,Update and provisioning,partial
+compartmentalized,Compartmentalized,application_framework,Application framework,strong
+compartmentalized,Compartmentalized,agent_runtime_tool_bridge,Agent runtime and tool bridge,weak
+reproducible,Reproducible,hardware_firmware,Hardware and firmware,partial
+reproducible,Reproducible,hypervisor,Hypervisor,weak
+reproducible,Reproducible,kernel_lsm,Kernel and LSM,partial
+reproducible,Reproducible,sandbox_runtime,Sandbox runtime,partial
+reproducible,Reproducible,container_microvm_runtime,Container and microVM runtime,partial
+reproducible,Reproducible,update_provisioning,Update and provisioning,strong
+reproducible,Reproducible,application_framework,Application framework,weak
+reproducible,Reproducible,agent_runtime_tool_bridge,Agent runtime and tool bridge,weak
+desktop,Desktop,hardware_firmware,Hardware and firmware,partial
+desktop,Desktop,hypervisor,Hypervisor,weak
+desktop,Desktop,kernel_lsm,Kernel and LSM,strong
+desktop,Desktop,sandbox_runtime,Sandbox runtime,partial
+desktop,Desktop,container_microvm_runtime,Container and microVM runtime,partial
+desktop,Desktop,update_provisioning,Update and provisioning,partial
+desktop,Desktop,application_framework,Application framework,strong
+desktop,Desktop,agent_runtime_tool_bridge,Agent runtime and tool bridge,weak
+server,Server,hardware_firmware,Hardware and firmware,partial
+server,Server,hypervisor,Hypervisor,partial
+server,Server,kernel_lsm,Kernel and LSM,strong
+server,Server,sandbox_runtime,Sandbox runtime,partial
+server,Server,container_microvm_runtime,Container and microVM runtime,strong
+server,Server,update_provisioning,Update and provisioning,strong
+server,Server,application_framework,Application framework,weak
+server,Server,agent_runtime_tool_bridge,Agent runtime and tool bridge,partial
+anonymity,Anonymity,hardware_firmware,Hardware and firmware,partial
+anonymity,Anonymity,hypervisor,Hypervisor,partial
+anonymity,Anonymity,kernel_lsm,Kernel and LSM,partial
+anonymity,Anonymity,sandbox_runtime,Sandbox runtime,partial
+anonymity,Anonymity,container_microvm_runtime,Container and microVM runtime,weak
+anonymity,Anonymity,update_provisioning,Update and provisioning,weak
+anonymity,Anonymity,application_framework,Application framework,partial
+anonymity,Anonymity,agent_runtime_tool_bridge,Agent runtime and tool bridge,n_a
+high_assurance,High assurance,hardware_firmware,Hardware and firmware,partial
+high_assurance,High assurance,hypervisor,Hypervisor,strong
+high_assurance,High assurance,kernel_lsm,Kernel and LSM,strong
+high_assurance,High assurance,sandbox_runtime,Sandbox runtime,strong
+high_assurance,High assurance,container_microvm_runtime,Container and microVM runtime,n_a
+high_assurance,High assurance,update_provisioning,Update and provisioning,partial
+high_assurance,High assurance,application_framework,Application framework,strong
+high_assurance,High assurance,agent_runtime_tool_bridge,Agent runtime and tool bridge,n_a
+mobile,Mobile,hardware_firmware,Hardware and firmware,strong
+mobile,Mobile,hypervisor,Hypervisor,n_a
+mobile,Mobile,kernel_lsm,Kernel and LSM,strong
+mobile,Mobile,sandbox_runtime,Sandbox runtime,strong
+mobile,Mobile,container_microvm_runtime,Container and microVM runtime,weak
+mobile,Mobile,update_provisioning,Update and provisioning,partial
+mobile,Mobile,application_framework,Application framework,strong
+mobile,Mobile,agent_runtime_tool_bridge,Agent runtime and tool bridge,weak
+offensive_toolkit,Offensive toolkit,hardware_firmware,Hardware and firmware,weak
+offensive_toolkit,Offensive toolkit,hypervisor,Hypervisor,weak
+offensive_toolkit,Offensive toolkit,kernel_lsm,Kernel and LSM,weak
+offensive_toolkit,Offensive toolkit,sandbox_runtime,Sandbox runtime,weak
+offensive_toolkit,Offensive toolkit,container_microvm_runtime,Container and microVM runtime,weak
+offensive_toolkit,Offensive toolkit,update_provisioning,Update and provisioning,partial
+offensive_toolkit,Offensive toolkit,application_framework,Application framework,weak
+offensive_toolkit,Offensive toolkit,agent_runtime_tool_bridge,Agent runtime and tool bridge,weak

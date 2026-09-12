@@ -201,11 +201,12 @@
 
 \begin{document}
 
-\section{Configuration Generation Is Not
-Authorization}\label{sec:configuration_authorization}
+\section{Configuration Generation Is Not Authorization: Review
+Invariants and Enforcer
+Independence}\label{sec:configuration_authorization}
 
 \begin{frame}[allowframebreaks]{Configuration Generation Is Not
-Authorization}
+Authorization: Review Invariants and Enforcer Independence}
 An AI agent can write a declarative configuration, an access-control
 policy, or a deployment change as fluently as it writes code. Generation
 is not the security event. The security event is whatever independently
@@ -313,7 +314,11 @@ describes.
 \protect\phantomsection\label{the-review-invariants}
 tbl.~\ref{tbl:invariants} states the review invariants: what an agent
 must never be able to do, the failure each invariant closes, and where
-enforcement must live.
+enforcement must live. Formally, each invariant is an unreachable-state
+predicate (eq.~\ref{eq:invariant_predicate}): no state reachable from
+agent-writable configuration may violate an invariant.
+
+\begin{equation}\protect\phantomsection\label{eq:invariant_predicate}{\forall g \in G_{\mathrm{agent}}\colon \neg\,\mathrm{reachable}(g, \mathrm{violate}(\iota_i))}\end{equation}
 
 \end{frame}
 

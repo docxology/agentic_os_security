@@ -1,5 +1,5 @@
-"""Analysis pipeline integration: run_analysis writes the eight data
-artifacts, the nine registry figures plus the cover graphical abstract,
+"""Analysis pipeline integration: run_analysis writes the ten data
+artifacts, the ten registry figures plus the cover graphical abstract,
 with row-count/tier-sum/verdict contracts and pinned caption assertions,
 and reruns are idempotent in validation verdicts.
 """
@@ -24,13 +24,14 @@ EXPECTED_FIGURES = {
     "agent_surface.png",
     "forecast_horizon.png",
     "update_windows.png",
+    "os_stack.png",
     # Cover graphical abstract: on disk with the figures, but NOT a
-    # manuscript figure registry entry (RESULT_NUM_FIGURES stays 9).
+    # manuscript figure registry entry (RESULT_NUM_FIGURES stays 10).
     "graphical_abstract.png",
 }
 
-# Registry short names whose caption/alt_text must equal the v0.3.0 pinned
-# strings verbatim (spot-check subset; all nine carry pinned captions).
+# Registry short names whose caption/alt_text must equal the v0.4.0 pinned
+# strings verbatim (spot-check subset; all ten carry pinned captions).
 PINNED_CAPTION_SPOT_CHECKS = {
     "fig:evidence_timeline": (
         "Two lanes of primary evidence, January 2024 through August 2026: "
@@ -47,6 +48,13 @@ PINNED_CAPTION_SPOT_CHECKS = {
         "Which mediation point constrains which agent capability class; "
         "filled numbered cells mark the primary control, and the right "
         "marginal counts how many distinct controls cover each capability."
+    ),
+    "fig:os_stack": (
+        "Eight layers of the operating-system security stack, from "
+        "hardware and firmware to the agent runtime and its tool "
+        "bridge; annotations name representative mechanisms per layer "
+        "and the right-hand columns record how strongly each candidate "
+        "class covers each layer."
     ),
 }
 
@@ -88,15 +96,15 @@ def test_run_analysis_writes_data_artifacts_and_figures(tmp_project):
 
     produced = {p.name for p in figures_dir.glob("*.png")}
     assert produced == EXPECTED_FIGURES
-    assert summary["figures_generated"] == 10
-    assert summary["figure_registry_entries"] == 9
+    assert summary["figures_generated"] == 11
+    assert summary["figure_registry_entries"] == 10
 
     registry = json.loads(
         (project_paths.figures_dir(tmp_project) / "figure_registry.json").read_text(
             encoding="utf-8"
         )
     )
-    assert len(registry) == 9
+    assert len(registry) == 10
     assert "graphical_abstract.png" not in {entry["filename"] for entry in registry.values()}
     assert all("section" in entry and "filename" in entry for entry in registry.values())
 
@@ -156,6 +164,9 @@ def test_validation_report_covers_new_v030_checks(tmp_project):
     )
     checks = {entry["check"]: entry for entry in report["checks"]}
     assert checks["incident_register_rows"]["status"] == "green"
+    assert checks["os_stack_coverage_rows"]["status"] == "green"
+    assert checks["formal_definitions"]["status"] == "green"
+    assert checks["figure_registry_entries"]["status"] == "green"
     cognitive = checks["cognitive_defense_coverage"]
     assert cognitive["status"] == "green"
     assert "6/6" in cognitive["detail"]
@@ -180,6 +191,90 @@ def test_defensive_stack_has_192_data_rows_plus_header(tmp_project):
     assert rows[0] == ["candidate_id", "candidate_name", "class_id", "stance"]
     assert all(row[3] in {"strong", "partial", "weak", "n_a"} for row in rows[1:])
     assert len({(row[0], row[2]) for row in rows[1:]}) == 192
+
+
+def test_os_stack_coverage_has_64_data_rows_plus_header(tmp_project):
+    run_analysis(tmp_project)
+    path = project_paths.data_dir(tmp_project) / "os_stack_coverage.csv"
+    with path.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.reader(handle))
+    assert len(rows) == 65
+    assert rows[0] == ["archetype_id", "archetype", "layer_id", "layer", "stance"]
+    assert all(row[4] in {"strong", "partial", "weak", "n_a"} for row in rows[1:])
+    assert len({(row[0], row[2]) for row in rows[1:]}) == 64
+    # Full-word archetype labels, never codes.
+    assert {row[1] for row in rows[1:]} == {
+        "Compartmentalized",
+        "Reproducible",
+        "Desktop",
+        "Server",
+        "Anonymity",
+        "High assurance",
+        "Mobile",
+        "Offensive toolkit",
+    }
+    assert {row[3] for row in rows[1:]} == {
+        "Hardware and firmware",
+        "Hypervisor",
+        "Kernel and LSM",
+        "Sandbox runtime",
+        "Container and microVM runtime",
+        "Update and provisioning",
+        "Application framework",
+        "Agent runtime and tool bridge",
+    }
+
+
+def test_formal_definitions_json_has_eight_definitions(tmp_project):
+    run_analysis(tmp_project)
+    payload = json.loads(
+        (project_paths.data_dir(tmp_project) / "formal_definitions.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    definitions = payload["definitions"]
+    assert payload["num_definitions"] == len(definitions) == 8
+    assert [d["definition_id"] for d in definitions] == [
+        "stance_mapping",
+        "stance_order",
+        "authority_ladder_order",
+        "delegation_bound",
+        "defense_composition",
+        "invariant_predicate",
+        "stack_layering",
+        "update_window_semantics",
+    ]
+    for definition in definitions:
+        assert definition["formal_latex"]
+        assert definition["informal"]
+        assert definition["surface"]
+        assert all(definition["citation_keys"])
+
+
+def test_figure_ids_match_manuscript_appearance_order(tmp_project):
+    run_analysis(tmp_project)
+    registry = json.loads(
+        (project_paths.figures_dir(tmp_project) / "figure_registry.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert {
+        label: entry["figure_id"]
+        for label, entry in registry.items()
+    } == {
+        "fig:evidence_timeline": "figure_001",
+        "fig:property_matrix": "figure_002",
+        "fig:defensive_stack": "figure_003",
+        "fig:trust_domains": "figure_004",
+        "fig:authority_ladder": "figure_005",
+        "fig:update_windows": "figure_006",
+        "fig:os_stack": "figure_007",
+        "fig:orchestration_boundaries": "figure_008",
+        "fig:agent_surface": "figure_009",
+        "fig:forecast_horizon": "figure_010",
+    }
+    os_stack = registry["fig:os_stack"]
+    assert os_stack["section"] == "Servers and Agent-Execution Infrastructure"
 
 
 def test_update_windows_has_24_data_rows_plus_header(tmp_project):

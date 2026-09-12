@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 14:22
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 15:48
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1685,6 +1685,23 @@ put/slides/12_orchestration_security_slides.vrb) [16
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
 put/slides/12_orchestration_security_slides.vrb
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.18091pt on input line 2.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.15076pt on input line 2.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.18155pt on input line 2.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.15129pt on input line 2.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.18036pt on input line 2.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.1503pt on input line 2.
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/microtype/mt-LatinModernRoman.cfg
+File: mt-LatinModernRoman.cfg 2026/02/26 v1.2 microtype config. file: Latin Mod
+ern Roman (RS)
+)
 File: ../figures/orchestration_boundaries.png Graphic file (type bmp)
 <../figures/orchestration_boundaries.png>
 ) [17
@@ -1759,11 +1776,11 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32459 strings out of 468168
- 650418 string characters out of 5432815
+ 32528 strings out of 468168
+ 652637 string characters out of 5432815
  1192434 words of memory out of 5000000
- 60598 multiletter control sequences out of 15000+600000
- 631256 words of font info for 72 fonts, out of 8000000 for 9000
+ 60653 multiletter control sequences out of 15000+600000
+ 633208 words of font info for 86 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1118b,625s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

@@ -356,9 +356,17 @@ not as an endorsement of any tool's security. The nine are also a
 composed defense rather than a stack of independent toggles: Defense
 Composition Algebra treats layered controls as formal objects whose
 composition --- coverage interactions included, not just their count ---
-determines what an attacker must defeat, and the set below is chosen so
-that each control closes a failure the others leave open (Friedman
-2026).
+determines what an attacker must defeat (Friedman 2026). In its
+notation, a defense over the eight mitigation classes is a composition
+of per-class layers, written as in eq.~\ref{eq:defense_composition}, and
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Nine controls and their design
+rationale}
+the set below is chosen so that each control closes a failure the others
+leave open.
+
+\begin{equation}\protect\phantomsection\label{eq:defense_composition}{D = d_1 \circ d_2 \circ \cdots \circ d_8}\end{equation}
 
 \end{frame}
 
@@ -565,24 +573,25 @@ authorization.}\label{fig:authority_ladder}
 \begin{frame}[allowframebreaks]{The authority ladder}
 The ladder in fig.~\ref{fig:authority_ladder} gives the architecture its
 operating rhythm across six rungs: \textbf{propose}, \textbf{stage},
-\textbf{authorize}, \textbf{exercise}, \textbf{audit}, \textbf{revoke}.
-An agent may propose and stage freely --- generating configurations,
-preparing artifacts, drafting deployments --- because nothing at those
-rungs changes the world. Authorization is the hinge: it must be
-exercised outside the agent, by the human principal or by deterministic
-policy, and the approval context is a mediated operation with artifact,
-destination, scope, and expiration. Exercise happens under whatever
-scopes the authorization granted, no more. Audit and revoke are not
-afterthoughts but standing rungs: the audit record lives outside the
-execution environment so it survives the environment's destruction, and
-revocation is the only rung that addresses what a rebuild cannot ---
+\textbf{authorize}, \textbf{exercise}, \textbf{audit}, \textbf{revoke},
+ordered as in eq.~\ref{eq:authority_ladder_order}. An agent may propose
+and stage freely --- generating configurations, preparing artifacts,
+drafting deployments --- because nothing at those rungs changes the
+world. Authorization is the hinge: it must be exercised outside the
+agent, by the human principal or by deterministic policy, and the
+approval context is a mediated operation with artifact, destination,
+scope, and expiration. Exercise happens under whatever scopes the
+authorization granted, no more. Audit and revoke are not afterthoughts
+but standing rungs: the audit record lives outside the execution
+environment so it survives the environment's destruction, and revocation
 \end{frame}
 
 \begin{frame}[allowframebreaks]{The authority ladder}
-authority already exercised against the outside world. An architecture
-that lets the agent climb from propose to authorize on its own has not
-built a ladder; it has built a loop, and the configuration-side
-invariants that prevent exactly that are specified and enforced in
+is the only rung that addresses what a rebuild cannot --- authority
+already exercised against the outside world. An architecture that lets
+the agent climb from propose to authorize on its own has not built a
+ladder; it has built a loop, and the configuration-side invariants that
+prevent exactly that are specified and enforced in
 sec.~14. The permission modes of the
 shipping tools read as partial ladders: default-prompt modes place
 authorize with the human; accept-edits moves routine edit-authorization
@@ -593,6 +602,8 @@ admission rather than a mode (Anthropic 2026b; OpenAI 2026).
 \end{frame}
 
 \begin{frame}[allowframebreaks]{The authority ladder}
+\begin{equation}\protect\phantomsection\label{eq:authority_ladder_order}{\textit{propose} \prec \textit{stage} \prec \textit{authorize} \prec \textit{exercise} \prec \textit{audit} \prec \textit{revoke}}\end{equation}
+
 The authorize/exercise split is also what keeps delegated trust bounded.
 Formal treatments of agent trust bound a delegate's effective trust by
 what it was authorized to exercise rather than by what it can reach, and

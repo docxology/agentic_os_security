@@ -3,7 +3,9 @@
 \beamer@slide {tbl:trust_domains}{6}
 \beamer@slide {fig:trust_domains}{6}
 \beamer@slide {nine-controls-and-their-design-rationale}{9}
-\beamer@slide {tbl:controls}{10}
-\beamer@slide {convergent-implementations-in-shipping-agent-tools}{14}
-\beamer@slide {the-authority-ladder}{17}
-\beamer@slide {fig:authority_ladder}{18}
+\beamer@slide {eq:defense_composition}{10}
+\beamer@slide {tbl:controls}{11}
+\beamer@slide {convergent-implementations-in-shipping-agent-tools}{15}
+\beamer@slide {the-authority-ladder}{18}
+\beamer@slide {fig:authority_ladder}{19}
+\beamer@slide {eq:authority_ladder_order}{22}

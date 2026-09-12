@@ -172,6 +172,71 @@
       vertical-align: middle;
     }
   </style>
+  <script data-template-mathjax-config>
+window.MathJax = window.MathJax || {};
+window.MathJax.chtml = Object.assign({}, window.MathJax.chtml, {
+  fontURL: "https://cdn.jsdelivr.net/npm/@mathjax/mathjax-newcm-font@4.0.0/chtml/woff2",
+  dynamicPrefix: "https://cdn.jsdelivr.net/npm/@mathjax/mathjax-newcm-font@4.0.0/chtml/dynamic"
+});
+var templateMathOutput = window.MathJax.output || {};
+window.MathJax.output = Object.assign({}, templateMathOutput, {
+  displayOverflow: "linebreak",
+  linebreaks: Object.assign({}, templateMathOutput.linebreaks, {
+    inline: true,
+    width: "100%",
+    lineleading: 0.5
+  })
+});
+window.normalizeTemplateMathJaxAria = function () {
+  document.querySelectorAll("mjx-speech[aria-roledescription]").forEach(function (node) {
+    var roleDescription = node.getAttribute("aria-roledescription") || "";
+    if (/[-]/.test(roleDescription)) {
+      node.setAttribute("aria-roledescription", "mathematical expression");
+    }
+  });
+};
+window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
+  ready: function () {
+    var measuredWidth = document.documentElement.clientWidth;
+    var reflowQueued = false;
+    window.MathJax.startup.defaultReady();
+    window.templateMathJaxReflowPromise = window.MathJax.startup.promise.then(
+      window.normalizeTemplateMathJaxAria
+    );
+    function reflowDisplayMath() {
+      if (reflowQueued || document.documentElement.clientWidth === measuredWidth) return;
+      reflowQueued = true;
+      window.templateMathJaxReflowPromise = window.templateMathJaxReflowPromise
+        .catch(function () { /* A later resize may retry a failed render. */ })
+        .then(async function () {
+          var width = document.documentElement.clientWidth;
+          try {
+            // MathJax 4 MathItem.STATE.METRICS = 110. The default RERENDER
+            // state retains old container metrics and cannot reflow on zoom.
+            await window.MathJax.startup.document.rerenderPromise(110);
+            window.normalizeTemplateMathJaxAria();
+            window.templateMathJaxReflowError = null;
+          } catch (error) {
+            window.templateMathJaxReflowError = String(error);
+            console.error("MathJax viewport reflow failed", error);
+            throw error;
+          } finally {
+            measuredWidth = width;
+            reflowQueued = false;
+          }
+        })
+        .then(reflowDisplayMath);
+      // Keep failure observable to callers without an unhandled rejection.
+      window.templateMathJaxReflowPromise.catch(function () {});
+    }
+    window.addEventListener("resize", reflowDisplayMath);
+    // Also cover a resize that happened during the initial asynchronous render.
+    window.templateMathJaxReflowPromise.then(reflowDisplayMath);
+  }
+});
+</script>
+<script defer=""
+  type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js" integrity="sha384-2BWc4dVaHADUocwKrUrK9u3iDwHxVMKXWEcoRmUkXYSFKhAsgVAYClu9ydNuo5Oz" crossorigin="anonymous"></script>
 
 <link data-template-favicon rel="icon" href="favicon.ico">
 
@@ -701,9 +766,14 @@ not as an endorsement of any tool’s security. The nine are also a
 composed defense rather than a stack of independent toggles: Defense
 Composition Algebra treats layered controls as formal objects whose
 composition — coverage interactions included, not just their count —
-determines what an attacker must defeat, and the set below is chosen so
-that each control closes a failure the others leave open
-[cif_formal_2026].</p>
+determines what an attacker must defeat [cif_formal_2026]. In its
+notation, a defense over the eight mitigation classes is a composition
+of per-class layers, written as in <span class="citation"
+data-cites="eq:defense_composition">[@eq:defense_composition]</span>,
+and the set below is chosen so that each control closes a failure the
+others leave open.</p>
+<p><span class="math display">\[D = d_1 \circ d_2 \circ \cdots \circ
+d_8\]</span> {#eq:defense_composition}</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The nine controls of the agentic authority architecture: operating rule and design rationale for each. The rules hold…"><table id="tbl:controls" data-responsive-table="true">
 <caption>The nine controls of the agentic authority architecture:
 operating rule and design rationale for each. The rules hold regardless
@@ -900,21 +970,24 @@ data-cites="fig:authority_ladder">[@fig:authority_ladder]</span> gives
 the architecture its operating rhythm across six rungs:
 <strong>propose</strong>, <strong>stage</strong>,
 <strong>authorize</strong>, <strong>exercise</strong>,
-<strong>audit</strong>, <strong>revoke</strong>. An agent may propose
-and stage freely — generating configurations, preparing artifacts,
-drafting deployments — because nothing at those rungs changes the world.
-Authorization is the hinge: it must be exercised outside the agent, by
-the human principal or by deterministic policy, and the approval context
-is a mediated operation with artifact, destination, scope, and
-expiration. Exercise happens under whatever scopes the authorization
-granted, no more. Audit and revoke are not afterthoughts but standing
-rungs: the audit record lives outside the execution environment so it
-survives the environment’s destruction, and revocation is the only rung
-that addresses what a rebuild cannot — authority already exercised
-against the outside world. An architecture that lets the agent climb
-from propose to authorize on its own has not built a ladder; it has
-built a loop, and the configuration-side invariants that prevent exactly
-that are specified and enforced in <span class="citation"
+<strong>audit</strong>, <strong>revoke</strong>, ordered as in <span
+class="citation"
+data-cites="eq:authority_ladder_order">[@eq:authority_ladder_order]</span>.
+An agent may propose and stage freely — generating configurations,
+preparing artifacts, drafting deployments — because nothing at those
+rungs changes the world. Authorization is the hinge: it must be
+exercised outside the agent, by the human principal or by deterministic
+policy, and the approval context is a mediated operation with artifact,
+destination, scope, and expiration. Exercise happens under whatever
+scopes the authorization granted, no more. Audit and revoke are not
+afterthoughts but standing rungs: the audit record lives outside the
+execution environment so it survives the environment’s destruction, and
+revocation is the only rung that addresses what a rebuild cannot —
+authority already exercised against the outside world. An architecture
+that lets the agent climb from propose to authorize on its own has not
+built a ladder; it has built a loop, and the configuration-side
+invariants that prevent exactly that are specified and enforced in <span
+class="citation"
 data-cites="sec:configuration_authorization">[@sec:configuration_authorization]</span>.
 The permission modes of the shipping tools read as partial ladders:
 default-prompt modes place authorize with the human; accept-edits moves
@@ -922,6 +995,9 @@ routine edit-authorization to the agent while keeping command approval;
 bypass modes remove the hinge altogether and are, in this architecture’s
 terms, a design admission rather than a mode [anthropic_sandboxing;
 codex_sandboxing].</p>
+<p><span class="math display">\[\textit{propose} \prec \textit{stage}
+\prec \textit{authorize} \prec \textit{exercise} \prec \textit{audit}
+\prec \textit{revoke}\]</span> {#eq:authority_ladder_order}</p>
 <p>The authorize/exercise split is also what keeps delegated trust
 bounded. Formal treatments of agent trust bound a delegate’s effective
 trust by what it was authorized to exercise rather than by what it can

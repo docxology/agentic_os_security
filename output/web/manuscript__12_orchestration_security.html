@@ -172,6 +172,71 @@
       vertical-align: middle;
     }
   </style>
+  <script data-template-mathjax-config>
+window.MathJax = window.MathJax || {};
+window.MathJax.chtml = Object.assign({}, window.MathJax.chtml, {
+  fontURL: "https://cdn.jsdelivr.net/npm/@mathjax/mathjax-newcm-font@4.0.0/chtml/woff2",
+  dynamicPrefix: "https://cdn.jsdelivr.net/npm/@mathjax/mathjax-newcm-font@4.0.0/chtml/dynamic"
+});
+var templateMathOutput = window.MathJax.output || {};
+window.MathJax.output = Object.assign({}, templateMathOutput, {
+  displayOverflow: "linebreak",
+  linebreaks: Object.assign({}, templateMathOutput.linebreaks, {
+    inline: true,
+    width: "100%",
+    lineleading: 0.5
+  })
+});
+window.normalizeTemplateMathJaxAria = function () {
+  document.querySelectorAll("mjx-speech[aria-roledescription]").forEach(function (node) {
+    var roleDescription = node.getAttribute("aria-roledescription") || "";
+    if (/[-]/.test(roleDescription)) {
+      node.setAttribute("aria-roledescription", "mathematical expression");
+    }
+  });
+};
+window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
+  ready: function () {
+    var measuredWidth = document.documentElement.clientWidth;
+    var reflowQueued = false;
+    window.MathJax.startup.defaultReady();
+    window.templateMathJaxReflowPromise = window.MathJax.startup.promise.then(
+      window.normalizeTemplateMathJaxAria
+    );
+    function reflowDisplayMath() {
+      if (reflowQueued || document.documentElement.clientWidth === measuredWidth) return;
+      reflowQueued = true;
+      window.templateMathJaxReflowPromise = window.templateMathJaxReflowPromise
+        .catch(function () { /* A later resize may retry a failed render. */ })
+        .then(async function () {
+          var width = document.documentElement.clientWidth;
+          try {
+            // MathJax 4 MathItem.STATE.METRICS = 110. The default RERENDER
+            // state retains old container metrics and cannot reflow on zoom.
+            await window.MathJax.startup.document.rerenderPromise(110);
+            window.normalizeTemplateMathJaxAria();
+            window.templateMathJaxReflowError = null;
+          } catch (error) {
+            window.templateMathJaxReflowError = String(error);
+            console.error("MathJax viewport reflow failed", error);
+            throw error;
+          } finally {
+            measuredWidth = width;
+            reflowQueued = false;
+          }
+        })
+        .then(reflowDisplayMath);
+      // Keep failure observable to callers without an unhandled rejection.
+      window.templateMathJaxReflowPromise.catch(function () {});
+    }
+    window.addEventListener("resize", reflowDisplayMath);
+    // Also cover a resize that happened during the initial asynchronous render.
+    window.templateMathJaxReflowPromise.then(reflowDisplayMath);
+  }
+});
+</script>
+<script defer=""
+  type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js" integrity="sha384-2BWc4dVaHADUocwKrUrK9u3iDwHxVMKXWEcoRmUkXYSFKhAsgVAYClu9ydNuo5Oz" crossorigin="anonymous"></script>
 
 <link data-template-favicon rel="icon" href="favicon.ico">
 
@@ -728,7 +793,9 @@ authority: a worker returns requests that preserve or reduce scope,
 never requests that expand it, and the broker rejects expansions as a
 matter of policy. These three rules convert the deputy from a trusted
 forwarder into a checked channel.</p>
-<p>The formal grounding for these rules is δ-bounded delegation: each
+<p>The formal grounding for these rules is δ-bounded delegation (<span
+class="citation"
+data-cites="eq:delegation_bound">[@eq:delegation_bound]</span>): each
 hop in an agent-to-agent chain is permitted to narrow the authority it
 passes, never to widen it, so trust cannot amplify across a delegation
 chain no matter how many intermediaries it traverses [cif_formal_2026].
@@ -736,6 +803,8 @@ That formal model is not left as a statement of intent — its
 bounded-delegation and trust-boundedness properties have been exercised
 computationally, with implementations validating the no-amplification
 guarantee on constructed delegation scenarios [cif_validation_2026].</p>
+<p><span class="math display">\[\mathrm{trust}(a \to c) \le \delta \cdot
+\mathrm{trust}(a \to b)\]</span> {#eq:delegation_bound}</p>
 <figure id="fig:orchestration_boundaries">
 <a class="figure-full-size-link" href="../figures/orchestration_boundaries.png" target="_blank" rel="noopener" aria-label="Open full-size figure, A reference orchestration: one orchestrator delegating through an MCP-style tool broker to…"><img src="../figures/orchestration_boundaries.png" style="width:100.0%"
 alt="A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>

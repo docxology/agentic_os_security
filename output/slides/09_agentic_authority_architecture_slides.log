@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 14:22
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 15:47
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1643,26 +1643,34 @@ File: ../figures/trust_domains.png Graphic file (type bmp)
 
 ] [9
 
-] [10
+]
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.18091pt on input line 371.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.15076pt on input line 371.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.18155pt on input line 371.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.15129pt on input line 371.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.18036pt on input line 371.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.1503pt on input line 371.
+ [10
+
+] [11
 
 ]
-Overfull \vbox (22.65085pt too high) detected at line 478
+Overfull \vbox (22.65085pt too high) detected at line 486
  []
 
-[11
-
-
-] [12
+[12
 
 
 ] [13
 
-]
-\openout4 = `09_agentic_authority_architecture_slides.vrb'.
 
-
-(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/09_agentic_authority_architecture_slides.vrb) [14
+] [14
 
 ]
 \openout4 = `09_agentic_authority_architecture_slides.vrb'.
@@ -1679,23 +1687,33 @@ put/slides/09_agentic_authority_architecture_slides.vrb) [15
 put/slides/09_agentic_authority_architecture_slides.vrb) [16
 
 ]
-Underfull \vbox (badness 1168) detected at line 551
+\openout4 = `09_agentic_authority_architecture_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/09_agentic_authority_architecture_slides.vrb) [17
+
+]
+Underfull \vbox (badness 1168) detected at line 559
  []
 
-[17
+[18
 
 ]
 File: ../figures/authority_ladder.png Graphic file (type bmp)
 <../figures/authority_ladder.png>
- [18
-
-] [19
+ [19
 
 ] [20
 
 ] [21
 
-] [22
+]
+LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 617.
+ [22
+
+] [23
 
 ]
 \tf@nav=\write5
@@ -1716,14 +1734,14 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32396 strings out of 468168
- 647461 string characters out of 5432815
- 1209458 words of memory out of 5000000
- 60549 multiletter control sequences out of 15000+600000
- 631256 words of font info for 72 fonts, out of 8000000 for 9000
+ 32463 strings out of 468168
+ 649416 string characters out of 5432815
+ 1208458 words of memory out of 5000000
+ 60605 multiletter control sequences out of 15000+600000
+ 633216 words of font info for 87 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1126b,726s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/09_agentic_authority_architecture_slides.pdf (22 pa
+c_os_security/output/slides/09_agentic_authority_architecture_slides.pdf (23 pa
 ges).

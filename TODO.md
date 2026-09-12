@@ -4,7 +4,7 @@ Forward-only; completed items move to `Done`.
 
 ## Open
 
-- [ ] v0.3.0 candidates: agent-identity deep dive once IETF drafts mature; refresh stances when Qubes 4.4/NixOS 26.11 land
+- [x] v0.3.0 delivered (2026-09-11): graphical abstract cover, extended titles, incident register, CIF mapping, author-work citations
 - [ ] Consider independent figure-audit pass (human review of 9 figures at print scale)
 
 ## Done

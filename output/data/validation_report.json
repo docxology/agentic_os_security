@@ -22,6 +22,21 @@
       "status": "green"
     },
     {
+      "check": "os_stack_coverage_rows",
+      "detail": "64 archetype x layer rows, 8 archetypes x 8 layers, unique pairs, full stance vocabulary",
+      "status": "green"
+    },
+    {
+      "check": "formal_definitions",
+      "detail": "8 formal definitions (expected 8)",
+      "status": "green"
+    },
+    {
+      "check": "figure_registry_entries",
+      "detail": "10 registry figures (cover excluded)",
+      "status": "green"
+    },
+    {
       "check": "stance_vocabulary",
       "detail": "all stances in strong|partial|weak|n_a",
       "status": "green"

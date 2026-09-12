@@ -7,11 +7,11 @@
 # Consumed by: `infrastructure/rendering/pdf_renderer.py` and `infrastructure/reporting/pipeline_report_model.py`
 paper:
   title: "Agentic Security and Operating Systems"
-  version: "0.3.0"
-  date: "2026-09-10" # Auto-generated via `infrastructure/validation/output/validator.py` if empty
+  version: "0.4.0"
+  date: "" # Auto-generated (\today) by the title-page builder when empty
   cover:
     image: "output/figures/graphical_abstract.png"
-    alt: "Graphical abstract: the two failure paths feed a nine-property evaluation of twenty-four operating systems, converging on the composition thesis — compartmentalization, reproducible operations, boot integrity, and capability-limited agents as one design target."
+    alt: "Graphical abstract: two failure paths — exploitation and authorized misuse — feed a nine-property evaluation of twenty-four operating systems, grouped into eight candidate classes with full-word stance counts, converging on the composition thesis: Qubes-like containment plus Nix-like reproducibility plus verified boot plus capability-limited agents as one design target."
 
 # Consumed by: `infrastructure.publishing.extract_publication_metadata` (in `infrastructure/publishing/metadata.py`)
 authors:
@@ -24,6 +24,7 @@ authors:
 # Publication posture: PRIVATE for now. No DOI, no deposits, no bookends.
 publication:
   doi: ""
+  doi_status: "Forthcoming — Zenodo DOI reserved on release"
   version_doi: ""
   version_record: ""
   github_repository: "docxology/agentic_os_security"
@@ -65,6 +66,11 @@ render:
   formats:
     pdf: true
     html: true
+
+# Title-page rendering options — cover_height_fraction scales the cover
+# image height as a fraction of \textheight in the title-page builder.
+rendering:
+  cover_height_fraction: 0.72
 metadata:
   license: "MIT"
   language: "en"

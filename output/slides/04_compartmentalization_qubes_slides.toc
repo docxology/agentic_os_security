@@ -1,1 +1,1 @@
-\beamer@sectionintoc {1}{Compartmentalization: Qubes OS Under Offensive-Agent Load}{1}{0}{1}
+\beamer@sectionintoc {1}{Compartmentalization: Qubes OS Under Offensive-Agent Load --- Capabilities and Limits}{1}{0}{1}

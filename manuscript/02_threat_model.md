@@ -1,4 +1,4 @@
-# Threat Model: Two Ways to Lose — Exploitation and Authorized Misuse {#sec:threat_model}
+# Threat Model: Two Ways to Lose — Exploitation and Authorized Misuse under Offensive Automation {#sec:threat_model}
 
 ## The primary scenario
 

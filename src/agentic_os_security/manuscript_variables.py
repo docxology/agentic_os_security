@@ -81,6 +81,7 @@ def _declared_figure_files() -> list[str]:
         "defensive_stack.png",
         "update_windows.png",
         "agent_surface.png",
+        "os_stack.png",
     ]
 
 

@@ -659,7 +659,8 @@ mjx-container[display="true"] {
 class="toc-section-number">1</span> Abstract</a></li>
 <li><a href="#sec:introduction" id="toc-sec:introduction"><span
 class="toc-section-number">2</span> Introduction: Offensive AI Agents
-Arrive at the Operating-System Boundary</a>
+Arrive at the Operating-System Boundary — Why Agent Capability Reshapes
+OS Security</a>
 <ul>
 <li><a href="#why-this-review-now" id="toc-why-this-review-now"><span
 class="toc-section-number">2.1</span> Why this review, now</a></li>
@@ -687,7 +688,7 @@ class="toc-section-number">2.8</span> Position</a></li>
 </ul></li>
 <li><a href="#sec:threat_model" id="toc-sec:threat_model"><span
 class="toc-section-number">3</span> Threat Model: Two Ways to Lose —
-Exploitation and Authorized Misuse</a>
+Exploitation and Authorized Misuse under Offensive Automation</a>
 <ul>
 <li><a href="#the-primary-scenario" id="toc-the-primary-scenario"><span
 class="toc-section-number">3.1</span> The primary scenario</a></li>
@@ -715,7 +716,7 @@ discipline</a></li>
 <li><a href="#sec:evaluation_framework"
 id="toc-sec:evaluation_framework"><span
 class="toc-section-number">4</span> Evaluation Framework: Nine
-Properties over Distribution Labels</a>
+Properties over Distribution Labels, with a Formal Stance Model</a>
 <ul>
 <li><a href="#why-not-a-distribution-label"
 id="toc-why-not-a-distribution-label"><span
@@ -731,24 +732,27 @@ structures, and why a property matrix still wins for OS work</a></li>
 <li><a href="#the-anti-scoring-stance"
 id="toc-the-anti-scoring-stance"><span
 class="toc-section-number">4.4</span> The anti-scoring stance</a></li>
+<li><a href="#a-formal-stance-model"
+id="toc-a-formal-stance-model"><span
+class="toc-section-number">4.5</span> A formal stance model</a></li>
 <li><a href="#how-the-matrix-is-constructed-and-refreshed"
 id="toc-how-the-matrix-is-constructed-and-refreshed"><span
-class="toc-section-number">4.5</span> How the matrix is constructed and
+class="toc-section-number">4.6</span> How the matrix is constructed and
 refreshed</a></li>
 <li><a href="#the-defensive-stack-mitigation-classes-as-a-second-lens"
 id="toc-the-defensive-stack-mitigation-classes-as-a-second-lens"><span
-class="toc-section-number">4.6</span> The defensive stack: mitigation
+class="toc-section-number">4.7</span> The defensive stack: mitigation
 classes as a second lens</a></li>
 <li><a href="#what-the-matrix-buys" id="toc-what-the-matrix-buys"><span
-class="toc-section-number">4.7</span> What the matrix buys</a></li>
+class="toc-section-number">4.8</span> What the matrix buys</a></li>
 <li><a href="#limitations-of-matrix-thinking"
 id="toc-limitations-of-matrix-thinking"><span
-class="toc-section-number">4.8</span> Limitations of matrix
+class="toc-section-number">4.9</span> Limitations of matrix
 thinking</a></li>
 </ul></li>
 <li><a href="#sec:qubes" id="toc-sec:qubes"><span
 class="toc-section-number">5</span> Compartmentalization: Qubes OS Under
-Offensive-Agent Load</a>
+Offensive-Agent Load — Capabilities and Limits</a>
 <ul>
 <li><a href="#architectural-foundation-separation-under-xen"
 id="toc-architectural-foundation-separation-under-xen"><span
@@ -814,7 +818,7 @@ class="toc-section-number">6.9</span> Assessment</a></li>
 </ul></li>
 <li><a href="#sec:desktops" id="toc-sec:desktops"><span
 class="toc-section-number">7</span> Conventional Desktops: Hardening
-Candidates and Compatibility Costs</a>
+Candidates, Compatibility Costs, and Agent Isolation</a>
 <ul>
 <li><a href="#why-secureblue-is-interesting-without-crowning-it"
 id="toc-why-secureblue-is-interesting-without-crowning-it"><span
@@ -831,7 +835,8 @@ lesson</a></li>
 </ul></li>
 <li><a href="#sec:servers" id="toc-sec:servers"><span
 class="toc-section-number">8</span> Servers and Agent-Execution
-Infrastructure: The Disposable-Isolation Baseline</a>
+Infrastructure: The Disposable-Isolation Baseline and the
+Operating-System Stack</a>
 <ul>
 <li><a href="#support-windows-are-part-of-the-architecture"
 id="toc-support-windows-are-part-of-the-architecture"><span
@@ -855,7 +860,7 @@ are the authority</a></li>
 </ul></li>
 <li><a href="#sec:comparators" id="toc-sec:comparators"><span
 class="toc-section-number">9</span> Boundary Comparators: What Non-Linux
-Systems Teach</a>
+and Specialized Systems Teach</a>
 <ul>
 <li><a
 href="#what-each-comparator-contributes-to-the-composition-argument"
@@ -1023,7 +1028,7 @@ architecture</a></li>
 <li><a href="#sec:configuration_authorization"
 id="toc-sec:configuration_authorization"><span
 class="toc-section-number">14</span> Configuration Generation Is Not
-Authorization</a>
+Authorization: Review Invariants and Enforcer Independence</a>
 <ul>
 <li><a href="#generation-versus-enforcement"
 id="toc-generation-versus-enforcement"><span
@@ -1110,7 +1115,7 @@ exfiltrate secrets or authorize consequential actions. The second path
 requires no kernel exploit at all, which reframes the evaluation: the
 axis of analysis is the authority a component already holds, not merely
 the difficulty of exploiting it.</p>
-<p>This revision (0.3.0) refreshes the evidence base through September
+<p>This revision (0.4.0) refreshes the evidence base through September
 11, 2026. The offensive baseline expands from four primary sources to
 the incident record now available: the NCSC assessments of January 2024
 and May 2025, the Anthropic campaign investigation of November 2025 —
@@ -1151,7 +1156,8 @@ offensive AI, reproducible builds.</p>
 <hr />
 <h1 data-number="2" id="sec:introduction"><span
 class="header-section-number">2</span> Introduction: Offensive AI Agents
-Arrive at the Operating-System Boundary</h1>
+Arrive at the Operating-System Boundary — Why Agent Capability Reshapes
+OS Security</h1>
 <h2 data-number="2.1" id="why-this-review-now"><span
 class="header-section-number">2.1</span> Why this review, now</h2>
 <p>Operating-system security has been organized around a stable
@@ -1479,7 +1485,7 @@ property.</p>
 <hr />
 <h1 data-number="3" id="sec:threat_model"><span
 class="header-section-number">3</span> Threat Model: Two Ways to Lose —
-Exploitation and Authorized Misuse</h1>
+Exploitation and Authorized Misuse under Offensive Automation</h1>
 <h2 data-number="3.1" id="the-primary-scenario"><span
 class="header-section-number">3.1</span> The primary scenario</h2>
 <p>The primary scenario is a technically capable person using a
@@ -1884,7 +1890,7 @@ synthesis chapters that follow.</p>
 <hr />
 <h1 data-number="4" id="sec:evaluation_framework"><span
 class="header-section-number">4</span> Evaluation Framework: Nine
-Properties over Distribution Labels</h1>
+Properties over Distribution Labels, with a Formal Stance Model</h1>
 <h2 data-number="4.1" id="why-not-a-distribution-label"><span
 class="header-section-number">4.1</span> Why not a distribution
 label</h2>
@@ -2081,9 +2087,46 @@ candidates for which the property is out of scope or unverified by
 available evidence — used rather than guessed, because absence of a
 confirmed feature in this review is not proof the feature is
 unavailable.</p>
-<h2 data-number="4.5"
+<h2 data-number="4.5" id="a-formal-stance-model"><span
+class="header-section-number">4.5</span> A formal stance model</h2>
+<p>The vocabulary is small enough to state formally, and the formal
+statement is worth writing down because it fixes what the matrix claims
+and what it refuses to claim. Let <span class="math inline">\(C\)</span>
+be the set of 24 candidates, <span class="math inline">\(P\)</span> the
+set of 9 properties, and <span class="math inline">\(S =
+\{\textit{strong}, \textit{partial}, \textit{weak}\}\)</span> the stance
+vocabulary. The evaluation matrix is then a single function</p>
+<p><span id="eq:stance_mapping"><span
+class="math display">\[\sigma\colon C \times P \to S \cup
+\{\textit{n/a}\}\qquad{(1)}\]</span></span></p>
+<p>assigning exactly one stance to each candidate–property pair. Read as
+a function, eq. <a href="#eq:stance_mapping">1</a> makes two commitments
+that prose leaves implicit. It is <strong>total</strong>: the pipeline
+refuses to emit figures until all 216 cells are defined, so no candidate
+escapes evaluation by omission. And it is <strong>qualitative</strong>:
+the codomain carries no numbers, so the matrix cannot be averaged or
+ranked without an explicit modeling step — the step the anti-scoring
+stance above declines to supply.</p>
+<p>The stance words themselves carry a preference structure rather than
+a measurement scale, and the review reads them as ordered:</p>
+<p><span id="eq:stance_order"><span
+class="math display">\[\textit{strong} \succ \textit{partial} \succ
+\textit{weak}\qquad{(2)}\]</span></span></p>
+<p>meaning that a candidate whose documented design earns the left-hand
+stance dominates a candidate that earns the right-hand stance <em>on
+that property</em>. eq. <a href="#eq:stance_order">2</a> defines an
+ordering over postures, not distances between them: no arithmetic over
+stances is meaningful, and no rung is a probability. Notably, <span
+class="math inline">\(n_a\)</span> does not appear in eq. <a
+href="#eq:stance_order">2</a> at all — an unverified or out-of-scope
+cell sits outside the preference order entirely, which is what stops “we
+could not verify” from masquerading as “we verified it is weak.” The
+formal model thus encodes exactly the discipline the vocabulary was
+built for: total coverage, ordered confidence in documented designs, and
+honesty about the unverified.</p>
+<h2 data-number="4.6"
 id="how-the-matrix-is-constructed-and-refreshed"><span
-class="header-section-number">4.5</span> How the matrix is constructed
+class="header-section-number">4.6</span> How the matrix is constructed
 and refreshed</h2>
 <p>The matrix lives as data, not prose. In
 <code>src/agentic_os_security/registry.py</code>, each candidate carries
@@ -2115,9 +2158,9 @@ stances, with candidates grouped into eight category bands (left strip)
 and per-property stance distributions (right marginals); glyphs mark
 strong (S), partial (P), weak (W), and not-assessed cells.</figcaption>
 </figure>
-<h2 data-number="4.6"
+<h2 data-number="4.7"
 id="the-defensive-stack-mitigation-classes-as-a-second-lens"><span
-class="header-section-number">4.6</span> The defensive stack: mitigation
+class="header-section-number">4.7</span> The defensive stack: mitigation
 classes as a second lens</h2>
 <p>The candidate–property matrix answers “how does each platform score
 on the evaluation properties?” — but an operator choosing <em>what
@@ -2182,8 +2225,8 @@ the threat-model judgments, the defensive stack names the mechanism
 inventory an operator composes from. Both are deterministic artifacts
 stamped with the review date 2026-09-10, and both refresh by diffing
 rows, not rewriting adjectives.</p>
-<h2 data-number="4.7" id="what-the-matrix-buys"><span
-class="header-section-number">4.7</span> What the matrix buys</h2>
+<h2 data-number="4.8" id="what-the-matrix-buys"><span
+class="header-section-number">4.8</span> What the matrix buys</h2>
 <p>Three things. First, <strong>comparability without false
 precision</strong>: two candidates can be contrasted property by
 property, and the contrast shows <em>where</em> they differ (Qubes holds
@@ -2199,8 +2242,8 @@ per-scenario recommendations in sec. <a href="#sec:scenarios">16</a>
 select candidates by which properties the scenario’s threat model
 weights most, which is precisely what a label-based ranking cannot
 do.</p>
-<h2 data-number="4.8" id="limitations-of-matrix-thinking"><span
-class="header-section-number">4.8</span> Limitations of matrix
+<h2 data-number="4.9" id="limitations-of-matrix-thinking"><span
+class="header-section-number">4.9</span> Limitations of matrix
 thinking</h2>
 <p>A matrix is a discipline for judgment, not a substitute for it, and
 four limits should be kept in view.</p>
@@ -2247,7 +2290,7 @@ role="doc-biblioref"><span class="nocase">community</span>
 <hr />
 <h1 data-number="5" id="sec:qubes"><span
 class="header-section-number">5</span> Compartmentalization: Qubes OS
-Under Offensive-Agent Load</h1>
+Under Offensive-Agent Load — Capabilities and Limits</h1>
 <h2 data-number="5.1"
 id="architectural-foundation-separation-under-xen"><span
 class="header-section-number">5.1</span> Architectural foundation:
@@ -3062,7 +3105,7 @@ deliberately does not.</p>
 <hr />
 <h1 data-number="7" id="sec:desktops"><span
 class="header-section-number">7</span> Conventional Desktops: Hardening
-Candidates and Compatibility Costs</h1>
+Candidates, Compatibility Costs, and Agent Isolation</h1>
 <p>The two preceding sections examined the architectural poles of this
 review: hypervisor-based compartmentalization in sec. <a
 href="#sec:qubes">5</a> and declarative, rebuildable operations in
@@ -3429,7 +3472,8 @@ in sec. <a href="#sec:scenarios">16</a>.</p>
 <hr />
 <h1 data-number="8" id="sec:servers"><span
 class="header-section-number">8</span> Servers and Agent-Execution
-Infrastructure: The Disposable-Isolation Baseline</h1>
+Infrastructure: The Disposable-Isolation Baseline and the
+Operating-System Stack</h1>
 <p>Server selection differs from desktop selection in what dominates.
 Desktop ergonomics recede; eliminating unnecessary interfaces,
 constraining management authority, and sustaining a tested update
@@ -3653,6 +3697,19 @@ short one, an operational tax. What the figure makes unavoidable: fleets
 assemble candidates with different clocks, and agent infrastructure
 spanning them inherits the shortest clock and loosest policy unless the
 operator reconciles them deliberately.</p>
+<p>Formally, the review records each candidate’s support posture as a
+function</p>
+<p><span id="eq:update_window_semantics"><span
+class="math display">\[W(c) \in \mathbb{N} \cup
+\{\infty\}\qquad{(3)}\]</span></span></p>
+<p>where a finite value is the project’s committed coverage in months
+and <span class="math inline">\(W(c) = \infty\)</span> marks a rolling
+or release-relative policy rather than an indefinite guarantee. The
+reading this section carries forward is monotone: risk grows as the
+committed window is exhausted, because a candidate operating inside its
+window still converts maintenance into scheduled, tested operations,
+while one at or past the boundary converts them into unplanned exposure
+eq. <a href="#eq:update_window_semantics">3</a>.</p>
 <figure id="fig:update_windows">
 <a class="figure-full-size-link" href="../figures/update_windows.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 4, Documented support windows for all twenty-four candidates"><img src="../figures/update_windows.png" style="width:100.0%"
 alt="Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
@@ -3787,6 +3844,60 @@ data-cites="nix_sandbox_config">(<a href="#ref-nix_sandbox_config"
 role="doc-biblioref">N. Project 2026g</a>)</span>, but as sec. <a
 href="#sec:nixos">6</a> establishes, its sandbox concerns builds, not
 the runtime confinement of the thing built.</p>
+<p>Viewed together, the baseline’s four elements occupy a specific slice
+of a larger structure. fig. <a href="#fig:os_stack">5</a> arranges the
+operating-system security stack as eight ordered layers, from hardware
+and firmware at the top, through the hypervisor and the kernel’s
+access-control primitives, down to the agent runtime and its tool
+bridge; the right-hand columns record how strongly each candidate class
+in this review covers each layer. Formally, the stack is a defense
+sequence</p>
+<p><span id="eq:stack_layering"><span class="math display">\[L_1 \prec
+L_2 \prec \cdots \prec L_8\qquad{(4)}\]</span></span></p>
+<p>with one design obligation: a compromise at layer <span
+class="math inline">\(i\)</span> must not grant authority at layer <span
+class="math inline">\(i+1\)</span> eq. <a
+href="#eq:stack_layering">4</a>. The disposable-isolation baseline
+concentrates on layers four through six. The sandbox runtime layer —
+bubblewrap, seatbelt, gVisor, jailer-style wrappers composing the kernel
+primitives of the layer above — is where this section’s advisory record
+lives: Firecracker’s jailer is privileged host-side code with its own
+CVE stream <span class="citation"
+data-cites="firecracker_jailer_docs firecracker_jailer_advisory">(<a
+href="#ref-firecracker_jailer_docs" role="doc-biblioref">Firecracker
+Project 2026</a>; <a href="#ref-firecracker_jailer_advisory"
+role="doc-biblioref">Services 2026</a>)</span>, and gVisor accounts for
+CVEs across the whole sandbox precisely because that layer is attack
+surface rather than wall <span class="citation"
+data-cites="gvisor_security_policy">(<a
+href="#ref-gvisor_security_policy" role="doc-biblioref">gVisor Project
+2026a</a>)</span>. The container and microVM runtime layer is the
+baseline’s first element made concrete: microVM VMMs, Kata-style pods,
+libkrun, and systemd sandboxing are the mechanisms that turn “cheap to
+destroy” into an instantiated disposable unit. The update and
+provisioning layer keeps those runtimes honest over time — A/B atomic
+replacement, transactional-update, reproducible and signed updates — the
+discipline Bottlerocket documents for its host and Fedora CoreOS and
+MicroOS implement for theirs <span class="citation"
+data-cites="bottlerocket_security_features fedora_coreos_updates opensuse_transactional_update">(<a
+href="#ref-bottlerocket_security_features"
+role="doc-biblioref">Bottlerocket 2026</a>; <a
+href="#ref-fedora_coreos_updates" role="doc-biblioref">Fedora Project
+2026a</a>; <a href="#ref-opensuse_transactional_update"
+role="doc-biblioref"><span class="nocase">openSUSE</span>
+2026b</a>)</span>. Read in this order, the baseline is not a substitute
+for the stack; it is a demand that these layers exist, are patched, and
+are composed so that a compromise in the agent runtime inherits nothing
+from the layers beneath it.</p>
+<figure id="fig:os_stack">
+<a class="figure-full-size-link" href="../figures/os_stack.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 5, Eight layers of the operating-system security stack, from hardware"><img src="../figures/os_stack.png" style="width:100.0%"
+alt="Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>Figure 5: Eight layers of the
+operating-system security stack, from hardware and firmware to the agent
+runtime and its tool bridge; annotations name representative mechanisms
+per layer and the right-hand columns record how strongly each candidate
+class covers each layer.</figcaption>
+</figure>
 <h2 data-number="8.3"
 id="orchestrators-and-api-credentials-are-the-authority"><span
 class="header-section-number">8.3</span> Orchestrators and API
@@ -3825,7 +3936,7 @@ href="#sec:opsec">12</a>.</p>
 <hr />
 <h1 data-number="9" id="sec:comparators"><span
 class="header-section-number">9</span> Boundary Comparators: What
-Non-Linux Systems Teach</h1>
+Non-Linux and Specialized Systems Teach</h1>
 <p>The candidates examined so far live inside the Linux workstation and
 server lanes. This section places seven systems that sit outside those
 lanes — privacy distributions, a non-Linux BSD, formally verified and
@@ -4317,14 +4428,14 @@ its agent.</td>
 </tbody>
 </table></div>
 <figure id="fig:trust_domains">
-<a class="figure-full-size-link" href="../figures/trust_domains.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 5, Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets"><img src="../figures/trust_domains.png" style="width:100.0%"
+<a class="figure-full-size-link" href="../figures/trust_domains.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 6, Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets"><img src="../figures/trust_domains.png" style="width:100.0%"
 alt="Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets; numbered arrows mark the control catalog entries that mediate each crossing." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>Figure 5: Seven trust domains for
+<figcaption>Figure 6: Seven trust domains for
 AI-assisted work, arranged from hostile intake to protected assets;
 numbered arrows mark the control catalog entries that mediate each
 crossing.</figcaption>
 </figure>
-<p>The table and fig. <a href="#fig:trust_domains">5</a> encode two
+<p>The table and fig. <a href="#fig:trust_domains">6</a> encode two
 design judgments. First, hostile-input domains and authority domains are
 different kinds of places: agent execution and browsing/intake are
 deliberately cheap to destroy, while administration, identity, and
@@ -4352,11 +4463,15 @@ not as an endorsement of any tool’s security. The nine are also a
 composed defense rather than a stack of independent toggles: Defense
 Composition Algebra treats layered controls as formal objects whose
 composition — coverage interactions included, not just their count —
-determines what an attacker must defeat, and the set below is chosen so
-that each control closes a failure the others leave open <span
-class="citation" data-cites="cif_formal_2026">(<a
-href="#ref-cif_formal_2026" role="doc-biblioref">Friedman
-2026c</a>)</span>.</p>
+determines what an attacker must defeat <span class="citation"
+data-cites="cif_formal_2026">(<a href="#ref-cif_formal_2026"
+role="doc-biblioref">Friedman 2026c</a>)</span>. In its notation, a
+defense over the eight mitigation classes is a composition of per-class
+layers, written as in eq. <a href="#eq:defense_composition">5</a>, and
+the set below is chosen so that each control closes a failure the others
+leave open.</p>
+<p><span id="eq:defense_composition"><span class="math display">\[D =
+d_1 \circ d_2 \circ \cdots \circ d_8\qquad{(5)}\]</span></span></p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Table 9: The nine controls of the agentic authority architecture: operating rule and design rationale for each. The r…"><table id="tbl:controls" data-responsive-table="true">
 <caption>Table 9: The nine controls of the agentic authority
 architecture: operating rule and design rationale for each. The rules
@@ -4562,20 +4677,21 @@ boundary.</p>
 <h2 data-number="10.5" id="the-authority-ladder"><span
 class="header-section-number">10.5</span> The authority ladder</h2>
 <figure id="fig:authority_ladder">
-<a class="figure-full-size-link" href="../figures/authority_ladder.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 6, The six-rung authority ladder as a swimlane across human principal, orchestrator"><img src="../figures/authority_ladder.png" style="width:100.0%"
+<a class="figure-full-size-link" href="../figures/authority_ladder.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 7, The six-rung authority ladder as a swimlane across human principal, orchestrator"><img src="../figures/authority_ladder.png" style="width:100.0%"
 alt="The six-rung authority ladder as a swimlane across human principal, orchestrator and agent, and tool broker; hatched cells mark exercise paths an agent must never hold without external authorization." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>Figure 6: The six-rung authority ladder
+<figcaption>Figure 7: The six-rung authority ladder
 as a swimlane across human principal, orchestrator and agent, and tool
 broker; hatched cells mark exercise paths an agent must never hold
 without external authorization.</figcaption>
 </figure>
-<p>The ladder in fig. <a href="#fig:authority_ladder">6</a> gives the
+<p>The ladder in fig. <a href="#fig:authority_ladder">7</a> gives the
 architecture its operating rhythm across six rungs:
 <strong>propose</strong>, <strong>stage</strong>,
 <strong>authorize</strong>, <strong>exercise</strong>,
-<strong>audit</strong>, <strong>revoke</strong>. An agent may propose
-and stage freely — generating configurations, preparing artifacts,
-drafting deployments — because nothing at those rungs changes the world.
+<strong>audit</strong>, <strong>revoke</strong>, ordered as in eq. <a
+href="#eq:authority_ladder_order">6</a>. An agent may propose and stage
+freely — generating configurations, preparing artifacts, drafting
+deployments — because nothing at those rungs changes the world.
 Authorization is the hinge: it must be exercised outside the agent, by
 the human principal or by deterministic policy, and the approval context
 is a mediated operation with artifact, destination, scope, and
@@ -4598,6 +4714,10 @@ data-cites="anthropic_sandboxing codex_sandboxing">(<a
 href="#ref-anthropic_sandboxing" role="doc-biblioref">Anthropic
 2026b</a>; <a href="#ref-codex_sandboxing" role="doc-biblioref">OpenAI
 2026a</a>)</span>.</p>
+<p><span id="eq:authority_ladder_order"><span
+class="math display">\[\textit{propose} \prec \textit{stage} \prec
+\textit{authorize} \prec \textit{exercise} \prec \textit{audit} \prec
+\textit{revoke}\qquad{(6)}\]</span></span></p>
 <p>The authorize/exercise split is also what keeps delegated trust
 bounded. Formal treatments of agent trust bound a delegate’s effective
 trust by what it was authorized to exercise rather than by what it can
@@ -5640,28 +5760,31 @@ authority: a worker returns requests that preserve or reduce scope,
 never requests that expand it, and the broker rejects expansions as a
 matter of policy. These three rules convert the deputy from a trusted
 forwarder into a checked channel.</p>
-<p>The formal grounding for these rules is δ-bounded delegation: each
-hop in an agent-to-agent chain is permitted to narrow the authority it
-passes, never to widen it, so trust cannot amplify across a delegation
-chain no matter how many intermediaries it traverses <span
-class="citation" data-cites="cif_formal_2026">(<a
-href="#ref-cif_formal_2026" role="doc-biblioref">Friedman
-2026c</a>)</span>. That formal model is not left as a statement of
-intent — its bounded-delegation and trust-boundedness properties have
-been exercised computationally, with implementations validating the
-no-amplification guarantee on constructed delegation scenarios <span
-class="citation" data-cites="cif_validation_2026">(<a
-href="#ref-cif_validation_2026" role="doc-biblioref">Friedman
-2026b</a>)</span>.</p>
+<p>The formal grounding for these rules is δ-bounded delegation (eq. <a
+href="#eq:delegation_bound">7</a>): each hop in an agent-to-agent chain
+is permitted to narrow the authority it passes, never to widen it, so
+trust cannot amplify across a delegation chain no matter how many
+intermediaries it traverses <span class="citation"
+data-cites="cif_formal_2026">(<a href="#ref-cif_formal_2026"
+role="doc-biblioref">Friedman 2026c</a>)</span>. That formal model is
+not left as a statement of intent — its bounded-delegation and
+trust-boundedness properties have been exercised computationally, with
+implementations validating the no-amplification guarantee on constructed
+delegation scenarios <span class="citation"
+data-cites="cif_validation_2026">(<a href="#ref-cif_validation_2026"
+role="doc-biblioref">Friedman 2026b</a>)</span>.</p>
+<p><span id="eq:delegation_bound"><span
+class="math display">\[\mathrm{trust}(a \to c) \le \delta \cdot
+\mathrm{trust}(a \to b)\qquad{(7)}\]</span></span></p>
 <figure id="fig:orchestration_boundaries">
-<a class="figure-full-size-link" href="../figures/orchestration_boundaries.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 7, A reference orchestration: one orchestrator delegating through an MCP-style tool broker to…"><img src="../figures/orchestration_boundaries.png" style="width:100.0%"
+<a class="figure-full-size-link" href="../figures/orchestration_boundaries.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 8, A reference orchestration: one orchestrator delegating through an MCP-style tool broker to…"><img src="../figures/orchestration_boundaries.png" style="width:100.0%"
 alt="A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>Figure 7: A reference orchestration: one
+<figcaption>Figure 8: A reference orchestration: one
 orchestrator delegating through an MCP-style tool broker to three
 disposable workers, with the ten mediation points numbered at each
 trust-boundary crossing.</figcaption>
 </figure>
-<p>The boundaries in fig. <a href="#fig:orchestration_boundaries">7</a>
+<p>The boundaries in fig. <a href="#fig:orchestration_boundaries">8</a>
 are the orchestration-layer rendering of the trust-domain design:
 executors instantiate the <code>agent_execution</code> domain, broker
 policy carries the <code>credential_service</code> restrictions,
@@ -5750,12 +5873,12 @@ href="#ref-anthropic_sandboxing" role="doc-biblioref">Anthropic
 2026a</a>; <a href="#ref-gemini_cli_sandbox" role="doc-biblioref">Google
 2026</a>)</span> — before the protocol work standardizes points 4
 through 7, is the market’s own vote on where control belongs. fig. <a
-href="#fig:agent_surface">8</a> arranges the matrix, with the numbered
+href="#fig:agent_surface">9</a> arranges the matrix, with the numbered
 mediation points keyed to the list above.</p>
 <figure id="fig:agent_surface">
-<a class="figure-full-size-link" href="../figures/agent_surface.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 8, Which mediation point constrains which agent capability class"><img src="../figures/agent_surface.png" style="width:100.0%"
+<a class="figure-full-size-link" href="../figures/agent_surface.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 9, Which mediation point constrains which agent capability class"><img src="../figures/agent_surface.png" style="width:100.0%"
 alt="Which mediation point constrains which agent capability class; filled numbered cells mark the primary control, and the right marginal counts how many distinct controls cover each capability." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>Figure 8: Which mediation point
+<figcaption>Figure 9: Which mediation point
 constrains which agent capability class; filled numbered cells mark the
 primary control, and the right marginal counts how many distinct
 controls cover each capability.</figcaption>
@@ -5829,7 +5952,7 @@ or quietly dissolved by convenience.</p>
 <hr />
 <h1 data-number="14" id="sec:configuration_authorization"><span
 class="header-section-number">14</span> Configuration Generation Is Not
-Authorization</h1>
+Authorization: Review Invariants and Enforcer Independence</h1>
 <p>An AI agent can write a declarative configuration, an access-control
 policy, or a deployment change as fluently as it writes code. Generation
 is not the security event. The security event is whatever independently
@@ -5934,7 +6057,14 @@ describes.</p>
 class="header-section-number">14.3</span> The review invariants</h2>
 <p>tbl. <a href="#tbl:invariants">10</a> states the review invariants:
 what an agent must never be able to do, the failure each invariant
-closes, and where enforcement must live.</p>
+closes, and where enforcement must live. Formally, each invariant is an
+unreachable-state predicate (eq. <a
+href="#eq:invariant_predicate">8</a>): no state reachable from
+agent-writable configuration may violate an invariant.</p>
+<p><span id="eq:invariant_predicate"><span
+class="math display">\[\forall g \in G_{\mathrm{agent}}\colon
+\neg\,\mathrm{reachable}(g,
+\mathrm{violate}(\iota_i))\qquad{(8)}\]</span></span></p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Table 10: The 9 configuration review invariants: the capability closed, the failure each prevents, and the enforcemen…"><table id="tbl:invariants" data-responsive-table="true">
 <caption>Table 10: The 9 configuration review invariants: the capability
 closed, the failure each prevents, and the enforcement point</caption>
@@ -6222,13 +6352,13 @@ of sec. <a href="#sec:evaluation_framework">4</a> restated as a design
 program. The destination is a composition, and composition quality is
 precisely what no reviewed product yet supplies as a default (sec. <a
 href="#sec:qubes">5</a>; sec. <a href="#sec:nixos">6</a>; sec. <a
-href="#sec:desktops">7</a>). fig. <a href="#fig:forecast_horizon">9</a>
+href="#sec:desktops">7</a>). fig. <a href="#fig:forecast_horizon">10</a>
 arranges the registered forecasts by confidence tier across the
 horizon.</p>
 <figure id="fig:forecast_horizon">
-<a class="figure-full-size-link" href="../figures/forecast_horizon.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 9, Fourteen forecasts placed on the 2026–2031 horizon by confidence tier"><img src="../figures/forecast_horizon.png" style="width:100.0%"
+<a class="figure-full-size-link" href="../figures/forecast_horizon.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 10, Fourteen forecasts placed on the 2026–2031 horizon by confidence tier"><img src="../figures/forecast_horizon.png" style="width:100.0%"
 alt="Fourteen forecasts placed on the 2026–2031 horizon by confidence tier; high-confidence architectural bets cluster early, while low-confidence rows are explicit refusals to predict a distribution winner." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
-<figcaption>Figure 9: Fourteen forecasts placed on
+<figcaption>Figure 10: Fourteen forecasts placed on
 the 2026–2031 horizon by confidence tier; high-confidence architectural
 bets cluster early, while low-confidence rows are explicit refusals to
 predict a distribution winner.</figcaption>
@@ -6721,7 +6851,7 @@ can grant itself.</li>
 system state is explicit, reviewable, reproducibly deployable — and
 independently authorized before deployment.</li>
 </ul>
-<p>The 9 figures and the underlying analysis artifacts are reproducible
+<p>The 10 figures and the underlying analysis artifacts are reproducible
 from the repository’s own pipeline, because a prospectus about
 independently rebuildable environments should be one. The composition
 that matters is not any single system. It is the set of boundaries an

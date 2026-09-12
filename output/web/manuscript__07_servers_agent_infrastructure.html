@@ -172,6 +172,71 @@
       vertical-align: middle;
     }
   </style>
+  <script data-template-mathjax-config>
+window.MathJax = window.MathJax || {};
+window.MathJax.chtml = Object.assign({}, window.MathJax.chtml, {
+  fontURL: "https://cdn.jsdelivr.net/npm/@mathjax/mathjax-newcm-font@4.0.0/chtml/woff2",
+  dynamicPrefix: "https://cdn.jsdelivr.net/npm/@mathjax/mathjax-newcm-font@4.0.0/chtml/dynamic"
+});
+var templateMathOutput = window.MathJax.output || {};
+window.MathJax.output = Object.assign({}, templateMathOutput, {
+  displayOverflow: "linebreak",
+  linebreaks: Object.assign({}, templateMathOutput.linebreaks, {
+    inline: true,
+    width: "100%",
+    lineleading: 0.5
+  })
+});
+window.normalizeTemplateMathJaxAria = function () {
+  document.querySelectorAll("mjx-speech[aria-roledescription]").forEach(function (node) {
+    var roleDescription = node.getAttribute("aria-roledescription") || "";
+    if (/[-]/.test(roleDescription)) {
+      node.setAttribute("aria-roledescription", "mathematical expression");
+    }
+  });
+};
+window.MathJax.startup = Object.assign({}, window.MathJax.startup, {
+  ready: function () {
+    var measuredWidth = document.documentElement.clientWidth;
+    var reflowQueued = false;
+    window.MathJax.startup.defaultReady();
+    window.templateMathJaxReflowPromise = window.MathJax.startup.promise.then(
+      window.normalizeTemplateMathJaxAria
+    );
+    function reflowDisplayMath() {
+      if (reflowQueued || document.documentElement.clientWidth === measuredWidth) return;
+      reflowQueued = true;
+      window.templateMathJaxReflowPromise = window.templateMathJaxReflowPromise
+        .catch(function () { /* A later resize may retry a failed render. */ })
+        .then(async function () {
+          var width = document.documentElement.clientWidth;
+          try {
+            // MathJax 4 MathItem.STATE.METRICS = 110. The default RERENDER
+            // state retains old container metrics and cannot reflow on zoom.
+            await window.MathJax.startup.document.rerenderPromise(110);
+            window.normalizeTemplateMathJaxAria();
+            window.templateMathJaxReflowError = null;
+          } catch (error) {
+            window.templateMathJaxReflowError = String(error);
+            console.error("MathJax viewport reflow failed", error);
+            throw error;
+          } finally {
+            measuredWidth = width;
+            reflowQueued = false;
+          }
+        })
+        .then(reflowDisplayMath);
+      // Keep failure observable to callers without an unhandled rejection.
+      window.templateMathJaxReflowPromise.catch(function () {});
+    }
+    window.addEventListener("resize", reflowDisplayMath);
+    // Also cover a resize that happened during the initial asynchronous render.
+    window.templateMathJaxReflowPromise.then(reflowDisplayMath);
+  }
+});
+</script>
+<script defer=""
+  type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@4.0.0/tex-chtml.js" integrity="sha384-2BWc4dVaHADUocwKrUrK9u3iDwHxVMKXWEcoRmUkXYSFKhAsgVAYClu9ydNuo5Oz" crossorigin="anonymous"></script>
 
 <link data-template-favicon rel="icon" href="favicon.ico">
 
@@ -566,7 +631,7 @@ mjx-container[display="true"] {
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <main id="main-content" tabindex="-1">
 <h1 id="sec:servers">Servers and Agent-Execution Infrastructure: The
-Disposable-Isolation Baseline</h1>
+Disposable-Isolation Baseline and the Operating-System Stack</h1>
 <p>Server selection differs from desktop selection in what dominates.
 Desktop ergonomics recede; eliminating unnecessary interfaces,
 constraining management authority, and sustaining a tested update
@@ -742,6 +807,19 @@ planning commitment; a short one, an operational tax. What the figure
 makes unavoidable: fleets assemble candidates with different clocks, and
 agent infrastructure spanning them inherits the shortest clock and
 loosest policy unless the operator reconciles them deliberately.</p>
+<p>Formally, the review records each candidate’s support posture as a
+function</p>
+<p><span class="math display">\[W(c) \in \mathbb{N} \cup
+\{\infty\}\]</span> {#eq:update_window_semantics}</p>
+<p>where a finite value is the project’s committed coverage in months
+and <span class="math inline">\(W(c) = \infty\)</span> marks a rolling
+or release-relative policy rather than an indefinite guarantee. The
+reading this section carries forward is monotone: risk grows as the
+committed window is exhausted, because a candidate operating inside its
+window still converts maintenance into scheduled, tested operations,
+while one at or past the boundary converts them into unplanned exposure
+<span class="citation"
+data-cites="eq:update_window_semantics">[@eq:update_window_semantics]</span>.</p>
 <figure id="fig:update_windows">
 <a class="figure-full-size-link" href="../figures/update_windows.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Documented support windows for all twenty-four candidates"><img src="../figures/update_windows.png" style="width:100.0%"
 alt="Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
@@ -850,6 +928,50 @@ and replace worker environments quickly [nix_sandbox_config], but as
 <span class="citation" data-cites="sec:nixos">[@sec:nixos]</span>
 establishes, its sandbox concerns builds, not the runtime confinement of
 the thing built.</p>
+<p>Viewed together, the baseline’s four elements occupy a specific slice
+of a larger structure. <span class="citation"
+data-cites="fig:os_stack">[@fig:os_stack]</span> arranges the
+operating-system security stack as eight ordered layers, from hardware
+and firmware at the top, through the hypervisor and the kernel’s
+access-control primitives, down to the agent runtime and its tool
+bridge; the right-hand columns record how strongly each candidate class
+in this review covers each layer. Formally, the stack is a defense
+sequence</p>
+<p><span class="math display">\[L_1 \prec L_2 \prec \cdots \prec
+L_8\]</span> {#eq:stack_layering}</p>
+<p>with one design obligation: a compromise at layer <span
+class="math inline">\(i\)</span> must not grant authority at layer <span
+class="math inline">\(i+1\)</span> <span class="citation"
+data-cites="eq:stack_layering">[@eq:stack_layering]</span>. The
+disposable-isolation baseline concentrates on layers four through six.
+The sandbox runtime layer — bubblewrap, seatbelt, gVisor, jailer-style
+wrappers composing the kernel primitives of the layer above — is where
+this section’s advisory record lives: Firecracker’s jailer is privileged
+host-side code with its own CVE stream [firecracker_jailer_docs;
+firecracker_jailer_advisory], and gVisor accounts for CVEs across the
+whole sandbox precisely because that layer is attack surface rather than
+wall [gvisor_security_policy]. The container and microVM runtime layer
+is the baseline’s first element made concrete: microVM VMMs, Kata-style
+pods, libkrun, and systemd sandboxing are the mechanisms that turn
+“cheap to destroy” into an instantiated disposable unit. The update and
+provisioning layer keeps those runtimes honest over time — A/B atomic
+replacement, transactional-update, reproducible and signed updates — the
+discipline Bottlerocket documents for its host and Fedora CoreOS and
+MicroOS implement for theirs [bottlerocket_security_features;
+fedora_coreos_updates; opensuse_transactional_update]. Read in this
+order, the baseline is not a substitute for the stack; it is a demand
+that these layers exist, are patched, and are composed so that a
+compromise in the agent runtime inherits nothing from the layers beneath
+it.</p>
+<figure id="fig:os_stack">
+<a class="figure-full-size-link" href="../figures/os_stack.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Eight layers of the operating-system security stack, from hardware"><img src="../figures/os_stack.png" style="width:100.0%"
+alt="Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
+<figcaption>Eight layers of the operating-system
+security stack, from hardware and firmware to the agent runtime and its
+tool bridge; annotations name representative mechanisms per layer and
+the right-hand columns record how strongly each candidate class covers
+each layer.</figcaption>
+</figure>
 <h2
 id="orchestrators-and-api-credentials-are-the-authority">Orchestrators
 and API credentials are the authority</h2>

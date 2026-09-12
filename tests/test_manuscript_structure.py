@@ -13,19 +13,23 @@ import pytest
 SECTION_FILES = {
     "00_abstract.md": ("Abstract", "sec:abstract"),
     "01_introduction.md": (
-        "Introduction: Offensive AI Agents Arrive at the Operating-System Boundary",
+        "Introduction: Offensive AI Agents Arrive at the Operating-System Boundary"
+        " — Why Agent Capability Reshapes OS Security",
         "sec:introduction",
     ),
     "02_threat_model.md": (
-        "Threat Model: Two Ways to Lose — Exploitation and Authorized Misuse",
+        "Threat Model: Two Ways to Lose"
+        " — Exploitation and Authorized Misuse under Offensive Automation",
         "sec:threat_model",
     ),
     "03_evaluation_framework.md": (
-        "Evaluation Framework: Nine Properties over Distribution Labels",
+        "Evaluation Framework: Nine Properties over Distribution Labels,"
+        " with a Formal Stance Model",
         "sec:evaluation_framework",
     ),
     "04_compartmentalization_qubes.md": (
-        "Compartmentalization: Qubes OS Under Offensive-Agent Load",
+        "Compartmentalization: Qubes OS Under Offensive-Agent Load"
+        " — Capabilities and Limits",
         "sec:qubes",
     ),
     "05_reproducible_operations_nixos.md": (
@@ -33,15 +37,17 @@ SECTION_FILES = {
         "sec:nixos",
     ),
     "06_conventional_desktops.md": (
-        "Conventional Desktops: Hardening Candidates and Compatibility Costs",
+        "Conventional Desktops: Hardening Candidates, Compatibility Costs,"
+        " and Agent Isolation",
         "sec:desktops",
     ),
     "07_servers_agent_infrastructure.md": (
-        "Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline",
+        "Servers and Agent-Execution Infrastructure: The Disposable-Isolation"
+        " Baseline and the Operating-System Stack",
         "sec:servers",
     ),
     "08_boundary_comparators.md": (
-        "Boundary Comparators: What Non-Linux Systems Teach",
+        "Boundary Comparators: What Non-Linux and Specialized Systems Teach",
         "sec:comparators",
     ),
     "09_agentic_authority_architecture.md": (
@@ -61,7 +67,8 @@ SECTION_FILES = {
         "sec:orchestration",
     ),
     "13_configuration_authorization.md": (
-        "Configuration Generation Is Not Authorization",
+        "Configuration Generation Is Not Authorization:"
+        " Review Invariants and Enforcer Independence",
         "sec:configuration_authorization",
     ),
     "14_forecast_2028_2031.md": (
@@ -86,6 +93,7 @@ FIGURE_LABELS = {
     "fig:defensive_stack",
     "fig:update_windows",
     "fig:agent_surface",
+    "fig:os_stack",
 }
 
 TABLE_LABELS = {
@@ -112,6 +120,18 @@ FIG_DEF_RE = re.compile(r"\{#(fig:[\w-]+)")
 TBL_DEF_RE = re.compile(r"\{#(tbl:[\w-]+)")
 FIG_REF_RE = re.compile(r"\[@(fig:[\w-]+)")
 TBL_REF_RE = re.compile(r"\[@(tbl:[\w-]+)")
+EQ_DEF_RE = re.compile(r"\{#(eq:[\w-]+)\}")
+EQ_REF_RE = re.compile(r"\[@(eq:[\w-]+)\]")
+EQUATION_LABELS = {
+    "eq:stance_mapping",
+    "eq:stance_order",
+    "eq:stack_layering",
+    "eq:update_window_semantics",
+    "eq:authority_ladder_order",
+    "eq:defense_composition",
+    "eq:delegation_bound",
+    "eq:invariant_predicate",
+}
 
 TOKEN_PLAN = frozenset(
     {
@@ -210,6 +230,24 @@ def test_figure_targets_defined_in_figure_registry(section_text):
         targets.update(FIG_REF_RE.findall(text))
     undefined = targets - FIGURE_LABELS
     assert not undefined, f"figure targets not in registry: {sorted(undefined)}"
+
+
+def test_equation_targets_defined_in_equation_registry(section_text):
+    targets = set()
+    for text in section_text.values():
+        targets.update(EQ_DEF_RE.findall(text))
+        targets.update(EQ_REF_RE.findall(text))
+    undefined = targets - EQUATION_LABELS
+    assert not undefined, f"equation targets not in registry: {sorted(undefined)}"
+
+
+def test_equation_registry_defined_exactly_once(section_text):
+    counts = {label: 0 for label in EQUATION_LABELS}
+    for text in section_text.values():
+        for label in EQ_DEF_RE.findall(text):
+            counts[label] += 1
+    wrong = {label: n for label, n in counts.items() if n != 1}
+    assert not wrong, f"equation labels must be defined exactly once: {wrong}"
 
 
 def test_table_targets_defined_in_table_registry(section_text):

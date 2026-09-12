@@ -1,3 +1,6 @@
 \beamer@slide {tbl:servers}{4}
-\beamer@slide {fig:update_windows}{9}
-\beamer@slide {agent-execution-isolation-what-the-deployed-evidence-shows}{14}
+\beamer@slide {eq:update_window_semantics}{9}
+\beamer@slide {fig:update_windows}{10}
+\beamer@slide {agent-execution-isolation-what-the-deployed-evidence-shows}{15}
+\beamer@slide {eq:stack_layering}{21}
+\beamer@slide {fig:os_stack}{23}

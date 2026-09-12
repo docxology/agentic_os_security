@@ -1,4 +1,4 @@
-# Introduction: Offensive AI Agents Arrive at the Operating-System Boundary {#sec:introduction}
+# Introduction: Offensive AI Agents Arrive at the Operating-System Boundary — Why Agent Capability Reshapes OS Security {#sec:introduction}
 
 ## Why this review, now
 

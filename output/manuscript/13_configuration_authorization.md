@@ -1,4 +1,4 @@
-# Configuration Generation Is Not Authorization {#sec:configuration_authorization}
+# Configuration Generation Is Not Authorization: Review Invariants and Enforcer Independence {#sec:configuration_authorization}
 
 An AI agent can write a declarative configuration, an access-control policy, or a deployment change as fluently as it writes code. Generation is not the security event. The security event is whatever independently enforces the boundary between what the agent may change and what it may only request — above all, the mechanisms that constrain the agent itself. This section deepens that argument, states the 9 review invariants that an agent must never be able to violate, and locates the separation of policy writing, policy approval, and permission exercise inside the authority architecture of [@sec:agentic_authority].
 
@@ -18,7 +18,9 @@ Provenance inspection, in particular, is maturing from a manual discipline into 
 
 ## The review invariants
 
-[@tbl:invariants] states the review invariants: what an agent must never be able to do, the failure each invariant closes, and where enforcement must live.
+[@tbl:invariants] states the review invariants: what an agent must never be able to do, the failure each invariant closes, and where enforcement must live. Formally, each invariant is an unreachable-state predicate ([@eq:invariant_predicate]): no state reachable from agent-writable configuration may violate an invariant.
+
+$$\forall g \in G_{\mathrm{agent}}\colon \neg\,\mathrm{reachable}(g, \mathrm{violate}(\iota_i))$$ {#eq:invariant_predicate}
 
 | Invariant: the agent must never be able to | Failure the invariant closes | Enforcement point |
 | --- | --- | --- |

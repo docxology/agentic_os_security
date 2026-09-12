@@ -1,4 +1,10 @@
 \frametitle{Agent-execution isolation: what the deployed evidence shows}
-worker environments quickly (N. Project 2026), but as
-sec.~6 establishes, its sandbox concerns builds, not the
-runtime confinement of the thing built.
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer.}]{../figures/os_stack.png}
+\caption{Eight layers of the operating-system security stack, from
+hardware and firmware to the agent runtime and its tool bridge;
+annotations name representative mechanisms per layer and the right-hand
+columns record how strongly each candidate class covers each
+layer.}\label{fig:os_stack}
+\end{figure}

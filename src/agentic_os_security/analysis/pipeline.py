@@ -1,9 +1,9 @@
-"""Evaluation analysis pipeline: data artifacts, nine registry figures, and
+"""Evaluation analysis pipeline: data artifacts, ten registry figures, and
 the cover graphical abstract.
 
-``run_analysis(project_root)`` is idempotent: every run rewrites the seven
+``run_analysis(project_root)`` is idempotent: every run rewrites the nine
 data artifacts plus the figure registry and the validation report from the
-pinned registry, regenerates all nine registry figures plus the cover
+pinned registry, regenerates all ten registry figures plus the cover
 graphical abstract (which is not a registry figure).  Reports
 carry timestamps from :mod:`agentic_os_security.build_clock` (which honors
 ``SOURCE_DATE_EPOCH``), never the wall clock.
@@ -27,6 +27,7 @@ from ..figures import (
     generate_forecast_horizon,
     generate_graphical_abstract,
     generate_orchestration_boundaries,
+    generate_os_stack,
     generate_property_matrix,
     generate_trust_domains,
     generate_update_windows,
@@ -43,6 +44,9 @@ from ..registry import (
 )
 from ..orchestration import CIF_CONCEPTS
 from ..threat_model import AUTHORITY_LADDER
+from ..formal import FORMAL_DEFINITIONS, FormalDefinition
+from ..stack import ARCHETYPE_LABELS, STACK_LAYERS
+from ..stack import stack_rows as coverage_rows
 from ..trust_domains import CONFIGURATION_INVARIANTS, CONTROLS, TRUST_DOMAINS
 
 
@@ -73,8 +77,9 @@ _FIGURE_GENERATORS: dict[str, Any] = {
     "agent_surface.png": generate_agent_surface,
     "forecast_horizon.png": generate_forecast_horizon,
     "update_windows.png": generate_update_windows,
+    "os_stack.png": generate_os_stack,
     # The cover graphical abstract: generated like a figure but NOT a
-    # registry entry and NOT counted in RESULT_NUM_FIGURES (stays 9).
+    # registry entry and NOT counted in RESULT_NUM_FIGURES (stays 10).
     "graphical_abstract.png": generate_graphical_abstract,
 }
 
@@ -142,8 +147,32 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
             "external authorization."
         ),
     },
-    "orchestration_boundaries": {
+    "update_windows": {
         "figure_id": "figure_006",
+        "filename": "update_windows.png",
+        "label": "fig:update_windows",
+        "section": "Servers and Agent-Execution Infrastructure",
+        "caption": (
+            "Documented support windows for all twenty-four candidates; "
+            "hatched bars mark rolling or lifecycle-based policies with no "
+            "fixed window, and color encodes the candidate category."
+        ),
+    },
+    "os_stack": {
+        "figure_id": "figure_007",
+        "filename": "os_stack.png",
+        "label": "fig:os_stack",
+        "section": "Servers and Agent-Execution Infrastructure",
+        "caption": (
+            "Eight layers of the operating-system security stack, from "
+            "hardware and firmware to the agent runtime and its tool "
+            "bridge; annotations name representative mechanisms per layer "
+            "and the right-hand columns record how strongly each candidate "
+            "class covers each layer."
+        ),
+    },
+    "orchestration_boundaries": {
+        "figure_id": "figure_008",
         "filename": "orchestration_boundaries.png",
         "label": "fig:orchestration_boundaries",
         "section": "Securing Agent Orchestration",
@@ -154,7 +183,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "agent_surface": {
-        "figure_id": "figure_007",
+        "figure_id": "figure_009",
         "filename": "agent_surface.png",
         "label": "fig:agent_surface",
         "section": "Securing Agent Orchestration",
@@ -165,7 +194,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "forecast_horizon": {
-        "figure_id": "figure_008",
+        "figure_id": "figure_010",
         "filename": "forecast_horizon.png",
         "label": "fig:forecast_horizon",
         "section": "Forecast",
@@ -174,17 +203,6 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
             "tier; high-confidence architectural bets cluster early, while "
             "low-confidence rows are explicit refusals to predict a "
             "distribution winner."
-        ),
-    },
-    "update_windows": {
-        "figure_id": "figure_009",
-        "filename": "update_windows.png",
-        "label": "fig:update_windows",
-        "section": "Servers and Agent-Execution Infrastructure",
-        "caption": (
-            "Documented support windows for all twenty-four candidates; "
-            "hatched bars mark rolling or lifecycle-based policies with no "
-            "fixed window, and color encodes the candidate category."
         ),
     },
 }
@@ -245,6 +263,52 @@ def _write_update_windows_csv(path: Path) -> int:
             writer.writerow([candidate.candidate_id, window.policy, window.months if window.months is not None else ""])
     return len(UPDATE_WINDOWS)
 
+
+def _write_os_stack_coverage_csv(path: Path) -> int:
+    """Write the archetype x layer stance coverage (64 rows) from ``stack``."""
+    layer_names = {layer.layer_id: layer.name for layer in STACK_LAYERS}
+    path.parent.mkdir(parents=True, exist_ok=True)
+    rows = coverage_rows()
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["archetype_id", "archetype", "layer_id", "layer", "stance"])
+        for archetype_id, layer_id, stance in rows:
+            writer.writerow(
+                [
+                    archetype_id,
+                    ARCHETYPE_LABELS[archetype_id],
+                    layer_id,
+                    layer_names[layer_id],
+                    stance,
+                ]
+            )
+    return len(rows)
+
+def _write_formal_definitions(path: Path) -> dict[str, Any]:
+    """Write the eight pinned formal definitions (deterministic).
+
+    Byte-deterministic: fixed key order inside each entry, sorted top-level
+    keys, fixed indent, trailing newline, no timestamps.
+    """
+    definitions: list[dict[str, Any]] = []
+    for definition in FORMAL_DEFINITIONS:
+        definitions.append(
+            {
+                "definition_id": definition.definition_id,
+                "name": definition.name,
+                "formal_latex": definition.formal_latex,
+                "informal": definition.informal,
+                "surface": definition.surface,
+                "citation_keys": list(definition.citation_keys),
+            }
+        )
+    payload = {
+        "definitions": definitions,
+        "num_definitions": len(definitions),
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return payload
 
 def _write_evidence_summary(path: Path) -> dict[str, Any]:
     payload = {
@@ -375,6 +439,30 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
         else f"missing={sorted(_CIF_CONCEPT_IDS - concept_ids)} unmapped={unmapped}",
     )
 
+    coverage = coverage_rows()
+    unique_coverage = len({(archetype, layer) for archetype, layer, _ in coverage})
+    bad_coverage_stances = sorted({stance for _, _, stance in coverage} - _STANCE_VOCAB)
+    record(
+        "os_stack_coverage_rows",
+        len(coverage) == 64
+        and unique_coverage == 64
+        and not bad_coverage_stances,
+        f"{len(coverage)} archetype x layer rows, 8 archetypes x 8 layers, unique pairs, full stance vocabulary"
+        if len(coverage) == 64 and unique_coverage == 64 and not bad_coverage_stances
+        else f"rows={len(coverage)} unique={unique_coverage} invalid={bad_coverage_stances}",
+    )
+
+    record(
+        "formal_definitions",
+        len(FORMAL_DEFINITIONS) == 8,
+        f"{len(FORMAL_DEFINITIONS)} formal definitions (expected 8)",
+    )
+
+    record(
+        "figure_registry_entries",
+        len(_FIGURE_REGISTRY) == 10,
+        f"{len(_FIGURE_REGISTRY)} registry figures (cover excluded)",
+    )
 
     bad_stances = sorted({stance for _, _, stance in rows} - _STANCE_VOCAB)
     record(
@@ -438,7 +526,7 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
 
 
 def run_analysis(project_root: Path | str) -> dict[str, Any]:
-    """Run the full analysis: 7 data artifacts, the 9 registry figures, and
+    """Run the full analysis: 9 data artifacts, the 10 registry figures, and
     the cover graphical abstract.
 
     Returns a summary dict with artifact paths and row/figure counts.
@@ -453,6 +541,8 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
     _write_evidence_summary(data_dir(root) / "evidence_summary.json")
     incident_rows_written = _write_incident_register(data_dir(root) / "incident_register.csv")
     cognitive_defenses = _write_cognitive_defenses(data_dir(root) / "cognitive_defenses.json")
+    coverage_rows_written = _write_os_stack_coverage_csv(data_dir(root) / "os_stack_coverage.csv")
+    formal_defs = _write_formal_definitions(data_dir(root) / "formal_definitions.json")
     registry_entries = _write_figure_registry(figures_dir(root) / "figure_registry.json")
 
     report = _run_checks(data_path)
@@ -474,8 +564,9 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
         "scenario_rows": scenario_rows_written,
         "defensive_stack_rows": stack_rows_written,
         "update_window_rows": update_rows_written,
-        "incident_rows": incident_rows_written,
         "cif_concepts_mapped": cognitive_defenses["num_concepts"],
+        "os_stack_coverage_rows": coverage_rows_written,
+        "formal_definitions": formal_defs["num_definitions"],
         "figures_generated": len(figures),
         "figures": figures,
         "figure_registry_entries": registry_entries,
@@ -484,8 +575,9 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
             "evaluation_matrix.csv",
             "scenario_recommendations.csv",
             "evidence_summary.json",
-            "incident_register.csv",
             "cognitive_defenses.json",
+            "os_stack_coverage.csv",
+            "formal_definitions.json",
             "figure_registry.json",
             "validation_report.json",
         ],

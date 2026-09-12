@@ -1,6 +1,6 @@
 \babel@toc {english}{}\relax
 \contentsline {section}{\numberline {1}Abstract}{3}{section.1}%
-\contentsline {section}{\numberline {2}Introduction: Offensive AI Agents Arrive at the Operating-System Boundary}{4}{section.2}%
+\contentsline {section}{\numberline {2}Introduction: Offensive AI Agents Arrive at the Operating-System Boundary --- Why Agent Capability Reshapes OS Security}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Why this review, now}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}The 2026 evidence landscape}{4}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Scope and method}{4}{subsection.2.3}%
@@ -9,105 +9,106 @@
 \contentsline {subsection}{\numberline {2.6}Contributions}{5}{subsection.2.6}%
 \contentsline {subsection}{\numberline {2.7}Reader's guide}{5}{subsection.2.7}%
 \contentsline {subsection}{\numberline {2.8}Position}{5}{subsection.2.8}%
-\contentsline {section}{\numberline {3}Threat Model: Two Ways to Lose --- Exploitation and Authorized Misuse}{6}{section.3}%
+\contentsline {section}{\numberline {3}Threat Model: Two Ways to Lose --- Exploitation and Authorized Misuse under Offensive Automation}{6}{section.3}%
 \contentsline {subsection}{\numberline {3.1}The primary scenario}{6}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Two distinct paths to harm}{6}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Adversary baseline}{6}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}The offensive-AI evidence baseline}{6}{subsection.3.4}%
 \contentsline {subsubsection}{\numberline {3.4.1}What the incident record actually shows}{9}{subsubsection.3.4.1}%
 \contentsline {subsection}{\numberline {3.5}Capability-forecast discipline}{9}{subsection.3.5}%
-\contentsline {section}{\numberline {4}Evaluation Framework: Nine Properties over Distribution Labels}{10}{section.4}%
+\contentsline {section}{\numberline {4}Evaluation Framework: Nine Properties over Distribution Labels, with a Formal Stance Model}{10}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Why not a distribution label}{10}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}The nine properties}{10}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Parallel threat-modeling structures, and why a property matrix still wins for OS work}{10}{subsection.4.3}%
 \contentsline {subsection}{\numberline {4.4}The anti-scoring stance}{11}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}How the matrix is constructed and refreshed}{11}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}The defensive stack: mitigation classes as a second lens}{11}{subsection.4.6}%
-\contentsline {subsection}{\numberline {4.7}What the matrix buys}{12}{subsection.4.7}%
-\contentsline {subsection}{\numberline {4.8}Limitations of matrix thinking}{13}{subsection.4.8}%
-\contentsline {section}{\numberline {5}Compartmentalization: Qubes OS Under Offensive-Agent Load}{14}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Architectural foundation: separation under Xen}{14}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}State model: templates, AppVMs, disposables}{14}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}What the architecture buys}{14}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}What it does not buy}{14}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}The 2026 QSB record: small privileged interfaces under fire}{15}{subsection.5.5}%
-\contentsline {subsection}{\numberline {5.6}Trajectory: Qubes 4.3}{15}{subsection.5.6}%
-\contentsline {subsection}{\numberline {5.7}Assessment}{16}{subsection.5.7}%
-\contentsline {section}{\numberline {6}Reproducible Operations: NixOS and the Build-Service Trust Boundary}{17}{section.6}%
-\contentsline {subsection}{\numberline {6.1}The model: declarative configuration, generations, rollback}{17}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Rollback is not recovery}{17}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Reproducible deployment versus verified reproducible builds}{17}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Six misconceptions that matter against offensive agents}{17}{subsection.6.4}%
-\contentsline {subsection}{\numberline {6.5}The package manager is part of the trusted computing base}{18}{subsection.6.5}%
-\contentsline {subsection}{\numberline {6.6}Provenance: from signatures to verification}{18}{subsection.6.6}%
-\contentsline {subsection}{\numberline {6.7}Update operations: the support-clock discipline}{19}{subsection.6.7}%
-\contentsline {subsection}{\numberline {6.8}Composition with Qubes}{19}{subsection.6.8}%
-\contentsline {subsection}{\numberline {6.9}Assessment}{19}{subsection.6.9}%
-\contentsline {section}{\numberline {7}Conventional Desktops: Hardening Candidates and Compatibility Costs}{20}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Why secureblue is interesting, without crowning it}{21}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}The Flatpak permission-grants warning}{22}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}The desktop-versus-agent authority lesson}{22}{subsection.7.3}%
-\contentsline {section}{\numberline {8}Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline}{23}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Support windows are part of the architecture}{24}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}An execution baseline for untrusted agent workloads}{24}{subsection.8.2}%
-\contentsline {subsubsection}{\numberline {8.2.1}Agent-execution isolation: what the deployed evidence shows}{24}{subsubsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.3}Orchestrators and API credentials are the authority}{26}{subsection.8.3}%
-\contentsline {section}{\numberline {9}Boundary Comparators: What Non-Linux Systems Teach}{27}{section.9}%
-\contentsline {subsection}{\numberline {9.1}What each comparator contributes to the composition argument}{28}{subsection.9.1}%
-\contentsline {section}{\numberline {10}Agentic Authority Architecture: Trust Domains, Controls, and the Authority Ladder}{30}{section.10}%
-\contentsline {subsection}{\numberline {10.1}The governing rule}{30}{subsection.10.1}%
-\contentsline {subsection}{\numberline {10.2}Seven trust domains}{30}{subsection.10.2}%
-\contentsline {subsection}{\numberline {10.3}Nine controls and their design rationale}{30}{subsection.10.3}%
-\contentsline {subsection}{\numberline {10.4}Convergent implementations in shipping agent tools}{33}{subsection.10.4}%
-\contentsline {subsection}{\numberline {10.5}The authority ladder}{33}{subsection.10.5}%
-\contentsline {section}{\numberline {11}Cognitive Security: Defending the Authorized-Misuse Surface}{35}{section.11}%
-\contentsline {subsection}{\numberline {11.1}Grounding: the authorized-misuse record}{35}{subsection.11.1}%
-\contentsline {subsection}{\numberline {11.2}A taxonomy for the cognitive surface}{35}{subsection.11.2}%
-\contentsline {subsection}{\numberline {11.3}Cognition as an attack surface}{35}{subsection.11.3}%
-\contentsline {subsection}{\numberline {11.4}The maintainer-pressure episode: a cognitive attack on a human}{35}{subsection.11.4}%
-\contentsline {subsection}{\numberline {11.5}Operator cognitive load: approval fatigue and habituation}{36}{subsection.11.5}%
-\contentsline {subsection}{\numberline {11.6}Agent output credibility hazards}{36}{subsection.11.6}%
-\contentsline {subsection}{\numberline {11.7}Cognitive boundary design}{36}{subsection.11.7}%
-\contentsline {subsection}{\numberline {11.8}Monitoring is itself an unsolved cognitive and control problem}{37}{subsection.11.8}%
-\contentsline {subsection}{\numberline {11.9}Connection to the human-factor tradition}{37}{subsection.11.9}%
-\contentsline {subsection}{\numberline {11.10}Open research problems}{37}{subsection.11.10}%
-\contentsline {section}{\numberline {12}Operator OpSec: Identity, Egress, and Incident Response for Agent Work}{38}{section.12}%
-\contentsline {subsection}{\numberline {12.1}Identity compartmentalization across agent contexts}{38}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Agent identity: workload identity, token exchange, and downscoped tokens}{38}{subsection.12.2}%
-\contentsline {subsection}{\numberline {12.3}Data-loss path analysis}{38}{subsection.12.3}%
-\contentsline {subsection}{\numberline {12.4}Tool-bridge grants as the OpSec surface}{39}{subsection.12.4}%
-\contentsline {subsection}{\numberline {12.5}Attribution and footprint hygiene}{39}{subsection.12.5}%
-\contentsline {subsection}{\numberline {12.6}Credential hygiene: short-lived, service-scoped}{39}{subsection.12.6}%
-\contentsline {subsection}{\numberline {12.7}Credential theft as the observed failure mode}{39}{subsection.12.7}%
-\contentsline {subsection}{\numberline {12.8}The intake discipline}{39}{subsection.12.8}%
-\contentsline {subsection}{\numberline {12.9}Rehearsed incident response for agent-era compromise}{39}{subsection.12.9}%
-\contentsline {subsection}{\numberline {12.10}Zero trust applied to agent tool calls}{40}{subsection.12.10}%
-\contentsline {section}{\numberline {13}Securing Agent Orchestration: Mediation Points Across Protocols}{41}{section.13}%
-\contentsline {subsection}{\numberline {13.1}The orchestrator as privileged intermediary}{41}{subsection.13.1}%
-\contentsline {subsection}{\numberline {13.2}Planner, executor, tool broker: where authority concentrates}{41}{subsection.13.2}%
-\contentsline {subsection}{\numberline {13.3}Least-privilege orchestration}{41}{subsection.13.3}%
-\contentsline {subsection}{\numberline {13.4}Protocol-level mediation: MCP and A2A}{41}{subsection.13.4}%
-\contentsline {subsection}{\numberline {13.5}Swarm threat models: MAESTRO, AegisSwarm, and the agent as insider}{41}{subsection.13.5}%
-\contentsline {subsection}{\numberline {13.6}Delegation chains and the confused deputy}{42}{subsection.13.6}%
-\contentsline {subsection}{\numberline {13.7}The mediation-point taxonomy}{43}{subsection.13.7}%
-\contentsline {subsection}{\numberline {13.8}Approval chains across agent hierarchies}{44}{subsection.13.8}%
-\contentsline {subsection}{\numberline {13.9}Auditability of multi-agent decisions}{44}{subsection.13.9}%
-\contentsline {subsection}{\numberline {13.10}Mapping to the trust-domain architecture}{44}{subsection.13.10}%
-\contentsline {section}{\numberline {14}Configuration Generation Is Not Authorization}{45}{section.14}%
-\contentsline {subsection}{\numberline {14.1}Generation versus enforcement}{45}{subsection.14.1}%
-\contentsline {subsection}{\numberline {14.2}Declarative configuration as an inspectable policy surface}{45}{subsection.14.2}%
-\contentsline {subsection}{\numberline {14.3}The review invariants}{45}{subsection.14.3}%
-\contentsline {subsection}{\numberline {14.4}Separating policy writing, policy approval, and permission exercise}{46}{subsection.14.4}%
-\contentsline {section}{\numberline {15}Forecast: The 2028--2031 Compartmentalization Horizon}{47}{section.15}%
-\contentsline {subsection}{\numberline {15.1}Highest-confidence architectural bets}{47}{subsection.15.1}%
-\contentsline {subsection}{\numberline {15.2}Execution-dependent trajectories}{47}{subsection.15.2}%
-\contentsline {subsection}{\numberline {15.3}The attractive destination}{47}{subsection.15.3}%
-\contentsline {subsection}{\numberline {15.4}Forecasts this analysis declines}{48}{subsection.15.4}%
-\contentsline {subsection}{\numberline {15.5}The decisive uncertainty}{48}{subsection.15.5}%
-\contentsline {section}{\numberline {16}Scenario Recommendations with Change Conditions and Confidence Tiers}{49}{section.16}%
-\contentsline {subsection}{\numberline {16.1}Scenario recommendations}{49}{subsection.16.1}%
-\contentsline {subsection}{\numberline {16.2}The strongest overall direction}{50}{subsection.16.2}%
-\contentsline {subsection}{\numberline {16.3}Confidence tiers and evidence limits}{50}{subsection.16.3}%
-\contentsline {subsubsection}{\numberline {16.3.1}Evidence limits}{50}{subsubsection.16.3.1}%
-\contentsline {section}{\numberline {17}Conclusion: The Composition That Matters}{52}{section.17}%
-\contentsline {section}{\numberline {18}References}{53}{section.18}%
+\contentsline {subsection}{\numberline {4.5}A formal stance model}{11}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}How the matrix is constructed and refreshed}{11}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}The defensive stack: mitigation classes as a second lens}{11}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}What the matrix buys}{14}{subsection.4.8}%
+\contentsline {subsection}{\numberline {4.9}Limitations of matrix thinking}{14}{subsection.4.9}%
+\contentsline {section}{\numberline {5}Compartmentalization: Qubes OS Under Offensive-Agent Load --- Capabilities and Limits}{15}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Architectural foundation: separation under Xen}{15}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}State model: templates, AppVMs, disposables}{15}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}What the architecture buys}{15}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}What it does not buy}{15}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}The 2026 QSB record: small privileged interfaces under fire}{16}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Trajectory: Qubes 4.3}{16}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Assessment}{17}{subsection.5.7}%
+\contentsline {section}{\numberline {6}Reproducible Operations: NixOS and the Build-Service Trust Boundary}{18}{section.6}%
+\contentsline {subsection}{\numberline {6.1}The model: declarative configuration, generations, rollback}{18}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Rollback is not recovery}{18}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Reproducible deployment versus verified reproducible builds}{18}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Six misconceptions that matter against offensive agents}{18}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}The package manager is part of the trusted computing base}{19}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.6}Provenance: from signatures to verification}{19}{subsection.6.6}%
+\contentsline {subsection}{\numberline {6.7}Update operations: the support-clock discipline}{20}{subsection.6.7}%
+\contentsline {subsection}{\numberline {6.8}Composition with Qubes}{20}{subsection.6.8}%
+\contentsline {subsection}{\numberline {6.9}Assessment}{20}{subsection.6.9}%
+\contentsline {section}{\numberline {7}Conventional Desktops: Hardening Candidates, Compatibility Costs, and Agent Isolation}{21}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Why secureblue is interesting, without crowning it}{22}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}The Flatpak permission-grants warning}{23}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}The desktop-versus-agent authority lesson}{23}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline and the Operating-System Stack}{24}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Support windows are part of the architecture}{25}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}An execution baseline for untrusted agent workloads}{25}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}Agent-execution isolation: what the deployed evidence shows}{27}{subsubsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.3}Orchestrators and API credentials are the authority}{27}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Boundary Comparators: What Non-Linux and Specialized Systems Teach}{29}{section.9}%
+\contentsline {subsection}{\numberline {9.1}What each comparator contributes to the composition argument}{30}{subsection.9.1}%
+\contentsline {section}{\numberline {10}Agentic Authority Architecture: Trust Domains, Controls, and the Authority Ladder}{32}{section.10}%
+\contentsline {subsection}{\numberline {10.1}The governing rule}{32}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Seven trust domains}{32}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Nine controls and their design rationale}{32}{subsection.10.3}%
+\contentsline {subsection}{\numberline {10.4}Convergent implementations in shipping agent tools}{35}{subsection.10.4}%
+\contentsline {subsection}{\numberline {10.5}The authority ladder}{35}{subsection.10.5}%
+\contentsline {section}{\numberline {11}Cognitive Security: Defending the Authorized-Misuse Surface}{38}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Grounding: the authorized-misuse record}{38}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}A taxonomy for the cognitive surface}{38}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Cognition as an attack surface}{38}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}The maintainer-pressure episode: a cognitive attack on a human}{38}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.5}Operator cognitive load: approval fatigue and habituation}{39}{subsection.11.5}%
+\contentsline {subsection}{\numberline {11.6}Agent output credibility hazards}{39}{subsection.11.6}%
+\contentsline {subsection}{\numberline {11.7}Cognitive boundary design}{39}{subsection.11.7}%
+\contentsline {subsection}{\numberline {11.8}Monitoring is itself an unsolved cognitive and control problem}{40}{subsection.11.8}%
+\contentsline {subsection}{\numberline {11.9}Connection to the human-factor tradition}{40}{subsection.11.9}%
+\contentsline {subsection}{\numberline {11.10}Open research problems}{40}{subsection.11.10}%
+\contentsline {section}{\numberline {12}Operator OpSec: Identity, Egress, and Incident Response for Agent Work}{41}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Identity compartmentalization across agent contexts}{41}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Agent identity: workload identity, token exchange, and downscoped tokens}{41}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.3}Data-loss path analysis}{41}{subsection.12.3}%
+\contentsline {subsection}{\numberline {12.4}Tool-bridge grants as the OpSec surface}{42}{subsection.12.4}%
+\contentsline {subsection}{\numberline {12.5}Attribution and footprint hygiene}{42}{subsection.12.5}%
+\contentsline {subsection}{\numberline {12.6}Credential hygiene: short-lived, service-scoped}{42}{subsection.12.6}%
+\contentsline {subsection}{\numberline {12.7}Credential theft as the observed failure mode}{42}{subsection.12.7}%
+\contentsline {subsection}{\numberline {12.8}The intake discipline}{42}{subsection.12.8}%
+\contentsline {subsection}{\numberline {12.9}Rehearsed incident response for agent-era compromise}{42}{subsection.12.9}%
+\contentsline {subsection}{\numberline {12.10}Zero trust applied to agent tool calls}{43}{subsection.12.10}%
+\contentsline {section}{\numberline {13}Securing Agent Orchestration: Mediation Points Across Protocols}{44}{section.13}%
+\contentsline {subsection}{\numberline {13.1}The orchestrator as privileged intermediary}{44}{subsection.13.1}%
+\contentsline {subsection}{\numberline {13.2}Planner, executor, tool broker: where authority concentrates}{44}{subsection.13.2}%
+\contentsline {subsection}{\numberline {13.3}Least-privilege orchestration}{44}{subsection.13.3}%
+\contentsline {subsection}{\numberline {13.4}Protocol-level mediation: MCP and A2A}{44}{subsection.13.4}%
+\contentsline {subsection}{\numberline {13.5}Swarm threat models: MAESTRO, AegisSwarm, and the agent as insider}{44}{subsection.13.5}%
+\contentsline {subsection}{\numberline {13.6}Delegation chains and the confused deputy}{45}{subsection.13.6}%
+\contentsline {subsection}{\numberline {13.7}The mediation-point taxonomy}{46}{subsection.13.7}%
+\contentsline {subsection}{\numberline {13.8}Approval chains across agent hierarchies}{47}{subsection.13.8}%
+\contentsline {subsection}{\numberline {13.9}Auditability of multi-agent decisions}{47}{subsection.13.9}%
+\contentsline {subsection}{\numberline {13.10}Mapping to the trust-domain architecture}{47}{subsection.13.10}%
+\contentsline {section}{\numberline {14}Configuration Generation Is Not Authorization: Review Invariants and Enforcer Independence}{48}{section.14}%
+\contentsline {subsection}{\numberline {14.1}Generation versus enforcement}{48}{subsection.14.1}%
+\contentsline {subsection}{\numberline {14.2}Declarative configuration as an inspectable policy surface}{48}{subsection.14.2}%
+\contentsline {subsection}{\numberline {14.3}The review invariants}{48}{subsection.14.3}%
+\contentsline {subsection}{\numberline {14.4}Separating policy writing, policy approval, and permission exercise}{49}{subsection.14.4}%
+\contentsline {section}{\numberline {15}Forecast: The 2028--2031 Compartmentalization Horizon}{50}{section.15}%
+\contentsline {subsection}{\numberline {15.1}Highest-confidence architectural bets}{50}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}Execution-dependent trajectories}{50}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}The attractive destination}{50}{subsection.15.3}%
+\contentsline {subsection}{\numberline {15.4}Forecasts this analysis declines}{51}{subsection.15.4}%
+\contentsline {subsection}{\numberline {15.5}The decisive uncertainty}{51}{subsection.15.5}%
+\contentsline {section}{\numberline {16}Scenario Recommendations with Change Conditions and Confidence Tiers}{52}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Scenario recommendations}{52}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}The strongest overall direction}{53}{subsection.16.2}%
+\contentsline {subsection}{\numberline {16.3}Confidence tiers and evidence limits}{53}{subsection.16.3}%
+\contentsline {subsubsection}{\numberline {16.3.1}Evidence limits}{53}{subsubsection.16.3.1}%
+\contentsline {section}{\numberline {17}Conclusion: The Composition That Matters}{55}{section.17}%
+\contentsline {section}{\numberline {18}References}{56}{section.18}%

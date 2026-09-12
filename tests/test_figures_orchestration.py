@@ -1,4 +1,4 @@
-"""Figure orchestration: each of the nine registry generators plus the
+"""Figure orchestration: each of the ten registry generators plus the
 cover graphical abstract writes its PNG (exists, >10KB), and two
 consecutive full generation runs are byte-identical given the same inputs
 (determinism contract).
@@ -22,6 +22,7 @@ from agentic_os_security.figures import (
     generate_property_matrix,
     generate_trust_domains,
     generate_update_windows,
+    generate_os_stack,
 )
 
 FIGURE_REGISTRY = {
@@ -34,6 +35,7 @@ FIGURE_REGISTRY = {
     "agent_surface": "agent_surface.png",
     "forecast_horizon": "forecast_horizon.png",
     "update_windows": "update_windows.png",
+    "os_stack": "os_stack.png",
 }
 
 GENERATOR_FILENAMES = {
@@ -53,8 +55,9 @@ GENERATORS = {
     "agent_surface": generate_agent_surface,
     "forecast_horizon": generate_forecast_horizon,
     "update_windows": generate_update_windows,
-    # The cover graphical abstract: a tenth generator that is deliberately
-    # NOT a manuscript figure registry entry.
+    "os_stack": generate_os_stack,
+    # The cover graphical abstract: an eleventh generator that is
+    # deliberately NOT a manuscript figure registry entry.
     "graphical_abstract": generate_graphical_abstract,
 }
 
@@ -68,7 +71,7 @@ def test_generator_produces_registered_png(tmp_project, name):
     assert expected.stat().st_size > 10_000, f"{expected.name} suspiciously small"
 
 
-def test_all_ten_figures_present_after_full_generation(tmp_project):
+def test_all_eleven_figures_present_after_full_generation(tmp_project):
     for name, generator in GENERATORS.items():
         generator(tmp_project)
     figures_dir = project_paths.figures_dir(tmp_project)

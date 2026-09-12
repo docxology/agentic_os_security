@@ -2,33 +2,33 @@
   "consumed_manuscript": [
     {
       "rendered_path": "output/manuscript/00_abstract.md",
-      "rendered_sha256": "9944b1417e08d40090079ff0926511dd253b231e9c1500487c60922b8380c1b1",
+      "rendered_sha256": "f71559bc559ef74c33f29e63973ea9e513feb4a6c52380c9850721c4734cd679",
       "source_path": "manuscript/00_abstract.md",
       "source_sha256": "5a49674cb781e050efc86c1f1471b156830fefdb732df4776aacdbe68983de00"
     },
     {
       "rendered_path": "output/manuscript/01_introduction.md",
-      "rendered_sha256": "81f6eeb73d8280ea79c202ae9e31e7a856d1d3d48b944fae864ddd28bd44b9d7",
+      "rendered_sha256": "3f75621071925c2d4ee7c0ba75ac6e3083a5c47af185388eccf13f4390a3207c",
       "source_path": "manuscript/01_introduction.md",
-      "source_sha256": "0539d01f3447f7bd04ad7ba905522bcfbdc3bdc2b6361160837ec5c24ad3a348"
+      "source_sha256": "2c055cd881d1640e669c3db710b3cec9fcb859e752c6f1dc91157cdb15fca082"
     },
     {
       "rendered_path": "output/manuscript/02_threat_model.md",
-      "rendered_sha256": "3a761b09717fdd670c8e814fb06f2dbfb658ef45a897328aca41c4e97d9d952e",
+      "rendered_sha256": "b04d8b25c259cb928faad844fc47a1923ca826988167d086d182ff15ab7887bc",
       "source_path": "manuscript/02_threat_model.md",
-      "source_sha256": "1d0c823f71cd44aa52fbf50e7bae8606915f850dd5a3d515cad8fe3294c11a16"
+      "source_sha256": "6a3bc460ac86d5f4ddcbc97039d53484aa1e359db60ecdebb52933b02689d522"
     },
     {
       "rendered_path": "output/manuscript/03_evaluation_framework.md",
-      "rendered_sha256": "78963daf318631917b0cb47e540f5a288f8992bb4f4f39ec3410e61e4a90fe05",
+      "rendered_sha256": "c19a0fb0ee1878a40bb99db7b7ec6da7112468aef747877aa37ccdcedef62ad2",
       "source_path": "manuscript/03_evaluation_framework.md",
-      "source_sha256": "7f3ab36a249b8ef34e56c6a1b04266fce1a1750be9a1a1c2d5d4cd96dff90c46"
+      "source_sha256": "c64e06b48f1540124830c7a9dea2c29b796d0b4e36c9e990f3317afb3d310eaf"
     },
     {
       "rendered_path": "output/manuscript/04_compartmentalization_qubes.md",
-      "rendered_sha256": "cf2141bd092bf654a6a69c1e7e76c244a0c45ebb7d1c72bee37cdb154fa28710",
+      "rendered_sha256": "bac9fa35991073f23716e47b8e3deb58a42d23db4959923f0ff94b1af95054cb",
       "source_path": "manuscript/04_compartmentalization_qubes.md",
-      "source_sha256": "cf2141bd092bf654a6a69c1e7e76c244a0c45ebb7d1c72bee37cdb154fa28710"
+      "source_sha256": "bac9fa35991073f23716e47b8e3deb58a42d23db4959923f0ff94b1af95054cb"
     },
     {
       "rendered_path": "output/manuscript/05_reproducible_operations_nixos.md",
@@ -38,27 +38,27 @@
     },
     {
       "rendered_path": "output/manuscript/06_conventional_desktops.md",
-      "rendered_sha256": "13b97892db95b8dbf5143cd2320c25f6c449275070cd41bbcc02225cb8ab86ee",
+      "rendered_sha256": "d34b647ecf5b2a59101554e857a54a5cf42d2580e88862afce0374d14ff6b561",
       "source_path": "manuscript/06_conventional_desktops.md",
-      "source_sha256": "7ed3960e5fc09232f4376b2ea2b880d759543f90b4588053d6ec43d71839b361"
+      "source_sha256": "fc9d1dae8047a91f4acf7050bf6ca5c10e51378c653bea813d2e94503d14ec0e"
     },
     {
       "rendered_path": "output/manuscript/07_servers_agent_infrastructure.md",
-      "rendered_sha256": "ef8ab078d72118c365dfb3c9bc5605b808f54e07450dc204172c9405c299d3f3",
+      "rendered_sha256": "eaf05a422b39ca56fec25fa00865432c86149ad8500e251c9713da7c3054349f",
       "source_path": "manuscript/07_servers_agent_infrastructure.md",
-      "source_sha256": "a9cf685b06184a5af95e911f100c4ffb430ffa03c7697b84cb950836fab3ceac"
+      "source_sha256": "ecb0beff7e098c6beb48575ed1994555cc127407a73320dfcfb30ff5cadb35e3"
     },
     {
       "rendered_path": "output/manuscript/08_boundary_comparators.md",
-      "rendered_sha256": "d34c8cd854e3e78ce002fabcbe2e746f41807bd2125c3ab80061dee42a953a37",
+      "rendered_sha256": "fd85427584ec8cf0917ccba9a1f7d565e01c1d4456587be3285eb7768d03682d",
       "source_path": "manuscript/08_boundary_comparators.md",
-      "source_sha256": "d34c8cd854e3e78ce002fabcbe2e746f41807bd2125c3ab80061dee42a953a37"
+      "source_sha256": "fd85427584ec8cf0917ccba9a1f7d565e01c1d4456587be3285eb7768d03682d"
     },
     {
       "rendered_path": "output/manuscript/09_agentic_authority_architecture.md",
-      "rendered_sha256": "73e26da0a7147fb7216a5be77169e21697aab1f83ccff4254d61771a869de3bf",
+      "rendered_sha256": "fbab543bc856b415c1b6c2783c00e746feb6584ce0fdc9625f064d0daeabaa94",
       "source_path": "manuscript/09_agentic_authority_architecture.md",
-      "source_sha256": "c3f5c00a8e5ab84b58432464ceaab4115df504297ba9a784967ae53961707d0d"
+      "source_sha256": "2609686393fe69d6381b62dcb4f134a2314a122576d51246a21d5c0d4847770d"
     },
     {
       "rendered_path": "output/manuscript/10_cognitive_security.md",
@@ -74,15 +74,15 @@
     },
     {
       "rendered_path": "output/manuscript/12_orchestration_security.md",
-      "rendered_sha256": "fc4ab9a8c53eed5d845772ae5f03f853558cf48422fbc79582667b1c9bad8429",
+      "rendered_sha256": "26d192ccfb1eb03ef19c3aec56faafb1c4a56e121ce3c4661a803b2264e765ae",
       "source_path": "manuscript/12_orchestration_security.md",
-      "source_sha256": "93c672be5f64afc134502d626b3e972f77bc7bfccda4e654848669bb1f92bd76"
+      "source_sha256": "d014aad373e06bf956f6c3c56e90c5ff71145fc1d9c513235053c5e55171ad63"
     },
     {
       "rendered_path": "output/manuscript/13_configuration_authorization.md",
-      "rendered_sha256": "c1dd6cd35bcf0e21bbb22468795e1f6a3536206e46c30d3dfdcf2799afd81d8d",
+      "rendered_sha256": "124f4a28bd72906e9e2804ff6b9a291b810e5309ec91739c2518474ef8e51339",
       "source_path": "manuscript/13_configuration_authorization.md",
-      "source_sha256": "c0ade0307bce15e120e4cd7e6f9bcd0d8d5e676e6ca29c85e77b391b2198f9c9"
+      "source_sha256": "3e4281c52c565bae8e45ea3b0c3e241981cd4ada7164ef72b044b0b64dfef9bf"
     },
     {
       "rendered_path": "output/manuscript/14_forecast_2028_2031.md",
@@ -98,7 +98,7 @@
     },
     {
       "rendered_path": "output/manuscript/16_conclusion.md",
-      "rendered_sha256": "cc84cff3c134a7fd57c55956884c88386fcefdaff13f7857926708c1a65dcfeb",
+      "rendered_sha256": "434c924f2a54a6423cc5e76bfa9db19b498d07ec37a3f4abff4598fbc6892dd0",
       "source_path": "manuscript/16_conclusion.md",
       "source_sha256": "a82690f9a69f0e13a00ae580b8dd7bb5fde5c7fd227862a75de842785acd3fe3"
     },
@@ -112,42 +112,42 @@
   "evidence_files": {
     "artifact_manifest": {
       "path": "output/reports/artifact_manifest.json",
-      "sha256": "36cc7ab03e93515ce137352f30ae05c69682d60482b08b677f05caea9c6c2d16",
-      "size_bytes": 24791
+      "sha256": "240e83e41f32d7311a495858de110491d701ab14e6eee42f0c2dfbbee5efe151",
+      "size_bytes": 25672
     },
     "combined_manuscript": {
       "path": "output/web/_combined_manuscript.md",
-      "sha256": "8a08000bb1543c72074187d00ac0d2852006561312df995252d7646391ed5656",
-      "size_bytes": 250864
+      "sha256": "39ed5cae3059e1933841d2cb408205f61fbcdd1e7f2ab094982d581cc0b38a77",
+      "size_bytes": 256772
     },
     "composition_manifest": {
       "path": "output/reports/manuscript_composition.json",
-      "sha256": "35924c17a53b8e6dc0f2ac235c9e95c065b7e8790d164e1fbf849268ece7ab18",
-      "size_bytes": 4262
+      "sha256": "6cb3cf9745342e25841ef9ce6cf4b1fee35578a8f64b66949de05190cd126c9d",
+      "size_bytes": 4263
     },
     "validation_report": {
       "path": "output/reports/validation_report.json",
-      "sha256": "7e502f14aa68f5010b073de7a613f380dd1747c00ecb89a8188741445ec2722b",
-      "size_bytes": 15522
+      "sha256": "361dc3a57a816a56d9b1fe35959f1992fa61987e837dfac43439721403aea8a0",
+      "size_bytes": 15472
     }
   },
   "evidence_mode": "validated-co-snapshot-fingerprint-bridge",
   "fingerprints": {
     "config": {
       "file_count": 18,
-      "sha256": "bfe2edf77ae45948cbcf81cd1517b5e86d0854b12459067f537a5a15625f0d86"
+      "sha256": "3a2756b73aae5b1a42d36bb7e415bd144ab0d8312f5ce4825c6e6922cdbea289"
     },
     "output": {
-      "file_count": 81,
-      "sha256": "285b9afad7a2c800a877db63bf81e2a5bdd65b374c710a9978ff174f2cd4742b"
+      "file_count": 84,
+      "sha256": "aaec3713f6acbcd89311293b5750bb01fa63eab8a6ef04cc867837b8c3dbe9a6"
     },
     "source": {
-      "file_count": 52,
-      "sha256": "c49bdd30c98944162de7de5179e6849392b0d0a50acc8d8e9777ed153c469d73"
+      "file_count": 53,
+      "sha256": "9ec8c78ca87d85a7f9630f3fe4fdc11a6c967468fec894a58615067ffaba3a85"
     },
     "stage": {
       "file_count": 1336,
-      "sha256": "4898dd69d2a27d99187478337ee6fa3a3052b2d78bd6872bf7e8c27b366dee14"
+      "sha256": "a015786be9285185524f605137c4b587cfb1550e5f7c665f4c4f46b490472481"
     }
   },
   "project": "working/agentic_os_security",

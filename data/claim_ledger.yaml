@@ -671,3 +671,31 @@ claims:
     source_tier: official_source
     freshness: active
     artifact_path: src/agentic_os_security/evidence.py
+
+  # v0.4.0 structured-layer claims (registered 2026-09-11). Values come
+  # from the approved-numbers list (stack-layers 8, formal-definitions 8,
+  # stack-coverage-rows 64); artifact_path values carry no # fragments.
+
+  - claim_id: stack-layers
+    kind: number
+    value: 8
+    source: agentic_os_security.stack.STACK_LAYERS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/stack.py
+
+  - claim_id: formal-definitions
+    kind: number
+    value: 8
+    source: agentic_os_security.formal.FORMAL_DEFINITIONS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/formal.py
+
+  - claim_id: stack-coverage-rows
+    kind: number
+    value: 64
+    source: agentic_os_security.stack.stack_rows()
+    source_tier: generated_metric
+    freshness: active
+    artifact_path: src/agentic_os_security/stack.py

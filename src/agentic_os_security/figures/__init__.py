@@ -1,4 +1,4 @@
-"""Figure generators: the nine registry manuscript figures plus the cover
+"""Figure generators: the ten registry manuscript figures plus the cover
 graphical abstract (which carries no ``{#fig:...}`` label and is not part
 of the manuscript figure registry).
 
@@ -27,6 +27,7 @@ from .evidence_timeline import generate_evidence_timeline
 from .forecast_horizon import generate_forecast_horizon
 from .graphical_abstract import generate_graphical_abstract
 from .orchestration_boundaries import generate_orchestration_boundaries
+from .os_stack import generate_os_stack
 from .property_matrix import generate_property_matrix
 from .trust_domains import generate_trust_domains
 from .update_windows import generate_update_windows
@@ -48,6 +49,7 @@ __all__ = [
     "generate_defensive_stack",
     "generate_trust_domains",
     "generate_authority_ladder",
+    "generate_os_stack",
     "generate_orchestration_boundaries",
     "generate_agent_surface",
     "generate_forecast_horizon",

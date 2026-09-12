@@ -217,10 +217,12 @@
 \begin{document}
 
 \section{Servers and Agent-Execution Infrastructure: The
-Disposable-Isolation Baseline}\label{sec:servers}
+Disposable-Isolation Baseline and the Operating-System
+Stack}\label{sec:servers}
 
 \begin{frame}[fragile,allowframebreaks]{Servers and Agent-Execution
-Infrastructure: The Disposable-Isolation Baseline}
+Infrastructure: The Disposable-Isolation Baseline and the
+Operating-System Stack}
 Server selection differs from desktop selection in what dominates.
 Desktop ergonomics recede; eliminating unnecessary interfaces,
 constraining management authority, and sustaining a tested update
@@ -234,7 +236,8 @@ comparative penetration testing, and no numeric scores are assigned.
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Servers and Agent-Execution
-Infrastructure: The Disposable-Isolation Baseline}
+Infrastructure: The Disposable-Isolation Baseline and the
+Operating-System Stack}
 During the review window the integrity paths of these candidates moved:
 Talos made TPM measurement configurable in 1.12.0, Bottlerocket added
 Secure Boot in 1.15.0, Fedora CoreOS automated its bootloader updates,
@@ -246,7 +249,8 @@ records as documented release facts rather than aspirations (Labs 2025,
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Servers and Agent-Execution
-Infrastructure: The Disposable-Isolation Baseline}
+Infrastructure: The Disposable-Isolation Baseline and the
+Operating-System Stack}
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
   >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
@@ -393,6 +397,23 @@ deliberately.
 \begin{frame}[allowframebreaks]{Support windows are part of the
 architecture}
 
+Formally, the review records each candidate's support posture as a
+function
+
+\begin{equation}\protect\phantomsection\label{eq:update_window_semantics}{W(c) \in \mathbb{N} \cup \{\infty\}}\end{equation}
+
+where a finite value is the project's committed coverage in months and
+\(W(c) = \infty\) marks a rolling or release-relative policy rather than
+an indefinite guarantee. The reading this section carries forward is
+monotone: risk grows as the committed window is exhausted, because a
+candidate operating inside its window still converts maintenance into
+scheduled, tested operations, while one at or past the boundary converts
+them into unplanned exposure eq.~\ref{eq:update_window_semantics}.
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Support windows are part of the
+architecture}
 \begin{figure}
 \centering
 \includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category.}]{../figures/update_windows.png}
@@ -533,6 +554,61 @@ the deployed evidence shows}
 worker environments quickly (N. Project 2026), but as
 sec.~6 establishes, its sandbox concerns builds, not the
 runtime confinement of the thing built.
+
+Viewed together, the baseline's four elements occupy a specific slice of
+a larger structure. fig.~\ref{fig:os_stack} arranges the
+operating-system security stack as eight ordered layers, from hardware
+and firmware at the top, through the hypervisor and the kernel's
+access-control primitives, down to the agent runtime and its tool
+bridge; the right-hand columns record how strongly each candidate class
+in this review covers each layer. Formally, the stack is a defense
+sequence
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Agent-execution isolation: what
+the deployed evidence shows}
+\begin{equation}\protect\phantomsection\label{eq:stack_layering}{L_1 \prec L_2 \prec \cdots \prec L_8}\end{equation}
+
+with one design obligation: a compromise at layer \(i\) must not grant
+authority at layer \(i+1\) eq.~\ref{eq:stack_layering}. The
+disposable-isolation baseline concentrates on layers four through six.
+The sandbox runtime layer --- bubblewrap, seatbelt, gVisor, jailer-style
+wrappers composing the kernel primitives of the layer above --- is where
+this section's advisory record lives: Firecracker's jailer is privileged
+host-side code with its own CVE stream (Firecracker Project 2026;
+Services 2026), and gVisor accounts for CVEs across the whole sandbox
+precisely because that layer is attack surface rather than wall (gVisor
+Project 2026a). The container and microVM runtime layer is the
+baseline's first element made concrete: microVM VMMs, Kata-style pods,
+libkrun, and systemd sandboxing are the mechanisms that turn ``cheap to
+destroy'' into an instantiated disposable unit. The update and
+provisioning layer keeps those runtimes honest over time --- A/B atomic
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Agent-execution isolation: what
+the deployed evidence shows}
+replacement, transactional-update, reproducible and signed updates ---
+the discipline Bottlerocket documents for its host and Fedora CoreOS and
+MicroOS implement for theirs (Bottlerocket 2026; Fedora Project 2026a;
+{openSUSE} 2026). Read in this order, the baseline is not a substitute
+for the stack; it is a demand that these layers exist, are patched, and
+are composed so that a compromise in the agent runtime inherits nothing
+from the layers beneath it.
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Agent-execution isolation: what
+the deployed evidence shows}
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer.}]{../figures/os_stack.png}
+\caption{Eight layers of the operating-system security stack, from
+hardware and firmware to the agent runtime and its tool bridge;
+annotations name representative mechanisms per layer and the right-hand
+columns record how strongly each candidate class covers each
+layer.}\label{fig:os_stack}
+\end{figure}
 \end{frame}
 
 \subsection{Orchestrators and API credentials are the

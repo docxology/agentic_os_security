@@ -1,4 +1,4 @@
-\beamer@sectionintoc {1}{Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline}{1}{0}{1}
+\beamer@sectionintoc {1}{Servers and Agent-Execution Infrastructure: The Disposable-Isolation Baseline and the Operating-System Stack}{1}{0}{1}
 \beamer@subsectionintoc {1}{1}{Support windows are part of the architecture}{7}{0}{1}
-\beamer@subsectionintoc {1}{2}{An execution baseline for untrusted agent workloads}{10}{0}{1}
-\beamer@subsectionintoc {1}{3}{Orchestrators and API credentials are the authority}{20}{0}{1}
+\beamer@subsectionintoc {1}{2}{An execution baseline for untrusted agent workloads}{11}{0}{1}
+\beamer@subsectionintoc {1}{3}{Orchestrators and API credentials are the authority}{24}{0}{1}
