@@ -9,6 +9,10 @@ ten orchestration mediation points
 numbered cell marks a mediation point that governs the capability class;
 columns carry the numbered mediation-point ids, decoded in the embedded
 legend, and a right marginal shows each class's coverage count.
+
+v0.5.0 polish: wider figure with increased row/column spacing, class-name
+and gloss labels bumped a point for legibility, the numbered column headers
+hung clear of the grid, and the full-word legend kept at its enlarged size.
 """
 
 from __future__ import annotations
@@ -85,19 +89,19 @@ def generate_agent_surface(project_root: Path | str) -> Path:
 
     n_rows = len(classes) * 2
     n_cols = len(point_ids)
-    row_step = lambda i: i * 2.0  # class row centers (cells sit at even y)
+    row_step = 2.0  # class row centers (cells sit at even y)
 
-    fig = new_figure((8.6, 6.1))
-    fig.subplots_adjust(left=0.265, right=0.968, top=0.855, bottom=0.325)
+    fig = new_figure((9.4, 7.4))
+    fig.subplots_adjust(left=0.245, right=0.955, top=0.86, bottom=0.33)
     ax = fig.add_subplot(111)
     ax.set_xlim(-0.62, n_cols - 0.38)
-    ax.set_ylim(n_rows - 0.5, -0.72)
+    ax.set_ylim((len(classes) - 1) * row_step + 0.5, -5.4)
     ax.invert_yaxis()
     ax.axis("off")
 
-    cell_w = 0.34
+    cell_w = 0.38
     for row_idx, (class_id, _name, _gloss) in enumerate(classes):
-        row_y = row_idx * 2.0
+        row_y = row_idx * row_step
         mediated = set(_CLASS_MEDIATION.get(class_id, ()))
         for col_idx, point_id in enumerate(point_ids):
             covered = point_id in mediated
@@ -117,35 +121,37 @@ def generate_agent_surface(project_root: Path | str) -> Path:
                     col_idx,
                     row_y,
                     str(point_numbers[point_id]),
-                    fontsize=5.6,
+                    fontsize=5.8,
                     fontweight="bold",
                     ha="center",
                     va="center",
                     color="white",
                 )
-
-    # Column headers: numbered mediation points (number above rotated id).
+    # Column headers: numbered mediation points (number above rotated id),
+    # hung below the grid with clearance so the rotated ids never overlap
+    # the last class row or its gloss.
+    header_y = -1.05
     for col_idx, point_id in enumerate(point_ids):
-        ax.text(col_idx, -0.60, str(point_numbers[point_id]), fontsize=5.6, fontweight="bold", ha="center", va="center", color=_FILL)
+        ax.text(col_idx, header_y, str(point_numbers[point_id]), fontsize=6.0, fontweight="bold", ha="center", va="center", color=_FILL)
         ax.text(
             col_idx,
-            -0.52,
+            header_y - 0.25,
             ascii_text(point_id),
             rotation=45,
-            fontsize=5.4,
+            fontsize=5.6,
             ha="right",
-            va="bottom",
+            va="top",
             color="#333333",
         )
 
     # Row labels: class name (bold) with its gloss wrapped below.
     for row_idx, (_class_id, name, gloss) in enumerate(classes):
-        row_y = row_idx * 2.0
+        row_y = row_idx * row_step
         ax.text(
             -0.68,
-            row_y + 0.10,
+            row_y + 0.12,
             name,
-            fontsize=6.4,
+            fontsize=6.8,
             fontweight="bold",
             ha="right",
             va="bottom",
@@ -153,37 +159,36 @@ def generate_agent_surface(project_root: Path | str) -> Path:
         )
         ax.text(
             -0.62,
-            row_y + 0.04,
-            wrap_ascii(gloss, width=54, max_lines=2),
-            fontsize=4.6,
+            row_y + 0.06,
+            wrap_ascii(gloss, width=44, max_lines=2),
+            fontsize=5.0,
             ha="right",
             va="top",
             color="#777777",
             linespacing=1.25,
         )
 
-    # Grid lines between rows/columns.
     for x in range(n_cols + 1):
         ax.axvline(x - 0.5, color="#E0E0E0", linewidth=0.5, zorder=0)
     for row_idx in range(len(classes)):
-        ax.axhline(row_idx * 2 - 0.5, color="#E0E0E0", linewidth=0.5, zorder=0)
-    ax.axhline((len(classes) - 1) * 2 + 0.5, color="#E0E0E0", linewidth=0.5, zorder=0)
-
-    # Right marginal: per-class coverage counts.
-    ax_cov = fig.add_axes((0.968, 0.325, 0.020, 0.53))
+        ax.axhline(row_idx * row_step - 0.5, color="#E0E0E0", linewidth=0.5, zorder=0)
+    ax.axhline((len(classes) - 1) * row_step + 0.5, color="#E0E0E0", linewidth=0.5, zorder=0)
+    # Right marginal: per-class coverage counts (shares the main axis y
+    # limits so bars align with their matrix rows).
+    ax_cov = fig.add_axes((0.968, 0.33, 0.022, 0.53))
     ax_cov.set_xlim(0, 4.6)
-    ax_cov.set_ylim((len(classes) - 1) * 2 + 0.9, -0.75)
+    ax_cov.set_ylim((len(classes) - 1) * row_step + 0.5, -5.4)
     ax_cov.invert_yaxis()
     ax_cov.set_xticks([])
     ax_cov.set_yticks([])
     for row_idx, (class_id, _name, _gloss) in enumerate(classes):
-        row_y = row_idx * 2.0
+        row_y = row_idx * row_step
         count = len(_CLASS_MEDIATION.get(class_id, ()))
         ax_cov.barh(row_y, count, height=0.5, color=_FILL, edgecolor="white", linewidth=0.4)
-        ax_cov.text(count + 0.12, row_y, str(count), fontsize=5.0, va="center", color="#333333")
+        ax_cov.text(count + 0.12, row_y, str(count), fontsize=5.2, va="center", color="#333333")
     for side in ("top", "right", "left", "bottom"):
         ax_cov.spines[side].set_visible(False)
-    ax_cov.set_title("n", fontsize=5.6, pad=3)
+    ax_cov.set_title("n", fontsize=5.8, pad=3)
 
     # Embedded legend: numbered mediation points (id + name), two columns.
     legend_entries = [
@@ -191,15 +196,15 @@ def generate_agent_surface(project_root: Path | str) -> Path:
         for point_id in point_ids
     ]
     half = (len(legend_entries) + 1) // 2
-    col_ax = fig.add_axes((0.012, 0.012, 0.95, 0.24))
+    col_ax = fig.add_axes((0.012, 0.012, 0.95, 0.23))
     col_ax.axis("off")
     col_ax.set_xlim(0, 2)
-    col_ax.set_ylim(0, half + 1)
+    col_ax.set_ylim(0, half)
     col_ax.invert_yaxis()
     for i, entry in enumerate(legend_entries):
         col = i // half
         row = i % half
-        col_ax.text(col + 0.02, row + 0.5, entry, fontsize=5.4, ha="left", va="center", color="#333333")
+        col_ax.text(col + 0.02, row + 0.5, entry, fontsize=5.8, ha="left", va="center", color="#333333")
     col_ax.text(
         0.0,
         0.08,

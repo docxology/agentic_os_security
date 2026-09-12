@@ -251,7 +251,8 @@ def test_bib_parity_every_source_key_is_a_bib_entry(project_root):
     source_keys = {s.key for s in evidence.SOURCES}
     missing = source_keys - bib_keys
     assert not missing, f"SOURCES keys missing from references.bib: {sorted(missing)}"
-    # v0.3.0 contract: 161 entries total = 155 source-derived + 6 scholarly.
+    # v0.5.0 contract: 164 entries total = 155 source-derived + 9 scholarly
+    # (the 6 classical anchors plus clark1987, biba1977, arpaci2018).
     scholarly = {
         "saltzer1975",
         "lampson1974",
@@ -259,9 +260,12 @@ def test_bib_parity_every_source_key_is_a_bib_entry(project_root):
         "hardy1988",
         "nist_sp800_207",
         "levy1984",
+        "clark1987",
+        "biba1977",
+        "arpaci2018",
     }
     assert scholarly <= bib_keys
-    assert len(bib_keys) >= 161
+    assert len(bib_keys) >= 164
 
 
 def test_author_work_sources_carry_zenodo_publisher_and_record_urls():
@@ -299,3 +303,50 @@ def test_incident_register_is_populated_with_valid_citation_keys(project_root):
         assert incident.boundary_lesson.strip(), incident.incident_id
         assert incident.citation_key in source_keys, incident.incident_id
         assert incident.citation_key in bib_keys, incident.incident_id
+
+
+#: The pinned 5-class boundary-lesson taxonomy: ids in figure column order.
+PINNED_LESSON_TAXONOMY = {
+    "containment_held": "Containment held",
+    "authority_exceeded": "Authority exceeded",
+    "supply_chain": "Supply chain",
+    "update_operations": "Update operations",
+    "cognitive_boundary": "Cognitive boundary",
+}
+
+#: The dossier-pinned incident -> lesson-class assignment map.
+PINNED_LESSON_CLASS = {
+    "gtg-1002": "authority_exceeded",
+    "gtg-2002": "cognitive_boundary",
+    "anthropic_apikey_theft": "authority_exceeded",
+    "aisi_inc_2026_07_28_01": "authority_exceeded",
+    "openai_hf_2026": "containment_held",
+    "qsb-110": "containment_held",
+    "qsb-115": "containment_held",
+    "qsb-116": "containment_held",
+    "qsb-118": "authority_exceeded",
+    "nix_ghsa_g3g9": "supply_chain",
+    "nix_ghsa_vh5x": "supply_chain",
+    "cve_2026_44029": "supply_chain",
+    "cve_2026_1386": "containment_held",
+    "cve_2026_45782": "containment_held",
+}
+
+
+def test_lesson_taxonomy_pins_five_unique_classes():
+    taxonomy = evidence.LESSON_TAXONOMY
+    assert list(taxonomy) == list(PINNED_LESSON_TAXONOMY)
+    assert len({entry.lesson_id for entry in taxonomy.values()}) == 5
+    for lesson_id, entry in taxonomy.items():
+        assert entry.lesson_id == lesson_id
+        assert entry.name == PINNED_LESSON_TAXONOMY[lesson_id]
+        assert len(entry.description) >= 40, lesson_id
+
+
+def test_every_incident_carries_a_taxonomy_lesson_class():
+    vocab = set(evidence.LESSON_TAXONOMY)
+    assert {i.incident_id: i.lesson_class for i in evidence.INCIDENTS} == (
+        PINNED_LESSON_CLASS
+    )
+    for incident in evidence.INCIDENTS:
+        assert incident.lesson_class in vocab, incident.incident_id

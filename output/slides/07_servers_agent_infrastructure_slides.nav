@@ -13,54 +13,56 @@
 \headcommand {\beamer@framepages {4}{5}}
 \headcommand {\slideentry {1}{0}{4}{4/6}{}{0}}
 \headcommand {\beamer@framepages {4}{6}}
-\headcommand {\beamer@subsectionpages {1}{6}}
-\headcommand {\beamer@subsectionentry {0}{1}{1}{7}{Support windows are part of the architecture}}
-\headcommand {\slideentry {1}{1}{1}{7/7}{Support windows are part of the architecture}{0}}
+\headcommand {\slideentry {1}{0}{5}{7/7}{}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\slideentry {1}{1}{2}{8/8}{Support windows are part of the architecture}{0}}
+\headcommand {\beamer@subsectionpages {1}{7}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{8}{Support windows are part of the architecture}}
+\headcommand {\slideentry {1}{1}{1}{8/8}{Support windows are part of the architecture}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {1}{1}{3}{9/9}{Support windows are part of the architecture}{0}}
+\headcommand {\slideentry {1}{1}{2}{9/9}{Support windows are part of the architecture}{0}}
 \headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {1}{1}{4}{10/10}{Support windows are part of the architecture}{0}}
+\headcommand {\slideentry {1}{1}{3}{10/10}{Support windows are part of the architecture}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\beamer@subsectionpages {7}{10}}
-\headcommand {\beamer@subsectionentry {0}{1}{2}{11}{An execution baseline for untrusted agent workloads}}
-\headcommand {\slideentry {1}{2}{1}{11/11}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{1}{4}{11/11}{Support windows are part of the architecture}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\slideentry {1}{2}{2}{12/12}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\beamer@subsectionpages {8}{11}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{12}{An execution baseline for untrusted agent workloads}}
+\headcommand {\slideentry {1}{2}{1}{12/12}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\slideentry {1}{2}{3}{13/13}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{2}{13/13}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {1}{2}{4}{14/14}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{3}{14/14}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\slideentry {1}{2}{5}{15/15}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{4}{15/15}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {1}{2}{6}{16/16}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{5}{16/16}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {16}{16}}
-\headcommand {\slideentry {1}{2}{7}{17/17}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{6}{17/17}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\slideentry {1}{2}{8}{18/18}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{7}{18/18}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\slideentry {1}{2}{9}{19/19}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{8}{19/19}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {1}{2}{10}{20/20}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{9}{20/20}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\slideentry {1}{2}{11}{21/21}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{10}{21/21}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\slideentry {1}{2}{12}{22/22}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{11}{22/22}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\slideentry {1}{2}{13}{23/23}{An execution baseline for untrusted agent workloads}{0}}
+\headcommand {\slideentry {1}{2}{12}{23/23}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\beamer@subsectionpages {11}{23}}
-\headcommand {\beamer@subsectionentry {0}{1}{3}{24}{Orchestrators and API credentials are the authority}}
-\headcommand {\slideentry {1}{3}{1}{24/24}{Orchestrators and API credentials are the authority}{0}}
+\headcommand {\slideentry {1}{2}{13}{24/24}{An execution baseline for untrusted agent workloads}{0}}
 \headcommand {\beamer@framepages {24}{24}}
-\headcommand {\slideentry {1}{3}{2}{25/25}{Orchestrators and API credentials are the authority}{0}}
+\headcommand {\beamer@subsectionpages {12}{24}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{25}{Orchestrators and API credentials are the authority}}
+\headcommand {\slideentry {1}{3}{1}{25/25}{Orchestrators and API credentials are the authority}{0}}
 \headcommand {\beamer@framepages {25}{25}}
-\headcommand {\slideentry {1}{3}{3}{26/26}{Orchestrators and API credentials are the authority}{0}}
+\headcommand {\slideentry {1}{3}{2}{26/26}{Orchestrators and API credentials are the authority}{0}}
 \headcommand {\beamer@framepages {26}{26}}
-\headcommand {\beamer@partpages {1}{26}}
-\headcommand {\beamer@subsectionpages {24}{26}}
-\headcommand {\beamer@sectionpages {1}{26}}
-\headcommand {\beamer@documentpages {26}}
-\headcommand {\gdef \inserttotalframenumber {26}}
+\headcommand {\slideentry {1}{3}{3}{27/27}{Orchestrators and API credentials are the authority}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\beamer@partpages {1}{27}}
+\headcommand {\beamer@subsectionpages {25}{27}}
+\headcommand {\beamer@sectionpages {1}{27}}
+\headcommand {\beamer@documentpages {27}}
+\headcommand {\gdef \inserttotalframenumber {27}}

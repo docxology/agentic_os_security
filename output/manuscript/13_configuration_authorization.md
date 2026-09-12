@@ -18,9 +18,12 @@ Provenance inspection, in particular, is maturing from a manual discipline into 
 
 ## The review invariants
 
-[@tbl:invariants] states the review invariants: what an agent must never be able to do, the failure each invariant closes, and where enforcement must live. Formally, each invariant is an unreachable-state predicate ([@eq:invariant_predicate]): no state reachable from agent-writable configuration may violate an invariant.
+[@tbl:invariants] states the review invariants: what an agent must never be able to do, the failure each invariant closes, and where enforcement must live. Formally, each invariant is an unreachable-state predicate ([@def:invariant_predicate]): no state reachable from agent-writable configuration may violate an invariant [@eq:invariant_predicate].
 
+::::: {.definition #def:invariant_predicate title="Invariant predicate"}
+Each review invariant $\iota_i$ is an unreachable-state predicate — no state reachable from agent-writable configuration may violate it:
 $$\forall g \in G_{\mathrm{agent}}\colon \neg\,\mathrm{reachable}(g, \mathrm{violate}(\iota_i))$$ {#eq:invariant_predicate}
+:::::
 
 | Invariant: the agent must never be able to | Failure the invariant closes | Enforcement point |
 | --- | --- | --- |
@@ -35,7 +38,7 @@ $$\forall g \in G_{\mathrm{agent}}\colon \neg\,\mathrm{reachable}(g, \mathrm{vio
 | Approve its own policy changes | Closure of the loop from proposal to authorization to exercise | Write-policy / approve-policy / exercise separation (below) |
 : The 9 configuration review invariants: the capability closed, the failure each prevents, and the enforcement point {#tbl:invariants}
 
-The 9 invariants share one design principle: the state that would relax an invariant is never reachable from agent-writable configuration. They are capability invariants, not instruction invariants. A well-prompted agent and a compromised agent must be equally unable to violate them, because the authorized-misuse path does not distinguish persuasion from compromise at the enforcement layer. An invariant that holds only while the agent behaves is not an invariant; it is a preference.
+The 9 invariants share one design principle: the state that would relax an invariant is never reachable from agent-writable configuration. They are capability invariants, not instruction invariants. A well-prompted agent and a compromised agent must be equally unable to violate them, because the authorized-misuse path does not distinguish persuasion from compromise at the enforcement layer. An invariant that holds only while the agent behaves is not an invariant; it is a preference. Biba's integrity model gives the principle its classical form: a subject may not write to an object at a higher integrity level [@biba1977] — agent-writable configuration is the low-integrity subject, the policy surface that authorizes the system's behavior is the high-integrity object, and generation-is-not-authorization is precisely the prohibition on that write-up.
 
 ## Separating policy writing, policy approval, and permission exercise
 

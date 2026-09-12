@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 15:47
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 18:20
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1638,13 +1638,13 @@ put/slides/07_servers_agent_infrastructure_slides.vrb) [3
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
 put/slides/07_servers_agent_infrastructure_slides.vrb)
-Overfull \vbox (36.51534pt too high) detected at line 374
+Overfull \vbox (36.51534pt too high) detected at line 375
  []
 
 [4
 
 ]
-Overfull \vbox (41.53085pt too high) detected at line 374
+Overfull \vbox (41.53085pt too high) detected at line 375
  []
 
 [5
@@ -1653,31 +1653,37 @@ Overfull \vbox (41.53085pt too high) detected at line 374
 ] [6
 
 
-] [7
+]
+\openout4 = `07_servers_agent_infrastructure_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/07_servers_agent_infrastructure_slides.vrb
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.18091pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 5.15076pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.18155pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 5.15129pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.18036pt on input line 9.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 5.1503pt on input line 9.
+) [7
 
 ] [8
 
-]
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.18091pt on input line 413.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.15076pt on input line 413.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.18155pt on input line 413.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.15129pt on input line 413.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.18036pt on input line 413.
-LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.1503pt on input line 413.
- [9
+] [9
+
+] [10
 
 ]
 File: ../figures/update_windows.png Graphic file (type bmp)
 <../figures/update_windows.png>
- [10
 
-] [11
+[11
 
 ] [12
 
@@ -1685,12 +1691,7 @@ File: ../figures/update_windows.png Graphic file (type bmp)
 
 ] [14
 
-]
-\openout4 = `07_servers_agent_infrastructure_slides.vrb'.
-
-
-(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/07_servers_agent_infrastructure_slides.vrb) [15
+] [15
 
 ]
 \openout4 = `07_servers_agent_infrastructure_slides.vrb'.
@@ -1746,16 +1747,23 @@ put/slides/07_servers_agent_infrastructure_slides.vrb) [22
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/07_servers_agent_infrastructure_slides.vrb) [23
+
+]
+\openout4 = `07_servers_agent_infrastructure_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
 put/slides/07_servers_agent_infrastructure_slides.vrb
 File: ../figures/os_stack.png Graphic file (type bmp)
 <../figures/os_stack.png>
-) [23
-
-] [24
+) [24
 
 ] [25
 
 ] [26
+
+] [27
 
 ]
 \tf@nav=\write5
@@ -1776,14 +1784,14 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32497 strings out of 468168
- 651850 string characters out of 5432815
+ 32503 strings out of 468168
+ 652177 string characters out of 5432815
  1213452 words of memory out of 5000000
- 60623 multiletter control sequences out of 15000+600000
+ 60627 multiletter control sequences out of 15000+600000
  633200 words of font info for 85 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1124b,750s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/07_servers_agent_infrastructure_slides.pdf (26 page
+c_os_security/output/slides/07_servers_agent_infrastructure_slides.pdf (27 page
 s).

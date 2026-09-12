@@ -813,28 +813,35 @@ and what it refuses to claim. Let <span class="math inline">\(C\)</span>
 be the set of 24 candidates, <span class="math inline">\(P\)</span> the
 set of 9 properties, and <span class="math inline">\(S =
 \{\textit{strong}, \textit{partial}, \textit{weak}\}\)</span> the stance
-vocabulary. The evaluation matrix is then a single function</p>
-<p><span class="math display">\[\sigma\colon C \times P \to S \cup
-\{\textit{n/a}\}\]</span> {#eq:stance_mapping}</p>
-<p>assigning exactly one stance to each candidate–property pair. Read as
-a function, <span class="citation"
-data-cites="eq:stance_mapping">[@eq:stance_mapping]</span> makes two
-commitments that prose leaves implicit. It is <strong>total</strong>:
-the pipeline refuses to emit figures until all 216 cells are defined, so
-no candidate escapes evaluation by omission. And it is
-<strong>qualitative</strong>: the codomain carries no numbers, so the
-matrix cannot be averaged or ranked without an explicit modeling step —
-the step the anti-scoring stance above declines to supply.</p>
+vocabulary.</p>
+<div id="def:stance_mapping" class="definition" title="Stance mapping">
+<p><strong>Definition 1 (Stance mapping).</strong> The evaluation matrix
+is a total function: every candidate–property pair receives exactly one
+qualitative stance, and n/a marks the pairs a candidate does not engage
+at its architectural level: <span class="math display">\[\sigma\colon C
+\times P \to S \cup \{\textit{n/a}\}\]</span> {#eq:stance_mapping}</p>
+</div>
+<p>Read as a function, <a href="#def:stance_mapping">Definition 1</a>
+makes two commitments that prose leaves implicit. It is
+<strong>total</strong>: the pipeline refuses to emit figures until all
+216 cells are defined, so no candidate escapes evaluation by omission.
+And it is <strong>qualitative</strong>: the codomain carries no numbers,
+so the matrix cannot be averaged or ranked without an explicit modeling
+step — the step the anti-scoring stance above declines to supply.</p>
 <p>The stance words themselves carry a preference structure rather than
 a measurement scale, and the review reads them as ordered:</p>
-<p><span class="math display">\[\textit{strong} \succ \textit{partial}
-\succ \textit{weak}\]</span> {#eq:stance_order}</p>
-<p>meaning that a candidate whose documented design earns the left-hand
-stance dominates a candidate that earns the right-hand stance <em>on
-that property</em>. <span class="citation"
-data-cites="eq:stance_order">[@eq:stance_order]</span> defines an
-ordering over postures, not distances between them: no arithmetic over
-stances is meaningful, and no rung is a probability. Notably, <span
+<div id="def:stance_order" class="definition"
+title="Stance preference order">
+<p><strong>Definition 2 (Stance preference order).</strong> Stances form
+a preference order over postures: a candidate whose documented design
+earns the left-hand stance dominates a candidate that earns the
+right-hand stance <em>on that property</em>: <span
+class="math display">\[\textit{strong} \succ \textit{partial} \succ
+\textit{weak}\]</span> {#eq:stance_order}</p>
+</div>
+<p>By <a href="#def:stance_order">Definition 2</a> the order fixes
+postures, not distances between them: no arithmetic over stances is
+meaningful, and no rung is a probability. Notably, <span
 class="math inline">\(n_a\)</span> does not appear in <span
 class="citation" data-cites="eq:stance_order">[@eq:stance_order]</span>
 at all — an unverified or out-of-scope cell sits outside the preference

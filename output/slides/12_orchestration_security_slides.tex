@@ -430,21 +430,28 @@ trusted forwarder into a checked channel.
 \begin{frame}[fragile,allowframebreaks]{Delegation chains and the
 confused deputy}
 The formal grounding for these rules is \texorpdfstring{\ensuremath{\delta}}{delta}-bounded delegation
-(eq.~\ref{eq:delegation_bound}): each hop in an agent-to-agent chain is
-permitted to narrow the authority it passes, never to widen it, so trust
-cannot amplify across a delegation chain no matter how many
-intermediaries it traverses (Friedman 2026b). That formal model is not
-left as a statement of intent --- its bounded-delegation and
-trust-boundedness properties have been exercised computationally, with
-implementations validating the no-amplification guarantee on constructed
-delegation scenarios (Friedman 2026a).
+((\textbf{def:delegation\_bound?})): each hop in an agent-to-agent chain
+is permitted to narrow the authority it passes, never to widen it, so
+trust cannot amplify across a delegation chain no matter how many
+intermediaries it traverses (Friedman 2026b). The bound of
+eq.~\ref{eq:delegation_bound} is not left as a statement of intent ---
+its bounded-delegation and trust-boundedness properties have been
+exercised computationally, with implementations validating the
+no-amplification guarantee on constructed delegation scenarios (Friedman
+2026a).
 
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Delegation chains and the
 confused deputy}
+\protect\phantomsection\label{def:delegation_bound}
+For a delegation chain a\texorpdfstring{\ensuremath{\to}}{->}b\texorpdfstring{\ensuremath{\to}}{->}c, trust does not amplify:
 \begin{equation}\protect\phantomsection\label{eq:delegation_bound}{\mathrm{trust}(a \to c) \le \delta \cdot \mathrm{trust}(a \to b)}\end{equation}
 
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Delegation chains and the
+confused deputy}
 \begin{figure}
 \centering
 \includegraphics[width=1\linewidth,height=0.40\textheight,keepaspectratio,alt={A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing.}]{../figures/orchestration_boundaries.png}

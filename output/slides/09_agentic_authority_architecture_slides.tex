@@ -247,18 +247,25 @@ deployment --- behind interfaces too narrow for a persuaded component to
 abuse. This section defines that architecture: 7 trust domains, 9
 controls that hold regardless of host distribution, and an authority
 ladder that separates what an agent may do alone from what requires a
-principal outside it. The section proposes a design; it is not a claim
-about the defaults of any distribution reviewed elsewhere in this
-document. What sharpens the proposal is that the control vocabulary
-below is no longer speculative: the major shipping coding agents now
-implement versions of these controls against the same operating-system
-primitives this review's server candidates deploy, and the convergences
+principal outside it.
+
 \end{frame}
 
 \begin{frame}[allowframebreaks]{The governing rule}
---- and divergences --- are documented in vendor engineering materials
-that this section cites as evidence of mechanism, not as security
-results (Anthropic 2026b; OpenAI 2026).
+\protect\phantomsection\label{def:authority_ladder_order}
+The authority ladder orders an agent-initiated change through six rungs;
+agent exercise without external authorization is forbidden:
+\begin{equation}\protect\phantomsection\label{eq:authority_ladder_order}{\textit{propose} \prec \textit{stage} \prec \textit{authorize} \prec \textit{exercise} \prec \textit{audit} \prec \textit{revoke}}\end{equation}
+
+The section proposes a design; it is not a claim about the defaults of
+any distribution reviewed elsewhere in this document. What sharpens the
+proposal is that the control vocabulary below is no longer speculative:
+the major shipping coding agents now implement versions of these
+controls against the same operating-system primitives this review's
+server candidates deploy, and the convergences --- and divergences ---
+are documented in vendor engineering materials that this section cites
+as evidence of mechanism, not as security results (Anthropic 2026b;
+OpenAI 2026).
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Seven trust domains}
@@ -356,16 +363,20 @@ not as an endorsement of any tool's security. The nine are also a
 composed defense rather than a stack of independent toggles: Defense
 Composition Algebra treats layered controls as formal objects whose
 composition --- coverage interactions included, not just their count ---
-determines what an attacker must defeat (Friedman 2026). In its
-notation, a defense over the eight mitigation classes is a composition
-of per-class layers, written as in eq.~\ref{eq:defense_composition}, and
+determines what an attacker must defeat (Friedman 2026). In its notation
+((\textbf{def:defense\_composition?})), a defense over the eight
+mitigation classes is a composition of per-class layers, written as in
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Nine controls and their design
 rationale}
-the set below is chosen so that each control closes a failure the others
-leave open.
+eq.~\ref{eq:defense_composition}, and the set below is chosen so that
+each control closes a failure the others leave open.
 
+\protect\phantomsection\label{def:defense_composition}
+Layered controls compose over the eight mitigation classes as a single
+formal object whose coverage interactions --- not merely the count of
+layers --- determine what an attacker must defeat:
 \begin{equation}\protect\phantomsection\label{eq:defense_composition}{D = d_1 \circ d_2 \circ \cdots \circ d_8}\end{equation}
 
 \end{frame}
@@ -602,21 +613,26 @@ admission rather than a mode (Anthropic 2026b; OpenAI 2026).
 \end{frame}
 
 \begin{frame}[allowframebreaks]{The authority ladder}
-\begin{equation}\protect\phantomsection\label{eq:authority_ladder_order}{\textit{propose} \prec \textit{stage} \prec \textit{authorize} \prec \textit{exercise} \prec \textit{audit} \prec \textit{revoke}}\end{equation}
-
-The authorize/exercise split is also what keeps delegated trust bounded.
-Formal treatments of agent trust bound a delegate's effective trust by
-what it was authorized to exercise rather than by what it can reach, and
-the ladder encodes that bound structurally: authorization fixes the
-scope, exercise consumes it, and no rung is reachable that lets the
-agent enlarge its own authorization (Friedman 2026). The orchestration
-section extends the same bound across agent-to-agent delegation chains,
-where unbounded trust would otherwise amplify with each hop
-sec.~13.
-
+The authorize/exercise split of (\textbf{def:authority\_ladder\_order?})
+is also what keeps delegated trust bounded, and it has a
+commercial-integrity ancestry: Clark and Wilson grounded integrity in
+well-formed transactions, in which data changes state only through a
+mediated operation whose form is certified in advance, and in separation
+of duty, which prevents the principal who certifies an operation from
+being the one who executes it (Clark and Wilson 1987). Operation
+mediation and the approve/exercise split of this section are those
+controls restated for agents. Formal treatments of agent trust bound a
+delegate's effective trust by what it was authorized to exercise rather
+than by what it can reach, and the ladder encodes that bound
+structurally: authorization fixes the scope, exercise consumes it, and
+no rung is reachable that lets the agent enlarge its own authorization
+(Friedman 2026). The orchestration section extends the same bound across
 \end{frame}
 
 \begin{frame}[allowframebreaks]{The authority ladder}
+agent-to-agent delegation chains, where unbounded trust would otherwise
+amplify with each hop sec.~13.
+
 The trust domains, controls, and ladder compose into the scenarios of
 sec.~16: a Qubes deployment realizes the domains as
 qubes with narrow communication policies (Project 2026b), a conventional

@@ -1,7 +1,7 @@
 {
   "fig:agent_surface": {
     "caption": "Which mediation point constrains which agent capability class; filled numbered cells mark the primary control, and the right marginal counts how many distinct controls cover each capability.",
-    "figure_id": "figure_009",
+    "figure_id": "figure_010",
     "filename": "agent_surface.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:agent_surface",
@@ -15,7 +15,7 @@
   },
   "fig:authority_ladder": {
     "caption": "The six-rung authority ladder as a swimlane across human principal, orchestrator and agent, and tool broker; hatched cells mark exercise paths an agent must never hold without external authorization.",
-    "figure_id": "figure_005",
+    "figure_id": "figure_006",
     "filename": "authority_ladder.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:authority_ladder",
@@ -29,7 +29,7 @@
   },
   "fig:defensive_stack": {
     "caption": "Defensive-stack coverage across eight mitigation classes: weak cells cluster on conventional desktops while compartmentalized, server, and high-assurance candidates concentrate strong stances in sandboxing, verified boot, and update operations.",
-    "figure_id": "figure_003",
+    "figure_id": "figure_004",
     "filename": "defensive_stack.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:defensive_stack",
@@ -43,7 +43,7 @@
   },
   "fig:evidence_timeline": {
     "caption": "Two lanes of primary evidence, January 2024 through August 2026: offensive capability and governance milestones above, platform incident and release milestones below; marker color encodes evidentiary tier, and each callout names the primary source.",
-    "figure_id": "figure_001",
+    "figure_id": "figure_002",
     "filename": "evidence_timeline.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:evidence_timeline",
@@ -56,22 +56,36 @@
     "width": "0.9\\textwidth"
   },
   "fig:forecast_horizon": {
-    "caption": "Fourteen forecasts placed on the 2026\u20132031 horizon by confidence tier; high-confidence architectural bets cluster early, while low-confidence rows are explicit refusals to predict a distribution winner.",
-    "figure_id": "figure_010",
+    "caption": "Fourteen forecasts placed on the 2026\u20132031 horizon by confidence tier; dashed guides mark the pinned 2028\u20132031 window, and the official-posture markers place the May 2025 NCSC 2027-horizon assessment and the May 2026 Five-Eyes adoption guidance.",
+    "figure_id": "figure_011",
     "filename": "forecast_horizon.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:forecast_horizon",
     "metadata": {
-      "alt_text": "Fourteen forecasts placed on the 2026\u20132031 horizon by confidence tier; high-confidence architectural bets cluster early, while low-confidence rows are explicit refusals to predict a distribution winner.",
+      "alt_text": "Fourteen forecasts placed on the 2026\u20132031 horizon by confidence tier; dashed guides mark the pinned 2028\u20132031 window, and the official-posture markers place the May 2025 NCSC 2027-horizon assessment and the May 2026 Five-Eyes adoption guidance.",
       "source": "agentic_os_security evaluation pipeline"
     },
     "placement": "h",
     "section": "Forecast",
     "width": "0.9\\textwidth"
   },
+  "fig:incidents": {
+    "caption": "Fourteen documented incidents and advisories placed against five boundary-lesson classes; each cell links the event to the architectural lesson it demonstrates, and marker color encodes evidentiary tier.",
+    "figure_id": "figure_001",
+    "filename": "incident_lessons.png",
+    "generated_by": "10_evaluation_analysis.py",
+    "label": "fig:incidents",
+    "metadata": {
+      "alt_text": "Fourteen documented incidents and advisories placed against five boundary-lesson classes; each cell links the event to the architectural lesson it demonstrates, and marker color encodes evidentiary tier.",
+      "source": "agentic_os_security evaluation pipeline"
+    },
+    "placement": "h",
+    "section": "Threat Model",
+    "width": "0.9\\textwidth"
+  },
   "fig:orchestration_boundaries": {
     "caption": "A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing.",
-    "figure_id": "figure_008",
+    "figure_id": "figure_009",
     "filename": "orchestration_boundaries.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:orchestration_boundaries",
@@ -85,7 +99,7 @@
   },
   "fig:os_stack": {
     "caption": "Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer.",
-    "figure_id": "figure_007",
+    "figure_id": "figure_008",
     "filename": "os_stack.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:os_stack",
@@ -99,7 +113,7 @@
   },
   "fig:property_matrix": {
     "caption": "All 216 candidate-by-property stances, with candidates grouped into eight category bands (left strip) and per-property stance distributions (right marginals); glyphs mark strong (S), partial (P), weak (W), and not-assessed cells.",
-    "figure_id": "figure_002",
+    "figure_id": "figure_003",
     "filename": "property_matrix.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:property_matrix",
@@ -113,7 +127,7 @@
   },
   "fig:trust_domains": {
     "caption": "Seven trust domains for AI-assisted work, arranged from hostile intake to protected assets; numbered arrows mark the control catalog entries that mediate each crossing.",
-    "figure_id": "figure_004",
+    "figure_id": "figure_005",
     "filename": "trust_domains.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:trust_domains",
@@ -127,7 +141,7 @@
   },
   "fig:update_windows": {
     "caption": "Documented support windows for all twenty-four candidates; hatched bars mark rolling or lifecycle-based policies with no fixed window, and color encodes the candidate category.",
-    "figure_id": "figure_006",
+    "figure_id": "figure_007",
     "filename": "update_windows.png",
     "generated_by": "10_evaluation_analysis.py",
     "label": "fig:update_windows",

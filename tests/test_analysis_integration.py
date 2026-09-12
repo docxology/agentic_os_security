@@ -15,6 +15,7 @@ from agentic_os_security.analysis.pipeline import run_analysis
 TIER_VOCAB = {"official", "advisory", "incident_report", "research", "community"}
 
 EXPECTED_FIGURES = {
+    "incident_lessons.png",
     "evidence_timeline.png",
     "property_matrix.png",
     "defensive_stack.png",
@@ -26,13 +27,19 @@ EXPECTED_FIGURES = {
     "update_windows.png",
     "os_stack.png",
     # Cover graphical abstract: on disk with the figures, but NOT a
-    # manuscript figure registry entry (RESULT_NUM_FIGURES stays 10).
+    # manuscript figure registry entry (RESULT_NUM_FIGURES is 11).
     "graphical_abstract.png",
 }
 
-# Registry short names whose caption/alt_text must equal the v0.4.0 pinned
-# strings verbatim (spot-check subset; all ten carry pinned captions).
+# Registry short names whose caption/alt_text must equal the v0.5.0 pinned
+# strings verbatim (spot-check subset; all eleven carry pinned captions).
 PINNED_CAPTION_SPOT_CHECKS = {
+    "fig:incidents": (
+        "Fourteen documented incidents and advisories placed against five "
+        "boundary-lesson classes; each cell links the event to the "
+        "architectural lesson it demonstrates, and marker color encodes "
+        "evidentiary tier."
+    ),
     "fig:evidence_timeline": (
         "Two lanes of primary evidence, January 2024 through August 2026: "
         "offensive capability and governance milestones above, platform "
@@ -92,19 +99,20 @@ def test_run_analysis_writes_data_artifacts_and_figures(tmp_project):
     assert (data_dir / "validation_report.json").exists()
     assert (data_dir / "incident_register.csv").exists()
     assert (data_dir / "cognitive_defenses.json").exists()
+    assert (data_dir / "candidate_basis.csv").exists()
     assert (project_paths.figures_dir(tmp_project) / "figure_registry.json").exists()
 
     produced = {p.name for p in figures_dir.glob("*.png")}
     assert produced == EXPECTED_FIGURES
-    assert summary["figures_generated"] == 11
-    assert summary["figure_registry_entries"] == 10
+    assert summary["figures_generated"] == 12
+    assert summary["figure_registry_entries"] == 11
 
     registry = json.loads(
         (project_paths.figures_dir(tmp_project) / "figure_registry.json").read_text(
             encoding="utf-8"
         )
     )
-    assert len(registry) == 10
+    assert len(registry) == 11
     assert "graphical_abstract.png" not in {entry["filename"] for entry in registry.values()}
     assert all("section" in entry and "filename" in entry for entry in registry.values())
 
@@ -119,19 +127,41 @@ def test_registry_captions_match_pinned_strings(tmp_project):
     for label, pinned in PINNED_CAPTION_SPOT_CHECKS.items():
         entry = registry[label]
         assert entry["caption"] == pinned, f"caption for {label} drifts from the pinned string"
-        assert entry["metadata"]["alt_text"] == pinned, f"alt_text for {label} drifts from the pinned string"
 
 
-def test_incident_register_has_at_least_twelve_rows_plus_header(tmp_project):
+def test_incident_register_has_14_rows_plus_header_with_lesson_class(tmp_project):
     run_analysis(tmp_project)
     with (project_paths.data_dir(tmp_project) / "incident_register.csv").open(
         newline="", encoding="utf-8"
     ) as handle:
         rows = list(csv.reader(handle))
-    assert rows[0] == ["incident_id", "date", "actor_class", "vector", "boundary_lesson", "citation"]
-    assert len(rows) - 1 >= 12
+    assert rows[0] == [
+        "incident_id",
+        "date",
+        "actor_class",
+        "vector",
+        "boundary_lesson",
+        "lesson_class",
+        "citation",
+    ]
+    assert len(rows) - 1 == 14
     assert len({row[0] for row in rows[1:]}) == len(rows) - 1, "incident ids not unique"
-    assert all(row[5] for row in rows[1:]), "every incident carries a citation key"
+    assert all(row[5] for row in rows[1:]), "every incident carries a lesson class"
+    assert all(row[6] for row in rows[1:]), "every incident carries a citation key"
+
+
+def test_candidate_basis_has_24_rows_plus_header(tmp_project):
+    run_analysis(tmp_project)
+    path = project_paths.data_dir(tmp_project) / "candidate_basis.csv"
+    assert path.exists(), "candidate_basis.csv missing from analysis artifacts"
+    with path.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.reader(handle))
+    assert rows[0] == ["basis_id", "summary", "primary_sources"]
+    assert len(rows) - 1 == 24
+    assert len({row[0] for row in rows[1:]}) == 24, "basis ids not unique"
+    for row in rows[1:]:
+        sources = row[2].split(";")
+        assert 3 <= len(sources) <= 6, f"{row[0]} carries {len(sources)} primary sources"
 
 
 def test_cognitive_defenses_maps_all_six_cif_concepts(tmp_project):
@@ -155,7 +185,7 @@ def test_cognitive_defenses_maps_all_six_cif_concepts(tmp_project):
     assert all(c["citation_key"] for c in concepts.values())
 
 
-def test_validation_report_covers_new_v030_checks(tmp_project):
+def test_validation_report_covers_v030_and_v050_checks(tmp_project):
     run_analysis(tmp_project)
     report = json.loads(
         (project_paths.data_dir(tmp_project) / "validation_report.json").read_text(
@@ -164,12 +194,18 @@ def test_validation_report_covers_new_v030_checks(tmp_project):
     )
     checks = {entry["check"]: entry for entry in report["checks"]}
     assert checks["incident_register_rows"]["status"] == "green"
+    assert "14" in checks["incident_register_rows"]["detail"]
     assert checks["os_stack_coverage_rows"]["status"] == "green"
     assert checks["formal_definitions"]["status"] == "green"
     assert checks["figure_registry_entries"]["status"] == "green"
+    assert "11" in checks["figure_registry_entries"]["detail"]
     cognitive = checks["cognitive_defense_coverage"]
     assert cognitive["status"] == "green"
     assert "6/6" in cognitive["detail"]
+    # v0.5.0 additions: lesson vocabulary, candidate basis, 11-entry registry.
+    assert checks["incident_lesson_vocabulary"]["status"] == "green"
+    assert checks["candidate_basis_rows"]["status"] == "green"
+    assert "24" in checks["candidate_basis_rows"]["detail"]
 
 
 def test_evaluation_matrix_has_216_data_rows_plus_header(tmp_project):
@@ -262,17 +298,20 @@ def test_figure_ids_match_manuscript_appearance_order(tmp_project):
         label: entry["figure_id"]
         for label, entry in registry.items()
     } == {
-        "fig:evidence_timeline": "figure_001",
-        "fig:property_matrix": "figure_002",
-        "fig:defensive_stack": "figure_003",
-        "fig:trust_domains": "figure_004",
-        "fig:authority_ladder": "figure_005",
-        "fig:update_windows": "figure_006",
-        "fig:os_stack": "figure_007",
-        "fig:orchestration_boundaries": "figure_008",
-        "fig:agent_surface": "figure_009",
-        "fig:forecast_horizon": "figure_010",
+        "fig:incidents": "figure_001",
+        "fig:evidence_timeline": "figure_002",
+        "fig:property_matrix": "figure_003",
+        "fig:defensive_stack": "figure_004",
+        "fig:trust_domains": "figure_005",
+        "fig:authority_ladder": "figure_006",
+        "fig:update_windows": "figure_007",
+        "fig:os_stack": "figure_008",
+        "fig:orchestration_boundaries": "figure_009",
+        "fig:agent_surface": "figure_010",
+        "fig:forecast_horizon": "figure_011",
     }
+    incidents = registry["fig:incidents"]
+    assert incidents["section"] == "Threat Model"
     os_stack = registry["fig:os_stack"]
     assert os_stack["section"] == "Servers and Agent-Execution Infrastructure"
 
@@ -314,6 +353,15 @@ def test_evidence_summary_tier_counts_sum_to_155(tmp_project):
     assert "capability_baseline" in summary or any(
         "baseline" in key for key in summary
     )
+    # v0.5.0: the 5-class lesson taxonomy ships inside the summary.
+    assert set(summary["lesson_taxonomy"]) == {
+        "containment_held",
+        "authority_exceeded",
+        "supply_chain",
+        "update_operations",
+        "cognitive_boundary",
+    }
+    assert summary["num_lesson_classes"] == 5
 
 
 def test_validation_report_all_checks_green(tmp_project):

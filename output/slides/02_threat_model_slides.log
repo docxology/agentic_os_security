@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 15:46
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 18:19
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1655,8 +1655,8 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <9> not available
 ] [15
 
 ]
-File: ../figures/evidence_timeline.png Graphic file (type bmp)
-<../figures/evidence_timeline.png>
+File: ../figures/incident_lessons.png Graphic file (type bmp)
+<../figures/incident_lessons.png>
  [16
 
 ]
@@ -1674,7 +1674,10 @@ Overfull \vbox (7.74084pt too high) detected at line 476
 
 ] [20
 
-] [21
+]
+File: ../figures/evidence_timeline.png Graphic file (type bmp)
+<../figures/evidence_timeline.png>
+ [21
 
 ] [22
 
@@ -1689,6 +1692,10 @@ Overfull \vbox (7.74084pt too high) detected at line 476
 ] [27
 
 ] [28
+
+] [29
+
+] [30
 
 ]
 \tf@nav=\write5
@@ -1709,13 +1716,13 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32451 strings out of 468168
- 647624 string characters out of 5432815
+ 32465 strings out of 468168
+ 647987 string characters out of 5432815
  1206404 words of memory out of 5000000
- 60610 multiletter control sequences out of 15000+600000
+ 60623 multiletter control sequences out of 15000+600000
  631264 words of font info for 73 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1108b,726s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/02_threat_model_slides.pdf (28 pages).
+c_os_security/output/slides/02_threat_model_slides.pdf (30 pages).

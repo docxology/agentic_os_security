@@ -118,3 +118,45 @@ def test_definitions_by_surface_covers_all_definitions():
     for defs in grouped.values():
         all_ids.extend(d.definition_id for d in defs)
     assert sorted(all_ids) == sorted(DEFINITION_IDS)
+
+
+def test_definition_blocks_mirror_formal_definitions():
+    blocks = formal.DEFINITION_BLOCKS
+    assert len(blocks) == 8
+    assert {b.block_id for b in blocks} == set(DEFINITION_IDS)
+    assert {b.block_id for b in blocks} == {
+        d.definition_id for d in formal.FORMAL_DEFINITIONS
+    }
+    for block in blocks:
+        assert block.kind == "definition", block.block_id
+        assert block.title.strip(), block.block_id
+        assert block.label == f"def:{block.block_id}", block.block_id
+
+
+def test_definition_block_orders_are_sequential_one_through_eight():
+    ordered = formal.definition_blocks_in_order()
+    assert [b.order for b in ordered] == [1, 2, 3, 4, 5, 6, 7, 8]
+    assert [b.block_id for b in ordered] == [
+        "stance_mapping",
+        "stance_order",
+        "stack_layering",
+        "update_window_semantics",
+        "authority_ladder_order",
+        "defense_composition",
+        "delegation_bound",
+        "invariant_predicate",
+    ]
+
+
+def test_definition_block_labels_are_unique():
+    labels = [b.label for b in formal.DEFINITION_BLOCKS]
+    assert len(set(labels)) == len(labels) == 8
+
+
+def test_definition_block_surfaces_match_formal_surfaces():
+    surfaces_by_id = {
+        d.definition_id: d.surface for d in formal.FORMAL_DEFINITIONS
+    }
+    for block in formal.DEFINITION_BLOCKS:
+        assert block.surface.strip(), block.block_id
+        assert surfaces_by_id[block.block_id] == block.surface, block.block_id

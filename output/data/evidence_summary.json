@@ -27,6 +27,29 @@
     "reproducible_iso_pct": 95.18
   },
   "generated_at": "2026-09-10T12:00:00+00:00",
+  "lesson_taxonomy": {
+    "authority_exceeded": {
+      "description": "Authorized access was misused: the actor acted inside a granted permission \u2014 credentials, sanctioned agent scope, or a mediated copy operation \u2014 rather than escaping a sandbox, so mediation must bind what authority may do, not only where it may run.",
+      "name": "Authority exceeded"
+    },
+    "cognitive_boundary": {
+      "description": "The boundary that failed is human judgment: social engineering, pressure on maintainers, or operator improvisation is the attack vector, so the design must assume persuasion and confusion as first-class threats.",
+      "name": "Cognitive boundary"
+    },
+    "containment_held": {
+      "description": "An isolation boundary survived as designed: the failure stayed inside the compartment it was built for, and the lesson is to keep the patched boundary on a standing update cadence.",
+      "name": "Containment held"
+    },
+    "supply_chain": {
+      "description": "The vulnerable path runs through the build, dependency, or artifact-ingestion code that introduces executable content, so who may introduce or approve new executable code is the load-bearing question.",
+      "name": "Supply chain"
+    },
+    "update_operations": {
+      "description": "The lesson turns on patch and update cadence: how fast fixes reach every active environment is part of the boundary itself, and an exhausted support window is a posture change, not a footnote.",
+      "name": "Update operations"
+    }
+  },
+  "num_lesson_classes": 5,
   "num_sources": 155,
   "source_tier_counts": {
     "advisory": 13,

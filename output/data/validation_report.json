@@ -13,7 +13,17 @@
     },
     {
       "check": "incident_register_rows",
-      "detail": "14 incidents (minimum 12, unique ids)",
+      "detail": "14 incidents (expected 14, unique ids)",
+      "status": "green"
+    },
+    {
+      "check": "incident_lesson_vocabulary",
+      "detail": "5 lesson classes, all incidents in vocabulary",
+      "status": "green"
+    },
+    {
+      "check": "candidate_basis_rows",
+      "detail": "24 candidate bases (expected 24, registry order)",
       "status": "green"
     },
     {
@@ -33,7 +43,7 @@
     },
     {
       "check": "figure_registry_entries",
-      "detail": "10 registry figures (cover excluded)",
+      "detail": "11 registry figures (cover excluded)",
       "status": "green"
     },
     {

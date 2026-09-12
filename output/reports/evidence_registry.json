@@ -1,17 +1,17 @@
 {
   "claim_boundary": "Compact evidence summary for manuscript validation; full fact dumps are opt-in debug output.",
-  "fact_count": 847,
+  "fact_count": 880,
   "freshness_warnings": [],
   "kind_counts": {
-    "artifact": 83,
-    "citation": 161,
-    "equation": 17,
-    "figure": 42,
-    "number": 465,
+    "artifact": 85,
+    "citation": 164,
+    "equation": 26,
+    "figure": 47,
+    "number": 479,
     "section": 54,
     "table": 25
   },
-  "omitted_fact_count": 647,
+  "omitted_fact_count": 680,
   "sample_facts": [
     {
       "active": true,
@@ -783,6 +783,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-12T01:22:07Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[84].value",
+      "source_field": "$.claims[84].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "24"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T18:43:33Z",
       "kind": "number",
       "source": "output/data/update_windows.csv:row_11.months",
@@ -819,6 +831,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-12T01:22:07Z",
+      "kind": "number",
+      "source": "agentic_os_security.basis.CANDIDATE_BASIS",
+      "source_field": "candidate-basis-rows",
+      "source_path": "src/agentic_os_security/basis.py",
+      "source_tier": "generated_metric",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "24"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T00:41:05Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[10].value (numeric variant)",
@@ -835,6 +859,18 @@
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[72].value (numeric variant)",
       "source_field": "$.claims[72].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.24"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-12T01:22:07Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[84].value (numeric variant)",
+      "source_field": "$.claims[84].value",
       "source_path": "data/claim_ledger.yaml",
       "source_tier": "configuration",
       "stale": false,
@@ -873,6 +909,18 @@
       "source_field": "num_update_windows",
       "source_path": "src/agentic_os_security/registry.py",
       "source_tier": "project_source",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.24"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-12T01:22:07Z",
+      "kind": "number",
+      "source": "agentic_os_security.basis.CANDIDATE_BASIS (numeric variant)",
+      "source_field": "candidate-basis-rows",
+      "source_path": "src/agentic_os_security/basis.py",
+      "source_tier": "generated_metric",
       "stale": false,
       "tolerance": 0.0,
       "value": "0.24"
@@ -1167,6 +1215,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-12T01:22:07Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[82].value",
+      "source_field": "$.claims[82].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "8"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T23:52:57Z",
       "kind": "number",
       "source": "output/data/formal_definitions.json:$.num_definitions",
@@ -1239,6 +1299,18 @@
     },
     {
       "active": true,
+      "checked_at": "2026-09-12T01:22:07Z",
+      "kind": "number",
+      "source": "agentic_os_security.formal.DEFINITION_BLOCKS",
+      "source_field": "definition-blocks",
+      "source_path": "src/agentic_os_security/formal.py",
+      "source_tier": "project_source",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "8"
+    },
+    {
+      "active": true,
       "checked_at": "2026-09-11T00:41:05Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[12].value (numeric variant)",
@@ -1279,6 +1351,18 @@
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[80].value (numeric variant)",
       "source_field": "$.claims[80].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.08"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-12T01:22:07Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[82].value (numeric variant)",
+      "source_field": "$.claims[82].value",
       "source_path": "data/claim_ledger.yaml",
       "source_tier": "configuration",
       "stale": false,
@@ -1351,6 +1435,18 @@
       "kind": "number",
       "source": "agentic_os_security.formal.FORMAL_DEFINITIONS (numeric variant)",
       "source_field": "formal-definitions",
+      "source_path": "src/agentic_os_security/formal.py",
+      "source_tier": "project_source",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.08"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-12T01:22:07Z",
+      "kind": "number",
+      "source": "agentic_os_security.formal.DEFINITION_BLOCKS (numeric variant)",
+      "source_field": "definition-blocks",
       "source_path": "src/agentic_os_security/formal.py",
       "source_tier": "project_source",
       "stale": false,
@@ -1839,7 +1935,7 @@
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T21:28:56Z",
+      "checked_at": "2026-09-12T01:22:07Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[21].value",
       "source_field": "$.claims[21].value",
@@ -1847,23 +1943,23 @@
       "source_tier": "configuration",
       "stale": false,
       "tolerance": 0.0,
-      "value": "161"
+      "value": "164"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T21:28:56Z",
+      "checked_at": "2026-09-12T01:22:07Z",
       "kind": "number",
-      "source": "manuscript/references.bib entry count (155 source-derived + 6 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md",
+      "source": "manuscript/references.bib entry count (155 source-derived + 9 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md",
       "source_field": "bib-entry-count",
       "source_path": "manuscript/references.bib",
       "source_tier": "manuscript_claim",
       "stale": false,
       "tolerance": 0.0,
-      "value": "161"
+      "value": "164"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T21:28:56Z",
+      "checked_at": "2026-09-12T01:22:07Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[21].value (numeric variant)",
       "source_field": "$.claims[21].value",
@@ -1871,19 +1967,19 @@
       "source_tier": "configuration",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.61"
+      "value": "1.64"
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T21:28:56Z",
+      "checked_at": "2026-09-12T01:22:07Z",
       "kind": "number",
-      "source": "manuscript/references.bib entry count (155 source-derived + 6 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md (numeric variant)",
+      "source": "manuscript/references.bib entry count (155 source-derived + 9 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md (numeric variant)",
       "source_field": "bib-entry-count",
       "source_path": "manuscript/references.bib",
       "source_tier": "manuscript_claim",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.61"
+      "value": "1.64"
     },
     {
       "active": true,
@@ -2316,112 +2412,16 @@
       "stale": false,
       "tolerance": 0.0,
       "value": "80"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "anthropic_campaign_report",
-      "source_field": "gtg1002_autonomy_low_pct",
-      "source_path": "src/agentic_os_security/evidence.py",
-      "source_tier": "official_source",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "80"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "data/claim_ledger.yaml:$.claims[29].value (numeric variant)",
-      "source_field": "$.claims[29].value",
-      "source_path": "data/claim_ledger.yaml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.8"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "output/data/evidence_summary.json:$.capability_baseline.gtg1002_autonomy_low_pct (numeric variant)",
-      "source_field": "$.capability_baseline.gtg1002_autonomy_low_pct",
-      "source_path": "output/data/evidence_summary.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.8"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "anthropic_campaign_report (numeric variant)",
-      "source_field": "gtg1002_autonomy_low_pct",
-      "source_path": "src/agentic_os_security/evidence.py",
-      "source_tier": "official_source",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.8"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "data/claim_ledger.yaml:$.claims[30].value",
-      "source_field": "$.claims[30].value",
-      "source_path": "data/claim_ledger.yaml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "90"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T00:41:05Z",
-      "kind": "number",
-      "source": "pyproject.toml:$.tool.coverage.report.fail_under",
-      "source_field": "$.tool.coverage.report.fail_under",
-      "source_path": "pyproject.toml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "90"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "output/data/evidence_summary.json:$.capability_baseline.gtg1002_autonomy_high_pct",
-      "source_field": "$.capability_baseline.gtg1002_autonomy_high_pct",
-      "source_path": "output/data/evidence_summary.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "90"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "anthropic_campaign_report",
-      "source_field": "gtg1002_autonomy_high_pct",
-      "source_path": "src/agentic_os_security/evidence.py",
-      "source_tier": "official_source",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "90"
     }
   ],
   "schema": "template-evidence-registry-report-v1",
   "source_tiers": {
-    "artifact": 221,
-    "bibliography": 161,
-    "configuration": 149,
-    "generated_metric": 161,
+    "artifact": 237,
+    "bibliography": 164,
+    "configuration": 155,
+    "generated_metric": 165,
     "manuscript_claim": 12,
     "official_source": 115,
-    "project_source": 28
+    "project_source": 32
   }
 }

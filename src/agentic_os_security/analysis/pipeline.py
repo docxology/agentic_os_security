@@ -1,9 +1,9 @@
-"""Evaluation analysis pipeline: data artifacts, ten registry figures, and
-the cover graphical abstract.
+"""Evaluation analysis pipeline: data artifacts, eleven registry figures,
+and the cover graphical abstract.
 
-``run_analysis(project_root)`` is idempotent: every run rewrites the nine
+``run_analysis(project_root)`` is idempotent: every run rewrites the ten
 data artifacts plus the figure registry and the validation report from the
-pinned registry, regenerates all ten registry figures plus the cover
+pinned registry, regenerates all eleven registry figures plus the cover
 graphical abstract (which is not a registry figure).  Reports
 carry timestamps from :mod:`agentic_os_security.build_clock` (which honors
 ``SOURCE_DATE_EPOCH``), never the wall clock.
@@ -16,8 +16,15 @@ import json
 from pathlib import Path
 from typing import Any
 
+from ..basis import CANDIDATE_BASIS
 from ..build_clock import build_timestamp
-from ..evidence import CAPABILITY_BASELINE, INCIDENTS, SOURCES, sources_by_tier
+from ..evidence import (
+    CAPABILITY_BASELINE,
+    INCIDENTS,
+    LESSON_TAXONOMY,
+    SOURCES,
+    sources_by_tier,
+)
 from ..forecasts import FORECASTS, counts_by_confidence
 from ..figures import (
     generate_agent_surface,
@@ -26,6 +33,7 @@ from ..figures import (
     generate_evidence_timeline,
     generate_forecast_horizon,
     generate_graphical_abstract,
+    generate_incidents,
     generate_orchestration_boundaries,
     generate_os_stack,
     generate_property_matrix,
@@ -68,6 +76,7 @@ __all__ = ["run_analysis"]
 _STANCE_VOCAB: frozenset[str] = frozenset({"strong", "partial", "weak", "n_a"})
 
 _FIGURE_GENERATORS: dict[str, Any] = {
+    "incident_lessons.png": generate_incidents,
     "evidence_timeline.png": generate_evidence_timeline,
     "property_matrix.png": generate_property_matrix,
     "defensive_stack.png": generate_defensive_stack,
@@ -79,7 +88,7 @@ _FIGURE_GENERATORS: dict[str, Any] = {
     "update_windows.png": generate_update_windows,
     "os_stack.png": generate_os_stack,
     # The cover graphical abstract: generated like a figure but NOT a
-    # registry entry and NOT counted in RESULT_NUM_FIGURES (stays 10).
+    # registry entry and NOT counted in RESULT_NUM_FIGURES (stays 11).
     "graphical_abstract.png": generate_graphical_abstract,
 }
 
@@ -88,8 +97,20 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
     # ``experiment.figure_registry``; order is manuscript appearance order
     # (section numbers in comments). Captions are the manuscript image alt
     # text, with {{TOKENS}} resolved to their pinned values.
-    "evidence_timeline": {
+    "incidents": {
         "figure_id": "figure_001",
+        "filename": "incident_lessons.png",
+        "label": "fig:incidents",
+        "section": "Threat Model",
+        "caption": (
+            "Fourteen documented incidents and advisories placed against five "
+            "boundary-lesson classes; each cell links the event to the "
+            "architectural lesson it demonstrates, and marker color encodes "
+            "evidentiary tier."
+        ),
+    },
+    "evidence_timeline": {
+        "figure_id": "figure_002",
         "filename": "evidence_timeline.png",
         "label": "fig:evidence_timeline",
         "section": "Threat Model",
@@ -101,7 +122,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "property_matrix": {
-        "figure_id": "figure_002",
+        "figure_id": "figure_003",
         "filename": "property_matrix.png",
         "label": "fig:property_matrix",
         "section": "Evaluation Framework",
@@ -113,7 +134,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "defensive_stack": {
-        "figure_id": "figure_003",
+        "figure_id": "figure_004",
         "filename": "defensive_stack.png",
         "label": "fig:defensive_stack",
         "section": "Evaluation Framework",
@@ -125,7 +146,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "trust_domains": {
-        "figure_id": "figure_004",
+        "figure_id": "figure_005",
         "filename": "trust_domains.png",
         "label": "fig:trust_domains",
         "section": "Agentic Authority Architecture",
@@ -136,7 +157,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "authority_ladder": {
-        "figure_id": "figure_005",
+        "figure_id": "figure_006",
         "filename": "authority_ladder.png",
         "label": "fig:authority_ladder",
         "section": "Agentic Authority Architecture",
@@ -148,7 +169,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "update_windows": {
-        "figure_id": "figure_006",
+        "figure_id": "figure_007",
         "filename": "update_windows.png",
         "label": "fig:update_windows",
         "section": "Servers and Agent-Execution Infrastructure",
@@ -159,7 +180,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "os_stack": {
-        "figure_id": "figure_007",
+        "figure_id": "figure_008",
         "filename": "os_stack.png",
         "label": "fig:os_stack",
         "section": "Servers and Agent-Execution Infrastructure",
@@ -172,7 +193,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "orchestration_boundaries": {
-        "figure_id": "figure_008",
+        "figure_id": "figure_009",
         "filename": "orchestration_boundaries.png",
         "label": "fig:orchestration_boundaries",
         "section": "Securing Agent Orchestration",
@@ -183,7 +204,7 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "agent_surface": {
-        "figure_id": "figure_009",
+        "figure_id": "figure_010",
         "filename": "agent_surface.png",
         "label": "fig:agent_surface",
         "section": "Securing Agent Orchestration",
@@ -194,15 +215,15 @@ _FIGURE_REGISTRY: dict[str, dict[str, str]] = {
         ),
     },
     "forecast_horizon": {
-        "figure_id": "figure_010",
+        "figure_id": "figure_011",
         "filename": "forecast_horizon.png",
         "label": "fig:forecast_horizon",
         "section": "Forecast",
         "caption": (
             "Fourteen forecasts placed on the 2026–2031 horizon by confidence "
-            "tier; high-confidence architectural bets cluster early, while "
-            "low-confidence rows are explicit refusals to predict a "
-            "distribution winner."
+            "tier; dashed guides mark the pinned 2028–2031 window, and the "
+            "official-posture markers place the May 2025 NCSC 2027-horizon "
+            "assessment and the May 2026 Five-Eyes adoption guidance."
         ),
     },
 }
@@ -316,6 +337,14 @@ def _write_evidence_summary(path: Path) -> dict[str, Any]:
         "source_tier_counts": dict(sorted(sources_by_tier().items())),
         "num_sources": len(SOURCES),
         "capability_baseline": dict(sorted(CAPABILITY_BASELINE.items())),
+        "lesson_taxonomy": {
+            lesson_id: {
+                "name": lesson_class.name,
+                "description": lesson_class.description,
+            }
+            for lesson_id, lesson_class in LESSON_TAXONOMY.items()
+        },
+        "num_lesson_classes": len(LESSON_TAXONOMY),
     }
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -354,7 +383,17 @@ def _write_incident_register(path: Path) -> int:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle, lineterminator="\n")
-        writer.writerow(["incident_id", "date", "actor_class", "vector", "boundary_lesson", "citation"])
+        writer.writerow(
+            [
+                "incident_id",
+                "date",
+                "actor_class",
+                "vector",
+                "boundary_lesson",
+                "lesson_class",
+                "citation",
+            ]
+        )
         for incident in INCIDENTS:
             writer.writerow(
                 [
@@ -363,10 +402,28 @@ def _write_incident_register(path: Path) -> int:
                     incident.actor_class,
                     incident.vector,
                     incident.boundary_lesson,
+                    incident.lesson_class,
                     incident.citation_key,
                 ]
             )
     return len(INCIDENTS)
+
+
+def _write_candidate_basis(path: Path) -> int:
+    """Write the candidate-basis CSV (24 rows) from ``basis.CANDIDATE_BASIS``."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["basis_id", "summary", "primary_sources"])
+        for basis in CANDIDATE_BASIS:
+            writer.writerow(
+                [
+                    basis.basis_id,
+                    basis.summary,
+                    ";".join(basis.primary_sources),
+                ]
+            )
+    return len(CANDIDATE_BASIS)
 
 
 def _write_cognitive_defenses(path: Path) -> dict[str, Any]:
@@ -423,10 +480,27 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
     )
 
     incident_ids = [incident.incident_id for incident in INCIDENTS]
+    bad_lesson_classes = sorted(
+        {str(incident.lesson_class) for incident in INCIDENTS} - set(LESSON_TAXONOMY)
+    )
     record(
         "incident_register_rows",
-        len(INCIDENTS) >= 12 and len(incident_ids) == len(set(incident_ids)),
-        f"{len(INCIDENTS)} incidents (minimum 12, unique ids)",
+        len(INCIDENTS) == 14 and len(incident_ids) == len(set(incident_ids)),
+        f"{len(INCIDENTS)} incidents (expected 14, unique ids)",
+    )
+    record(
+        "incident_lesson_vocabulary",
+        not bad_lesson_classes and len(LESSON_TAXONOMY) == 5,
+        f"{len(LESSON_TAXONOMY)} lesson classes, all incidents in vocabulary"
+        if not bad_lesson_classes and len(LESSON_TAXONOMY) == 5
+        else f"invalid classes: {bad_lesson_classes}",
+    )
+
+    basis_ids = [basis.basis_id for basis in CANDIDATE_BASIS]
+    record(
+        "candidate_basis_rows",
+        len(CANDIDATE_BASIS) == 24 and basis_ids == [c.candidate_id for c in CANDIDATES],
+        f"{len(CANDIDATE_BASIS)} candidate bases (expected 24, registry order)",
     )
 
     concept_ids = {concept.concept_id for concept in CIF_CONCEPTS}
@@ -460,7 +534,7 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
 
     record(
         "figure_registry_entries",
-        len(_FIGURE_REGISTRY) == 10,
+        len(_FIGURE_REGISTRY) == 11,
         f"{len(_FIGURE_REGISTRY)} registry figures (cover excluded)",
     )
 
@@ -526,8 +600,8 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
 
 
 def run_analysis(project_root: Path | str) -> dict[str, Any]:
-    """Run the full analysis: 9 data artifacts, the 10 registry figures, and
-    the cover graphical abstract.
+    """Run the full analysis: 10 data artifacts, the 11 registry figures,
+    and the cover graphical abstract.
 
     Returns a summary dict with artifact paths and row/figure counts.
     """
@@ -544,6 +618,7 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
     coverage_rows_written = _write_os_stack_coverage_csv(data_dir(root) / "os_stack_coverage.csv")
     formal_defs = _write_formal_definitions(data_dir(root) / "formal_definitions.json")
     registry_entries = _write_figure_registry(figures_dir(root) / "figure_registry.json")
+    basis_rows_written = _write_candidate_basis(data_dir(root) / "candidate_basis.csv")
 
     report = _run_checks(data_path)
     report_path = data_dir(root) / "validation_report.json"
@@ -559,11 +634,12 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
     figure_files = sorted(figure_dir.glob("*.png"))
 
     return {
-        "project_root": str(root),
         "matrix_rows": matrix_rows_written,
         "scenario_rows": scenario_rows_written,
         "defensive_stack_rows": stack_rows_written,
         "update_window_rows": update_rows_written,
+        "incident_register_rows": incident_rows_written,
+        "candidate_basis_rows": basis_rows_written,
         "cif_concepts_mapped": cognitive_defenses["num_concepts"],
         "os_stack_coverage_rows": coverage_rows_written,
         "formal_definitions": formal_defs["num_definitions"],
@@ -571,6 +647,7 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
         "figures": figures,
         "figure_registry_entries": registry_entries,
         "figure_files_on_disk": [p.name for p in figure_files],
+        "candidate_basis_rows": basis_rows_written,
         "data_artifacts": [
             "evaluation_matrix.csv",
             "scenario_recommendations.csv",
@@ -578,6 +655,7 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
             "cognitive_defenses.json",
             "os_stack_coverage.csv",
             "formal_definitions.json",
+            "candidate_basis.csv",
             "figure_registry.json",
             "validation_report.json",
         ],

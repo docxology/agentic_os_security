@@ -1,4 +1,4 @@
-\begin{thebibliography}{157}
+\begin{thebibliography}{160}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -82,12 +82,23 @@ Anthropic.
   2026{\natexlab{d}}.
 \newblock Accessed 2026-09-11.
 
+\bibitem[Arpaci-Dusseau and Arpaci-Dusseau(2018)]{arpaci2018}
+Remzi~H. Arpaci-Dusseau and Andrea~C. Arpaci-Dusseau.
+\newblock \emph{Operating Systems: Three Easy Pieces}.
+\newblock Arpaci-Dusseau Books, 1.00 edition, 2018.
+\newblock Open textbook; Accessed 2026-09-11.
+
 \bibitem[Atlanta(2025)]{aixcc_atlantis_paper}
 Team Atlanta.
 \newblock {ATLANTIS}: {AI}-driven threat localization, analysis, and triage
   intelligence system.
 \newblock \url{https://doi.org/10.48550/arxiv.2509.14589}, 2025.
 \newblock arXiv:2509.14589; Accessed 2026-09-11.
+
+\bibitem[Biba(1977)]{biba1977}
+K.~J. Biba.
+\newblock Integrity considerations for secure computer systems.
+\newblock Technical Report ESD-TR-76-372, MITRE Corporation, 1977.
 
 \bibitem[Bottlerocket(2026)]{bottlerocket_security_features}
 AWS Bottlerocket.
@@ -133,6 +144,12 @@ UK~National Cyber~Security Centre.
 \newblock \url{https://www.ncsc.gov.uk/report/impact-ai-cyber-threat-now-2027},
   2026.
 \newblock Accessed 2026-09-10.
+
+\bibitem[Clark and Wilson(1987)]{clark1987}
+David~D. Clark and David~R. Wilson.
+\newblock A comparison of commercial and military computer security policies.
+\newblock In \emph{Proceedings of the 1987 {IEEE} Symposium on Security and
+  Privacy}, pages 184--194. IEEE, 1987.
 
 \bibitem[Commission(2026)]{eu_ai_act_transparency}
 European Commission.

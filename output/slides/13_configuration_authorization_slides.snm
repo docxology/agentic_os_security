@@ -1,6 +1,7 @@
 \beamer@slide {generation-versus-enforcement}{3}
 \beamer@slide {declarative-configuration-as-an-inspectable-policy-surface}{5}
 \beamer@slide {the-review-invariants}{9}
+\beamer@slide {def:invariant_predicate}{9}
 \beamer@slide {eq:invariant_predicate}{9}
 \beamer@slide {tbl:invariants}{10}
 \beamer@slide {separating-policy-writing-policy-approval-and-permission-exercise}{12}

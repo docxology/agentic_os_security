@@ -23,7 +23,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-__all__ = ["FormalDefinition", "FORMAL_DEFINITIONS", "definitions_by_surface"]
+__all__ = [
+    "FormalDefinition",
+    "FORMAL_DEFINITIONS",
+    "definitions_by_surface",
+    "DefinitionBlock",
+    "DEFINITION_BLOCKS",
+    "definition_blocks_in_order",
+]
 
 
 @dataclass(frozen=True)
@@ -186,3 +193,98 @@ def definitions_by_surface() -> dict[str, list[FormalDefinition]]:
     for definition in FORMAL_DEFINITIONS:
         grouped.setdefault(definition.surface, []).append(definition)
     return grouped
+
+
+@dataclass(frozen=True)
+class DefinitionBlock:
+    """One auto-numbered Definition block for the formalism.lua filter.
+
+    ``block_id`` is the pandoc identifier (``#def:...``) and equals the
+    pinned :class:`FormalDefinition` id; ``label`` is the prose reference
+    form (``[@def:...]``) the filter resolves; ``surface`` mirrors the
+    formal definition's manuscript surface; ``order`` is the document
+    position the filter's counter assigns (never hand-numbered).
+    """
+
+    block_id: str
+    kind: str
+    title: str
+    label: str
+    surface: str
+    order: int
+
+
+#: The 8 Definition blocks (block ids == definition_ids; order is the
+#: document order across sections 03, 07, 09, 12, 13 — the filter's
+#: counter assigns Definition 1..8 in this sequence).
+DEFINITION_BLOCKS: tuple[DefinitionBlock, ...] = (
+    DefinitionBlock(
+        "stance_mapping",
+        "definition",
+        "Stance mapping",
+        "def:stance_mapping",
+        "registry/evaluation matrix",
+        1,
+    ),
+    DefinitionBlock(
+        "stance_order",
+        "definition",
+        "Stance preference order",
+        "def:stance_order",
+        "registry/evaluation matrix",
+        2,
+    ),
+    DefinitionBlock(
+        "stack_layering",
+        "definition",
+        "Operating-system stack layering",
+        "def:stack_layering",
+        "sec:servers",
+        3,
+    ),
+    DefinitionBlock(
+        "update_window_semantics",
+        "definition",
+        "Support-window semantics",
+        "def:update_window_semantics",
+        "registry/update windows",
+        4,
+    ),
+    DefinitionBlock(
+        "authority_ladder_order",
+        "definition",
+        "Authority ladder",
+        "def:authority_ladder_order",
+        "sec:agentic_authority",
+        5,
+    ),
+    DefinitionBlock(
+        "defense_composition",
+        "definition",
+        "Defense composition",
+        "def:defense_composition",
+        "sec:agentic_authority",
+        6,
+    ),
+    DefinitionBlock(
+        "delegation_bound",
+        "definition",
+        "δ-bounded delegation",
+        "def:delegation_bound",
+        "sec:orchestration",
+        7,
+    ),
+    DefinitionBlock(
+        "invariant_predicate",
+        "definition",
+        "Invariant predicate",
+        "def:invariant_predicate",
+        "sec:configuration_authorization",
+        8,
+    ),
+)
+
+
+def definition_blocks_in_order() -> tuple[DefinitionBlock, ...]:
+    """Return the 8 Definition blocks sorted by their document order."""
+    return tuple(sorted(DEFINITION_BLOCKS, key=lambda b: b.order))

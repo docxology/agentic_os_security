@@ -72,6 +72,7 @@ def _config_hash(project_root: Path) -> str:
 
 def _declared_figure_files() -> list[str]:
     return [
+        "incident_lessons.png",
         "evidence_timeline.png",
         "property_matrix.png",
         "trust_domains.png",
@@ -93,6 +94,7 @@ def _declared_data_files() -> list[str]:
         "validation_report.json",
         "defensive_stack.csv",
         "update_windows.csv",
+        "candidate_basis.csv",
     ]
 
 

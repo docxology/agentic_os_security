@@ -84,16 +84,17 @@ SECTION_FILES = {
 }
 
 FIGURE_LABELS = {
+    "fig:incidents",
     "fig:evidence_timeline",
     "fig:property_matrix",
+    "fig:defensive_stack",
     "fig:trust_domains",
     "fig:authority_ladder",
-    "fig:orchestration_boundaries",
-    "fig:forecast_horizon",
-    "fig:defensive_stack",
     "fig:update_windows",
-    "fig:agent_surface",
     "fig:os_stack",
+    "fig:orchestration_boundaries",
+    "fig:agent_surface",
+    "fig:forecast_horizon",
 }
 
 TABLE_LABELS = {
@@ -122,6 +123,8 @@ FIG_REF_RE = re.compile(r"\[@(fig:[\w-]+)")
 TBL_REF_RE = re.compile(r"\[@(tbl:[\w-]+)")
 EQ_DEF_RE = re.compile(r"\{#(eq:[\w-]+)\}")
 EQ_REF_RE = re.compile(r"\[@(eq:[\w-]+)\]")
+DEF_DEF_RE = re.compile(r"\{\.definition\s+#(def:[\w-]+)")
+DEF_REF_RE = re.compile(r"\[@(def:[\w-]+)")
 EQUATION_LABELS = {
     "eq:stance_mapping",
     "eq:stance_order",
@@ -131,6 +134,17 @@ EQUATION_LABELS = {
     "eq:defense_composition",
     "eq:delegation_bound",
     "eq:invariant_predicate",
+}
+
+DEF_LABELS = {
+    "def:stance_mapping",
+    "def:stance_order",
+    "def:stack_layering",
+    "def:update_window_semantics",
+    "def:authority_ladder_order",
+    "def:defense_composition",
+    "def:delegation_bound",
+    "def:invariant_predicate",
 }
 
 TOKEN_PLAN = frozenset(
@@ -239,6 +253,33 @@ def test_equation_targets_defined_in_equation_registry(section_text):
         targets.update(EQ_REF_RE.findall(text))
     undefined = targets - EQUATION_LABELS
     assert not undefined, f"equation targets not in registry: {sorted(undefined)}"
+
+
+def test_figure_registry_defined_exactly_once(section_text):
+    counts = {label: 0 for label in FIGURE_LABELS}
+    for text in section_text.values():
+        for label in FIG_DEF_RE.findall(text):
+            counts[label] += 1
+    wrong = {label: n for label, n in counts.items() if n != 1}
+    assert not wrong, f"figure labels must be defined exactly once: {wrong}"
+
+
+def test_definition_targets_defined_in_definition_registry(section_text):
+    targets = set()
+    for text in section_text.values():
+        targets.update(DEF_DEF_RE.findall(text))
+        targets.update(DEF_REF_RE.findall(text))
+    undefined = targets - DEF_LABELS
+    assert not undefined, f"definition targets not in registry: {sorted(undefined)}"
+
+
+def test_definition_blocks_defined_exactly_once(section_text):
+    counts = {label: 0 for label in DEF_LABELS}
+    for text in section_text.values():
+        for label in DEF_DEF_RE.findall(text):
+            counts[label] += 1
+    wrong = {label: n for label, n in counts.items() if n != 1}
+    assert not wrong, f"definition blocks must be declared exactly once: {wrong}"
 
 
 def test_equation_registry_defined_exactly_once(section_text):

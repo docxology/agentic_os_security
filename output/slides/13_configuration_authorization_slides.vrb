@@ -5,4 +5,10 @@ are capability invariants, not instruction invariants. A well-prompted
 agent and a compromised agent must be equally unable to violate them,
 because the authorized-misuse path does not distinguish persuasion from
 compromise at the enforcement layer. An invariant that holds only while
-the agent behaves is not an invariant; it is a preference.
+the agent behaves is not an invariant; it is a preference. Biba's
+integrity model gives the principle its classical form: a subject may
+not write to an object at a higher integrity level (Biba 1977) ---
+agent-writable configuration is the low-integrity subject, the policy
+surface that authorizes the system's behavior is the high-integrity
+object, and generation-is-not-authorization is precisely the prohibition
+on that write-up.

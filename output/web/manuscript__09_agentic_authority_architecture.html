@@ -657,14 +657,24 @@ deployment — behind interfaces too narrow for a persuaded component to
 abuse. This section defines that architecture: 7 trust domains, 9
 controls that hold regardless of host distribution, and an authority
 ladder that separates what an agent may do alone from what requires a
-principal outside it. The section proposes a design; it is not a claim
-about the defaults of any distribution reviewed elsewhere in this
-document. What sharpens the proposal is that the control vocabulary
-below is no longer speculative: the major shipping coding agents now
-implement versions of these controls against the same operating-system
-primitives this review’s server candidates deploy, and the convergences
-— and divergences — are documented in vendor engineering materials that
-this section cites as evidence of mechanism, not as security results
+principal outside it.</p>
+<div id="def:authority_ladder_order" class="definition"
+title="Authority ladder">
+<p><strong>Definition 1 (Authority ladder).</strong> The authority
+ladder orders an agent-initiated change through six rungs; agent
+exercise without external authorization is forbidden: <span
+class="math display">\[\textit{propose} \prec \textit{stage} \prec
+\textit{authorize} \prec \textit{exercise} \prec \textit{audit} \prec
+\textit{revoke}\]</span> {#eq:authority_ladder_order}</p>
+</div>
+<p>The section proposes a design; it is not a claim about the defaults
+of any distribution reviewed elsewhere in this document. What sharpens
+the proposal is that the control vocabulary below is no longer
+speculative: the major shipping coding agents now implement versions of
+these controls against the same operating-system primitives this
+review’s server candidates deploy, and the convergences — and
+divergences — are documented in vendor engineering materials that this
+section cites as evidence of mechanism, not as security results
 [anthropic_sandboxing; codex_sandboxing].</p>
 <h2 id="seven-trust-domains">Seven trust domains</h2>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The seven trust domains of the proposed agentic authority architecture, with the intended contents of each and the re…"><table id="tbl:trust_domains" data-responsive-table="true">
@@ -767,13 +777,20 @@ composed defense rather than a stack of independent toggles: Defense
 Composition Algebra treats layered controls as formal objects whose
 composition — coverage interactions included, not just their count —
 determines what an attacker must defeat [cif_formal_2026]. In its
-notation, a defense over the eight mitigation classes is a composition
-of per-class layers, written as in <span class="citation"
+notation (<a href="#def:defense_composition">Definition 2</a>), a
+defense over the eight mitigation classes is a composition of per-class
+layers, written as in <span class="citation"
 data-cites="eq:defense_composition">[@eq:defense_composition]</span>,
 and the set below is chosen so that each control closes a failure the
 others leave open.</p>
-<p><span class="math display">\[D = d_1 \circ d_2 \circ \cdots \circ
-d_8\]</span> {#eq:defense_composition}</p>
+<div id="def:defense_composition" class="definition"
+title="Defense composition">
+<p><strong>Definition 2 (Defense composition).</strong> Layered controls
+compose over the eight mitigation classes as a single formal object
+whose coverage interactions — not merely the count of layers — determine
+what an attacker must defeat: <span class="math display">\[D = d_1 \circ
+d_2 \circ \cdots \circ d_8\]</span> {#eq:defense_composition}</p>
+</div>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The nine controls of the agentic authority architecture: operating rule and design rationale for each. The rules hold…"><table id="tbl:controls" data-responsive-table="true">
 <caption>The nine controls of the agentic authority architecture:
 operating rule and design rationale for each. The rules hold regardless
@@ -995,18 +1012,22 @@ routine edit-authorization to the agent while keeping command approval;
 bypass modes remove the hinge altogether and are, in this architecture’s
 terms, a design admission rather than a mode [anthropic_sandboxing;
 codex_sandboxing].</p>
-<p><span class="math display">\[\textit{propose} \prec \textit{stage}
-\prec \textit{authorize} \prec \textit{exercise} \prec \textit{audit}
-\prec \textit{revoke}\]</span> {#eq:authority_ladder_order}</p>
-<p>The authorize/exercise split is also what keeps delegated trust
-bounded. Formal treatments of agent trust bound a delegate’s effective
-trust by what it was authorized to exercise rather than by what it can
-reach, and the ladder encodes that bound structurally: authorization
-fixes the scope, exercise consumes it, and no rung is reachable that
-lets the agent enlarge its own authorization [cif_formal_2026]. The
-orchestration section extends the same bound across agent-to-agent
-delegation chains, where unbounded trust would otherwise amplify with
-each hop <span class="citation"
+<p>The authorize/exercise split of <a
+href="#def:authority_ladder_order">Definition 1</a> is also what keeps
+delegated trust bounded, and it has a commercial-integrity ancestry:
+Clark and Wilson grounded integrity in well-formed transactions, in
+which data changes state only through a mediated operation whose form is
+certified in advance, and in separation of duty, which prevents the
+principal who certifies an operation from being the one who executes it
+[clark1987]. Operation mediation and the approve/exercise split of this
+section are those controls restated for agents. Formal treatments of
+agent trust bound a delegate’s effective trust by what it was authorized
+to exercise rather than by what it can reach, and the ladder encodes
+that bound structurally: authorization fixes the scope, exercise
+consumes it, and no rung is reachable that lets the agent enlarge its
+own authorization [cif_formal_2026]. The orchestration section extends
+the same bound across agent-to-agent delegation chains, where unbounded
+trust would otherwise amplify with each hop <span class="citation"
 data-cites="sec:orchestration">[@sec:orchestration]</span>.</p>
 <p>The trust domains, controls, and ladder compose into the scenarios of
 <span class="citation"

@@ -1,11 +1,13 @@
 \beamer@slide {the-governing-rule}{2}
+\beamer@slide {def:authority_ladder_order}{4}
+\beamer@slide {eq:authority_ladder_order}{4}
 \beamer@slide {seven-trust-domains}{5}
 \beamer@slide {tbl:trust_domains}{6}
 \beamer@slide {fig:trust_domains}{6}
 \beamer@slide {nine-controls-and-their-design-rationale}{9}
+\beamer@slide {def:defense_composition}{10}
 \beamer@slide {eq:defense_composition}{10}
 \beamer@slide {tbl:controls}{11}
 \beamer@slide {convergent-implementations-in-shipping-agent-tools}{15}
 \beamer@slide {the-authority-ladder}{18}
 \beamer@slide {fig:authority_ladder}{19}
-\beamer@slide {eq:authority_ladder_order}{22}

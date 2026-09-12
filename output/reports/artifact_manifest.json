@@ -2,6 +2,15 @@
   "entries": [
     {
       "contract_match": true,
+      "path": "output/data/candidate_basis.csv",
+      "sha256": "85dd5b7d3bf903693e0db7ae7c0b77f2e97a89a9db31c8f82e4ef1b9cbac4b6e",
+      "size_bytes": 12578,
+      "stage_name": "standalone-output-scan",
+      "stage_num": 0,
+      "timestamp": ""
+    },
+    {
+      "contract_match": true,
       "path": "output/data/cognitive_defenses.json",
       "sha256": "5cf84f90e2717d4a30a3d24dce8c747dc61863b275d4b2e27f57ce6b407f46b3",
       "size_bytes": 2484,
@@ -30,8 +39,8 @@
     {
       "contract_match": true,
       "path": "output/data/evidence_summary.json",
-      "sha256": "e0754bc71d3ac2982843b9e9f250d1576a6f16e9df594eadfb0795ebab340ee0",
-      "size_bytes": 1126,
+      "sha256": "b33eaf11462d9789b17823939775c167f7a39f530553e24224af9f0eb8e71588",
+      "size_bytes": 2679,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -48,8 +57,8 @@
     {
       "contract_match": true,
       "path": "output/data/incident_register.csv",
-      "sha256": "566b77e95a038664c6ea06c5bab3fbb56e3e41fb881c5aaaee2dcef19815cda5",
-      "size_bytes": 4133,
+      "sha256": "302bcdff83da6ceffc82e9e852b2e266e1866e8f79bddc0b6f7f0a15e3ab34d5",
+      "size_bytes": 4382,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -57,7 +66,7 @@
     {
       "contract_match": true,
       "path": "output/data/manuscript_variables.json",
-      "sha256": "7a4ac60f468b2072c25640b4156da28941335377c938851314383706a8042ed8",
+      "sha256": "56dd7548dbe58f703860ce8b773d9598cd0cd1d4268719d795fdc3233fd641aa",
       "size_bytes": 1292,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -93,8 +102,8 @@
     {
       "contract_match": true,
       "path": "output/figures/agent_surface.png",
-      "sha256": "484369d6aa8aabc7042ecead4bdf8904b4b149d1084669d8299a60fa0be48b1b",
-      "size_bytes": 267456,
+      "sha256": "8242bba202459ba13d4d4229909ab18523a59310d4a5b2b7d5163b9e84cd5c82",
+      "size_bytes": 293081,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -129,8 +138,8 @@
     {
       "contract_match": true,
       "path": "output/figures/figure_registry.json",
-      "sha256": "8540ddbd0134cfb99239f948d5d154b4a4dc6d9cb527cc36913d9007d8477971",
-      "size_bytes": 8306,
+      "sha256": "81cb2e20fa19a0ada11250229e104d2f97beae59f24c57599bed0e679339a055",
+      "size_bytes": 9191,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -138,8 +147,8 @@
     {
       "contract_match": true,
       "path": "output/figures/forecast_horizon.png",
-      "sha256": "16a590151e987b8433d9b7d94a133c47b4b7d0850999657a575b4da498740fe9",
-      "size_bytes": 158920,
+      "sha256": "701a63ac822d1d68651c826c554675de57405e69c47bae0d83a0691190bbba75",
+      "size_bytes": 186921,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -149,6 +158,15 @@
       "path": "output/figures/graphical_abstract.png",
       "sha256": "420128ac4102fee3eadfd6b76429200e86f750eeeb2eb86bf4ffb4d28db5bbc9",
       "size_bytes": 561797,
+      "stage_name": "standalone-output-scan",
+      "stage_num": 0,
+      "timestamp": ""
+    },
+    {
+      "contract_match": true,
+      "path": "output/figures/incident_lessons.png",
+      "sha256": "810fdf3f3d84e3030691dacb46a10ae90e1e74eba03588fa6f3b9c84f3a7c9a2",
+      "size_bytes": 165426,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -201,7 +219,7 @@
     {
       "contract_match": true,
       "path": "output/manuscript/00_abstract.md",
-      "sha256": "f71559bc559ef74c33f29e63973ea9e513feb4a6c52380c9850721c4734cd679",
+      "sha256": "bcaacae0311ae95f68d9878a3cfbb90fac97970709ff72c36cff8d134e182936",
       "size_bytes": 3375,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -219,8 +237,8 @@
     {
       "contract_match": true,
       "path": "output/manuscript/02_threat_model.md",
-      "sha256": "b04d8b25c259cb928faad844fc47a1923ca826988167d086d182ff15ab7887bc",
-      "size_bytes": 17206,
+      "sha256": "732a81e7c42ae19a62795468c4f0fd8d9d64b3a6bd5f23e713343c1bb3a59fcd",
+      "size_bytes": 18207,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -228,8 +246,8 @@
     {
       "contract_match": true,
       "path": "output/manuscript/03_evaluation_framework.md",
-      "sha256": "c19a0fb0ee1878a40bb99db7b7ec6da7112468aef747877aa37ccdcedef62ad2",
-      "size_bytes": 17403,
+      "sha256": "296d637fd31e8ea988a2e3aa33582e458882143cc109ae07a88c1beb85a8b656",
+      "size_bytes": 17658,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -264,8 +282,8 @@
     {
       "contract_match": true,
       "path": "output/manuscript/07_servers_agent_infrastructure.md",
-      "sha256": "eaf05a422b39ca56fec25fa00865432c86149ad8500e251c9713da7c3054349f",
-      "size_bytes": 19168,
+      "sha256": "3c7a73e57a54eb77d15daad2a7744d1d43d221d90c85b20ee785827e789c7e7c",
+      "size_bytes": 19558,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -282,8 +300,8 @@
     {
       "contract_match": true,
       "path": "output/manuscript/09_agentic_authority_architecture.md",
-      "sha256": "fbab543bc856b415c1b6c2783c00e746feb6584ce0fdc9625f064d0daeabaa94",
-      "size_bytes": 18136,
+      "sha256": "448fa6902b2d8082049d980a001114ced158cb870efab1783b487a1887ffffab",
+      "size_bytes": 19128,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -309,8 +327,8 @@
     {
       "contract_match": true,
       "path": "output/manuscript/12_orchestration_security.md",
-      "sha256": "26d192ccfb1eb03ef19c3aec56faafb1c4a56e121ce3c4661a803b2264e765ae",
-      "size_bytes": 18001,
+      "sha256": "195d421d9795cbc108c407c3c5a0a4ecb1824f37fccc7f9cfc1dd0d037d59727",
+      "size_bytes": 18156,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -318,8 +336,8 @@
     {
       "contract_match": true,
       "path": "output/manuscript/13_configuration_authorization.md",
-      "sha256": "124f4a28bd72906e9e2804ff6b9a291b810e5309ec91739c2518474ef8e51339",
-      "size_bytes": 10123,
+      "sha256": "6bb596953c9718d69947e543986ad470f9bb68ad17e2ace732181a5bccb058da",
+      "size_bytes": 10741,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -345,7 +363,7 @@
     {
       "contract_match": true,
       "path": "output/manuscript/16_conclusion.md",
-      "sha256": "434c924f2a54a6423cc5e76bfa9db19b498d07ec37a3f4abff4598fbc6892dd0",
+      "sha256": "56368a72640fe255225131c76cd220dfe315cab81f061ce1551b379bdbbdac2b",
       "size_bytes": 6417,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -354,8 +372,8 @@
     {
       "contract_match": true,
       "path": "output/manuscript/99_references.md",
-      "sha256": "5b3fe0f1813d38ffe3ee5a671ddeb5e97fa299c457e9fb7c9ab4e5d4a83f9715",
-      "size_bytes": 364,
+      "sha256": "7cda19cfebb4a8a27294415c6c5215e927b7561c3935da7cd9957bd0416b1194",
+      "size_bytes": 402,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -363,7 +381,7 @@
     {
       "contract_match": true,
       "path": "output/manuscript/config.yaml",
-      "sha256": "6e00a99559d4b8e7930453d053968e290e6703d1682dacc24ab2ec3438340f60",
+      "sha256": "12149d26c1cc2d25a08ed35016fd29b8d48e32776e463e2d0518da5e6cfcdf80",
       "size_bytes": 5200,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -381,8 +399,8 @@
     {
       "contract_match": true,
       "path": "output/manuscript/references.bib",
-      "sha256": "f8d40ac9f0ad14a98aeb7902944dd90eb612a4eaab213e43e7f88d7f8db8d6ff",
-      "size_bytes": 46905,
+      "sha256": "b5d714825dd46dcc2e640e62f2d30f58ef57b202c9a57d6e47e121da38d218f6",
+      "size_bytes": 48132,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -390,8 +408,8 @@
     {
       "contract_match": true,
       "path": "output/pdf/agentic_os_security_combined.pdf",
-      "sha256": "d17f3396b2b8fce7ed1f1cdfc019adc48fbf51d1f0aab712ce53e5e4a993f9be",
-      "size_bytes": 3853250,
+      "sha256": "3d615adb39046e83774df4cd552975d480cfd5afa855b9e00e221f86af46ff1a",
+      "size_bytes": 4075429,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -399,7 +417,7 @@
     {
       "contract_match": true,
       "path": "output/reports/manuscript_composition.json",
-      "sha256": "6cb3cf9745342e25841ef9ce6cf4b1fee35578a8f64b66949de05190cd126c9d",
+      "sha256": "cfb9b9d0ff194109575ffac8d8144c9b3fc309348796abbdd47b3c62e3a394e2",
       "size_bytes": 4263,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -408,7 +426,7 @@
     {
       "contract_match": true,
       "path": "output/slides/00_abstract_slides.pdf",
-      "sha256": "10a867da94e63786e3f819d5b57f449172ce7ca6d3ed9744d8d039b894bec29d",
+      "sha256": "145f4aba818342e6d7e971d474276bd846477324c6c9f4006075177e00d12b69",
       "size_bytes": 18629,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -417,8 +435,8 @@
     {
       "contract_match": true,
       "path": "output/slides/01_introduction_slides.pdf",
-      "sha256": "acd1f221803ab205ad5ea933b9cac1ed387dfedd35ecba8539e7871ee91104aa",
-      "size_bytes": 49622,
+      "sha256": "caaca1f289926f2b9d6a7b0318940d350191c17c1ec7dcc414605e038569858d",
+      "size_bytes": 49623,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -426,8 +444,8 @@
     {
       "contract_match": true,
       "path": "output/slides/02_threat_model_slides.pdf",
-      "sha256": "08cf6375dff26210d3bda64bf61ff612c32fb008f450620dd85319f724b36b3a",
-      "size_bytes": 292233,
+      "sha256": "cd085809a86cbc4d7630ffb4ccd2a5115e872a2c2d68762ccfaf27737f3c0c33",
+      "size_bytes": 462612,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -435,8 +453,8 @@
     {
       "contract_match": true,
       "path": "output/slides/03_evaluation_framework_slides.pdf",
-      "sha256": "25beee3163006a1c38249745deb7991f5cdb9d345529c56e61c6c4ce5a24dee4",
-      "size_bytes": 741002,
+      "sha256": "989974135bb04e0b055eff28ef1871d858dacb8d2edba79a24ba1d555a178f8f",
+      "size_bytes": 741724,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -444,7 +462,7 @@
     {
       "contract_match": true,
       "path": "output/slides/04_compartmentalization_qubes_slides.pdf",
-      "sha256": "eadac78cb2fd726a4b84bf574515dac3505d1ba20ebb7f2a35a59ac9fa2b047b",
+      "sha256": "fa4ad0b880829fe538dff08e67302714957c56a28860381611b3a2aacbfa54dd",
       "size_bytes": 57297,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -453,8 +471,8 @@
     {
       "contract_match": true,
       "path": "output/slides/05_reproducible_operations_nixos_slides.pdf",
-      "sha256": "60c0244e895e848134795e84da3a8f98031903025987a3e1d9bbcd2585c203b0",
-      "size_bytes": 58457,
+      "sha256": "175a0f88d745411282ccf5af5866450f2d826935e3d413cc8a5de97a6dae43e5",
+      "size_bytes": 58456,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -462,8 +480,8 @@
     {
       "contract_match": true,
       "path": "output/slides/06_conventional_desktops_slides.pdf",
-      "sha256": "2dbe5bd9f445ba932217655c7e7c9303fa38289c630445c98c4f70f9c3484167",
-      "size_bytes": 48202,
+      "sha256": "3ca61116645bc9cf32b82b3e3c5d0eab1da0933557d702fd924c4b9cef5fe9e0",
+      "size_bytes": 48200,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -471,8 +489,8 @@
     {
       "contract_match": true,
       "path": "output/slides/07_servers_agent_infrastructure_slides.pdf",
-      "sha256": "6b72181416d802f2d05fd29b2214149bd33195d3646a7515b12b10b4bcaef83c",
-      "size_bytes": 734130,
+      "sha256": "accba030f3c67351b0f9c5e88aa70384d66f0dfb81b4bbc7dab1699229dc1a76",
+      "size_bytes": 735228,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -480,7 +498,7 @@
     {
       "contract_match": true,
       "path": "output/slides/08_boundary_comparators_slides.pdf",
-      "sha256": "901d584736a04783b4f5e03d25d400ad95ddfce2a65cc7fa7d62acc76c043427",
+      "sha256": "d10bc869c3cdd63b13f4040f6fea186e0b01bd8240f1e78f7df96aa64e52d57e",
       "size_bytes": 55261,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -489,8 +507,8 @@
     {
       "contract_match": true,
       "path": "output/slides/09_agentic_authority_architecture_slides.pdf",
-      "sha256": "caf3c0020bfad8b10e9815b260f8b8415ccac9dbfc5a70dc85a117eb12180e4c",
-      "size_bytes": 609756,
+      "sha256": "0533dd1b0ad7a72b3bed08336c36c15f4cba8bdba10c35ff984f8d6320c5a4f5",
+      "size_bytes": 610914,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -498,7 +516,7 @@
     {
       "contract_match": true,
       "path": "output/slides/10_cognitive_security_slides.pdf",
-      "sha256": "76e4b2684b3f2650af0e02559a7fc8d503bf49a38ca149344066a693bb2d3fd2",
+      "sha256": "f68d148b3e1a8ca606653134590dd24b5acc715f18fe27013851e70a5d2ef6fb",
       "size_bytes": 58027,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -507,8 +525,8 @@
     {
       "contract_match": true,
       "path": "output/slides/11_opsec_for_agent_operators_slides.pdf",
-      "sha256": "d5e84cb79308ee608fe8f1552332c0ad4c310c73234fd013b24376216496fd86",
-      "size_bytes": 44157,
+      "sha256": "41385283868e50a52cbc2d03aae16d2cba98189d417bd21593337e4cc0118e09",
+      "size_bytes": 44156,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -516,8 +534,8 @@
     {
       "contract_match": true,
       "path": "output/slides/12_orchestration_security_slides.pdf",
-      "sha256": "cc5f7d23336dc9d1b0d87aaec62262269ec3408a604f2ebd71b02e73dca2a7d9",
-      "size_bytes": 625570,
+      "sha256": "634bd613c285e6248cce268e5ffceb52a7068b5fe2421f7ed71e6264b31b2f79",
+      "size_bytes": 647574,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -525,8 +543,8 @@
     {
       "contract_match": true,
       "path": "output/slides/13_configuration_authorization_slides.pdf",
-      "sha256": "2c89fb830953dc775fe0fc748974d9a66e895d4e8430da1a9e7c39c03cdd5a10",
-      "size_bytes": 42778,
+      "sha256": "4623eec5c8fbca8d00f7c8da6d1dfd8581486f7d31a26b3605d63558a890eff0",
+      "size_bytes": 46077,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -534,8 +552,8 @@
     {
       "contract_match": true,
       "path": "output/slides/14_forecast_2028_2031_slides.pdf",
-      "sha256": "7ffc039971f5da651e1776feacb9ab4fc7e44b17a9a00372da6f80d343acc8ae",
-      "size_bytes": 202901,
+      "sha256": "7265899dff7634b6acaa7968fa7037d6f92157e696e957046c429ab38f073a55",
+      "size_bytes": 228935,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -543,7 +561,7 @@
     {
       "contract_match": true,
       "path": "output/slides/15_scenarios_and_confidence_slides.pdf",
-      "sha256": "31cbe1e038fcf0272090c09e549338a45ad2c6ebcd39ac67f39797c5b17116c5",
+      "sha256": "436516f9371271d97566bbbb9c7c4abf64e06f168892ff7acf0957684fe5d7ab",
       "size_bytes": 40634,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -552,8 +570,8 @@
     {
       "contract_match": true,
       "path": "output/slides/16_conclusion_slides.pdf",
-      "sha256": "cd2773775b388c06b2e4872ad54f9a836be28758ef2812122301df0f6b0dff16",
-      "size_bytes": 26280,
+      "sha256": "41456010d5dfdcd106e1f4c4a553c79837857107350239a56d44c8e427a17408",
+      "size_bytes": 26279,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -561,8 +579,8 @@
     {
       "contract_match": true,
       "path": "output/slides/99_references_slides.pdf",
-      "sha256": "0b2b82d73bb62513f173159f0e4d11c5e4e4f530c3967aefe6e9a7c0636085b8",
-      "size_bytes": 9342,
+      "sha256": "37668de10c054d6bef9b04164bc15a32b95190f51da72cd8208940d0cd5f952c",
+      "size_bytes": 9809,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -570,8 +588,8 @@
     {
       "contract_match": true,
       "path": "output/web/_combined_manuscript.md",
-      "sha256": "39ed5cae3059e1933841d2cb408205f61fbcdd1e7f2ab094982d581cc0b38a77",
-      "size_bytes": 256772,
+      "sha256": "3ec34104f8cd749a49981016b8847c89e6e8b20a376f1e909dc5a24745e2a016",
+      "size_bytes": 260214,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -588,8 +606,8 @@
     {
       "contract_match": true,
       "path": "output/web/index.html",
-      "sha256": "1d4778b48f6ae5b657479647c1531bafad4e9dbf8fe24a80d45d769565af4203",
-      "size_bytes": 431314,
+      "sha256": "7b26678251a608c7c539f59f3cd9cf139188fbebea6aab86519a6e37b7932e96",
+      "size_bytes": 437479,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -597,7 +615,7 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__00_abstract.html",
-      "sha256": "ae06d7865a357baefd817a376032640dc6a9133a612d6f8e89fba6a1e161cb6b",
+      "sha256": "2d81e2741a8a672030489640ced174ce7c045360151854c889fbb5b7417f4a32",
       "size_bytes": 14663,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -615,8 +633,8 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__02_threat_model.html",
-      "sha256": "fdfe2c8d9f2bda8aea0c9eec51c562f85645d8de84d774060b6553f406e246d9",
-      "size_bytes": 30887,
+      "sha256": "e26262cb235ab05eba601c3694715f3136b0e489f109baeb150c25ea02e74677",
+      "size_bytes": 32669,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -624,8 +642,8 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__03_evaluation_framework.html",
-      "sha256": "1691cd031366c8e459297963ff1fdcb9bca6df7c854ab7cbd5e7e5acdef580db",
-      "size_bytes": 35959,
+      "sha256": "89a7a106686eae0590d48cb1e852c2b049f159e347056a915d188e7ca750174b",
+      "size_bytes": 36273,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -660,8 +678,8 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__07_servers_agent_infrastructure.html",
-      "sha256": "0c5f788b228b069398e9fd51750b04f8c8fc01ee8a70bc532f1e509064d0efcc",
-      "size_bytes": 36817,
+      "sha256": "2cd296dce4f9ec3efc478dd73402a56a501e8910ff6ba0d18b562cfaeb958909",
+      "size_bytes": 37498,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -678,8 +696,8 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__09_agentic_authority_architecture.html",
-      "sha256": "0a41aae2fb8f9988565ebad2ffd124eb696f98589f951035813881a877e24135",
-      "size_bytes": 36497,
+      "sha256": "ebbb5408f04c8d9e7919060111a9c868785996009ddf29878e52f70d10ad3615",
+      "size_bytes": 37667,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -705,8 +723,8 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__12_orchestration_security.html",
-      "sha256": "2d5fe615f4b7e2f0f53bf054c0bef0ee13f78ff4bbec12b749a6075ab0ace698",
-      "size_bytes": 35558,
+      "sha256": "435cc78805c41a9fc01ee805565bb50756fe728482b11f4cb5169d79f035d3a7",
+      "size_bytes": 35803,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -714,8 +732,8 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__13_configuration_authorization.html",
-      "sha256": "f2040dd7b3ce07c59c6a07ad537ff14b530f2de985aa724efc99b0de2e833811",
-      "size_bytes": 26088,
+      "sha256": "9d75b5b7dff249aaa2ae558d1e16cda1eca350207939f55138552a7c135cbef3",
+      "size_bytes": 26832,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -723,8 +741,8 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__14_forecast_2028_2031.html",
-      "sha256": "8c7d3966c5f3e40fc62e053f071ac07b8395d574acb020c21bfe0247ed2604c9",
-      "size_bytes": 23008,
+      "sha256": "e304945569e5a75cf4a59555df716d7dcafe77c30f668dd888716ad475b284bc",
+      "size_bytes": 23053,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""
@@ -741,7 +759,7 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__16_conclusion.html",
-      "sha256": "0fc6c757df1eb9283c8b29d260589ff7c6ca7b4729d2029466768bd17b930f35",
+      "sha256": "31d431cedf151c953ff045a53956604b009bc2b2c136a72d0f51189a09b34023",
       "size_bytes": 18430,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
@@ -750,8 +768,8 @@
     {
       "contract_match": true,
       "path": "output/web/manuscript__99_references.html",
-      "sha256": "cc92d2e283f34c4c04476331bf05957c7db17d035ef3fb6f3bf266bbcd072390",
-      "size_bytes": 11557,
+      "sha256": "28fc171b03db705331abfe598d93a49cbc0e384410ab679d75cc5ad9c6873fc6",
+      "size_bytes": 11595,
       "stage_name": "standalone-output-scan",
       "stage_num": 0,
       "timestamp": ""

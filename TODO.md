@@ -5,7 +5,7 @@ Forward-only; completed items move to `Done`.
 ## Open
 
 - [x] v0.3.0 delivered (2026-09-11): graphical abstract cover, extended titles, incident register, CIF mapping, author-work citations
-- [ ] Consider independent figure-audit pass (human review of 9 figures at print scale)
+- [x] v0.4.0 delivered (2026-09-11): cover DOI + auto date, taller zero-code cover, formalisms, OS stack
 
 ## Done
 

@@ -4,10 +4,11 @@
 \beamer@slide {protocol-level-mediation-mcp-and-a2a}{9}
 \beamer@slide {swarm-threat-models-maestro-aegisswarm-and-the-agent-as-insider}{12}
 \beamer@slide {delegation-chains-and-the-confused-deputy}{14}
+\beamer@slide {def:delegation_bound}{17}
 \beamer@slide {eq:delegation_bound}{17}
-\beamer@slide {fig:orchestration_boundaries}{17}
-\beamer@slide {the-mediation-point-taxonomy}{19}
-\beamer@slide {fig:agent_surface}{24}
-\beamer@slide {approval-chains-across-agent-hierarchies}{25}
-\beamer@slide {auditability-of-multi-agent-decisions}{27}
-\beamer@slide {mapping-to-the-trust-domain-architecture}{29}
+\beamer@slide {fig:orchestration_boundaries}{18}
+\beamer@slide {the-mediation-point-taxonomy}{20}
+\beamer@slide {fig:agent_surface}{25}
+\beamer@slide {approval-chains-across-agent-hierarchies}{26}
+\beamer@slide {auditability-of-multi-agent-decisions}{28}
+\beamer@slide {mapping-to-the-trust-domain-architecture}{30}

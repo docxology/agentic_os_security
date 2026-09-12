@@ -793,18 +793,24 @@ authority: a worker returns requests that preserve or reduce scope,
 never requests that expand it, and the broker rejects expansions as a
 matter of policy. These three rules convert the deputy from a trusted
 forwarder into a checked channel.</p>
-<p>The formal grounding for these rules is δ-bounded delegation (<span
-class="citation"
-data-cites="eq:delegation_bound">[@eq:delegation_bound]</span>): each
-hop in an agent-to-agent chain is permitted to narrow the authority it
-passes, never to widen it, so trust cannot amplify across a delegation
-chain no matter how many intermediaries it traverses [cif_formal_2026].
-That formal model is not left as a statement of intent — its
-bounded-delegation and trust-boundedness properties have been exercised
-computationally, with implementations validating the no-amplification
-guarantee on constructed delegation scenarios [cif_validation_2026].</p>
-<p><span class="math display">\[\mathrm{trust}(a \to c) \le \delta \cdot
+<p>The formal grounding for these rules is δ-bounded delegation (<a
+href="#def:delegation_bound">Definition 1</a>): each hop in an
+agent-to-agent chain is permitted to narrow the authority it passes,
+never to widen it, so trust cannot amplify across a delegation chain no
+matter how many intermediaries it traverses [cif_formal_2026]. The bound
+of <span class="citation"
+data-cites="eq:delegation_bound">[@eq:delegation_bound]</span> is not
+left as a statement of intent — its bounded-delegation and
+trust-boundedness properties have been exercised computationally, with
+implementations validating the no-amplification guarantee on constructed
+delegation scenarios [cif_validation_2026].</p>
+<div id="def:delegation_bound" class="definition"
+title="δ-bounded delegation">
+<p><strong>Definition 1 (δ-bounded delegation).</strong> For a
+delegation chain a→b→c, trust does not amplify: <span
+class="math display">\[\mathrm{trust}(a \to c) \le \delta \cdot
 \mathrm{trust}(a \to b)\]</span> {#eq:delegation_bound}</p>
+</div>
 <figure id="fig:orchestration_boundaries">
 <a class="figure-full-size-link" href="../figures/orchestration_boundaries.png" target="_blank" rel="noopener" aria-label="Open full-size figure, A reference orchestration: one orchestrator delegating through an MCP-style tool broker to…"><img src="../figures/orchestration_boundaries.png" style="width:100.0%"
 alt="A reference orchestration: one orchestrator delegating through an MCP-style tool broker to three disposable workers, with the ten mediation points numbered at each trust-boundary crossing." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>

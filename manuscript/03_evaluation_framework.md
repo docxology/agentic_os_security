@@ -39,17 +39,23 @@ Instead, every candidate–property cell receives one qualitative stance: **stro
 
 ## A formal stance model
 
-The vocabulary is small enough to state formally, and the formal statement is worth writing down because it fixes what the matrix claims and what it refuses to claim. Let $C$ be the set of {{CONFIG_NUM_CANDIDATES}} candidates, $P$ the set of {{CONFIG_NUM_PROPERTIES}} properties, and $S = \{\textit{strong}, \textit{partial}, \textit{weak}\}$ the stance vocabulary. The evaluation matrix is then a single function
+The vocabulary is small enough to state formally, and the formal statement is worth writing down because it fixes what the matrix claims and what it refuses to claim. Let $C$ be the set of {{CONFIG_NUM_CANDIDATES}} candidates, $P$ the set of {{CONFIG_NUM_PROPERTIES}} properties, and $S = \{\textit{strong}, \textit{partial}, \textit{weak}\}$ the stance vocabulary.
 
+:::: {.definition #def:stance_mapping title="Stance mapping"}
+The evaluation matrix is a total function: every candidate–property pair receives exactly one qualitative stance, and n/a marks the pairs a candidate does not engage at its architectural level:
 $$\sigma\colon C \times P \to S \cup \{\textit{n/a}\}$$ {#eq:stance_mapping}
+::::
 
-assigning exactly one stance to each candidate–property pair. Read as a function, [@eq:stance_mapping] makes two commitments that prose leaves implicit. It is **total**: the pipeline refuses to emit figures until all {{RESULT_MATRIX_CELLS}} cells are defined, so no candidate escapes evaluation by omission. And it is **qualitative**: the codomain carries no numbers, so the matrix cannot be averaged or ranked without an explicit modeling step — the step the anti-scoring stance above declines to supply.
+Read as a function, [@def:stance_mapping] makes two commitments that prose leaves implicit. It is **total**: the pipeline refuses to emit figures until all {{RESULT_MATRIX_CELLS}} cells are defined, so no candidate escapes evaluation by omission. And it is **qualitative**: the codomain carries no numbers, so the matrix cannot be averaged or ranked without an explicit modeling step — the step the anti-scoring stance above declines to supply.
 
 The stance words themselves carry a preference structure rather than a measurement scale, and the review reads them as ordered:
 
+:::: {.definition #def:stance_order title="Stance preference order"}
+Stances form a preference order over postures: a candidate whose documented design earns the left-hand stance dominates a candidate that earns the right-hand stance *on that property*:
 $$\textit{strong} \succ \textit{partial} \succ \textit{weak}$$ {#eq:stance_order}
+::::
 
-meaning that a candidate whose documented design earns the left-hand stance dominates a candidate that earns the right-hand stance *on that property*. [@eq:stance_order] defines an ordering over postures, not distances between them: no arithmetic over stances is meaningful, and no rung is a probability. Notably, $n_a$ does not appear in [@eq:stance_order] at all — an unverified or out-of-scope cell sits outside the preference order entirely, which is what stops "we could not verify" from masquerading as "we verified it is weak." The formal model thus encodes exactly the discipline the vocabulary was built for: total coverage, ordered confidence in documented designs, and honesty about the unverified.
+By [@def:stance_order] the order fixes postures, not distances between them: no arithmetic over stances is meaningful, and no rung is a probability. Notably, $n_a$ does not appear in [@eq:stance_order] at all — an unverified or out-of-scope cell sits outside the preference order entirely, which is what stops "we could not verify" from masquerading as "we verified it is weak." The formal model thus encodes exactly the discipline the vocabulary was built for: total coverage, ordered confidence in documented designs, and honesty about the unverified.
 
 ## How the matrix is constructed and refreshed
 

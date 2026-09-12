@@ -21,11 +21,14 @@ from .build_clock import (
 )
 from .evidence import (
     CAPABILITY_BASELINE,
+    LESSON_TAXONOMY,
     SOURCES,
     TIER_VOCAB,
+    LessonClass,
     Source,
     sources_by_tier,
 )
+from .basis import CANDIDATE_BASIS, CandidateBasis
 from .experiment_config import (
     ExperimentConfigError,
     REQUIRED_KEY_SHAPES,
@@ -95,6 +98,10 @@ __all__ = [
     "Source",
     "SOURCES",
     "TIER_VOCAB",
+    "LessonClass",
+    "LESSON_TAXONOMY",
+    "CandidateBasis",
+    "CANDIDATE_BASIS",
     "CAPABILITY_BASELINE",
     "sources_by_tier",
     # threat model

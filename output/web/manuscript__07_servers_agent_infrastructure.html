@@ -790,6 +790,19 @@ process.</td>
 </tr>
 </tbody>
 </table></div>
+<p>The section’s formal backdrop is the operating-system security stack.
+Following the standard account of operating-system structure as ordered
+layers of mechanism [arpaci2018], this review models the stack as an
+ordered defense sequence:</p>
+<div id="def:stack_layering" class="definition"
+title="Operating-system stack layering">
+<p><strong>Definition 1 (Operating-system stack layering).</strong>
+Formally, the stack is a defense sequence <span
+class="math display">\[L_1 \prec L_2 \prec \cdots \prec L_8\]</span>
+{#eq:stack_layering} with one design obligation: a compromise at layer
+<span class="math inline">\(i\)</span> must not grant authority at layer
+<span class="math inline">\(i+1\)</span>.</p>
+</div>
 <h2 id="support-windows-are-part-of-the-architecture">Support windows
 are part of the architecture</h2>
 <p>Support-policy diversity is easier to see than to state, so <span
@@ -807,18 +820,22 @@ planning commitment; a short one, an operational tax. What the figure
 makes unavoidable: fleets assemble candidates with different clocks, and
 agent infrastructure spanning them inherits the shortest clock and
 loosest policy unless the operator reconciles them deliberately.</p>
-<p>Formally, the review records each candidate’s support posture as a
-function</p>
-<p><span class="math display">\[W(c) \in \mathbb{N} \cup
-\{\infty\}\]</span> {#eq:update_window_semantics}</p>
-<p>where a finite value is the project’s committed coverage in months
-and <span class="math inline">\(W(c) = \infty\)</span> marks a rolling
-or release-relative policy rather than an indefinite guarantee. The
-reading this section carries forward is monotone: risk grows as the
-committed window is exhausted, because a candidate operating inside its
-window still converts maintenance into scheduled, tested operations,
-while one at or past the boundary converts them into unplanned exposure
-<span class="citation"
+<div id="def:update_window_semantics" class="definition"
+title="Support-window semantics">
+<p><strong>Definition 2 (Support-window semantics).</strong> A
+candidate’s support posture is its committed coverage window: <span
+class="math display">\[W(c) \in \mathbb{N} \cup \{\infty\}\]</span>
+{#eq:update_window_semantics} where a finite value is the project’s
+committed coverage in months and <span class="math inline">\(W(c) =
+\infty\)</span> marks a rolling or release-relative policy rather than
+an indefinite guarantee.</p>
+</div>
+<p>The reading this section carries forward from <a
+href="#def:update_window_semantics">Definition 2</a> is monotone: risk
+grows as the committed window is exhausted, because a candidate
+operating inside its window still converts maintenance into scheduled,
+tested operations, while one at or past the boundary converts them into
+unplanned exposure <span class="citation"
 data-cites="eq:update_window_semantics">[@eq:update_window_semantics]</span>.</p>
 <figure id="fig:update_windows">
 <a class="figure-full-size-link" href="../figures/update_windows.png" target="_blank" rel="noopener" aria-label="Open full-size figure, Documented support windows for all twenty-four candidates"><img src="../figures/update_windows.png" style="width:100.0%"
@@ -929,24 +946,20 @@ and replace worker environments quickly [nix_sandbox_config], but as
 establishes, its sandbox concerns builds, not the runtime confinement of
 the thing built.</p>
 <p>Viewed together, the baseline’s four elements occupy a specific slice
-of a larger structure. <span class="citation"
-data-cites="fig:os_stack">[@fig:os_stack]</span> arranges the
-operating-system security stack as eight ordered layers, from hardware
-and firmware at the top, through the hypervisor and the kernel’s
-access-control primitives, down to the agent runtime and its tool
-bridge; the right-hand columns record how strongly each candidate class
-in this review covers each layer. Formally, the stack is a defense
-sequence</p>
-<p><span class="math display">\[L_1 \prec L_2 \prec \cdots \prec
-L_8\]</span> {#eq:stack_layering}</p>
-<p>with one design obligation: a compromise at layer <span
+of the stack formalized in <a href="#def:stack_layering">Definition
+1</a>. <span class="citation"
+data-cites="fig:os_stack">[@fig:os_stack]</span> arranges its eight
+ordered layers; the right-hand columns record how strongly each
+candidate class in this review covers each layer.</p>
+<p>The disposable-isolation baseline concentrates on layers four through
+six, and the obligation of <a href="#def:stack_layering">Definition
+1</a> stands: a compromise at layer <span
 class="math inline">\(i\)</span> must not grant authority at layer <span
 class="math inline">\(i+1\)</span> <span class="citation"
-data-cites="eq:stack_layering">[@eq:stack_layering]</span>. The
-disposable-isolation baseline concentrates on layers four through six.
-The sandbox runtime layer — bubblewrap, seatbelt, gVisor, jailer-style
-wrappers composing the kernel primitives of the layer above — is where
-this section’s advisory record lives: Firecracker’s jailer is privileged
+data-cites="eq:stack_layering">[@eq:stack_layering]</span>. The sandbox
+runtime layer — bubblewrap, seatbelt, gVisor, jailer-style wrappers
+composing the kernel primitives of the layer above — is where this
+section’s advisory record lives: Firecracker’s jailer is privileged
 host-side code with its own CVE stream [firecracker_jailer_docs;
 firecracker_jailer_advisory], and gVisor accounts for CVEs across the
 whole sandbox precisely because that layer is attack surface rather than

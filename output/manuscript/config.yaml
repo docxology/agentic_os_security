@@ -7,7 +7,7 @@
 # Consumed by: `infrastructure/rendering/pdf_renderer.py` and `infrastructure/reporting/pipeline_report_model.py`
 paper:
   title: "Agentic Security and Operating Systems"
-  version: "0.4.0"
+  version: "0.5.0"
   date: "" # Auto-generated (\today) by the title-page builder when empty
   cover:
     image: "output/figures/graphical_abstract.png"

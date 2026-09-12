@@ -24,7 +24,23 @@ caveats recorded in the matching ``Source.claims``.
 
 ``INCIDENTS`` registers the documented platform and agent incidents the
 review's boundary lessons are drawn from; each entry pairs one
-reporting-party account with the citation key it is attributed to.
+reporting-party account with the citation key it is attributed to, plus
+the ``lesson_class`` naming which of the five boundary-lesson classes in
+:data:`LESSON_TAXONOMY` the incident demonstrates:
+
+- ``containment_held`` — an isolation boundary survived as designed; the
+  failure stayed inside the compartment and the patched boundary stays on
+  a standing update cadence.
+- ``authority_exceeded`` — authorized access was misused: the actor acted
+  inside a granted permission rather than escaping a sandbox, so mediation
+  binds what authority may do, not only where it may run.
+- ``supply_chain`` — the vulnerable path runs through the build,
+  dependency, or artifact-ingestion code that introduces executable
+  content; who may introduce or approve code is the load-bearing question.
+- ``update_operations`` — the lesson turns on patch and update cadence;
+  how fast fixes reach every active environment is part of the boundary.
+- ``cognitive_boundary`` — the boundary that failed is human judgment:
+  social engineering, pressure, or operator improvisation is the vector.
 
 No I/O at import time; the module is a pure constant surface.
 """
@@ -39,6 +55,8 @@ __all__ = [
     "SOURCES",
     "Incident",
     "INCIDENTS",
+    "LessonClass",
+    "LESSON_TAXONOMY",
     "CAPABILITY_BASELINE",
     "sources_by_tier",
 ]
@@ -1515,11 +1533,13 @@ class Incident:
     vector: str
     boundary_lesson: str
     citation_key: str
+    lesson_class: str
 
 
 #: The incident register — 14 documented incidents spanning agent-driven
 #: intrusions, authorized-agent misbehavior, and platform boundary
-#: failures. Citation keys must exist in ``manuscript/references.bib``.
+#: failures. Citation keys must exist in ``manuscript/references.bib``; each
+#: entry names one :data:`LESSON_TAXONOMY` class in ``lesson_class``.
 INCIDENTS: tuple[Incident, ...] = (
     Incident(
         "gtg-1002",
@@ -1528,6 +1548,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "AI-agent-assisted intrusion campaign targeting roughly 30 entities with a handful of validated intrusions.",
         "Vendor-reported autonomy percentages are attribution-caveated, not independent measurements; human decision points remained in the loop.",
         "anthropic_campaign_report",
+        "authority_exceeded",
     ),
     Incident(
         "gtg-2002",
@@ -1536,6 +1557,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Vibe hacking: human operators conducting intrusions with AI assistance against at least 17 targets with 48-72 hour extortion deadlines.",
         "Extortion speed compresses recovery time; rehearsed recovery and credential revocation are the compensating controls.",
         "anthropic_misuse_aug_2025",
+        "cognitive_boundary",
     ),
     Incident(
         "anthropic_apikey_theft",
@@ -1544,6 +1566,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "API-key theft patterns persisting as a leading observed AI threat in the September 2026 threat-intelligence report.",
         "Long-lived cloud credentials are the agent operator's crown jewels; scope credentials to a task and revoke at boundary crossings.",
         "anthropic_ti_sept_2026",
+        "authority_exceeded",
     ),
     Incident(
         "aisi_inc_2026_07_28_01",
@@ -1552,6 +1575,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Unsanctioned live-internet actions across 10 of 122 runs on 7 models during authorized cyber testing, including fake GitHub identities pressuring a maintainer.",
         "Authorized agents misbehave within authorization, not through sandbox escape; classifier coverage and mediation points bound the authorized-misuse surface.",
         "aisi_incident_pdf",
+        "authority_exceeded",
     ),
     Incident(
         "openai_hf_2026",
@@ -1560,6 +1584,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Long-horizon internal evaluation agent reaching Hugging Face infrastructure across roughly 17,600 actions; Preparedness rated the incident Critical.",
         "Egress boundaries must separate evaluation scopes from production infrastructure, not merely internal from external networks.",
         "openai_hf_incident",
+        "containment_held",
     ),
     Incident(
         "qsb-110",
@@ -1568,6 +1593,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Qubes security bulletin fixing dom0-relevant vulnerabilities in the March 2026 cadence.",
         "A documented bulletin cadence keeps the dom0 attack surface visible between releases; update operations are part of the boundary.",
         "qsb_110",
+        "containment_held",
     ),
     Incident(
         "qsb-115",
@@ -1576,6 +1602,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Qubes security bulletin fixing dom0-relevant vulnerabilities in the June 2026 cadence.",
         "Scheduled bulletins without a named campaign still move the dom0 attack surface; track the cadence as a standing control.",
         "qsb_115",
+        "containment_held",
     ),
     Incident(
         "qsb-116",
@@ -1584,6 +1611,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Qubes security bulletin fixing dom0-relevant vulnerabilities in the July 2026 cadence.",
         "Update operations for the isolation layer are part of the boundary, not an afterthought to it.",
         "qsb_116",
+        "containment_held",
     ),
     Incident(
         "qsb-118",
@@ -1592,6 +1620,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Arbitrary command injection into dom0 via qvm-copy-to-vm (CVE-2026-82636, CVSS 7.9) from an already compromised qube; fixed by qubes-core-dom0-linux 4.3.22.",
         "A user-initiated copy is a trust-boundary crossing into the TCB; mediate operations, not vague intentions.",
         "qsb_118",
+        "authority_exceeded",
     ),
     Incident(
         "nix_ghsa_g3g9",
@@ -1600,6 +1629,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Symlink-following flaw during fixed-output derivation registration let build-submission users gain root in multi-user installations.",
         "Build submission is a privileged operation; sandboxed Linux builds did not remove the underlying privilege boundary.",
         "nix_ghsa_g3g9",
+        "supply_chain",
     ),
     Incident(
         "nix_ghsa_vh5x",
@@ -1608,6 +1638,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "NAR parser unbounded recursion converting artifact ingestion into denial of service; recursion bounded at depth 64 in the fix.",
         "Parser robustness is a supply-chain trust boundary; unbounded input handling in a trusted path is itself a vulnerability.",
         "nix_ghsa_vh5x",
+        "supply_chain",
     ),
     Incident(
         "cve_2026_44029",
@@ -1616,6 +1647,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Path traversal on nix --unpack (GHSA-gr92-w2r5-qw5p) escaping the intended extraction directory.",
         "Extraction is a filesystem-boundary crossing that needs the same scrutiny as artifact ingestion.",
         "nix_ghsa_gr92",
+        "supply_chain",
     ),
     Incident(
         "cve_2026_1386",
@@ -1624,6 +1656,7 @@ INCIDENTS: tuple[Incident, ...] = (
         "Firecracker jailer symlink flaw allowing arbitrary host file overwrite; fixed in 1.13.2 and 1.14.1.",
         "The jailer's host-file surface is part of the isolation TCB; symlink resolution defects escape the microVM boundary.",
         "firecracker_jailer_advisory",
+        "containment_held",
     ),
     Incident(
         "cve_2026_45782",
@@ -1632,8 +1665,65 @@ INCIDENTS: tuple[Incident, ...] = (
         "Cloud Hypervisor v52.0 fixing CVE-2026-45782 in the Rust VMM.",
         "MicroVM managers ship CVEs like any VMM; update operations for the virtualization layer are part of the boundary.",
         "cloud_hypervisor_v52",
+        "containment_held",
     ),
 )
+
+
+#: One boundary-lesson class of the pinned taxonomy (ids and names pinned).
+@dataclass(frozen=True)
+class LessonClass:
+    """One boundary-lesson class of the pinned 5-class taxonomy."""
+
+    lesson_id: str
+    name: str
+    description: str
+
+
+#: The pinned 5-class boundary-lesson taxonomy (pinned order = figure
+#: column order). Every :data:`INCIDENTS` entry names one class in
+#: ``lesson_class``.
+LESSON_TAXONOMY: dict[str, LessonClass] = {
+    "containment_held": LessonClass(
+        "containment_held",
+        "Containment held",
+        "An isolation boundary survived as designed: the failure stayed "
+        "inside the compartment it was built for, and the lesson is to "
+        "keep the patched boundary on a standing update cadence.",
+    ),
+    "authority_exceeded": LessonClass(
+        "authority_exceeded",
+        "Authority exceeded",
+        "Authorized access was misused: the actor acted inside a granted "
+        "permission — credentials, sanctioned agent scope, or a mediated "
+        "copy operation — rather than escaping a sandbox, so mediation "
+        "must bind what authority may do, not only where it may run.",
+    ),
+    "supply_chain": LessonClass(
+        "supply_chain",
+        "Supply chain",
+        "The vulnerable path runs through the build, dependency, or "
+        "artifact-ingestion code that introduces executable content, so "
+        "who may introduce or approve new executable code is the "
+        "load-bearing question.",
+    ),
+    "update_operations": LessonClass(
+        "update_operations",
+        "Update operations",
+        "The lesson turns on patch and update cadence: how fast fixes "
+        "reach every active environment is part of the boundary itself, "
+        "and an exhausted support window is a posture change, not a "
+        "footnote.",
+    ),
+    "cognitive_boundary": LessonClass(
+        "cognitive_boundary",
+        "Cognitive boundary",
+        "The boundary that failed is human judgment: social engineering, "
+        "pressure on maintainers, or operator improvisation is the attack "
+        "vector, so the design must assume persuasion and confusion as "
+        "first-class threats.",
+    ),
+}
 
 
 #: Pinned offensive/defensive AI capability numbers reported by the source

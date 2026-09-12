@@ -85,7 +85,7 @@ def test_config_tokens_match_canonical_constants(tmp_project):
     variables = manuscript_variables.generate_variables(
         tmp_project, require_analysis_outputs=False
     )
-    assert variables["CONFIG_VERSION"] == "0.4.0"
+    assert variables["CONFIG_VERSION"] == "0.5.0"
     assert variables["CONFIG_REVIEW_DATE"] == "2026-09-10"
     assert variables["CONFIG_FORECAST_HORIZON"] == "2028–2031"
     assert variables["CONFIG_NUM_CANDIDATES"] == "24"
@@ -105,7 +105,11 @@ def test_result_tokens_derived_from_registry_and_forecasts(tmp_project):
     )
     assert variables["RESULT_MATRIX_CELLS"] == "216"
     assert variables["RESULT_MATRIX_COVERAGE_PCT"] == "100.0"
-    assert variables["RESULT_NUM_FIGURES"] == "10"
+    # Declared figure registry: 11 entries (v0.5.0 adds fig:incidents).
+    assert variables["RESULT_NUM_FIGURES"] == str(
+        len(manuscript_variables._declared_figure_files())
+    )
+    assert variables["RESULT_NUM_FIGURES"] == "11"
 
     stance_counts = registry.stance_counts()
     assert variables["RESULT_STANCE_STRONG_COUNT"] == str(stance_counts["strong"])

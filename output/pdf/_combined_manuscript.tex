@@ -250,7 +250,7 @@ requires no kernel exploit at all, which reframes the evaluation: the
 axis of analysis is the authority a component already holds, not merely
 the difficulty of exploiting it.
 
-This revision (0.4.0) refreshes the evidence base through September 11,
+This revision (0.5.0) refreshes the evidence base through September 11,
 2026. The offensive baseline expands from four primary sources to the
 incident record now available: the NCSC assessments of January 2024 and
 May 2025, the Anthropic campaign investigation of November 2025 ---
@@ -818,6 +818,28 @@ properties this review evaluates. \\
 
 \begin{figure}
 \centering
+\includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Fourteen documented incidents and advisories placed against five boundary-lesson classes; each cell links the event to the architectural lesson it demonstrates, and marker color encodes evidentiary tier.}]{../figures/incident_lessons.png}
+\caption{Fourteen documented incidents and advisories placed against
+five boundary-lesson classes; each cell links the event to the
+architectural lesson it demonstrates, and marker color encodes
+evidentiary tier.}\label{fig:incidents}
+\end{figure}
+
+Read column-wise, fig.~\ref{fig:incidents} sorts the fourteen events
+into five boundary-lesson classes: \textbf{containment held} (the
+isolation boundary itself survived the event), \textbf{authority
+exceeded} (authorized access was misused without any exploit),
+\textbf{supply chain} (the failure traveled the build, dependency, or
+code path), \textbf{update operations} (the patch or update cadence
+failed to keep pace), and \textbf{cognitive boundary} (persuasion or
+judgment failed rather than code). The taxonomy is deliberately
+architectural --- each class names a property the evaluation framework
+of sec.~\ref{sec:evaluation_framework} interrogates --- so the incident
+record becomes testable input to the property matrix rather than a
+gallery of anecdotes.
+
+\begin{figure}
+\centering
 \includegraphics[width=1\linewidth,height=0.5\textheight,keepaspectratio,alt={Two lanes of primary evidence, January 2024 through August 2026: offensive capability and governance milestones above, platform incident and release milestones below; marker color encodes evidentiary tier, and each callout names the primary source.}]{../figures/evidence_timeline.png}
 \caption{Two lanes of primary evidence, January 2024 through August
 2026: offensive capability and governance milestones above, platform
@@ -1104,35 +1126,42 @@ statement is worth writing down because it fixes what the matrix claims
 and what it refuses to claim. Let \(C\) be the set of 24 candidates,
 \(P\) the set of 9 properties, and
 \(S = \{\textit{strong}, \textit{partial}, \textit{weak}\}\) the stance
-vocabulary. The evaluation matrix is then a single function
+vocabulary.
 
+\protect\phantomsection\label{def:stance_mapping}
+\textbf{Definition 1 (Stance mapping).} The evaluation matrix is a total
+function: every candidate--property pair receives exactly one
+qualitative stance, and n/a marks the pairs a candidate does not engage
+at its architectural level:
 \begin{equation}\protect\phantomsection\label{eq:stance_mapping}{\sigma\colon C \times P \to S \cup \{\textit{n/a}\}}\end{equation}
 
-assigning exactly one stance to each candidate--property pair. Read as a
-function, eq.~\ref{eq:stance_mapping} makes two commitments that prose
-leaves implicit. It is \textbf{total}: the pipeline refuses to emit
-figures until all 216 cells are defined, so no candidate escapes
-evaluation by omission. And it is \textbf{qualitative}: the codomain
-carries no numbers, so the matrix cannot be averaged or ranked without
-an explicit modeling step --- the step the anti-scoring stance above
-declines to supply.
+Read as a function, \hyperref[def:stance_mapping]{Definition 1} makes
+two commitments that prose leaves implicit. It is \textbf{total}: the
+pipeline refuses to emit figures until all 216 cells are defined, so no
+candidate escapes evaluation by omission. And it is
+\textbf{qualitative}: the codomain carries no numbers, so the matrix
+cannot be averaged or ranked without an explicit modeling step --- the
+step the anti-scoring stance above declines to supply.
 
 The stance words themselves carry a preference structure rather than a
 measurement scale, and the review reads them as ordered:
 
+\protect\phantomsection\label{def:stance_order}
+\textbf{Definition 2 (Stance preference order).} Stances form a
+preference order over postures: a candidate whose documented design
+earns the left-hand stance dominates a candidate that earns the
+right-hand stance \emph{on that property}:
 \begin{equation}\protect\phantomsection\label{eq:stance_order}{\textit{strong} \succ \textit{partial} \succ \textit{weak}}\end{equation}
 
-meaning that a candidate whose documented design earns the left-hand
-stance dominates a candidate that earns the right-hand stance \emph{on
-that property}. eq.~\ref{eq:stance_order} defines an ordering over
-postures, not distances between them: no arithmetic over stances is
-meaningful, and no rung is a probability. Notably, \(n_a\) does not
-appear in eq.~\ref{eq:stance_order} at all --- an unverified or
-out-of-scope cell sits outside the preference order entirely, which is
-what stops ``we could not verify'' from masquerading as ``we verified it
-is weak.'' The formal model thus encodes exactly the discipline the
-vocabulary was built for: total coverage, ordered confidence in
-documented designs, and honesty about the unverified.
+By \hyperref[def:stance_order]{Definition 2} the order fixes postures,
+not distances between them: no arithmetic over stances is meaningful,
+and no rung is a probability. Notably, \(n_a\) does not appear in
+eq.~\ref{eq:stance_order} at all --- an unverified or out-of-scope cell
+sits outside the preference order entirely, which is what stops ``we
+could not verify'' from masquerading as ``we verified it is weak.'' The
+formal model thus encodes exactly the discipline the vocabulary was
+built for: total coverage, ordered confidence in documented designs, and
+honesty about the unverified.
 
 \subsection{How the matrix is constructed and
 refreshed}\label{how-the-matrix-is-constructed-and-refreshed}
@@ -2402,6 +2431,18 @@ general-purpose options when paired with narrow service permissions,
 deliberate workload isolation, and a tested update process. \\
 \end{longtable}
 
+The section's formal backdrop is the operating-system security stack.
+Following the standard account of operating-system structure as ordered
+layers of mechanism \citep{arpaci2018}, this review models the stack as
+an ordered defense sequence:
+
+\protect\phantomsection\label{def:stack_layering}
+\textbf{Definition 3 (Operating-system stack layering).} Formally, the
+stack is a defense sequence
+\begin{equation}\protect\phantomsection\label{eq:stack_layering}{L_1 \prec L_2 \prec \cdots \prec L_8}\end{equation}
+with one design obligation: a compromise at layer \(i\) must not grant
+authority at layer \(i+1\).
+
 \subsection{Support windows are part of the
 architecture}\label{support-windows-are-part-of-the-architecture}
 
@@ -2420,18 +2461,20 @@ makes unavoidable: fleets assemble candidates with different clocks, and
 agent infrastructure spanning them inherits the shortest clock and
 loosest policy unless the operator reconciles them deliberately.
 
-Formally, the review records each candidate's support posture as a
-function
-
+\protect\phantomsection\label{def:update_window_semantics}
+\textbf{Definition 4 (Support-window semantics).} A candidate's support
+posture is its committed coverage window:
 \begin{equation}\protect\phantomsection\label{eq:update_window_semantics}{W(c) \in \mathbb{N} \cup \{\infty\}}\end{equation}
-
 where a finite value is the project's committed coverage in months and
 \(W(c) = \infty\) marks a rolling or release-relative policy rather than
-an indefinite guarantee. The reading this section carries forward is
-monotone: risk grows as the committed window is exhausted, because a
-candidate operating inside its window still converts maintenance into
-scheduled, tested operations, while one at or past the boundary converts
-them into unplanned exposure eq.~\ref{eq:update_window_semantics}.
+an indefinite guarantee.
+
+The reading this section carries forward from
+\hyperref[def:update_window_semantics]{Definition 4} is monotone: risk
+grows as the committed window is exhausted, because a candidate
+operating inside its window still converts maintenance into scheduled,
+tested operations, while one at or past the boundary converts them into
+unplanned exposure eq.~\ref{eq:update_window_semantics}.
 
 \begin{figure}
 \centering
@@ -2546,23 +2589,19 @@ assemble and replace worker environments quickly
 sandbox concerns builds, not the runtime confinement of the thing built.
 
 Viewed together, the baseline's four elements occupy a specific slice of
-a larger structure. fig.~\ref{fig:os_stack} arranges the
-operating-system security stack as eight ordered layers, from hardware
-and firmware at the top, through the hypervisor and the kernel's
-access-control primitives, down to the agent runtime and its tool
-bridge; the right-hand columns record how strongly each candidate class
-in this review covers each layer. Formally, the stack is a defense
-sequence
+the stack formalized in \hyperref[def:stack_layering]{Definition 3}.
+fig.~\ref{fig:os_stack} arranges its eight ordered layers; the
+right-hand columns record how strongly each candidate class in this
+review covers each layer.
 
-\begin{equation}\protect\phantomsection\label{eq:stack_layering}{L_1 \prec L_2 \prec \cdots \prec L_8}\end{equation}
-
-with one design obligation: a compromise at layer \(i\) must not grant
-authority at layer \(i+1\) eq.~\ref{eq:stack_layering}. The
-disposable-isolation baseline concentrates on layers four through six.
-The sandbox runtime layer --- bubblewrap, seatbelt, gVisor, jailer-style
-wrappers composing the kernel primitives of the layer above --- is where
-this section's advisory record lives: Firecracker's jailer is privileged
-host-side code with its own CVE stream
+The disposable-isolation baseline concentrates on layers four through
+six, and the obligation of \hyperref[def:stack_layering]{Definition 3}
+stands: a compromise at layer \(i\) must not grant authority at layer
+\(i+1\) eq.~\ref{eq:stack_layering}. The sandbox runtime layer ---
+bubblewrap, seatbelt, gVisor, jailer-style wrappers composing the kernel
+primitives of the layer above --- is where this section's advisory
+record lives: Firecracker's jailer is privileged host-side code with its
+own CVE stream
 \citep{firecracker_jailer_docs, firecracker_jailer_advisory}, and gVisor
 accounts for CVEs across the whole sandbox precisely because that layer
 is attack surface rather than wall \citep{gvisor_security_policy}. The
@@ -2952,15 +2991,23 @@ deployment --- behind interfaces too narrow for a persuaded component to
 abuse. This section defines that architecture: 7 trust domains, 9
 controls that hold regardless of host distribution, and an authority
 ladder that separates what an agent may do alone from what requires a
-principal outside it. The section proposes a design; it is not a claim
-about the defaults of any distribution reviewed elsewhere in this
-document. What sharpens the proposal is that the control vocabulary
-below is no longer speculative: the major shipping coding agents now
-implement versions of these controls against the same operating-system
-primitives this review's server candidates deploy, and the convergences
---- and divergences --- are documented in vendor engineering materials
-that this section cites as evidence of mechanism, not as security
-results \citep{anthropic_sandboxing, codex_sandboxing}.
+principal outside it.
+
+\protect\phantomsection\label{def:authority_ladder_order}
+\textbf{Definition 5 (Authority ladder).} The authority ladder orders an
+agent-initiated change through six rungs; agent exercise without
+external authorization is forbidden:
+\begin{equation}\protect\phantomsection\label{eq:authority_ladder_order}{\textit{propose} \prec \textit{stage} \prec \textit{authorize} \prec \textit{exercise} \prec \textit{audit} \prec \textit{revoke}}\end{equation}
+
+The section proposes a design; it is not a claim about the defaults of
+any distribution reviewed elsewhere in this document. What sharpens the
+proposal is that the control vocabulary below is no longer speculative:
+the major shipping coding agents now implement versions of these
+controls against the same operating-system primitives this review's
+server candidates deploy, and the convergences --- and divergences ---
+are documented in vendor engineering materials that this section cites
+as evidence of mechanism, not as security results
+\citep{anthropic_sandboxing, codex_sandboxing}.
 
 \subsection{Seven trust domains}\label{seven-trust-domains}
 
@@ -3052,11 +3099,16 @@ composed defense rather than a stack of independent toggles: Defense
 Composition Algebra treats layered controls as formal objects whose
 composition --- coverage interactions included, not just their count ---
 determines what an attacker must defeat \citep{cif_formal_2026}. In its
-notation, a defense over the eight mitigation classes is a composition
-of per-class layers, written as in eq.~\ref{eq:defense_composition}, and
-the set below is chosen so that each control closes a failure the others
-leave open.
+notation (\hyperref[def:defense_composition]{Definition 6}), a defense
+over the eight mitigation classes is a composition of per-class layers,
+written as in eq.~\ref{eq:defense_composition}, and the set below is
+chosen so that each control closes a failure the others leave open.
 
+\protect\phantomsection\label{def:defense_composition}
+\textbf{Definition 6 (Defense composition).} Layered controls compose
+over the eight mitigation classes as a single formal object whose
+coverage interactions --- not merely the count of layers --- determine
+what an attacker must defeat:
 \begin{equation}\protect\phantomsection\label{eq:defense_composition}{D = d_1 \circ d_2 \circ \cdots \circ d_8}\end{equation}
 
 \begin{longtable}[]{@{}
@@ -3268,17 +3320,23 @@ hinge altogether and are, in this architecture's terms, a design
 admission rather than a mode
 \citep{anthropic_sandboxing, codex_sandboxing}.
 
-\begin{equation}\protect\phantomsection\label{eq:authority_ladder_order}{\textit{propose} \prec \textit{stage} \prec \textit{authorize} \prec \textit{exercise} \prec \textit{audit} \prec \textit{revoke}}\end{equation}
-
-The authorize/exercise split is also what keeps delegated trust bounded.
-Formal treatments of agent trust bound a delegate's effective trust by
-what it was authorized to exercise rather than by what it can reach, and
-the ladder encodes that bound structurally: authorization fixes the
-scope, exercise consumes it, and no rung is reachable that lets the
-agent enlarge its own authorization \citep{cif_formal_2026}. The
-orchestration section extends the same bound across agent-to-agent
-delegation chains, where unbounded trust would otherwise amplify with
-each hop sec.~\ref{sec:orchestration}.
+The authorize/exercise split of
+\hyperref[def:authority_ladder_order]{Definition 5} is also what keeps
+delegated trust bounded, and it has a commercial-integrity ancestry:
+Clark and Wilson grounded integrity in well-formed transactions, in
+which data changes state only through a mediated operation whose form is
+certified in advance, and in separation of duty, which prevents the
+principal who certifies an operation from being the one who executes it
+\citep{clark1987}. Operation mediation and the approve/exercise split of
+this section are those controls restated for agents. Formal treatments
+of agent trust bound a delegate's effective trust by what it was
+authorized to exercise rather than by what it can reach, and the ladder
+encodes that bound structurally: authorization fixes the scope, exercise
+consumes it, and no rung is reachable that lets the agent enlarge its
+own authorization \citep{cif_formal_2026}. The orchestration section
+extends the same bound across agent-to-agent delegation chains, where
+unbounded trust would otherwise amplify with each hop
+sec.~\ref{sec:orchestration}.
 
 The trust domains, controls, and ladder compose into the scenarios of
 sec.~\ref{sec:scenarios}: a Qubes deployment realizes the domains as
@@ -4227,15 +4285,19 @@ as a matter of policy. These three rules convert the deputy from a
 trusted forwarder into a checked channel.
 
 The formal grounding for these rules is \texorpdfstring{\ensuremath{\delta}}{delta}-bounded delegation
-(eq.~\ref{eq:delegation_bound}): each hop in an agent-to-agent chain is
-permitted to narrow the authority it passes, never to widen it, so trust
-cannot amplify across a delegation chain no matter how many
-intermediaries it traverses \citep{cif_formal_2026}. That formal model
-is not left as a statement of intent --- its bounded-delegation and
-trust-boundedness properties have been exercised computationally, with
-implementations validating the no-amplification guarantee on constructed
-delegation scenarios \citep{cif_validation_2026}.
+(\hyperref[def:delegation_bound]{Definition 7}): each hop in an
+agent-to-agent chain is permitted to narrow the authority it passes,
+never to widen it, so trust cannot amplify across a delegation chain no
+matter how many intermediaries it traverses \citep{cif_formal_2026}. The
+bound of eq.~\ref{eq:delegation_bound} is not left as a statement of
+intent --- its bounded-delegation and trust-boundedness properties have
+been exercised computationally, with implementations validating the
+no-amplification guarantee on constructed delegation scenarios
+\citep{cif_validation_2026}.
 
+\protect\phantomsection\label{def:delegation_bound}
+\textbf{Definition 7 (\texorpdfstring{\ensuremath{\delta}}{delta}-bounded delegation).} For a delegation chain
+a\texorpdfstring{\ensuremath{\to}}{->}b\texorpdfstring{\ensuremath{\to}}{->}c, trust does not amplify:
 \begin{equation}\protect\phantomsection\label{eq:delegation_bound}{\mathrm{trust}(a \to c) \le \delta \cdot \mathrm{trust}(a \to b)}\end{equation}
 
 \begin{figure}
@@ -4499,9 +4561,14 @@ describes.
 tbl.~\ref{tbl:invariants} states the review invariants: what an agent
 must never be able to do, the failure each invariant closes, and where
 enforcement must live. Formally, each invariant is an unreachable-state
-predicate (eq.~\ref{eq:invariant_predicate}): no state reachable from
-agent-writable configuration may violate an invariant.
+predicate (\hyperref[def:invariant_predicate]{Definition 8}): no state
+reachable from agent-writable configuration may violate an invariant
+eq.~\ref{eq:invariant_predicate}.
 
+\protect\phantomsection\label{def:invariant_predicate}
+\textbf{Definition 8 (Invariant predicate).} Each review invariant
+\(\iota_i\) is an unreachable-state predicate --- no state reachable
+from agent-writable configuration may violate it:
 \begin{equation}\protect\phantomsection\label{eq:invariant_predicate}{\forall g \in G_{\mathrm{agent}}\colon \neg\,\mathrm{reachable}(g, \mathrm{violate}(\iota_i))}\end{equation}
 
 \begin{longtable}[]{@{}
@@ -4570,7 +4637,13 @@ are capability invariants, not instruction invariants. A well-prompted
 agent and a compromised agent must be equally unable to violate them,
 because the authorized-misuse path does not distinguish persuasion from
 compromise at the enforcement layer. An invariant that holds only while
-the agent behaves is not an invariant; it is a preference.
+the agent behaves is not an invariant; it is a preference. Biba's
+integrity model gives the principle its classical form: a subject may
+not write to an object at a higher integrity level \citep{biba1977} ---
+agent-writable configuration is the low-integrity subject, the policy
+surface that authorizes the system's behavior is the high-integrity
+object, and generation-is-not-authorization is precisely the prohibition
+on that write-up.
 
 \subsection{Separating policy writing, policy approval, and permission
 exercise}\label{separating-policy-writing-policy-approval-and-permission-exercise}
@@ -5187,7 +5260,7 @@ The prospectus is therefore specific about what to build next:
   independently authorized before deployment.
 \end{itemize}
 
-The 10 figures and the underlying analysis artifacts are reproducible
+The 11 figures and the underlying analysis artifacts are reproducible
 from the repository's own pipeline, because a prospectus about
 independently rebuildable environments should be one. The composition
 that matters is not any single system. It is the set of boundaries an
@@ -5202,11 +5275,11 @@ rewards.
 \section{References}\label{sec:references}
 
 The bibliography is generated by Pandoc--natbib from
-\texttt{references.bib} --- 161 entries comprising primary vendor
-documentation, security advisories, incident reports, standards-body
-specifications and guidance, scholarly anchors, and the author's
-cognitive-security research works published on Zenodo; no entries are
-listed by hand.
+\texttt{references.bib} --- 164 entries (155 source-derived plus 9
+scholarly) comprising primary vendor documentation, security advisories,
+incident reports, standards-body specifications and guidance, scholarly
+anchors, and the author's cognitive-security research works published on
+Zenodo; no entries are listed by hand.
 
 
 

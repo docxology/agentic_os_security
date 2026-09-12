@@ -43,6 +43,10 @@ Discussions of agentic risk routinely over-extrapolate from thin evidence, so th
 | CISA-led Five-Eyes adoption guidance [@cisa_agentic_guidance] | April 2026 guidance for organizations adopting agentic AI services: sandboxed deployment, low-risk tasks first, threat-model-based evaluations, and red-teaming before production use. | Inter-agency governance posture, not a measurement. Its prescriptions — sandboxing, staged authority, adversarial testing — map directly onto the properties this review evaluates. |
 : The offensive-AI evidence baseline, 2024–2026: documented findings with evidentiary status and caveats. {#tbl:offensive_evidence}
 
+![Fourteen documented incidents and advisories placed against five boundary-lesson classes; each cell links the event to the architectural lesson it demonstrates, and marker color encodes evidentiary tier.](../output/figures/incident_lessons.png){#fig:incidents width=100%}
+
+Read column-wise, [@fig:incidents] sorts the fourteen events into five boundary-lesson classes: **containment held** (the isolation boundary itself survived the event), **authority exceeded** (authorized access was misused without any exploit), **supply chain** (the failure traveled the build, dependency, or code path), **update operations** (the patch or update cadence failed to keep pace), and **cognitive boundary** (persuasion or judgment failed rather than code). The taxonomy is deliberately architectural — each class names a property the evaluation framework of [@sec:evaluation_framework] interrogates — so the incident record becomes testable input to the property matrix rather than a gallery of anecdotes.
+
 ![Two lanes of primary evidence, January 2024 through August 2026: offensive capability and governance milestones above, platform incident and release milestones below; marker color encodes evidentiary tier, and each callout names the primary source.](../output/figures/evidence_timeline.png){#fig:evidence_timeline width=100%}
 
 ### What the incident record actually shows

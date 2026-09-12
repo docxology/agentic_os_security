@@ -1,4 +1,4 @@
-"""Figure orchestration: each of the ten registry generators plus the
+"""Figure orchestration: each of the eleven registry generators plus the
 cover graphical abstract writes its PNG (exists, >10KB), and two
 consecutive full generation runs are byte-identical given the same inputs
 (determinism contract).
@@ -18,6 +18,7 @@ from agentic_os_security.figures import (
     generate_evidence_timeline,
     generate_forecast_horizon,
     generate_graphical_abstract,
+    generate_incidents,
     generate_orchestration_boundaries,
     generate_property_matrix,
     generate_trust_domains,
@@ -26,6 +27,7 @@ from agentic_os_security.figures import (
 )
 
 FIGURE_REGISTRY = {
+    "incidents": "incident_lessons.png",
     "evidence_timeline": "evidence_timeline.png",
     "property_matrix": "property_matrix.png",
     "defensive_stack": "defensive_stack.png",
@@ -46,6 +48,7 @@ GENERATOR_FILENAMES = {
 
 
 GENERATORS = {
+    "incidents": generate_incidents,
     "evidence_timeline": generate_evidence_timeline,
     "property_matrix": generate_property_matrix,
     "defensive_stack": generate_defensive_stack,
@@ -56,7 +59,7 @@ GENERATORS = {
     "forecast_horizon": generate_forecast_horizon,
     "update_windows": generate_update_windows,
     "os_stack": generate_os_stack,
-    # The cover graphical abstract: an eleventh generator that is
+    # The cover graphical abstract: a twelfth generator that is
     # deliberately NOT a manuscript figure registry entry.
     "graphical_abstract": generate_graphical_abstract,
 }
@@ -71,13 +74,39 @@ def test_generator_produces_registered_png(tmp_project, name):
     assert expected.stat().st_size > 10_000, f"{expected.name} suspiciously small"
 
 
-def test_all_eleven_figures_present_after_full_generation(tmp_project):
+def test_all_twelve_figures_present_after_full_generation(tmp_project):
     for name, generator in GENERATORS.items():
         generator(tmp_project)
     figures_dir = project_paths.figures_dir(tmp_project)
     produced = {p.name for p in figures_dir.glob("*.png")}
     expected = set(FIGURE_REGISTRY.values()) | {"graphical_abstract.png"}
     assert produced == expected
+
+
+def test_registry_has_eleven_entries_and_renumbered_figure_ids(tmp_project):
+    """The manuscript figure registry carries 11 entries whose figure_ids
+    match the pinned v0.5.0 appearance order (incidents=001 ... forecast
+    horizon=011); the cover stays outside it."""
+    from agentic_os_security.analysis.pipeline import _FIGURE_REGISTRY
+
+    assert len(_FIGURE_REGISTRY) == 11
+    expected_order = [
+        ("incidents", "figure_001"),
+        ("evidence_timeline", "figure_002"),
+        ("property_matrix", "figure_003"),
+        ("defensive_stack", "figure_004"),
+        ("trust_domains", "figure_005"),
+        ("authority_ladder", "figure_006"),
+        ("update_windows", "figure_007"),
+        ("os_stack", "figure_008"),
+        ("orchestration_boundaries", "figure_009"),
+        ("agent_surface", "figure_010"),
+        ("forecast_horizon", "figure_011"),
+    ]
+    for name, figure_id in expected_order:
+        assert _FIGURE_REGISTRY[name]["figure_id"] == figure_id, name
+    assert "graphical_abstract" not in _FIGURE_REGISTRY
+    assert set(_FIGURE_REGISTRY) == set(FIGURE_REGISTRY)
 
 
 def _hash_tree(root):

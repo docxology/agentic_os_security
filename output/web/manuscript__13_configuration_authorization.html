@@ -720,13 +720,20 @@ describes.</p>
 data-cites="tbl:invariants">[@tbl:invariants]</span> states the review
 invariants: what an agent must never be able to do, the failure each
 invariant closes, and where enforcement must live. Formally, each
-invariant is an unreachable-state predicate (<span class="citation"
-data-cites="eq:invariant_predicate">[@eq:invariant_predicate]</span>):
-no state reachable from agent-writable configuration may violate an
-invariant.</p>
-<p><span class="math display">\[\forall g \in G_{\mathrm{agent}}\colon
-\neg\,\mathrm{reachable}(g, \mathrm{violate}(\iota_i))\]</span>
-{#eq:invariant_predicate}</p>
+invariant is an unreachable-state predicate (<a
+href="#def:invariant_predicate">Definition 1</a>): no state reachable
+from agent-writable configuration may violate an invariant <span
+class="citation"
+data-cites="eq:invariant_predicate">[@eq:invariant_predicate]</span>.</p>
+<div id="def:invariant_predicate" class="definition"
+title="Invariant predicate">
+<p><strong>Definition 1 (Invariant predicate).</strong> Each review
+invariant <span class="math inline">\(\iota_i\)</span> is an
+unreachable-state predicate — no state reachable from agent-writable
+configuration may violate it: <span class="math display">\[\forall g \in
+G_{\mathrm{agent}}\colon \neg\,\mathrm{reachable}(g,
+\mathrm{violate}(\iota_i))\]</span> {#eq:invariant_predicate}</p>
+</div>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The 9 configuration review invariants: the capability closed, the failure each prevents, and the enforcement point"><table id="tbl:invariants" data-responsive-table="true">
 <caption>The 9 configuration review invariants: the capability closed,
 the failure each prevents, and the enforcement point</caption>
@@ -809,7 +816,12 @@ well-prompted agent and a compromised agent must be equally unable to
 violate them, because the authorized-misuse path does not distinguish
 persuasion from compromise at the enforcement layer. An invariant that
 holds only while the agent behaves is not an invariant; it is a
-preference.</p>
+preference. Biba’s integrity model gives the principle its classical
+form: a subject may not write to an object at a higher integrity level
+[biba1977] — agent-writable configuration is the low-integrity subject,
+the policy surface that authorizes the system’s behavior is the
+high-integrity object, and generation-is-not-authorization is precisely
+the prohibition on that write-up.</p>
 <h2
 id="separating-policy-writing-policy-approval-and-permission-exercise">Separating
 policy writing, policy approval, and permission exercise</h2>

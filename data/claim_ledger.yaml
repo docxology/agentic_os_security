@@ -191,8 +191,8 @@ claims:
 
   - claim_id: bib-entry-count
     kind: number
-    value: 161
-    source: manuscript/references.bib entry count (155 source-derived + 6
+    value: 164
+    source: manuscript/references.bib entry count (155 source-derived + 9
       scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md
     source_tier: manuscript_claim
     freshness: active
@@ -699,3 +699,32 @@ claims:
     source_tier: generated_metric
     freshness: active
     artifact_path: src/agentic_os_security/stack.py
+
+  # v0.5.0 structured-expansion claims (registered 2026-09-11). Values
+  # come from the approved-numbers list (definition-blocks 8,
+  # lesson-taxonomy 5, candidate-basis-rows 24); artifact_path values
+  # carry no # fragments.
+
+  - claim_id: definition-blocks
+    kind: number
+    value: 8
+    source: agentic_os_security.formal.DEFINITION_BLOCKS
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/formal.py
+
+  - claim_id: lesson-taxonomy
+    kind: number
+    value: 5
+    source: agentic_os_security.evidence.LESSON_TAXONOMY
+    source_tier: project_source
+    freshness: active
+    artifact_path: src/agentic_os_security/evidence.py
+
+  - claim_id: candidate-basis-rows
+    kind: number
+    value: 24
+    source: agentic_os_security.basis.CANDIDATE_BASIS
+    source_tier: generated_metric
+    freshness: active
+    artifact_path: src/agentic_os_security/basis.py

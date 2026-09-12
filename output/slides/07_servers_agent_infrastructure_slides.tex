@@ -371,6 +371,22 @@ general-purpose options when paired with narrow service permissions,
 deliberate workload isolation, and a tested update process. \\
 \bottomrule\noalign{}
 \end{longtable}
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Servers and Agent-Execution
+Infrastructure: The Disposable-Isolation Baseline and the
+Operating-System Stack}
+The section's formal backdrop is the operating-system security stack.
+Following the standard account of operating-system structure as ordered
+layers of mechanism (Arpaci-Dusseau and Arpaci-Dusseau 2018), this
+review models the stack as an ordered defense sequence:
+
+\protect\phantomsection\label{def:stack_layering}
+Formally, the stack is a defense sequence
+\begin{equation}\protect\phantomsection\label{eq:stack_layering}{L_1 \prec L_2 \prec \cdots \prec L_8}\end{equation}
+with one design obligation: a compromise at layer \(i\) must not grant
+authority at layer \(i+1\).
 \end{frame}
 
 \subsection{Support windows are part of the
@@ -397,18 +413,19 @@ deliberately.
 \begin{frame}[allowframebreaks]{Support windows are part of the
 architecture}
 
-Formally, the review records each candidate's support posture as a
-function
-
+\protect\phantomsection\label{def:update_window_semantics}
+A candidate's support posture is its committed coverage window:
 \begin{equation}\protect\phantomsection\label{eq:update_window_semantics}{W(c) \in \mathbb{N} \cup \{\infty\}}\end{equation}
-
 where a finite value is the project's committed coverage in months and
 \(W(c) = \infty\) marks a rolling or release-relative policy rather than
-an indefinite guarantee. The reading this section carries forward is
-monotone: risk grows as the committed window is exhausted, because a
-candidate operating inside its window still converts maintenance into
-scheduled, tested operations, while one at or past the boundary converts
-them into unplanned exposure eq.~\ref{eq:update_window_semantics}.
+an indefinite guarantee.
+
+The reading this section carries forward from
+(\textbf{def:update\_window\_semantics?}) is monotone: risk grows as the
+committed window is exhausted, because a candidate operating inside its
+window still converts maintenance into scheduled, tested operations,
+while one at or past the boundary converts them into unplanned exposure
+eq.~\ref{eq:update_window_semantics}.
 
 \end{frame}
 
@@ -556,45 +573,41 @@ sec.~6 establishes, its sandbox concerns builds, not the
 runtime confinement of the thing built.
 
 Viewed together, the baseline's four elements occupy a specific slice of
-a larger structure. fig.~\ref{fig:os_stack} arranges the
-operating-system security stack as eight ordered layers, from hardware
-and firmware at the top, through the hypervisor and the kernel's
-access-control primitives, down to the agent runtime and its tool
-bridge; the right-hand columns record how strongly each candidate class
-in this review covers each layer. Formally, the stack is a defense
-sequence
+the stack formalized in (\textbf{def:stack\_layering?}).
+fig.~\ref{fig:os_stack} arranges its eight ordered layers; the
+right-hand columns record how strongly each candidate class in this
+review covers each layer.
 
+The disposable-isolation baseline concentrates on layers four through
+six, and the obligation of (\textbf{def:stack\_layering?}) stands: a
+compromise at layer \(i\) must not grant authority at layer \(i+1\)
+eq.~\ref{eq:stack_layering}. The sandbox runtime layer --- bubblewrap,
+seatbelt, gVisor, jailer-style wrappers composing the kernel primitives
+of the layer above --- is where this section's advisory record lives:
+Firecracker's jailer is privileged host-side code with its own CVE
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Agent-execution isolation: what
 the deployed evidence shows}
-\begin{equation}\protect\phantomsection\label{eq:stack_layering}{L_1 \prec L_2 \prec \cdots \prec L_8}\end{equation}
-
-with one design obligation: a compromise at layer \(i\) must not grant
-authority at layer \(i+1\) eq.~\ref{eq:stack_layering}. The
-disposable-isolation baseline concentrates on layers four through six.
-The sandbox runtime layer --- bubblewrap, seatbelt, gVisor, jailer-style
-wrappers composing the kernel primitives of the layer above --- is where
-this section's advisory record lives: Firecracker's jailer is privileged
-host-side code with its own CVE stream (Firecracker Project 2026;
-Services 2026), and gVisor accounts for CVEs across the whole sandbox
-precisely because that layer is attack surface rather than wall (gVisor
-Project 2026a). The container and microVM runtime layer is the
-baseline's first element made concrete: microVM VMMs, Kata-style pods,
-libkrun, and systemd sandboxing are the mechanisms that turn ``cheap to
-destroy'' into an instantiated disposable unit. The update and
-provisioning layer keeps those runtimes honest over time --- A/B atomic
+stream (Firecracker Project 2026; Services 2026), and gVisor accounts
+for CVEs across the whole sandbox precisely because that layer is attack
+surface rather than wall (gVisor Project 2026a). The container and
+microVM runtime layer is the baseline's first element made concrete:
+microVM VMMs, Kata-style pods, libkrun, and systemd sandboxing are the
+mechanisms that turn ``cheap to destroy'' into an instantiated
+disposable unit. The update and provisioning layer keeps those runtimes
+honest over time --- A/B atomic replacement, transactional-update,
+reproducible and signed updates --- the discipline Bottlerocket
+documents for its host and Fedora CoreOS and MicroOS implement for
+theirs (Bottlerocket 2026; Fedora Project 2026a; {openSUSE} 2026). Read
+in this order, the baseline is not a substitute for the stack; it is a
+demand that these layers exist, are patched, and are composed so that a
+compromise in the agent runtime inherits nothing from the layers beneath
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Agent-execution isolation: what
 the deployed evidence shows}
-replacement, transactional-update, reproducible and signed updates ---
-the discipline Bottlerocket documents for its host and Fedora CoreOS and
-MicroOS implement for theirs (Bottlerocket 2026; Fedora Project 2026a;
-{openSUSE} 2026). Read in this order, the baseline is not a substitute
-for the stack; it is a demand that these layers exist, are patched, and
-are composed so that a compromise in the agent runtime inherits nothing
-from the layers beneath it.
+it.
 
 \end{frame}
 

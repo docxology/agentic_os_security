@@ -3,4 +3,4 @@
 \beamer@subsectionintoc {1}{2}{Two distinct paths to harm}{4}{0}{1}
 \beamer@subsectionintoc {1}{3}{Adversary baseline}{9}{0}{1}
 \beamer@subsectionintoc {1}{4}{The offensive-AI evidence baseline}{14}{0}{1}
-\beamer@subsectionintoc {1}{5}{Capability-forecast discipline}{26}{0}{1}
+\beamer@subsectionintoc {1}{5}{Capability-forecast discipline}{28}{0}{1}

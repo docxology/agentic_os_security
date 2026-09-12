@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 15:46
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  11 SEP 2026 18:19
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1652,31 +1652,26 @@ put/slides/03_evaluation_framework_slides.vrb) [11
 
 ]
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 420.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 417.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.18091pt on input line 420.
+(Font)              scaled to size 6.18091pt on input line 417.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 5.15076pt on input line 420.
+(Font)              scaled to size 5.15076pt on input line 417.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.18155pt on input line 420.
+(Font)              scaled to size 6.18155pt on input line 417.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 5.15129pt on input line 420.
+(Font)              scaled to size 5.15129pt on input line 417.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.18036pt on input line 420.
+(Font)              scaled to size 6.18036pt on input line 417.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.1503pt on input line 420.
+(Font)              scaled to size 5.1503pt on input line 417.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 420.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 417.
  [12
 
 ] [13
 
-]
-\openout4 = `03_evaluation_framework_slides.vrb'.
-
-
-(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [14
+] [14
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
@@ -1690,17 +1685,17 @@ put/slides/03_evaluation_framework_slides.vrb) [15
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb
-File: ../figures/property_matrix.png Graphic file (type bmp)
-<../figures/property_matrix.png>
-) [16
+put/slides/03_evaluation_framework_slides.vrb) [16
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [17
+put/slides/03_evaluation_framework_slides.vrb
+File: ../figures/property_matrix.png Graphic file (type bmp)
+<../figures/property_matrix.png>
+) [17
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
@@ -1721,28 +1716,35 @@ put/slides/03_evaluation_framework_slides.vrb) [19
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/03_evaluation_framework_slides.vrb) [20
+
+]
+\openout4 = `03_evaluation_framework_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
 put/slides/03_evaluation_framework_slides.vrb
 File: ../figures/defensive_stack.png Graphic file (type bmp)
 <../figures/defensive_stack.png>
-) [20
+) [21
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [21
-
-] [22
+put/slides/03_evaluation_framework_slides.vrb) [22
 
 ] [23
 
+] [24
+
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [24
+put/slides/03_evaluation_framework_slides.vrb) [25
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
@@ -1756,9 +1758,9 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
 (Font)              scaled to size 9.27232pt on input line 5.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 9.27054pt on input line 5.
-) [25
+) [26
 
-] [26
+] [27
 
 
 ]
@@ -1766,7 +1768,7 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [27
+put/slides/03_evaluation_framework_slides.vrb) [28
 
 ]
 \tf@nav=\write5
@@ -1787,13 +1789,13 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32564 strings out of 468168
- 653825 string characters out of 5432815
+ 32568 strings out of 468168
+ 653879 string characters out of 5432815
  1200428 words of memory out of 5000000
- 60674 multiletter control sequences out of 15000+600000
+ 60678 multiletter control sequences out of 15000+600000
  634225 words of font info for 99 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1116b,726s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/03_evaluation_framework_slides.pdf (27 pages).
+c_os_security/output/slides/03_evaluation_framework_slides.pdf (28 pages).

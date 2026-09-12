@@ -1,6 +1,6 @@
-"""Figure generators: the ten registry manuscript figures plus the cover
-graphical abstract (which carries no ``{#fig:...}`` label and is not part
-of the manuscript figure registry).
+"""Figure generators: the eleven registry manuscript figures plus the
+cover graphical abstract (which carries no ``{#fig:...}`` label and is not
+part of the manuscript figure registry).
 
 Every generator takes ``project_root`` and returns the written PNG path
 (under ``output/figures/``).  All figures are 300 dpi, colorblind-safe, and
@@ -26,11 +26,13 @@ from .defensive_stack import generate_defensive_stack
 from .evidence_timeline import generate_evidence_timeline
 from .forecast_horizon import generate_forecast_horizon
 from .graphical_abstract import generate_graphical_abstract
+from .incident_lessons import generate_incidents
 from .orchestration_boundaries import generate_orchestration_boundaries
 from .os_stack import generate_os_stack
 from .property_matrix import generate_property_matrix
 from .trust_domains import generate_trust_domains
 from .update_windows import generate_update_windows
+
 
 __all__ = [
     "apply_style",
@@ -44,8 +46,8 @@ __all__ = [
     "CATEGORY_LABELS",
     "DETERMINISTIC_RC",
     "FigureSpec",
+    "generate_incidents",
     "generate_evidence_timeline",
-    "generate_property_matrix",
     "generate_defensive_stack",
     "generate_trust_domains",
     "generate_authority_ladder",
