@@ -389,6 +389,35 @@ def generate_graphical_abstract(project_root: Path | str) -> Path:
     _arrow(ax, 2.20, 5.75, 2.54, 6.05, _MISUSE)
     _arrow(ax, 5.20, 5.90, 5.44, 5.90, _ACCENT)
     _arrow(ax, 7.40, zone_bottom, 7.40, 1.78, _COMPOSE)
+    # --- Stance color legend (full-word labels, no letter codes). ---
+    legend_items = (
+        ("strong", "strong"),
+        ("partial", "partial"),
+        ("weak", "weak"),
+        ("n_a", "not assessed"),
+    )
+    legend_x = 0.90
+    for stance_key, label in legend_items:
+        ax.add_patch(
+            Rectangle(
+                (legend_x, 1.80),
+                0.30,
+                0.18,
+                facecolor=STANCE_COLORS[stance_key],
+                edgecolor=_SOFT,
+                linewidth=0.6,
+            )
+        )
+        ax.text(
+            legend_x + 0.42,
+            1.89,
+            ascii_text(label),
+            fontsize=12.5,
+            ha="left",
+            va="center",
+            color=_INK,
+        )
+        legend_x += 1.52
 
     # --- Bottom band: the composition thesis (y 0.30 - 1.72, full width). ---
     _chip(ax, 0.28, 0.30, 9.04, 1.42, "#E9F5F0", _COMPOSE, lw=2.0)

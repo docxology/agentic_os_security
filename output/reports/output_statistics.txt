@@ -8,21 +8,21 @@ Inventory Scope: stage5-delivery-mirror
 Inventory Root: output/working/agentic_os_security
 
 Total Files: 87
-Total Size: 16.51 MB
+Total Size: 16.54 MB
 
 Files by Category:
-  • pdf: 1 files (3.89 MB)
+  • pdf: 1 files (3.90 MB)
   • web: 21 files (1.16 MB)
   • slides: 18 files (3.76 MB)
-  • figures: 13 files (3.46 MB)
+  • figures: 13 files (3.47 MB)
   • data: 11 files (0.06 MB)
   • reports: 1 files (0.00 MB)
   • manuscript: 21 files (0.30 MB)
-  • root: 1 files (3.89 MB)
+  • root: 1 files (3.90 MB)
 
 Largest Files:
-  • agentic_os_security_combined.pdf: 3.89 MB (root)
-  • agentic_os_security_combined.pdf: 3.89 MB (pdf)
+  • agentic_os_security_combined.pdf: 3.90 MB (root)
+  • agentic_os_security_combined.pdf: 3.90 MB (pdf)
   • 03_evaluation_framework_slides.pdf: 0.71 MB (slides)
   • 07_servers_agent_infrastructure_slides.pdf: 0.70 MB (slides)
   • 12_orchestration_security_slides.pdf: 0.62 MB (slides)

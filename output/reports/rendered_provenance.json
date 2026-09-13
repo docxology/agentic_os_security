@@ -2,7 +2,7 @@
   "consumed_manuscript": [
     {
       "rendered_path": "output/manuscript/00_abstract.md",
-      "rendered_sha256": "bcaacae0311ae95f68d9878a3cfbb90fac97970709ff72c36cff8d134e182936",
+      "rendered_sha256": "7ce48fac1fc32e822e96d4edd844108a180db829af70565b6ae27a25d531448d",
       "source_path": "manuscript/00_abstract.md",
       "source_sha256": "5a49674cb781e050efc86c1f1471b156830fefdb732df4776aacdbe68983de00"
     },
@@ -112,22 +112,22 @@
   "evidence_files": {
     "artifact_manifest": {
       "path": "output/reports/artifact_manifest.json",
-      "sha256": "386e6326f8278cbdf7fe876fd5a814f5a8d88c99b1f30681251be8a9c4ad8d1f",
+      "sha256": "806e1834473ebb67770584b99c6cea0ea5c93cf5d116ef7b69bf2b9488a64aa2",
       "size_bytes": 26263
     },
     "combined_manuscript": {
       "path": "output/web/_combined_manuscript.md",
-      "sha256": "3ec34104f8cd749a49981016b8847c89e6e8b20a376f1e909dc5a24745e2a016",
+      "sha256": "30e82adf0da39b950ff19f64ff89289e381f96ca5fc478b28c574d8b0f167ac9",
       "size_bytes": 260214
     },
     "composition_manifest": {
       "path": "output/reports/manuscript_composition.json",
-      "sha256": "cfb9b9d0ff194109575ffac8d8144c9b3fc309348796abbdd47b3c62e3a394e2",
+      "sha256": "91b054ed1e140900c630e250a943dc06368d7e2dc51ad58cad18c833a0574d41",
       "size_bytes": 4263
     },
     "validation_report": {
       "path": "output/reports/validation_report.json",
-      "sha256": "b7e46f857a93b5fa7d8d804105f421609e6347ff33187372629e75eba6365237",
+      "sha256": "8e2d380b2ead24ee8f1e227dc431e5cf396e8f0f872a1b77acb620ac69b2c778",
       "size_bytes": 16179
     }
   },
@@ -135,19 +135,19 @@
   "fingerprints": {
     "config": {
       "file_count": 18,
-      "sha256": "c093f14497d233620b8cea1de2c5cb2225d0a33c7a6304412f8cb043522d1851"
+      "sha256": "c3cae440f55a5ad9db83db3b908edb72b4f3c3de4f23f481405f94a816466099"
     },
     "output": {
       "file_count": 86,
-      "sha256": "4d55b65a388f2d4d69ba04ca2f97e16b45caac2ef02f2b01d64fcc4a0eddb87a"
+      "sha256": "453ff4d031a0e8322dc6cca584862ef53df565e1f587a4920d66e2049ca125b5"
     },
     "source": {
-      "file_count": 56,
-      "sha256": "b788fef5b36152f17e7cedabb12277cfd57adbfd7c3b5d59d771d26a3bff2ddc"
+      "file_count": 58,
+      "sha256": "c990d0a27227610fbc08ce9985a22a5fd12d412c26508ff8f89d07f74f42a046"
     },
     "stage": {
       "file_count": 1336,
-      "sha256": "79accdb995c84922dd6d39ef1a7e0a8248aef3205d4caf9c6e85590e6e6e92e9"
+      "sha256": "a015786be9285185524f605137c4b587cfb1550e5f7c665f4c4f46b490472481"
     }
   },
   "project": "working/agentic_os_security",
