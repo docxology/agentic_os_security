@@ -167,7 +167,7 @@ claims:
 
   - claim_id: num_figures
     kind: number
-    value: 9
+    value: 11
     source: manuscript/config.yaml experiment.figure_registry
     source_tier: manuscript_claim
     freshness: active
@@ -191,8 +191,8 @@ claims:
 
   - claim_id: bib-entry-count
     kind: number
-    value: 164
-    source: manuscript/references.bib entry count (155 source-derived + 9
+    value: 168
+    source: manuscript/references.bib entry count (155 source-derived + 13
       scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md
     source_tier: manuscript_claim
     freshness: active

@@ -1,17 +1,17 @@
 {
   "claim_boundary": "Compact evidence summary for manuscript validation; full fact dumps are opt-in debug output.",
-  "fact_count": 880,
+  "fact_count": 885,
   "freshness_warnings": [],
   "kind_counts": {
-    "artifact": 85,
-    "citation": 164,
+    "artifact": 86,
+    "citation": 168,
     "equation": 26,
     "figure": 47,
     "number": 479,
     "section": 54,
     "table": 25
   },
-  "omitted_fact_count": 680,
+  "omitted_fact_count": 685,
   "sample_facts": [
     {
       "active": true,
@@ -965,18 +965,6 @@
       "active": true,
       "checked_at": "2026-09-11T18:43:33Z",
       "kind": "number",
-      "source": "data/claim_ledger.yaml:$.claims[18].value",
-      "source_field": "$.claims[18].value",
-      "source_path": "data/claim_ledger.yaml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "9"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
       "source": "output/data/evidence_summary.json:$.source_tier_counts.incident_report",
       "source_field": "$.source_tier_counts.incident_report",
       "source_path": "output/data/evidence_summary.json",
@@ -1035,18 +1023,6 @@
     },
     {
       "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "manuscript/config.yaml experiment.figure_registry",
-      "source_field": "num_figures",
-      "source_path": "manuscript/config.yaml",
-      "source_tier": "manuscript_claim",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "9"
-    },
-    {
-      "active": true,
       "checked_at": "2026-09-11T00:41:05Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[11].value (numeric variant)",
@@ -1075,18 +1051,6 @@
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[15].value (numeric variant)",
       "source_field": "$.claims[15].value",
-      "source_path": "data/claim_ledger.yaml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.09"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "data/claim_ledger.yaml:$.claims[18].value (numeric variant)",
-      "source_field": "$.claims[18].value",
       "source_path": "data/claim_ledger.yaml",
       "source_tier": "configuration",
       "stale": false,
@@ -1149,18 +1113,6 @@
       "source_field": "num_configuration_invariants",
       "source_path": "src/agentic_os_security/trust_domains.py",
       "source_tier": "project_source",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "0.09"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "manuscript/config.yaml experiment.figure_registry (numeric variant)",
-      "source_field": "num_figures",
-      "source_path": "manuscript/config.yaml",
-      "source_tier": "manuscript_claim",
       "stale": false,
       "tolerance": 0.0,
       "value": "0.09"
@@ -1935,7 +1887,79 @@
     },
     {
       "active": true,
-      "checked_at": "2026-09-12T01:22:07Z",
+      "checked_at": "2026-09-13T23:18:00Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[18].value",
+      "source_field": "$.claims[18].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "11"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-13T23:18:00Z",
+      "kind": "number",
+      "source": "output/reports/manuscript_composition.json:$.ordered_inputs[10].ordinal",
+      "source_field": "$.ordered_inputs[10].ordinal",
+      "source_path": "output/reports/manuscript_composition.json",
+      "source_tier": "generated_metric",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "11"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-13T23:18:01Z",
+      "kind": "number",
+      "source": "manuscript/config.yaml experiment.figure_registry",
+      "source_field": "num_figures",
+      "source_path": "manuscript/config.yaml",
+      "source_tier": "manuscript_claim",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "11"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-13T23:18:00Z",
+      "kind": "number",
+      "source": "data/claim_ledger.yaml:$.claims[18].value (numeric variant)",
+      "source_field": "$.claims[18].value",
+      "source_path": "data/claim_ledger.yaml",
+      "source_tier": "configuration",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.11"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-13T23:18:00Z",
+      "kind": "number",
+      "source": "output/reports/manuscript_composition.json:$.ordered_inputs[10].ordinal (numeric variant)",
+      "source_field": "$.ordered_inputs[10].ordinal",
+      "source_path": "output/reports/manuscript_composition.json",
+      "source_tier": "generated_metric",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.11"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-13T23:18:01Z",
+      "kind": "number",
+      "source": "manuscript/config.yaml experiment.figure_registry (numeric variant)",
+      "source_field": "num_figures",
+      "source_path": "manuscript/config.yaml",
+      "source_tier": "manuscript_claim",
+      "stale": false,
+      "tolerance": 0.0,
+      "value": "0.11"
+    },
+    {
+      "active": true,
+      "checked_at": "2026-09-13T23:18:00Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[21].value",
       "source_field": "$.claims[21].value",
@@ -1943,23 +1967,23 @@
       "source_tier": "configuration",
       "stale": false,
       "tolerance": 0.0,
-      "value": "164"
+      "value": "168"
     },
     {
       "active": true,
-      "checked_at": "2026-09-12T01:22:07Z",
+      "checked_at": "2026-09-13T23:18:01Z",
       "kind": "number",
-      "source": "manuscript/references.bib entry count (155 source-derived + 9 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md",
+      "source": "manuscript/references.bib entry count (155 source-derived + 13 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md",
       "source_field": "bib-entry-count",
       "source_path": "manuscript/references.bib",
       "source_tier": "manuscript_claim",
       "stale": false,
       "tolerance": 0.0,
-      "value": "164"
+      "value": "168"
     },
     {
       "active": true,
-      "checked_at": "2026-09-12T01:22:07Z",
+      "checked_at": "2026-09-13T23:18:00Z",
       "kind": "number",
       "source": "data/claim_ledger.yaml:$.claims[21].value (numeric variant)",
       "source_field": "$.claims[21].value",
@@ -1967,19 +1991,19 @@
       "source_tier": "configuration",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.64"
+      "value": "1.68"
     },
     {
       "active": true,
-      "checked_at": "2026-09-12T01:22:07Z",
+      "checked_at": "2026-09-13T23:18:01Z",
       "kind": "number",
-      "source": "manuscript/references.bib entry count (155 source-derived + 9 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md (numeric variant)",
+      "source": "manuscript/references.bib entry count (155 source-derived + 13 scholarly), documented in manuscript/AGENTS.md, manuscript/SYNTAX.md (numeric variant)",
       "source_field": "bib-entry-count",
       "source_path": "manuscript/references.bib",
       "source_tier": "manuscript_claim",
       "stale": false,
       "tolerance": 0.0,
-      "value": "1.64"
+      "value": "1.68"
     },
     {
       "active": true,
@@ -2388,36 +2412,12 @@
       "stale": false,
       "tolerance": 0.0,
       "value": "0.28"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "data/claim_ledger.yaml:$.claims[29].value",
-      "source_field": "$.claims[29].value",
-      "source_path": "data/claim_ledger.yaml",
-      "source_tier": "configuration",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "80"
-    },
-    {
-      "active": true,
-      "checked_at": "2026-09-11T18:43:33Z",
-      "kind": "number",
-      "source": "output/data/evidence_summary.json:$.capability_baseline.gtg1002_autonomy_low_pct",
-      "source_field": "$.capability_baseline.gtg1002_autonomy_low_pct",
-      "source_path": "output/data/evidence_summary.json",
-      "source_tier": "generated_metric",
-      "stale": false,
-      "tolerance": 0.0,
-      "value": "80"
     }
   ],
   "schema": "template-evidence-registry-report-v1",
   "source_tiers": {
-    "artifact": 237,
-    "bibliography": 164,
+    "artifact": 238,
+    "bibliography": 168,
     "configuration": 155,
     "generated_metric": 165,
     "manuscript_claim": 12,

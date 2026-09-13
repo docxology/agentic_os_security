@@ -14,6 +14,8 @@ The duality is easy to state and easy to under-weight. The source assessment nam
 
 **What the two paths share** is the consequence that matters for evaluation: either path converts an exposed component into a foothold, so an operating system must be judged on what it constrains *after* a component fails and on what authority the component *held before* failing — not on the probability that its components never fail.
 
+Schneier's attack-tree discipline reads a system exactly this way: enumerate the adversary's paths to a goal, price each of them, and read the cheapest surviving path off the diagram — that minimum, not the most dramatic branch, is the system's exposure [@schneier1999]. The two failure paths above are the root branches of the operator's tree, so hardening only the exploitation branch leaves the minimum untouched whenever the authorized-misuse branch stays cheaper: an agent persuaded to transmit a vault's contents costs less than a sandbox escape. An evaluation that measures only exploit difficulty has answered one branch while the tree still stands.
+
 ## Adversary baseline
 
 The baseline assumptions are deliberately conservative and match the source assessment:

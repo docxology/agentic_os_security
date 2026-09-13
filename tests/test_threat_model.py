@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import re
 
-from agentic_os_security import threat_model
+from agentic_os_security import orchestration, threat_model
 
 AUTHORITY_LADDER = ("propose", "stage", "authorize", "exercise", "audit", "revoke")
 
@@ -73,3 +73,32 @@ def test_no_numeric_security_scores_in_threat_model_strings():
     ] + list(threat_model.ADVERSARY_ASSUMPTIONS)
     for text in texts:
         assert not score.search(text), text
+
+
+def test_capability_linkage_covers_all_six_capability_classes():
+    # One linkage row per capability class, in catalog order.
+    class_ids = [c.split(":", 1)[0].strip() for c in threat_model.AGENT_CAPABILITY_CLASSES]
+    link_ids = [link.capability_id for link in threat_model.CAPABILITY_LINKAGE]
+    assert link_ids == class_ids
+    assert len(link_ids) == 6
+
+
+def test_capability_linkage_failure_path_ids_are_valid():
+    failure_ids = {fp.failure_path_id for fp in threat_model.FAILURE_PATHS}
+    for link in threat_model.CAPABILITY_LINKAGE:
+        assert link.failure_paths, link.capability_id
+        assert set(link.failure_paths) <= failure_ids, link.capability_id
+
+
+def test_capability_linkage_mediation_ids_exist_in_orchestration():
+    mediation_ids = {mp.point_id for mp in orchestration.MEDIATION_POINTS}
+    for link in threat_model.CAPABILITY_LINKAGE:
+        assert link.mediation_points, link.capability_id
+        assert set(link.mediation_points) <= mediation_ids, link.capability_id
+
+
+def test_capability_linkage_residual_risk_is_nonempty_qualitative():
+    score = re.compile(r"\b\d+\.\d+\s*(/|out of)\s*10\b", re.IGNORECASE)
+    for link in threat_model.CAPABILITY_LINKAGE:
+        assert link.residual_risk.strip(), link.capability_id
+        assert not score.search(link.residual_risk), link.capability_id

@@ -17,7 +17,7 @@ Project-specific overlay on the canonical [`docs/guides/manuscript-semantics.md`
 
 All citation keys must exist in [`references.bib`](references.bib). Pandoc with `--natbib` converts `[@key]` to the right LaTeX cite command automatically; **never** write raw `\cite{}` in Markdown.
 
-**Key parity is enforced by tests** (`tests/test_evidence.py`, `tests/test_manuscript_structure.py`): every citation key used in prose must exist in `references.bib`; the bibliography has 164 entries (155 primary sources + 9 scholarly anchors), carried through the v0.5.0 round (review date 2026-09-11). The v0.5.0 scholarly additions are `clark1987`, `biba1977`, and `arpaci2018`.
+**Key parity is enforced by tests** (`tests/test_evidence.py`, `tests/test_manuscript_structure.py`): every citation key used in prose must exist in `references.bib`; the bibliography has 168 entries (155 primary sources + 13 scholarly anchors), carried through the v0.6.0 round. The v0.5.0 scholarly additions are `clark1987`, `biba1977`, and `arpaci2018`; the v0.6.0 additions are `schneier1999`, `rushby1981`, `miller2006`, and `endsley1995`.
 
 ## Figure References
 
@@ -109,6 +109,29 @@ By [@def:delegation_bound] the broker cannot amplify trust.
 | `{#def:defense_composition}` | Defense composition | `{#eq:defense_composition}` | `09_agentic_authority_architecture.md` |
 | `{#def:delegation_bound}` | δ-bounded delegation | `{#eq:delegation_bound}` | `12_orchestration_security.md` |
 | `{#def:invariant_predicate}` | Invariant predicate | `{#eq:invariant_predicate}` | `13_configuration_authorization.md` |
+
+## Remark Blocks (v0.6.0)
+
+Auto-numbered fenced remark blocks carry analytical observations that are not definitions (no formal statement, no equation). They use the same `formalism.lua` machinery as Definition blocks but get their **own counter** — definitions continue 1–8, remarks are numbered Remark 1, 2, … — and are never hand-numbered:
+
+```markdown
+:::: {.remark #rem:anti_scoring title="Why no numeric scores"}
+The stance vocabulary is ordinal without interval structure...
+::::
+
+By [@rem:anti_scoring] the review refuses composite scores.
+```
+
+- The opening fence is four colons with class `.remark`, a `{#rem:<label>}` label, and a `title="..."` attribute; the block closes with `::::` and wraps one plain-prose paragraph (no display math).
+- The filter renders this as **Remark N (title).** and consumes `[@rem:x]` references itself (never natbib); mixed groups with other keys are supported.
+- The 2-block registry below is enforced by `tests/test_manuscript_structure.py` (`REMARK_LABELS`): every `{.remark #rem:...}` block declared exactly once, every `[@rem:...]` target registered.
+
+### Remark block registry (v0.6.0)
+
+| Block label | Title | Section |
+|---|---|---|
+| `{#rem:anti_scoring}` | Why no numeric scores | `03_evaluation_framework.md` |
+| `{#rem:composition_interaction}` | Composition is not monotone in practice | `09_agentic_authority_architecture.md` |
 
 ## Table References
 

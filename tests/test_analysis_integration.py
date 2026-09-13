@@ -1,4 +1,4 @@
-"""Analysis pipeline integration: run_analysis writes the ten data
+"""Analysis pipeline integration: run_analysis writes the eleven data
 artifacts, the ten registry figures plus the cover graphical abstract,
 with row-count/tier-sum/verdict contracts and pinned caption assertions,
 and reruns are idempotent in validation verdicts.
@@ -11,6 +11,8 @@ import json
 
 from agentic_os_security import project_paths
 from agentic_os_security.analysis.pipeline import run_analysis
+from agentic_os_security.orchestration import MEDIATION_POINTS
+from agentic_os_security.threat_model import AGENT_CAPABILITY_CLASSES
 
 TIER_VOCAB = {"official", "advisory", "incident_report", "research", "community"}
 
@@ -95,7 +97,8 @@ def test_run_analysis_writes_data_artifacts_and_figures(tmp_project):
     assert (data_dir / "scenario_recommendations.csv").exists()
     assert (data_dir / "defensive_stack.csv").exists()
     assert (data_dir / "update_windows.csv").exists()
-    assert (data_dir / "evidence_summary.json").exists()
+    assert (data_dir / "candidate_basis.csv").exists()
+    assert (data_dir / "capability_mediation_map.csv").exists()
     assert (data_dir / "validation_report.json").exists()
     assert (data_dir / "incident_register.csv").exists()
     assert (data_dir / "cognitive_defenses.json").exists()
@@ -185,7 +188,7 @@ def test_cognitive_defenses_maps_all_six_cif_concepts(tmp_project):
     assert all(c["citation_key"] for c in concepts.values())
 
 
-def test_validation_report_covers_v030_and_v050_checks(tmp_project):
+def test_validation_report_covers_v030_v050_and_v060_checks(tmp_project):
     run_analysis(tmp_project)
     report = json.loads(
         (project_paths.data_dir(tmp_project) / "validation_report.json").read_text(
@@ -206,6 +209,10 @@ def test_validation_report_covers_v030_and_v050_checks(tmp_project):
     assert checks["incident_lesson_vocabulary"]["status"] == "green"
     assert checks["candidate_basis_rows"]["status"] == "green"
     assert "24" in checks["candidate_basis_rows"]["detail"]
+    # v0.6.0 addition: capability x failure-path x mediation linkage.
+    linkage = checks["capability_mediation_linkage"]
+    assert linkage["status"] == "green"
+    assert "6" in linkage["detail"]
 
 
 def test_evaluation_matrix_has_216_data_rows_plus_header(tmp_project):
@@ -227,6 +234,31 @@ def test_defensive_stack_has_192_data_rows_plus_header(tmp_project):
     assert rows[0] == ["candidate_id", "candidate_name", "class_id", "stance"]
     assert all(row[3] in {"strong", "partial", "weak", "n_a"} for row in rows[1:])
     assert len({(row[0], row[2]) for row in rows[1:]}) == 192
+
+
+def test_capability_mediation_map_has_6_rows_with_valid_vocab(tmp_project):
+    run_analysis(tmp_project)
+    with (project_paths.data_dir(tmp_project) / "capability_mediation_map.csv").open(
+        newline="", encoding="utf-8"
+    ) as handle:
+        rows = list(csv.reader(handle))
+    assert rows[0] == ["capability_id", "failure_paths", "mediation_points", "residual_risk"]
+    assert len(rows) - 1 == 6
+    # Every capability class from the threat-model catalog is linked exactly
+    # once, in catalog order.
+    catalog_ids = [entry.split(":", 1)[0] for entry in AGENT_CAPABILITY_CLASSES]
+    assert [row[0] for row in rows[1:]] == catalog_ids
+    valid_mediation_ids = {point.point_id for point in MEDIATION_POINTS}
+    for row in rows[1:]:
+        failure_paths = row[1].split(";")
+        assert failure_paths and all(
+            fp in {"exploitation", "authorized_misuse"} for fp in failure_paths
+        ), f"{row[0]} carries invalid failure paths"
+        mediation_points = row[2].split(";")
+        assert mediation_points and all(mp in valid_mediation_ids for mp in mediation_points), (
+            f"{row[0]} cites unknown mediation points"
+        )
+        assert row[3], f"{row[0]} lacks a residual-risk note"
 
 
 def test_os_stack_coverage_has_64_data_rows_plus_header(tmp_project):

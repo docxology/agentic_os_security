@@ -7,7 +7,7 @@
 # Consumed by: `infrastructure/rendering/pdf_renderer.py` and `infrastructure/reporting/pipeline_report_model.py`
 paper:
   title: "Agentic Security and Operating Systems"
-  version: "0.5.1"
+  version: "0.6.0"
   date: "" # Auto-generated (\today) by the title-page builder when empty
   cover:
     image: "output/figures/graphical_abstract.png"
@@ -168,12 +168,14 @@ experiment:
     - independent_audit
     - rehearsed_recovery
   figure_registry:
+    - fig:incidents -> incident_lessons.png
     - fig:evidence_timeline -> evidence_timeline.png
     - fig:property_matrix -> property_matrix.png
+    - fig:defensive_stack -> defensive_stack.png
     - fig:trust_domains -> trust_domains.png
     - fig:authority_ladder -> authority_ladder.png
-    - fig:orchestration_boundaries -> orchestration_boundaries.png
-    - fig:forecast_horizon -> forecast_horizon.png
-    - fig:defensive_stack -> defensive_stack.png
     - fig:update_windows -> update_windows.png
+    - fig:os_stack -> os_stack.png
+    - fig:orchestration_boundaries -> orchestration_boundaries.png
     - fig:agent_surface -> agent_surface.png
+    - fig:forecast_horizon -> forecast_horizon.png

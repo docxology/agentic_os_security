@@ -8,16 +8,21 @@ disposable *execution* domain, whose crossings are mediated by the
 they reach *assets* (personal identity). Administration and recovery sit
 outside the daily path. Numbered mediation arrows point to the pinned
 control ids from :data:`agentic_os_security.trust_domains.CONTROLS`; box
-contents and restrictions come from :data:`TRUST_DOMAINS`.
+contents and restrictions come from :data:`TRUST_DOMAINS`. A v0.6.0
+annotation appends the failure path each arrow counters —
+``(exploitation)`` / ``(authorized misuse)`` / ``(both)`` — derived from
+:data:`agentic_os_security.threat_model.CAPABILITY_LINKAGE` by majority
+vote across the capabilities each arrow's mediation points cover.
 """
 
 from __future__ import annotations
 
+from collections import Counter
 from pathlib import Path
-
 from matplotlib.patches import Circle, FancyArrowPatch, FancyBboxPatch
 
 from ..project_paths import figures_dir
+from ..threat_model import CAPABILITY_LINKAGE
 from ..trust_domains import TRUST_DOMAINS
 from ._common import OKABE_ITO, ascii_text, new_figure, save_figure, wrap_ascii
 
@@ -36,6 +41,48 @@ _FACE_ASSETS = "#F4E9F4"  # light reddish purple
 _FACE_OUTSIDE = "#F2F2F2"  # gray band for administration + recovery
 
 _BY_ID = {domain.domain_id: domain for domain in TRUST_DOMAINS}
+
+
+_BY_ID = {domain.domain_id: domain for domain in TRUST_DOMAINS}
+
+#: Failure-path display words (full words, no codes).
+_FAILURE_PATH_WORDS: dict[str, str] = {
+    "exploitation": "exploitation",
+    "authorized_misuse": "authorized misuse",
+}
+
+#: Numbered-arrow control id -> the orchestration mediation-point ids that
+#: arrow realizes. The failure-path suffix on each arrow is the majority
+#: vote across :data:`threat_model.CAPABILITY_LINKAGE` capabilities whose
+#: mediation_points include any of these ids.
+_ARROW_MEDIATION_IDS: dict[str, tuple[str, ...]] = {
+    _CTRL_EGRESS: ("egress_proxy",),
+    _CTRL_CREDS: ("oauth_resource_server", "agent_identity_exchange"),
+    _CTRL_APPROVAL: ("external_approval",),
+    _CTRL_OP_MEDIATION: ("tool_annotations", "classifier_escalation"),
+}
+
+
+def _failure_path_suffix(mediation_ids: tuple[str, ...]) -> str:
+    """Return the ``(failure path)`` suffix for one numbered arrow.
+
+    Majority vote across the CAPABILITY_LINKAGE capabilities covered by
+    *mediation_ids*: a failure path wins when more than half of the covered
+    capabilities list it; both paths winning renders ``(both)``. With no
+    covering capability the vote falls back to the full linkage.
+    """
+    covered = [
+        link
+        for link in CAPABILITY_LINKAGE
+        if set(mediation_ids) & set(link.mediation_points)
+    ] or list(CAPABILITY_LINKAGE)
+    tally = Counter(fp for link in covered for fp in link.failure_paths)
+    winners = sorted(fp for fp, n in tally.items() if n > len(covered) / 2)
+    if not winners:
+        winners = [min(tally, key=lambda fp: (-tally[fp], fp))]
+    if len(winners) == 1:
+        return f"({_FAILURE_PATH_WORDS[winners[0]]})"
+    return "(both)"
 
 
 def _box(
@@ -288,21 +335,23 @@ def generate_trust_domains(project_root: Path | str) -> Path:
     # (1) Egress: execution back out across the daily-path boundary.
     _numbered_arrow(
         ax, 3.30, 3.05, 0.55, 3.05,
-        OKABE_ITO["vermillion"], 1, f"{_CTRL_EGRESS}: controlled egress",
-        label_dx=0.0, label_dy=0.24,
+        OKABE_ITO["vermillion"], 1,
+        f"{_CTRL_EGRESS}: controlled egress\n{_failure_path_suffix(_ARROW_MEDIATION_IDS[_CTRL_EGRESS])}",
+        label_dx=0.0, label_dy=0.15,
     )
 
     # (2) Credential operations: execution -> credential service.
     _numbered_arrow(
         ax, 5.60, 5.60, 6.85, 5.60,
-        OKABE_ITO["bluish_green"], 2, _CTRL_CREDS,
+        OKABE_ITO["bluish_green"], 2,
+        f"{_CTRL_CREDS}\n{_failure_path_suffix(_ARROW_MEDIATION_IDS[_CTRL_CREDS])}",
         label_dx=0.0,
     )
-
     # (3) External approvals: execution -> release/deployment.
     _numbered_arrow(
         ax, 5.60, 3.60, 6.85, 3.40,
-        OKABE_ITO["blue"], 3, _CTRL_APPROVAL,
+        OKABE_ITO["blue"], 3,
+        f"{_CTRL_APPROVAL}\n{_failure_path_suffix(_ARROW_MEDIATION_IDS[_CTRL_APPROVAL])}",
         label_dx=0.0, label_dy=0.30,
     )
 
@@ -324,9 +373,10 @@ def generate_trust_domains(project_root: Path | str) -> Path:
 
     # (4) Operation mediation: administration (outside daily path) gates commands.
     _numbered_arrow(
-        ax, 3.10, 1.86, 3.10, 2.68,
-        OKABE_ITO["blue"], 4, ascii_text(_CTRL_OP_MEDIATION),
-        label_dx=0.0, label_dy=-0.26,
+        ax, 3.10, 1.96, 3.10, 2.74,
+        OKABE_ITO["blue"], 4,
+        ascii_text(f"{_CTRL_OP_MEDIATION}\n{_failure_path_suffix(_ARROW_MEDIATION_IDS[_CTRL_OP_MEDIATION])}"),
+        label_dx=0.0, label_dy=-0.40,
         dashed=True,
     )
 

@@ -7,7 +7,8 @@
 \beamer@slide {nine-controls-and-their-design-rationale}{9}
 \beamer@slide {def:defense_composition}{10}
 \beamer@slide {eq:defense_composition}{10}
-\beamer@slide {tbl:controls}{11}
-\beamer@slide {convergent-implementations-in-shipping-agent-tools}{15}
-\beamer@slide {the-authority-ladder}{18}
-\beamer@slide {fig:authority_ladder}{19}
+\beamer@slide {rem:composition_interaction}{10}
+\beamer@slide {tbl:controls}{13}
+\beamer@slide {convergent-implementations-in-shipping-agent-tools}{17}
+\beamer@slide {the-authority-ladder}{20}
+\beamer@slide {fig:authority_ladder}{21}

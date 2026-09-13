@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  13 SEP 2026 14:20
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  13 SEP 2026 16:16
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1673,12 +1673,7 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
 
 ] [14
 
-]
-\openout4 = `03_evaluation_framework_slides.vrb'.
-
-
-(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [15
+] [15
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
@@ -1692,17 +1687,17 @@ put/slides/03_evaluation_framework_slides.vrb) [16
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb
-File: ../figures/property_matrix.png Graphic file (type bmp)
-<../figures/property_matrix.png>
-) [17
+put/slides/03_evaluation_framework_slides.vrb) [17
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [18
+put/slides/03_evaluation_framework_slides.vrb
+File: ../figures/property_matrix.png Graphic file (type bmp)
+<../figures/property_matrix.png>
+) [18
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
@@ -1723,28 +1718,35 @@ put/slides/03_evaluation_framework_slides.vrb) [20
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/03_evaluation_framework_slides.vrb) [21
+
+]
+\openout4 = `03_evaluation_framework_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
 put/slides/03_evaluation_framework_slides.vrb
 File: ../figures/defensive_stack.png Graphic file (type bmp)
 <../figures/defensive_stack.png>
-) [21
+) [22
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [22
-
-] [23
+put/slides/03_evaluation_framework_slides.vrb) [23
 
 ] [24
 
+] [25
+
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [25
+put/slides/03_evaluation_framework_slides.vrb) [26
 
 ]
 \openout4 = `03_evaluation_framework_slides.vrb'.
@@ -1758,9 +1760,9 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
 (Font)              scaled to size 9.27232pt on input line 5.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 9.27054pt on input line 5.
-) [26
+) [27
 
-] [27
+] [28
 
 
 ]
@@ -1768,7 +1770,7 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 
 
 (/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
-put/slides/03_evaluation_framework_slides.vrb) [28
+put/slides/03_evaluation_framework_slides.vrb) [29
 
 ]
 \tf@nav=\write5
@@ -1789,13 +1791,13 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32568 strings out of 468168
- 653879 string characters out of 5432815
+ 32571 strings out of 468168
+ 653913 string characters out of 5432815
  1200428 words of memory out of 5000000
- 60678 multiletter control sequences out of 15000+600000
+ 60681 multiletter control sequences out of 15000+600000
  634225 words of font info for 99 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1116b,726s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/03_evaluation_framework_slides.pdf (28 pages).
+c_os_security/output/slides/03_evaluation_framework_slides.pdf (29 pages).

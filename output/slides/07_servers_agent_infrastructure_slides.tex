@@ -599,15 +599,20 @@ disposable unit. The update and provisioning layer keeps those runtimes
 honest over time --- A/B atomic replacement, transactional-update,
 reproducible and signed updates --- the discipline Bottlerocket
 documents for its host and Fedora CoreOS and MicroOS implement for
-theirs (Bottlerocket 2026; Fedora Project 2026a; {openSUSE} 2026). Read
-in this order, the baseline is not a substitute for the stack; it is a
-demand that these layers exist, are patched, and are composed so that a
-compromise in the agent runtime inherits nothing from the layers beneath
+theirs (Bottlerocket 2026; Fedora Project 2026a; {openSUSE} 2026).
+Consistent with the incident record of sec.~3,
+fig.~\ref{fig:os_stack} also marks the documented entry points that
+record shows were struck: the hypervisor layer (the QSB-110/115/116 fix
 \end{frame}
 
 \begin{frame}[fragile,allowframebreaks]{Agent-execution isolation: what
 the deployed evidence shows}
-it.
+cadence), the sandbox runtime (the Firecracker jailer advisory), the
+update and provisioning layer (the Nix GHSA record), and the agent
+runtime (the AISI unsanctioned-action account). Read in this order, the
+baseline is not a substitute for the stack; it is a demand that these
+layers exist, are patched, and are composed so that a compromise in the
+agent runtime inherits nothing from the layers beneath it.
 
 \end{frame}
 

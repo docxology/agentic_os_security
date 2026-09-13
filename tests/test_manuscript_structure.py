@@ -124,7 +124,9 @@ TBL_REF_RE = re.compile(r"\[@(tbl:[\w-]+)")
 EQ_DEF_RE = re.compile(r"\{#(eq:[\w-]+)\}")
 EQ_REF_RE = re.compile(r"\[@(eq:[\w-]+)\]")
 DEF_DEF_RE = re.compile(r"\{\.definition\s+#(def:[\w-]+)")
-DEF_REF_RE = re.compile(r"\[@(def:[\w-]+)")
+DEF_REF_RE = re.compile(r"\[@(def:[\w-]+)\]")
+REMARK_DEF_RE = re.compile(r"\{\.remark\s+#(rem:[\w-]+)")
+REMARK_REF_RE = re.compile(r"\[@(rem:[\w-]+)\]")
 EQUATION_LABELS = {
     "eq:stance_mapping",
     "eq:stance_order",
@@ -145,6 +147,11 @@ DEF_LABELS = {
     "def:defense_composition",
     "def:delegation_bound",
     "def:invariant_predicate",
+}
+
+REMARK_LABELS = {
+    "rem:anti_scoring",
+    "rem:composition_interaction",
 }
 
 TOKEN_PLAN = frozenset(
@@ -280,6 +287,24 @@ def test_definition_blocks_defined_exactly_once(section_text):
             counts[label] += 1
     wrong = {label: n for label, n in counts.items() if n != 1}
     assert not wrong, f"definition blocks must be declared exactly once: {wrong}"
+
+
+def test_remark_targets_defined_in_remark_registry(section_text):
+    targets = set()
+    for text in section_text.values():
+        targets.update(REMARK_DEF_RE.findall(text))
+        targets.update(REMARK_REF_RE.findall(text))
+    undefined = targets - REMARK_LABELS
+    assert not undefined, f"remark targets not in registry: {sorted(undefined)}"
+
+
+def test_remark_blocks_defined_exactly_once(section_text):
+    counts = {label: 0 for label in REMARK_LABELS}
+    for text in section_text.values():
+        for label in REMARK_DEF_RE.findall(text):
+            counts[label] += 1
+    wrong = {label: n for label, n in counts.items() if n != 1}
+    assert not wrong, f"remark blocks must be declared exactly once: {wrong}"
 
 
 def test_equation_registry_defined_exactly_once(section_text):

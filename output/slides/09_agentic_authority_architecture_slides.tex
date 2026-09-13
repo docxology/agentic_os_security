@@ -379,6 +379,46 @@ formal object whose coverage interactions --- not merely the count of
 layers --- determine what an attacker must defeat:
 \begin{equation}\protect\phantomsection\label{eq:defense_composition}{D = d_1 \circ d_2 \circ \cdots \circ d_8}\end{equation}
 
+\protect\phantomsection\label{rem:composition_interaction}
+Layered controls interact: a boundary can be bypassed through a
+dependency of another layer, so adding a control does not monotonically
+increase what an attacker must defeat. The composition of
+(\textbf{def:defense\_composition?}) bounds the composed whole rather
+than licensing each layer separately, and it is the audit rung of
+(\textbf{def:authority\_ladder\_order?}) --- independent verification
+against records the agent cannot rewrite --- that keeps the composition
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Nine controls and their design
+rationale}
+honest in practice.
+
+Each control above counters a named failure path, and the
+capability-mediation linkage makes the mapping explicit. Six agent
+capability classes --- content intake, tool and bridge use, credential
+touch, external communication, state mutation, and self-modification ---
+map onto the failure paths that most directly exploit them and the
+mediation points that counter them (the mediation taxonomy is developed
+in sec.~13): content intake and external
+communication sit on both failure paths, exploitation and authorized
+misuse, while the other four are exercised chiefly through authorized
+misuse; sandbox primitives and classifier escalation counter content
+intake; tool annotations, resource-server binding, and external approval
+counter tool and bridge use; agent identity exchange and external
+approval counter credential touch; egress proxy and sandbox
+observability counter external communication; external approval and
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Nine controls and their design
+rationale}
+tool-bridge constraining counter state mutation; and external approval
+with independent audit counters self-modification. The linkage is a
+residual-risk statement as much as a control plan --- prompt injection
+against content intake remains probabilistic under every mediation point
+--- and the composition-interaction caveat stated above is the reason
+the composition must be read as a whole: the failure paths cross layers,
+so a dependency of one control can route around the boundary of another.
+
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Nine controls and their design

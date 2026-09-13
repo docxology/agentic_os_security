@@ -288,6 +288,20 @@ evaluation: either path converts an exposed component into a foothold,
 so an operating system must be judged on what it constrains \emph{after}
 a component fails and on what authority the component \emph{held before}
 failing --- not on the probability that its components never fail.
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Two distinct paths to harm}
+Schneier's attack-tree discipline reads a system exactly this way:
+enumerate the adversary's paths to a goal, price each of them, and read
+the cheapest surviving path off the diagram --- that minimum, not the
+most dramatic branch, is the system's exposure (Schneier 1999). The two
+failure paths above are the root branches of the operator's tree, so
+hardening only the exploitation branch leaves the minimum untouched
+whenever the authorized-misuse branch stays cheaper: an agent persuaded
+to transmit a vault's contents costs less than a sandbox escape. An
+evaluation that measures only exploit difficulty has answered one branch
+while the tree still stands.
 \end{frame}
 
 \subsection{Adversary baseline}\label{adversary-baseline}

@@ -33,8 +33,9 @@ __all__ = [
     "FAILURE_PATHS",
     "ADVERSARY_ASSUMPTIONS",
     "AUTHORITY_LADDER",
-    "AUTHORITY_LADDER_RUNGS",
     "AGENT_CAPABILITY_CLASSES",
+    "CapabilityLink",
+    "CAPABILITY_LINKAGE",
 ]
 
 
@@ -198,4 +199,67 @@ AGENT_CAPABILITY_CLASSES: tuple[str, ...] = (
     "generation and database writes",
     "self_modification: altering its own grants, policy, tool access, or execution "
     "environment",
+)
+
+
+@dataclass(frozen=True)
+class CapabilityLink:
+    """One capability class linked to the failure paths that exploit it,
+    the mediation points that primarily bound it, and its residual risk."""
+
+    capability_id: str
+    failure_paths: tuple[str, ...]
+    mediation_points: tuple[str, ...]
+    residual_risk: str
+
+
+#: Capability × failure-path × mediation linkage: each capability class in
+#: :data:`AGENT_CAPABILITY_CLASSES` mapped to the failure path(s) that most
+#: directly exploit it, the primary mediation-point ids from
+#: orchestration.MEDIATION_POINTS that bound it, and a one-line residual-risk
+#: note. Literal tuples by design: no cross-module import — the pinned ids
+#: match the orchestration surface without depending on it.
+CAPABILITY_LINKAGE: tuple[CapabilityLink, ...] = (
+    CapabilityLink(
+        "content_intake",
+        ("exploitation", "authorized_misuse"),
+        ("sandbox_primitives", "classifier_escalation"),
+        "Prompt injection through hostile content remains probabilistic: mediation "
+        "reduces exposure but cannot eliminate it.",
+    ),
+    CapabilityLink(
+        "tool_bridge_use",
+        ("authorized_misuse",),
+        ("tool_annotations", "oauth_resource_server", "external_approval"),
+        "Tool annotations are advisory hints and tokens stay powerful, so the review "
+        "quality of grants bounds this surface.",
+    ),
+    CapabilityLink(
+        "credential_touch",
+        ("authorized_misuse",),
+        ("agent_identity_exchange", "external_approval"),
+        "Audience-bound identity shrinks stolen-credential value, but a persuaded agent "
+        "still spends real credentials within its grant.",
+    ),
+    CapabilityLink(
+        "external_comms",
+        ("exploitation", "authorized_misuse"),
+        ("egress_proxy", "sandbox_observability"),
+        "Egress allowlists constrain destinations, not content, so exfiltration through "
+        "an allowed channel remains possible.",
+    ),
+    CapabilityLink(
+        "state_mutation",
+        ("authorized_misuse",),
+        ("external_approval", "classifier_escalation"),
+        "Approval gates scale poorly with volume: consequential-but-routine mutations "
+        "risk gating fatigue.",
+    ),
+    CapabilityLink(
+        "self_modification",
+        ("authorized_misuse",),
+        ("external_approval", "sandbox_observability"),
+        "Explicit approval catches visible self-grants, but incremental environment "
+        "drift between reviews can accumulate.",
+    ),
 )

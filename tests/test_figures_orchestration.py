@@ -139,3 +139,47 @@ def test_two_consecutive_full_runs_are_byte_identical(tmp_project):
     first_hash = _hash_tree(project_paths.figures_dir(first_root))
     second_hash = _hash_tree(project_paths.figures_dir(second_root))
     assert first_hash == second_hash, "figures are not byte-deterministic"
+
+
+def test_trust_domains_arrow_suffixes_follow_majority_vote():
+    """Each numbered trust-domains arrow annotates the failure path it
+    counters, majority-voted from CAPABILITY_LINKAGE capabilities covered
+    by the arrow's mediation points (v0.6.0 upgrade)."""
+    from agentic_os_security.figures.trust_domains import (
+        _ARROW_MEDIATION_IDS,
+        _failure_path_suffix,
+    )
+    from agentic_os_security.threat_model import CAPABILITY_LINKAGE
+
+    assert set(_ARROW_MEDIATION_IDS) == {
+        "egress_boundary",
+        "scoped_credentials",
+        "external_approvals",
+        "operation_mediation",
+    }
+    suffixes = {
+        control_id: _failure_path_suffix(mediation_ids)
+        for control_id, mediation_ids in _ARROW_MEDIATION_IDS.items()
+    }
+    for suffix in suffixes.values():
+        assert suffix in {"(exploitation)", "(authorized misuse)", "(both)"}
+
+    # Independent majority-vote recomputation for the approval arrow: every
+    # capability gated by external_approval is authorized-misuse-only under
+    # the pinned linkage.
+    covered = [
+        link for link in CAPABILITY_LINKAGE if "external_approval" in link.mediation_points
+    ]
+    assert covered
+    if all(link.failure_paths == ("authorized_misuse",) for link in covered):
+        assert suffixes["external_approvals"] == "(authorized misuse)"
+
+    # The egress arrow covers the dual-path external-comms capability, so it
+    # must name both failure paths.
+    egress_covered = [
+        link for link in CAPABILITY_LINKAGE if "egress_proxy" in link.mediation_points
+    ]
+    if egress_covered and all(
+        set(link.failure_paths) == {"exploitation", "authorized_misuse"} for link in egress_covered
+    ):
+        assert suffixes["egress_boundary"] == "(both)"

@@ -85,7 +85,7 @@ def test_config_tokens_match_canonical_constants(tmp_project):
     variables = manuscript_variables.generate_variables(
         tmp_project, require_analysis_outputs=False
     )
-    assert variables["CONFIG_VERSION"] == "0.5.1"
+    assert variables["CONFIG_VERSION"] == "0.6.0"
     assert variables["CONFIG_REVIEW_DATE"] == "2026-09-10"
     assert variables["CONFIG_FORECAST_HORIZON"] == "2028–2031"
     assert variables["CONFIG_NUM_CANDIDATES"] == "24"

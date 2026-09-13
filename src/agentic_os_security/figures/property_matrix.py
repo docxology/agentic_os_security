@@ -6,7 +6,9 @@ Publication-grade layout (v0.2.0): the 24 candidate rows are grouped into
 the 8 pinned candidate categories (colored side band with rotated category
 labels and thin category separator lines), a right-side marginal
 stance-distribution bar per property, and a legend with stance counts
-embedded inside the plot. Driven entirely by
+embedded inside the plot. A v0.6.0 lower-left inset panel adds the
+per-category stance distribution (8 stacked mini-bars in registry order,
+full-word counts beside each bar). Driven entirely by
 :func:`agentic_os_security.registry.matrix_rows`; the qualitative color
 encoding (Okabe-Ito) mirrors the stance vocabulary
 ``strong | partial | weak | n_a``.
@@ -16,6 +18,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from matplotlib.figure import Figure
 from matplotlib.colors import ListedColormap
 from matplotlib.patches import Patch, Rectangle
 
@@ -44,9 +47,111 @@ __all__ = ["generate_property_matrix"]
 
 _STANCE_ORDER: tuple[str, ...] = ("strong", "partial", "weak", "n_a")
 _STANCE_INDEX: dict[str, int] = {stance: i for i, stance in enumerate(_STANCE_ORDER)}
+_STANCE_WORDS: dict[str, str] = {
+    "strong": "strong",
+    "partial": "partial",
+    "weak": "weak",
+    "n_a": "not assessed",
+}
 
-#: Left margin (in matrix column units) reserved for the category band.
+#: Lower-left inset panel (figure fractions): per-category stance
+#: distribution — 8 stacked mini-bars in registry order with full-word
+#: counts beside each bar, placed in the whitespace above the stance
+#: legend and left of the rotated property labels.
+
+_PANEL_RECT = (0.012, 0.098, 0.262, 0.116)
+_PANEL_NAME_W = 0.31  # axes-fraction column reserved for category names
+_PANEL_BAR_W = 0.13  # axes-fraction width of each mini-bar
 _BAND_X0, _BAND_X1, _BAND_LABEL_X = -1.85, -1.35, -1.60
+
+def _category_counts_lines(counts: dict[str, int]) -> str:
+    """Full-word stance counts, e.g. ``"2 strong/7 partial"``.
+
+    Zero-count stances are omitted; ``n_a`` renders as ``not assessed``
+    on its own line (only the high-assurance category carries n_a cells).
+    """
+    lines = [
+        "/".join(
+            f"{counts[stance]} {_STANCE_WORDS[stance]}"
+            for stance in _STANCE_ORDER[:3]
+            if counts[stance]
+        )
+    ]
+    if counts["n_a"]:
+        lines.append(f"{counts['n_a']} {_STANCE_WORDS['n_a']}")
+    return "\n".join(line for line in lines if line)
+
+
+def _add_category_stance_panel(
+    fig: Figure,
+    rows: list[tuple[str, str, str]],
+    stances: dict[tuple[str, str], str],
+    property_ids: list[str],
+) -> None:
+    """Draw the lower-left per-category stance-distribution inset panel.
+
+    One stacked mini-bar per candidate category in registry order
+    (segment colors = ``STANCE_COLORS``), with the category name and its
+    full-word stance counts beside the bar.
+    """
+    tallies: dict[str, dict[str, int]] = {
+        category: {stance: 0 for stance in _STANCE_ORDER} for category in CATEGORY_VOCAB
+    }
+    for cid, _name, category in rows:
+        for pid in property_ids:
+            tallies[category][stances[(cid, pid)]] += 1
+
+    ax_panel = fig.add_axes(_PANEL_RECT)
+    ax_panel.patch.set_visible(False)  # never mask the rotated property labels
+    ax_panel.set_xlim(0, 1)
+    ax_panel.set_ylim(0, len(CATEGORY_VOCAB))
+    ax_panel.invert_yaxis()
+    ax_panel.set_xticks([])
+    ax_panel.set_yticks([])
+    ax_panel.tick_params(length=0)
+    for side in ax_panel.spines.values():
+        side.set_visible(False)
+
+    for row, category in enumerate(CATEGORY_VOCAB):
+        counts = tallies[category]
+        y_mid = row + 0.5
+        ax_panel.text(
+            0.0,
+            y_mid,
+            ascii_text(CATEGORY_LABELS[category]),
+            fontsize=4.8,
+            fontweight="bold",
+            ha="left",
+            va="center",
+            color="#1A1A1A",
+        )
+        total = sum(counts.values()) or 1
+        left = _PANEL_NAME_W
+        for stance in _STANCE_ORDER:
+            count = counts[stance]
+            if not count:
+                continue
+            width = _PANEL_BAR_W * count / total
+            ax_panel.add_patch(
+                Rectangle(
+                    (left, row + 0.24),
+                    width,
+                    0.52,
+                    facecolor=STANCE_COLORS[stance],
+                    edgecolor="white",
+                    linewidth=0.3,
+                )
+            )
+            left += width
+        ax_panel.text(
+            _PANEL_NAME_W + _PANEL_BAR_W + 0.015,
+            y_mid,
+            _category_counts_lines(counts),
+            fontsize=4.3,
+            ha="left",
+            va="center",
+            color="#333333",
+        )
 
 
 def generate_property_matrix(project_root: Path | str) -> Path:
@@ -176,6 +281,9 @@ def generate_property_matrix(project_root: Path | str) -> Path:
         ax_marg.spines[side].set_visible(False)
     ax_marg.spines["bottom"].set_color("#888888")
 
+    # Lower-left inset: per-category stance distribution (v0.6.0), placed
+    # in the whitespace above the legend, left of the rotated labels.
+    _add_category_stance_panel(fig, rows, stances, property_ids)
     # Legend with stance counts, embedded in the lower-left margin (empty
     # area below the category band strip).
     total_counts = {

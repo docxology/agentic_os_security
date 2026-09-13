@@ -1115,7 +1115,7 @@ exfiltrate secrets or authorize consequential actions. The second path
 requires no kernel exploit at all, which reframes the evaluation: the
 axis of analysis is the authority a component already holds, not merely
 the difficulty of exploiting it.</p>
-<p>This revision (0.5.1) refreshes the evidence base through September
+<p>This revision (0.6.0) refreshes the evidence base through September
 11, 2026. The offensive baseline expands from four primary sources to
 the incident record now available: the NCSC assessments of January 2024
 and May 2025, the Anthropic campaign investigation of November 2025 —
@@ -1551,6 +1551,18 @@ foothold, so an operating system must be judged on what it constrains
 <em>after</em> a component fails and on what authority the component
 <em>held before</em> failing — not on the probability that its
 components never fail.</p>
+<p>Schneier’s attack-tree discipline reads a system exactly this way:
+enumerate the adversary’s paths to a goal, price each of them, and read
+the cheapest surviving path off the diagram — that minimum, not the most
+dramatic branch, is the system’s exposure <span class="citation"
+data-cites="schneier1999">(<a href="#ref-schneier1999"
+role="doc-biblioref">Schneier 1999</a>)</span>. The two failure paths
+above are the root branches of the operator’s tree, so hardening only
+the exploitation branch leaves the minimum untouched whenever the
+authorized-misuse branch stays cheaper: an agent persuaded to transmit a
+vault’s contents costs less than a sandbox escape. An evaluation that
+measures only exploit difficulty has answered one branch while the tree
+still stands.</p>
 <h2 data-number="3.3" id="adversary-baseline"><span
 class="header-section-number">3.3</span> Adversary baseline</h2>
 <p>The baseline assumptions are deliberately conservative and match the
@@ -2153,6 +2165,16 @@ could not verify” from masquerading as “we verified it is weak.” The
 formal model thus encodes exactly the discipline the vocabulary was
 built for: total coverage, ordered confidence in documented designs, and
 honesty about the unverified.</p>
+<div id="rem:anti_scoring" class="remark" title="Why no numeric scores">
+<p><strong>Remark 1 (Why no numeric scores).</strong> The stance
+vocabulary is ordinal without interval structure: strong and partial can
+be told apart, but no measurement assigns them distances, and an average
+over stances therefore implies a measurement that does not exist. By <a
+href="#def:stance_order">Definition 2</a> the preference order is
+qualitative only — it fixes which posture dominates on a property, never
+by how much — so any composite score built on it would be arithmetic
+performed on words.</p>
+</div>
 <h2 data-number="4.6"
 id="how-the-matrix-is-constructed-and-refreshed"><span
 class="header-section-number">4.6</span> How the matrix is constructed
@@ -2340,7 +2362,13 @@ class="citation" data-cites="qubes_security_design_goals">(<a
 href="#ref-qubes_security_design_goals" role="doc-biblioref">Q. O.
 Project 2026s</a>)</span> — a documented limitation, not a bug — and the
 architecture accepts that cost in exchange for a boundary that an
-application-level exploit must not be able to cross by design.</p>
+application-level exploit must not be able to cross by design. Rushby’s
+separation-kernel theory names the formal property this arrangement
+claims: a separation kernel guarantees noninterference between
+compartments except along declared channels, and the Xen/qube split is
+that property instantiated as a workstation operating system <span
+class="citation" data-cites="rushby1981">(<a href="#ref-rushby1981"
+role="doc-biblioref">Rushby 1981</a>)</span>.</p>
 <p>The qrexec layer deserves particular attention because it is where
 Qubes turns “separate VMs” into “separate security domains.” Every
 cross-qube service call — file copy, clipboard access, inter-qube
@@ -3928,10 +3956,16 @@ role="doc-biblioref">Bottlerocket 2026</a>; <a
 href="#ref-fedora_coreos_updates" role="doc-biblioref">Fedora Project
 2026a</a>; <a href="#ref-opensuse_transactional_update"
 role="doc-biblioref"><span class="nocase">openSUSE</span>
-2026b</a>)</span>. Read in this order, the baseline is not a substitute
-for the stack; it is a demand that these layers exist, are patched, and
-are composed so that a compromise in the agent runtime inherits nothing
-from the layers beneath it.</p>
+2026b</a>)</span>. Consistent with the incident record of sec. <a
+href="#sec:threat_model">3</a>, fig. <a href="#fig:os_stack">6</a> also
+marks the documented entry points that record shows were struck: the
+hypervisor layer (the QSB-110/115/116 fix cadence), the sandbox runtime
+(the Firecracker jailer advisory), the update and provisioning layer
+(the Nix GHSA record), and the agent runtime (the AISI
+unsanctioned-action account). Read in this order, the baseline is not a
+substitute for the stack; it is a demand that these layers exist, are
+patched, and are composed so that a compromise in the agent runtime
+inherits nothing from the layers beneath it.</p>
 <figure id="fig:os_stack">
 <a class="figure-full-size-link" href="../figures/os_stack.png" target="_blank" rel="noopener" aria-label="Open full-size Figure 6, Eight layers of the operating-system security stack, from hardware"><img src="../figures/os_stack.png" style="width:100.0%"
 alt="Eight layers of the operating-system security stack, from hardware and firmware to the agent runtime and its tool bridge; annotations name representative mechanisms per layer and the right-hand columns record how strongly each candidate class covers each layer." /><span class="figure-full-size-label" aria-hidden="true">Open full-size figure</span></a>
@@ -4532,6 +4566,40 @@ what an attacker must defeat: <span id="eq:defense_composition"><span
 class="math display">\[D = d_1 \circ d_2 \circ \cdots \circ
 d_8\qquad{(6)}\]</span></span></p>
 </div>
+<div id="rem:composition_interaction" class="remark"
+title="Composition is not monotone in practice">
+<p><strong>Remark 2 (Composition is not monotone in practice).</strong>
+Layered controls interact: a boundary can be bypassed through a
+dependency of another layer, so adding a control does not monotonically
+increase what an attacker must defeat. The composition of <a
+href="#def:defense_composition">Definition 6</a> bounds the composed
+whole rather than licensing each layer separately, and it is the audit
+rung of <a href="#def:authority_ladder_order">Definition 5</a> —
+independent verification against records the agent cannot rewrite — that
+keeps the composition honest in practice.</p>
+</div>
+<p>Each control above counters a named failure path, and the
+capability-mediation linkage makes the mapping explicit. Six agent
+capability classes — content intake, tool and bridge use, credential
+touch, external communication, state mutation, and self-modification —
+map onto the failure paths that most directly exploit them and the
+mediation points that counter them (the mediation taxonomy is developed
+in sec. <a href="#sec:orchestration">13</a>): content intake and
+external communication sit on both failure paths, exploitation and
+authorized misuse, while the other four are exercised chiefly through
+authorized misuse; sandbox primitives and classifier escalation counter
+content intake; tool annotations, resource-server binding, and external
+approval counter tool and bridge use; agent identity exchange and
+external approval counter credential touch; egress proxy and sandbox
+observability counter external communication; external approval and
+tool-bridge constraining counter state mutation; and external approval
+with independent audit counters self-modification. The linkage is a
+residual-risk statement as much as a control plan — prompt injection
+against content intake remains probabilistic under every mediation point
+— and the composition-interaction caveat stated above is the reason the
+composition must be read as a whole: the failure paths cross layers, so
+a dependency of one control can route around the boundary of
+another.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: Table 9: The nine controls of the agentic authority architecture: operating rule and design rationale for each. The r…"><table id="tbl:controls" data-responsive-table="true">
 <caption>Table 9: The nine controls of the agentic authority
 architecture: operating rule and design rationale for each. The rules
@@ -5046,10 +5114,17 @@ security advice is the most directly dangerous variant: an agent’s
 confident recommendation to disable a confinement, widen an egress rule,
 or reuse a credential for convenience is a configuration change proposed
 with fluent justification and no way for the operator to distinguish it
-from competent advice without independent verification. The operator
-consuming agent output is, in this sense, in the position of a system
-consuming the output of a possibly compromised tool — the same
-skepticism the review applies to build artifacts applies to prose.</p>
+from competent advice without independent verification. In Endsley’s
+situation-awareness terms, such output degrades the operator’s model at
+all three levels — perception of what the system is doing, comprehension
+of what it means, and projection of where it is heading — so a single
+plausible fabrication corrupts not one decision but the trajectory of
+the decisions that follow <span class="citation"
+data-cites="endsley1995">(<a href="#ref-endsley1995"
+role="doc-biblioref">Endsley 1995</a>)</span>. The operator consuming
+agent output is, in this sense, in the position of a system consuming
+the output of a possibly compromised tool — the same skepticism the
+review applies to build artifacts applies to prose.</p>
 <h2 data-number="11.7" id="cognitive-boundary-design"><span
 class="header-section-number">11.7</span> Cognitive boundary design</h2>
 <p>The response is not exhortation to stay vigilant; it is the design of
@@ -5832,12 +5907,18 @@ agent-to-agent chain is permitted to narrow the authority it passes,
 never to widen it, so trust cannot amplify across a delegation chain no
 matter how many intermediaries it traverses <span class="citation"
 data-cites="cif_formal_2026">(<a href="#ref-cif_formal_2026"
-role="doc-biblioref">Friedman 2026c</a>)</span>. The bound of eq. <a
-href="#eq:delegation_bound">7</a> is not left as a statement of intent —
-its bounded-delegation and trust-boundedness properties have been
-exercised computationally, with implementations validating the
-no-amplification guarantee on constructed delegation scenarios <span
-class="citation" data-cites="cif_validation_2026">(<a
+role="doc-biblioref">Friedman 2026c</a>)</span>. Miller’s
+robust-composition discipline supplies the construction rule behind the
+bound: capability handoffs must be built so that a recipient can never
+acquire more authority than its grantor held, making no-widening a
+property of the handoff mechanism itself rather than of operator care
+<span class="citation" data-cites="miller2006">(<a
+href="#ref-miller2006" role="doc-biblioref">Miller 2006</a>)</span>. The
+bound of eq. <a href="#eq:delegation_bound">7</a> is not left as a
+statement of intent — its bounded-delegation and trust-boundedness
+properties have been exercised computationally, with implementations
+validating the no-amplification guarantee on constructed delegation
+scenarios <span class="citation" data-cites="cif_validation_2026">(<a
 href="#ref-cif_validation_2026" role="doc-biblioref">Friedman
 2026b</a>)</span>.</p>
 <div id="def:delegation_bound" class="definition"
@@ -6950,7 +7031,7 @@ rewards.</p>
 <h1 data-number="18" id="sec:references"><span
 class="header-section-number">18</span> References</h1>
 <p>The bibliography is generated by Pandoc–natbib from
-<code>references.bib</code> — 164 entries (155 source-derived plus 9
+<code>references.bib</code> — 168 entries (155 source-derived plus 13
 scholarly) comprising primary vendor documentation, security advisories,
 incident reports, standards-body specifications and guidance, scholarly
 anchors, and the author’s cognitive-security research works published on
@@ -7185,6 +7266,11 @@ Final Event</em>. <a
 href="https://www.darpa.mil/news/2025/aixcc-results"
 class="uri">Https://www.darpa.mil/news/2025/aixcc-results</a>.
 </div>
+<div id="ref-endsley1995" class="csl-entry" role="listitem">
+Endsley, Mica R. 1995. <span>“Toward a Theory of Situation Awareness in
+Dynamic Systems.”</span> <em>Human Factors: The Journal of the Human
+Factors and Ergonomics Society</em> 37 (1): 32–64.
+</div>
 <div id="ref-ietf_agent_identity" class="csl-entry" role="listitem">
 Force, Internet Engineering Task. 2026. <em><span>AI</span> Agent
 Authentication and Authorization (Draft-Klrc-Aiagent-Auth)</em>. <a
@@ -7377,6 +7463,11 @@ Malka, Julien, Stefano Zacchiroli, and Théo Zimmermann. 2025. <em>Does
 Functional Package Management Enable Reproducible Builds at Scale?
 Yes</em>. <a href="https://arxiv.org/pdf/2501.15919"
 class="uri">Https://arxiv.org/pdf/2501.15919</a>.
+</div>
+<div id="ref-miller2006" class="csl-entry" role="listitem">
+Miller, Mark S. 2006. <span>“Robust Composition: Towards a Unified
+Approach to Access Control and Concurrency Control.”</span> PhD thesis,
+Johns Hopkins University.
 </div>
 <div id="ref-openai_disruption_oct_2025" class="csl-entry"
 role="listitem">
@@ -7799,10 +7890,19 @@ Rose, Scott, Oliver Borchert, Stu Mitchell, and Sean Connelly. 2020.
 <em>Zero Trust Architecture</em>. NIST Special Publication Nos. 800-207.
 National Institute of Standards; Technology.
 </div>
+<div id="ref-rushby1981" class="csl-entry" role="listitem">
+Rushby, John. 1981. <span>“Design and Verification of Secure
+Systems.”</span> <em>Proceedings of the 8th <span>ACM</span> Symposium
+on Operating Systems Principles (<span>SOSP</span> ’81)</em>, 12–21.
+</div>
 <div id="ref-saltzer1975" class="csl-entry" role="listitem">
 Saltzer, Jerome H., and Michael D. Schroeder. 1975. <span>“The
 Protection of Information in Computer Systems.”</span> <em>Proceedings
 of the IEEE</em> 63 (9): 1278–308.
+</div>
+<div id="ref-schneier1999" class="csl-entry" role="listitem">
+Schneier, Bruce. 1999. <span>“Attack Trees: Modeling Security Threats
+and Exploit Scenarios.”</span> <em>Dr. Dobb’s Journal</em> 24 (12).
 </div>
 <div id="ref-parrot_intended_use" class="csl-entry" role="listitem">
 Security, Parrot. 2026. <em>What Is Parrot?</em> <a

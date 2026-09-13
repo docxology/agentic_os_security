@@ -22,7 +22,7 @@ Symptom-first guide. Run `uv run python scripts/00_preflight.py` first — it ca
 
 ## Tests fail: bib parity
 
-- A key exists in `manuscript/references.bib` but not in `evidence.SOURCES`, or vice versa. The 65 source-derived keys must match exactly on both sides (plus the 6 scholarly entries). Fix the registry, not the test.
+- A key exists in `manuscript/references.bib` but not in `evidence.SOURCES`, or vice versa. The 155 source-derived keys must match exactly on both sides (plus the 13 scholarly entries). Fix the registry, not the test.
 
 ## Tests fail: figures not byte-identical
 

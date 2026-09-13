@@ -1,4 +1,4 @@
-\begin{thebibliography}{160}
+\begin{thebibliography}{164}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -278,6 +278,12 @@ DARPA.
   2025{\natexlab{b}}.
 \newblock Accessed 2026-09-10.
 
+\bibitem[Endsley(1995)]{endsley1995}
+Mica~R. Endsley.
+\newblock Toward a theory of situation awareness in dynamic systems.
+\newblock \emph{Human Factors: The Journal of the Human Factors and Ergonomics
+  Society}, 37\penalty0 (1):\penalty0 32--64, 1995.
+
 \bibitem[Force(2026)]{ietf_agent_identity}
 Internet Engineering~Task Force.
 \newblock {AI} agent authentication and authorization
@@ -527,6 +533,12 @@ Julien Malka, Stefano Zacchiroli, and Théo Zimmermann.
   scale? yes.
 \newblock \url{https://arxiv.org/pdf/2501.15919}, 2025.
 \newblock arXiv:2501.15919; Accessed 2026-09-11.
+
+\bibitem[Miller(2006)]{miller2006}
+Mark~S. Miller.
+\newblock \emph{Robust Composition: Towards a Unified Approach to Access
+  Control and Concurrency Control}.
+\newblock PhD thesis, Johns Hopkins University, 2006.
 
 \bibitem[of~Standards and Technology(2026)]{nist_ai_agent_standards}
 National~Institute of~Standards and Technology.
@@ -1039,11 +1051,22 @@ Scott Rose, Oliver Borchert, Stu Mitchell, and Sean Connelly.
 \newblock NIST Special Publication 800-207, National Institute of Standards and
   Technology, 2020.
 
+\bibitem[Rushby(1981)]{rushby1981}
+John Rushby.
+\newblock Design and verification of secure systems.
+\newblock In \emph{Proceedings of the 8th {ACM} Symposium on Operating Systems
+  Principles ({SOSP} '81)}, pages 12--21. {ACM}, 1981.
+
 \bibitem[Saltzer and Schroeder(1975)]{saltzer1975}
 Jerome~H. Saltzer and Michael~D. Schroeder.
 \newblock The protection of information in computer systems.
 \newblock \emph{Proceedings of the IEEE}, 63\penalty0 (9):\penalty0 1278--1308,
   1975.
+
+\bibitem[Schneier(1999)]{schneier1999}
+Bruce Schneier.
+\newblock Attack trees: Modeling security threats and exploit scenarios.
+\newblock \emph{Dr. Dobb's Journal}, 24\penalty0 (12), December 1999.
 
 \bibitem[secureblue Project(2026{\natexlab{a}})]{secureblue_features}
 secureblue Project.

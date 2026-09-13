@@ -9,16 +9,16 @@ Pure Python + matplotlib. **No `infrastructure` imports anywhere in `src/`.** Im
 | Module | Owns |
 |---|---|
 | `registry.py` | The candidate×property×scenario backbone: dataclasses `Property`, `Candidate`, `Scenario`; constants `PROPERTIES` (9), `CANDIDATES` (24), `SCENARIOS` (8); helpers `matrix_rows()` (24×9 = 216 rows), `stance_counts()`, `category_counts()`, `candidates_by_category()`. Stance vocabulary: `strong \| partial \| weak \| n_a`. |
-| `evidence.py` | `Source` dataclass (key, title, publisher, year, url, tier, claims); `SOURCES` — 65 documented sources keyed to the 65 source-derived bib keys; `CAPABILITY_BASELINE` (capability horizon 2027; Anthropic report: 30 targeted entities; AISI: 122 runs, 10 unsanctioned, incident days 2026-07-25..28; aiXcc 2025; QSB fix package; NixOS support dates); `sources_by_tier()`. |
-| `threat_model.py` | `FAILURE_PATHS` (exploitation vs authorized misuse, each with definition + boundary implication), `ADVERSARY_ASSUMPTIONS`, `AUTHORITY_LADDER` (propose → stage → authorize → exercise → audit → revoke), `AGENT_CAPABILITY_CLASSES` (content intake, tool/bridge use, credential touch, external comms, state mutation, self-modification). |
+| `evidence.py` | `Source` dataclass (key, title, publisher, year, url, tier, claims); `SOURCES` — 155 documented sources keyed to the 155 source-derived bib keys; `CAPABILITY_BASELINE` (capability horizon 2027; Anthropic report: 30 targeted entities; AISI: 122 runs, 10 unsanctioned, incident days 2026-07-25..28; aiXcc 2025; QSB fix package; NixOS support dates); `INCIDENTS` (14); `sources_by_tier()`. |
+| `threat_model.py` | `FAILURE_PATHS` (exploitation vs authorized misuse, each with definition + boundary implication), `ADVERSARY_ASSUMPTIONS`, `AUTHORITY_LADDER` (propose → stage → authorize → exercise → audit → revoke), `AGENT_CAPABILITY_CLASSES` (content intake, tool/bridge use, credential touch, external comms, state mutation, self-modification), `CAPABILITY_LINKAGE` (6 capability × failure-path × mediation links). |
 | `trust_domains.py` | `TRUST_DOMAINS` (7: administration, personal_identity, credential_service, agent_execution, browsing_intake, release_deployment, recovery), `CONTROLS` (9: scoped credentials, egress boundary, external approvals, operation mediation, minimal shared state, environment refresh, tool-bridge constraining, independent audit, rehearsed recovery), `CONFIGURATION_INVARIANTS` (9 things an agent must never be able to do). |
 | `forecasts.py` | `Forecast` dataclass (claim, confidence, horizon tuple); `FORECASTS` with confidence vocabulary `high \| moderate \| low`, horizon 2028–2031; `counts_by_confidence()`. |
 | `build_clock.py` | Deterministic time: `build_timestamp()`, `build_date()`, `build_epoch()`; honors `SOURCE_DATE_EPOCH`, falls back to the review date (2026-09-10 noon UTC). The **only** clock in the project. |
 | `project_paths.py` | `find_project_root()` plus `output_dir()`, `figures_dir()`, `data_dir()` — no path literals scattered elsewhere. |
 | `experiment_config.py` | Loads and validates the `experiment:` block of `manuscript/config.yaml`; raises `ExperimentConfigError` on missing/invalid keys. |
 | `manuscript_variables.py` | `generate_variables()` → every `{{TOKEN}}` in `manuscript/*.md` as a string; `save_variables()`. |
-| `figures/` (package) | `_common.py` (Agg backend, deterministic rcParams, colorblind-safe palette, `apply_style()`, `save_figure()`) + six generators: `evidence_timeline`, `property_matrix`, `trust_domains`, `authority_ladder`, `orchestration_boundaries`, `forecast_horizon`. Each exposes `generate_<name>(project_root) -> Path`. |
-| `analysis/` (package) | `pipeline.py::run_analysis(project_root) -> dict` — writes the four data artifacts (see below) and generates all six figures; returns a summary dict. |
+| `figures/` (package) | `_common.py` (Agg backend, deterministic rcParams, colorblind-safe palette, `apply_style()`, `save_figure()`) + eleven registered generators (`incident_lessons`, `evidence_timeline`, `property_matrix`, `defensive_stack`, `trust_domains`, `authority_ladder`, `update_windows`, `os_stack`, `orchestration_boundaries`, `agent_surface`, `forecast_horizon`) plus the cover `graphical_abstract`. Each exposes `generate_<name>(project_root) -> Path`. |
+| `analysis/` (package) | `pipeline.py::run_analysis(project_root) -> dict` — writes the eleven data artifacts (see below) and generates all eleven registered figures plus the cover; returns a summary dict. |
 
 ## Scripts (`scripts/`, thin orchestrators)
 
@@ -39,8 +39,8 @@ graph LR
     TM[threat_model] --> AN
     TD[trust_domains] --> AN
     FC[forecasts] --> AN
-    AN --> OUT[output/figures: 6 PNGs]
-    AN --> OUTD[output/data: 4 artifacts]
+    AN --> OUT[output/figures: 11 registered PNGs + cover]
+    AN --> OUTD[output/data: 11 artifacts]
     OUTD --> MV[manuscript_variables]
     MV --> OUTV[output/data/manuscript_variables.json]
     OUTV -.-> M[manuscript sections resolved at render time]
@@ -50,8 +50,8 @@ graph LR
 
 ## output/ artifacts
 
-- `output/figures/` — 6 deterministic PNGs, 300 dpi, colorblind-safe.
-- `output/data/` — `evaluation_matrix.csv` (216 rows), `scenario_recommendations.csv` (8 rows), `evidence_summary.json`, `validation_report.json`, plus `manuscript_variables.json` from the variables script.
+- `output/figures/` — 11 registered deterministic PNGs plus the cover graphical abstract, 300 dpi, colorblind-safe.
+- `output/data/` — `evaluation_matrix.csv` (216 rows), `scenario_recommendations.csv` (8 rows), `defensive_stack.csv` (192 rows), `update_windows.csv` (24 rows), `os_stack_coverage.csv` (64 rows), `candidate_basis.csv` (24 rows), `incident_register.csv` (14 rows), `capability_mediation_map.csv` (6 rows), `evidence_summary.json`, `cognitive_defenses.json`, `formal_definitions.json`, `validation_report.json`, plus `manuscript_variables.json` from the variables script.
 - `output/reports/` — human-readable run summaries.
 
 Everything under `output/` is disposable: regenerate, never hand-edit.

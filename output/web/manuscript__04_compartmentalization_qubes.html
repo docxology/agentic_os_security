@@ -580,7 +580,12 @@ separate kernels. Qubes’ own security goals explicitly do not promise
 isolation between applications within the same qube
 [qubes_security_design_goals] — a documented limitation, not a bug — and
 the architecture accepts that cost in exchange for a boundary that an
-application-level exploit must not be able to cross by design.</p>
+application-level exploit must not be able to cross by design. Rushby’s
+separation-kernel theory names the formal property this arrangement
+claims: a separation kernel guarantees noninterference between
+compartments except along declared channels, and the Xen/qube split is
+that property instantiated as a workstation operating system
+[rushby1981].</p>
 <p>The qrexec layer deserves particular attention because it is where
 Qubes turns “separate VMs” into “separate security domains.” Every
 cross-qube service call — file copy, clipboard access, inter-qube

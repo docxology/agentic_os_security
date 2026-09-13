@@ -8,9 +8,10 @@
 \beamer@slide {eq:stance_mapping}{12}
 \beamer@slide {def:stance_order}{14}
 \beamer@slide {eq:stance_order}{14}
-\beamer@slide {how-the-matrix-is-constructed-and-refreshed}{15}
-\beamer@slide {fig:property_matrix}{17}
-\beamer@slide {the-defensive-stack-mitigation-classes-as-a-second-lens}{18}
-\beamer@slide {fig:defensive_stack}{21}
-\beamer@slide {what-the-matrix-buys}{23}
-\beamer@slide {limitations-of-matrix-thinking}{25}
+\beamer@slide {rem:anti_scoring}{15}
+\beamer@slide {how-the-matrix-is-constructed-and-refreshed}{16}
+\beamer@slide {fig:property_matrix}{18}
+\beamer@slide {the-defensive-stack-mitigation-classes-as-a-second-lens}{19}
+\beamer@slide {fig:defensive_stack}{22}
+\beamer@slide {what-the-matrix-buys}{24}
+\beamer@slide {limitations-of-matrix-thinking}{26}

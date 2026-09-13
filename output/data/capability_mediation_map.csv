@@ -1,0 +1,7 @@
+capability_id,failure_paths,mediation_points,residual_risk
+content_intake,exploitation;authorized_misuse,sandbox_primitives;classifier_escalation,Prompt injection through hostile content remains probabilistic: mediation reduces exposure but cannot eliminate it.
+tool_bridge_use,authorized_misuse,tool_annotations;oauth_resource_server;external_approval,"Tool annotations are advisory hints and tokens stay powerful, so the review quality of grants bounds this surface."
+credential_touch,authorized_misuse,agent_identity_exchange;external_approval,"Audience-bound identity shrinks stolen-credential value, but a persuaded agent still spends real credentials within its grant."
+external_comms,exploitation;authorized_misuse,egress_proxy;sandbox_observability,"Egress allowlists constrain destinations, not content, so exfiltration through an allowed channel remains possible."
+state_mutation,authorized_misuse,external_approval;classifier_escalation,Approval gates scale poorly with volume: consequential-but-routine mutations risk gating fatigue.
+self_modification,authorized_misuse,external_approval;sandbox_observability,"Explicit approval catches visible self-grants, but incremental environment drift between reviews can accumulate."

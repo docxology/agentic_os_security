@@ -250,7 +250,7 @@ requires no kernel exploit at all, which reframes the evaluation: the
 axis of analysis is the authority a component already holds, not merely
 the difficulty of exploiting it.
 
-This revision (0.5.1) refreshes the evidence base through September 11,
+This revision (0.6.0) refreshes the evidence base through September 11,
 2026. The offensive baseline expands from four primary sources to the
 incident record now available: the NCSC assessments of January 2024 and
 May 2025, the Anthropic campaign investigation of November 2025 ---
@@ -647,6 +647,17 @@ evaluation: either path converts an exposed component into a foothold,
 so an operating system must be judged on what it constrains \emph{after}
 a component fails and on what authority the component \emph{held before}
 failing --- not on the probability that its components never fail.
+
+Schneier's attack-tree discipline reads a system exactly this way:
+enumerate the adversary's paths to a goal, price each of them, and read
+the cheapest surviving path off the diagram --- that minimum, not the
+most dramatic branch, is the system's exposure \citep{schneier1999}. The
+two failure paths above are the root branches of the operator's tree, so
+hardening only the exploitation branch leaves the minimum untouched
+whenever the authorized-misuse branch stays cheaper: an agent persuaded
+to transmit a vault's contents costs less than a sandbox escape. An
+evaluation that measures only exploit difficulty has answered one branch
+while the tree still stands.
 
 \subsection{Adversary baseline}\label{adversary-baseline}
 
@@ -1163,6 +1174,16 @@ formal model thus encodes exactly the discipline the vocabulary was
 built for: total coverage, ordered confidence in documented designs, and
 honesty about the unverified.
 
+\protect\phantomsection\label{rem:anti_scoring}
+\textbf{Remark 1 (Why no numeric scores).} The stance vocabulary is
+ordinal without interval structure: strong and partial can be told
+apart, but no measurement assigns them distances, and an average over
+stances therefore implies a measurement that does not exist. By
+\hyperref[def:stance_order]{Definition 2} the preference order is
+qualitative only --- it fixes which posture dominates on a property,
+never by how much --- so any composite score built on it would be
+arithmetic performed on words.
+
 \subsection{How the matrix is constructed and
 refreshed}\label{how-the-matrix-is-constructed-and-refreshed}
 
@@ -1343,7 +1364,11 @@ isolation between applications within the same qube
 \citep{qubes_security_design_goals} --- a documented limitation, not a
 bug --- and the architecture accepts that cost in exchange for a
 boundary that an application-level exploit must not be able to cross by
-design.
+design. Rushby's separation-kernel theory names the formal property this
+arrangement claims: a separation kernel guarantees noninterference
+between compartments except along declared channels, and the Xen/qube
+split is that property instantiated as a workstation operating system
+\citep{rushby1981}.
 
 The qrexec layer deserves particular attention because it is where Qubes
 turns ``separate VMs'' into ``separate security domains.'' Every
@@ -2614,10 +2639,15 @@ reproducible and signed updates --- the discipline Bottlerocket
 documents for its host and Fedora CoreOS and MicroOS implement for
 theirs
 \citep{bottlerocket_security_features, fedora_coreos_updates, opensuse_transactional_update}.
-Read in this order, the baseline is not a substitute for the stack; it
-is a demand that these layers exist, are patched, and are composed so
-that a compromise in the agent runtime inherits nothing from the layers
-beneath it.
+Consistent with the incident record of sec.~\ref{sec:threat_model},
+fig.~\ref{fig:os_stack} also marks the documented entry points that
+record shows were struck: the hypervisor layer (the QSB-110/115/116 fix
+cadence), the sandbox runtime (the Firecracker jailer advisory), the
+update and provisioning layer (the Nix GHSA record), and the agent
+runtime (the AISI unsanctioned-action account). Read in this order, the
+baseline is not a substitute for the stack; it is a demand that these
+layers exist, are patched, and are composed so that a compromise in the
+agent runtime inherits nothing from the layers beneath it.
 
 \begin{figure}
 \centering
@@ -3111,6 +3141,39 @@ coverage interactions --- not merely the count of layers --- determine
 what an attacker must defeat:
 \begin{equation}\protect\phantomsection\label{eq:defense_composition}{D = d_1 \circ d_2 \circ \cdots \circ d_8}\end{equation}
 
+\protect\phantomsection\label{rem:composition_interaction}
+\textbf{Remark 2 (Composition is not monotone in practice).} Layered
+controls interact: a boundary can be bypassed through a dependency of
+another layer, so adding a control does not monotonically increase what
+an attacker must defeat. The composition of
+\hyperref[def:defense_composition]{Definition 6} bounds the composed
+whole rather than licensing each layer separately, and it is the audit
+rung of \hyperref[def:authority_ladder_order]{Definition 5} ---
+independent verification against records the agent cannot rewrite ---
+that keeps the composition honest in practice.
+
+Each control above counters a named failure path, and the
+capability-mediation linkage makes the mapping explicit. Six agent
+capability classes --- content intake, tool and bridge use, credential
+touch, external communication, state mutation, and self-modification ---
+map onto the failure paths that most directly exploit them and the
+mediation points that counter them (the mediation taxonomy is developed
+in sec.~\ref{sec:orchestration}): content intake and external
+communication sit on both failure paths, exploitation and authorized
+misuse, while the other four are exercised chiefly through authorized
+misuse; sandbox primitives and classifier escalation counter content
+intake; tool annotations, resource-server binding, and external approval
+counter tool and bridge use; agent identity exchange and external
+approval counter credential touch; egress proxy and sandbox
+observability counter external communication; external approval and
+tool-bridge constraining counter state mutation; and external approval
+with independent audit counters self-modification. The linkage is a
+residual-risk statement as much as a control plan --- prompt injection
+against content intake remains probabilistic under every mediation point
+--- and the composition-interaction caveat stated above is the reason
+the composition must be read as a whole: the failure paths cross layers,
+so a dependency of one control can route around the boundary of another.
+
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
@@ -3566,10 +3629,15 @@ variant: an agent's confident recommendation to disable a confinement,
 widen an egress rule, or reuse a credential for convenience is a
 configuration change proposed with fluent justification and no way for
 the operator to distinguish it from competent advice without independent
-verification. The operator consuming agent output is, in this sense, in
-the position of a system consuming the output of a possibly compromised
-tool --- the same skepticism the review applies to build artifacts
-applies to prose.
+verification. In Endsley's situation-awareness terms, such output
+degrades the operator's model at all three levels --- perception of what
+the system is doing, comprehension of what it means, and projection of
+where it is heading --- so a single plausible fabrication corrupts not
+one decision but the trajectory of the decisions that follow
+\citep{endsley1995}. The operator consuming agent output is, in this
+sense, in the position of a system consuming the output of a possibly
+compromised tool --- the same skepticism the review applies to build
+artifacts applies to prose.
 
 \subsection{Cognitive boundary design}\label{cognitive-boundary-design}
 
@@ -4288,10 +4356,15 @@ The formal grounding for these rules is \texorpdfstring{\ensuremath{\delta}}{del
 (\hyperref[def:delegation_bound]{Definition 7}): each hop in an
 agent-to-agent chain is permitted to narrow the authority it passes,
 never to widen it, so trust cannot amplify across a delegation chain no
-matter how many intermediaries it traverses \citep{cif_formal_2026}. The
-bound of eq.~\ref{eq:delegation_bound} is not left as a statement of
-intent --- its bounded-delegation and trust-boundedness properties have
-been exercised computationally, with implementations validating the
+matter how many intermediaries it traverses \citep{cif_formal_2026}.
+Miller's robust-composition discipline supplies the construction rule
+behind the bound: capability handoffs must be built so that a recipient
+can never acquire more authority than its grantor held, making
+no-widening a property of the handoff mechanism itself rather than of
+operator care \citep{miller2006}. The bound of
+eq.~\ref{eq:delegation_bound} is not left as a statement of intent ---
+its bounded-delegation and trust-boundedness properties have been
+exercised computationally, with implementations validating the
 no-amplification guarantee on constructed delegation scenarios
 \citep{cif_validation_2026}.
 
@@ -5275,7 +5348,7 @@ rewards.
 \section{References}\label{sec:references}
 
 The bibliography is generated by Pandoc--natbib from
-\texttt{references.bib} --- 164 entries (155 source-derived plus 9
+\texttt{references.bib} --- 168 entries (155 source-derived plus 13
 scholarly) comprising primary vendor documentation, security advisories,
 incident reports, standards-body specifications and guidance, scholarly
 anchors, and the author's cognitive-security research works published on

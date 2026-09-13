@@ -218,12 +218,16 @@ own security goals explicitly do not promise isolation between
 applications within the same qube (Project 2026s) --- a documented
 limitation, not a bug --- and the architecture accepts that cost in
 exchange for a boundary that an application-level exploit must not be
-able to cross by design.
-
+able to cross by design. Rushby's separation-kernel theory names the
+formal property this arrangement claims: a separation kernel guarantees
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Architectural foundation: separation
 under Xen}
+noninterference between compartments except along declared channels, and
+the Xen/qube split is that property instantiated as a workstation
+operating system (Rushby 1981).
+
 The qrexec layer deserves particular attention because it is where Qubes
 turns ``separate VMs'' into ``separate security domains.'' Every
 cross-qube service call --- file copy, clipboard access, inter-qube
@@ -236,11 +240,11 @@ sec.~4 applies with full force here ---
 qrexec's policy surface is exactly the kind of privileged, byte-moving
 component that offensive automation will probe first, and the QSB-118
 lesson below is a direct instance.
-
 \end{frame}
 
 \begin{frame}[allowframebreaks]{Architectural foundation: separation
 under Xen}
+
 The GUI protocol is part of the same boundary. Keyboard and mouse events
 are directed to the focused domain, window rendering is mediated, and
 inter-domain clipboard transfer requires explicit user action rather

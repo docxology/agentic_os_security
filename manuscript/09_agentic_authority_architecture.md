@@ -40,6 +40,12 @@ Layered controls compose over the eight mitigation classes as a single formal ob
 $$D = d_1 \circ d_2 \circ \cdots \circ d_8$$ {#eq:defense_composition}
 :::::
 
+:::: {.remark #rem:composition_interaction title="Composition is not monotone in practice"}
+Layered controls interact: a boundary can be bypassed through a dependency of another layer, so adding a control does not monotonically increase what an attacker must defeat. The composition of [@def:defense_composition] bounds the composed whole rather than licensing each layer separately, and it is the audit rung of [@def:authority_ladder_order] — independent verification against records the agent cannot rewrite — that keeps the composition honest in practice.
+::::
+
+Each control above counters a named failure path, and the capability-mediation linkage makes the mapping explicit. Six agent capability classes — content intake, tool and bridge use, credential touch, external communication, state mutation, and self-modification — map onto the failure paths that most directly exploit them and the mediation points that counter them (the mediation taxonomy is developed in [@sec:orchestration]): content intake and external communication sit on both failure paths, exploitation and authorized misuse, while the other four are exercised chiefly through authorized misuse; sandbox primitives and classifier escalation counter content intake; tool annotations, resource-server binding, and external approval counter tool and bridge use; agent identity exchange and external approval counter credential touch; egress proxy and sandbox observability counter external communication; external approval and tool-bridge constraining counter state mutation; and external approval with independent audit counters self-modification. The linkage is a residual-risk statement as much as a control plan — prompt injection against content intake remains probabilistic under every mediation point — and the composition-interaction caveat stated above is the reason the composition must be read as a whole: the failure paths cross layers, so a dependency of one control can route around the boundary of another.
+
 : The nine controls of the agentic authority architecture: operating rule and design rationale for each. The rules hold regardless of host distribution; the rationales connect each control to a failure it prevents, and where shipping agent tools implement a version of the rule, the rationale points at the documented mechanism. {#tbl:controls}
 
 | Control | Operating rule | Design rationale |

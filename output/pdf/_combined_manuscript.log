@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  13 SEP 2026 14:19
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  13 SEP 2026 16:16
 entering extended mode
  %&-line parsing enabled.
 **_combined_manuscript.tex
@@ -1728,21 +1728,21 @@ Package natbib Warning: Multiple citation on page 31: same authors and year
 
 
 Package natbib Warning: Citation `openbsd_innovations' on page 31 undefined on
-input line 2755.
+input line 2785.
 
 
 Package natbib Warning: Citation `openbsd_79' on page 31 undefined on input lin
-e 2761.
+e 2791.
 
 
 ignored: Infinite glue shrinkage found in box being split [31] [32]
 
 Package natbib Warning: Citation `openbsd_innovations' on page 33 undefined on
-input line 2876.
+input line 2906.
 
 
 Package natbib Warning: Citation `openbsd_79' on page 33 undefined on input lin
-e 2885.
+e 2915.
 
 [33]
 File: ../figures/trust_domains.png Graphic file (type bmp)
@@ -1780,7 +1780,7 @@ Project(2026{\natexlab {{}})]{openbsd_79} OpenBSD Project. \newblock \ETC.
 ! Paragraph ended before \@lbibitem was complete.
 <to be read again>
                    \par
-l.820
+l.832
 
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -1789,7 +1789,7 @@ My plan is to forget the whole thing and hope for the best.
 ! Argument of \@lbibitem has an extra }.
 <inserted text>
                 \par
-l.827 \bibitem[Project(2026{\natexlab{}}}
+l.839 \bibitem[Project(2026{\natexlab{}}}
                                          )]{openbsd_innovations}
 I've run across a `}' that doesn't seem to match anything.
 For example, `\def\a#1{...}' and `\a}' would produce
@@ -1803,7 +1803,7 @@ Project(2026{\natexlab {}}
 ! Paragraph ended before \@lbibitem was complete.
 <to be read again>
                    \par
-l.827 \bibitem[Project(2026{\natexlab{}}}
+l.839 \bibitem[Project(2026{\natexlab{}}}
                                          )]{openbsd_innovations}
 I suspect you've forgotten a `}', causing me to apply this
 control sequence to too much text. How can we recover?
@@ -1812,7 +1812,7 @@ My plan is to forget the whole thing and hope for the best.
 ! Extra }, or forgotten \endgroup.
 <recently read> }
 
-l.827 \bibitem[Project(2026{\natexlab{}}}
+l.839 \bibitem[Project(2026{\natexlab{}}}
                                          )]{openbsd_innovations}
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1823,13 +1823,13 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text>
                 $
-l.827 ...tem[Project(2026{\natexlab{}}})]{openbsd_
+l.839 ...tem[Project(2026{\natexlab{}}})]{openbsd_
                                                   innovations}
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
-l.827 ...2026{\natexlab{}}})]{openbsd_innovations}
+l.839 ...2026{\natexlab{}}})]{openbsd_innovations}
 
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1844,7 +1844,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1852,7 +1852,7 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing } inserted.
 <inserted text>
                 }
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1863,7 +1863,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing \endgroup inserted.
 <inserted text>
                 \endgroup
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1874,7 +1874,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing \endgroup inserted.
 <inserted text>
                 \endgroup
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1885,7 +1885,7 @@ my insertion and my current dilemma will both disappear.
 ! Undefined control sequence.
 \Url@FormatString ...ndafter \UrlLeft \Url@String
                                                   \UrlRight \m@th $
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1896,7 +1896,7 @@ and I'll forget about whatever was undefined.
 ! Extra }, or forgotten $.
 <recently read> }
 
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1907,7 +1907,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text>
                 $
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1918,7 +1918,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing } inserted.
 <inserted text>
                 }
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1929,12 +1929,12 @@ my insertion and my current dilemma will both disappear.
 ! Extra \endgroup.
 \Hy@endcolorlink ->\endgroup
 
-l.830 ...https://www.openbsd.org/innovations.html}
+l.842 ...https://www.openbsd.org/innovations.html}
                                                   , 2026{\natexlab{}}}.
 Things are pretty mixed up, but I think the worst is over.
 
 ! Too many }'s.
-l.830 ...org/innovations.html}, 2026{\natexlab{}}}
+l.842 ...org/innovations.html}, 2026{\natexlab{}}}
                                                   .
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
@@ -1946,13 +1946,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.833 ...ct(2026{\natexlab{~}})]{openbsd_security}
+l.845 ...ct(2026{\natexlab{~}})]{openbsd_security}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 833
+Underfull \hbox (badness 10000) detected at line 845
 [][]
  []
 
@@ -1963,13 +1963,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.839 ...t(2025{\natexlab{g}})]{qubes_430_release}
+l.851 ...t(2025{\natexlab{g}})]{qubes_430_release}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 839
+Underfull \hbox (badness 10000) detected at line 851
 [][]
  []
 
@@ -1980,41 +1980,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.847 \bibitem[Project(2026)]{qsb_110}
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 847
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...
-
-l.853 \bibitem[Project(2026)]{qsb_115}
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Underfull \hbox (badness 10000) detected at line 853
-[][]
- []
-
-
-! LaTeX Error: Lonely \item--perhaps a missing list environment.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...
-
-l.859 \bibitem[Project(2026)]{qsb_116}
+l.859 \bibitem[Project(2026)]{qsb_110}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2031,7 +1997,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.865 \bibitem[Project(2026)]{qsb_118}
+l.865 \bibitem[Project(2026)]{qsb_115}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2048,7 +2014,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.871 ...em[Project(2026)]{qubes_43_release_notes}
+l.871 \bibitem[Project(2026)]{qsb_116}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2065,13 +2031,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.879 ...tem[Project(2026)]{qubes_43_requirements}
+l.877 \bibitem[Project(2026)]{qsb_118}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 879
+Underfull \hbox (badness 10000) detected at line 877
 [][]
  []
 
@@ -2082,13 +2048,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.887 ...item[Project(2026)]{qubes_anti_evil_maid}
+l.883 ...em[Project(2026)]{qubes_43_release_notes}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 887
+Underfull \hbox (badness 10000) detected at line 883
 [][]
  []
 
@@ -2099,13 +2065,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.895 \bibitem[Project(2026)]{qubes_architecture}
+l.891 ...tem[Project(2026)]{qubes_43_requirements}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 895
+Underfull \hbox (badness 10000) detected at line 891
 [][]
  []
 
@@ -2116,13 +2082,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.903 \bibitem[Project(2026)]{qubes_devices_api}
+l.899 ...item[Project(2026)]{qubes_anti_evil_maid}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 903
+Underfull \hbox (badness 10000) detected at line 899
 [][]
  []
 
@@ -2133,13 +2099,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.911 \bibitem[Project(2026)]{qubes_disposables}
+l.907 \bibitem[Project(2026)]{qubes_architecture}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 911
+Underfull \hbox (badness 10000) detected at line 907
 [][]
  []
 
@@ -2150,13 +2116,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.919 \bibitem[Project(2026)]{qubes_faq}
+l.915 \bibitem[Project(2026)]{qubes_devices_api}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 919
+Underfull \hbox (badness 10000) detected at line 915
 [][]
  []
 
@@ -2167,13 +2133,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.925 \bibitem[Project(2026)]{qubes_gui_domain}
+l.923 \bibitem[Project(2026)]{qubes_disposables}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 925
+Underfull \hbox (badness 10000) detected at line 923
 [][]
  []
 
@@ -2184,13 +2150,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.933 \bibitem[Project(2026)]{qubes_gui_protocol}
+l.931 \bibitem[Project(2026)]{qubes_faq}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 933
+Underfull \hbox (badness 10000) detected at line 931
 [][]
  []
 
@@ -2201,13 +2167,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.940 \bibitem[Project(2026)]{qubes_issue_4371}
+l.937 \bibitem[Project(2026)]{qubes_gui_domain}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 940
+Underfull \hbox (badness 10000) detected at line 937
 [][]
  []
 
@@ -2218,13 +2184,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.946 \bibitem[Project(2026)]{qubes_issue_7992}
+l.945 \bibitem[Project(2026)]{qubes_gui_protocol}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 946
+Underfull \hbox (badness 10000) detected at line 945
 [][]
  []
 
@@ -2235,7 +2201,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.952 \bibitem[Project(2026)]{qubes_qrexec}
+l.952 \bibitem[Project(2026)]{qubes_issue_4371}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2252,13 +2218,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.960 \bibitem[Project(2026)]{qubes_qsb_index}
+l.958 \bibitem[Project(2026)]{qubes_issue_7992}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 960
+Underfull \hbox (badness 10000) detected at line 958
 [][]
  []
 
@@ -2269,13 +2235,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.966 ...Project(2026)]{qubes_salt_administration}
+l.964 \bibitem[Project(2026)]{qubes_qrexec}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 966
+Underfull \hbox (badness 10000) detected at line 964
 [][]
  []
 
@@ -2286,13 +2252,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.974 ...oject(2026)]{qubes_security_design_goals}
+l.972 \bibitem[Project(2026)]{qubes_qsb_index}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 974
+Underfull \hbox (badness 10000) detected at line 972
 [][]
  []
 
@@ -2304,13 +2270,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.982 \bibitem[Project(2026)]{qubes_templates}
+l.978 ...Project(2026)]{qubes_salt_administration}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 982
+Underfull \hbox (badness 10000) detected at line 978
 [][]
  []
 
@@ -2321,13 +2287,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.989 \bibitem[Project(2026)]{tails_7_12}
+l.986 ...oject(2026)]{qubes_security_design_goals}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 989
+Underfull \hbox (badness 10000) detected at line 986
 [][]
  []
 
@@ -2338,13 +2304,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.995 \bibitem[Project(2026)]{tails_overview}
+l.994 \bibitem[Project(2026)]{qubes_templates}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 995
+Underfull \hbox (badness 10000) detected at line 994
 [][]
  []
 
@@ -2355,7 +2321,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1001 ...Project(2026)]{tails_persistent_storage}
+l.1001 \bibitem[Project(2026)]{tails_7_12}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2372,7 +2338,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1007 \bibitem[Project(2026)]{whonix_18_support}
+l.1007 \bibitem[Project(2026)]{tails_overview}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2389,13 +2355,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1016 ...[Project(2026)]{whonix_technical_design}
+l.1013 ...Project(2026)]{tails_persistent_storage}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1016
+Underfull \hbox (badness 10000) detected at line 1013
 [][]
  []
 
@@ -2406,13 +2372,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1022 ...ject(2026)]{whonix_workstation_security}
+l.1019 \bibitem[Project(2026)]{whonix_18_support}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1022
+Underfull \hbox (badness 10000) detected at line 1019
 [][]
  []
 
@@ -2423,7 +2389,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1028 \bibitem[Research(2026)]{apollo_automode}
+l.1028 ...[Project(2026)]{whonix_technical_design}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2440,13 +2406,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1036   Connelly]{nist_sp800_207}
+l.1034 ...ject(2026)]{whonix_workstation_security}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1036
+Underfull \hbox (badness 10000) detected at line 1034
 [][]
  []
 
@@ -2457,13 +2423,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1042 ...altzer and Schroeder(1975)]{saltzer1975}
+l.1040 \bibitem[Research(2026)]{apollo_automode}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1042
+Underfull \hbox (badness 10000) detected at line 1040
 [][]
  []
 
@@ -2474,7 +2440,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1048 ...026{\natexlab{a}})]{secureblue_features}
+l.1048   Connelly]{nist_sp800_207}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2491,7 +2457,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1054 ...ct(2026{\natexlab{b}})]{secureblue_v430}
+l.1054 \bibitem[Rushby(1981)]{rushby1981}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2508,13 +2474,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1061 ...ct(2026{\natexlab{c}})]{secureblue_v491}
+l.1060 ...altzer and Schroeder(1975)]{saltzer1975}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1061
+Underfull \hbox (badness 10000) detected at line 1060
 [][]
  []
 
@@ -2525,13 +2491,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1068 ...tem[Security(2026)]{parrot_intended_use}
+l.1066 \bibitem[Schneier(1999)]{schneier1999}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1068
+Underfull \hbox (badness 10000) detected at line 1066
 [][]
  []
 
@@ -2542,13 +2508,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1074 ...ation(2026{\natexlab{a}})]{microkit_2_3}
+l.1071 ...026{\natexlab{a}})]{secureblue_features}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1074
+Underfull \hbox (badness 10000) detected at line 1071
 [][]
  []
 
@@ -2559,13 +2525,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1081 ...ion(2026{\natexlab{b}})]{sel4_2026_news}
+l.1077 ...ct(2026{\natexlab{b}})]{secureblue_v430}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1081
+Underfull \hbox (badness 10000) detected at line 1077
 [][]
  []
 
@@ -2576,13 +2542,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1087 ...lab{c}})]{sel4_verification_assumptions}
+l.1084 ...ct(2026{\natexlab{c}})]{secureblue_v491}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1087
+Underfull \hbox (badness 10000) detected at line 1084
 [][]
  []
 
@@ -2593,13 +2559,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1094 ...ices(2026)]{firecracker_jailer_advisory}
+l.1091 ...tem[Security(2026)]{parrot_intended_use}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1094
+Underfull \hbox (badness 10000) detected at line 1091
 [][]
  []
 
@@ -2610,13 +2576,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1102 ...stemHardening(2026)]{io_uring_hardening}
+l.1097 ...ation(2026{\natexlab{a}})]{microkit_2_3}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1102
+Underfull \hbox (badness 10000) detected at line 1097
 [][]
  []
 
@@ -2627,13 +2593,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1111 ...hnica(2025)]{arstechnica_gtg_skepticism}
+l.1104 ...ion(2026{\natexlab{b}})]{sel4_2026_news}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1111
+Underfull \hbox (badness 10000) detected at line 1104
 [][]
  []
 
@@ -2644,13 +2610,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1120 \bibitem[(TII)(2026)]{sbomnix}
+l.1110 ...lab{c}})]{sel4_verification_assumptions}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1120
+Underfull \hbox (badness 10000) detected at line 1110
 [][]
  []
 
@@ -2661,13 +2627,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1127 ...u(2026{\natexlab{a}})]{snap_confinement}
+l.1117 ...ices(2026)]{firecracker_jailer_advisory}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1127
+Underfull \hbox (badness 10000) detected at line 1117
 [][]
  []
 
@@ -2678,13 +2644,13 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1135 ...\natexlab{b}})]{ubuntu_core_confinement}
+l.1125 ...stemHardening(2026)]{io_uring_hardening}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) detected at line 1135
+Underfull \hbox (badness 10000) detected at line 1125
 [][]
  []
 
@@ -2695,7 +2661,24 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1143 ...26{\natexlab{c}})]{ubuntu_release_cycle}
+l.1134 ...hnica(2025)]{arstechnica_gtg_skepticism}
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 1134
+[][]
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...
+
+l.1143 \bibitem[(TII)(2026)]{sbomnix}
 
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -2706,13 +2689,64 @@ Underfull \hbox (badness 10000) detected at line 1143
  []
 
 
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...
+
+l.1150 ...u(2026{\natexlab{a}})]{snap_confinement}
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 1150
+[][]
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...
+
+l.1158 ...\natexlab{b}})]{ubuntu_core_confinement}
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 1158
+[][]
+ []
+
+
+! LaTeX Error: Lonely \item--perhaps a missing list environment.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...
+
+l.1166 ...26{\natexlab{c}})]{ubuntu_release_cycle}
+
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) detected at line 1166
+[][]
+ []
+
+
 ! LaTeX Error: \begin{document} ended by \end{thebibliography}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...
 
-l.1149 \end{thebibliography}
+l.1172 \end{thebibliography}
 
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -2721,7 +2755,7 @@ or  <return>  to continue without it.
 ! Extra \endgroup.
 \end  ...end#1\endcsname \@checkend {#1}\endgroup
                                                   \UseHook {env/#1/after}\if...
-l.1149 \end{thebibliography}
+l.1172 \end{thebibliography}
 
 Things are pretty mixed up, but I think the worst is over.
 
@@ -2738,10 +2772,10 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 30711 strings out of 468168
- 629443 string characters out of 5432815
- 1266015 words of memory out of 5000000
- 59073 multiletter control sequences out of 15000+600000
+ 30727 strings out of 468168
+ 629772 string characters out of 5432815
+ 1265015 words of memory out of 5000000
+ 59089 multiletter control sequences out of 15000+600000
  631381 words of font info for 88 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  90i,9n,117p,1017b,1387s stack positions out of 10000i,1000n,20000p,200000b,200000s

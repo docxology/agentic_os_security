@@ -45,7 +45,7 @@ Requires Python ≥ 3.10. Dependencies: numpy, matplotlib, pillow, pyyaml, defus
 
 ```bash
 uv run python scripts/00_preflight.py            # environment, deps, directory checks
-uv run python scripts/10_evaluation_analysis.py  # evaluation matrix + 11 figures + candidate basis + validation report
+uv run python scripts/10_evaluation_analysis.py  # evaluation matrix + 11 figures + candidate basis + capability mediation map + validation report
 uv run python scripts/z_generate_manuscript_variables.py  # token pipeline -> output/data/manuscript_variables.json
 uv run pytest tests/ --cov=src --cov-fail-under=90        # ≥90% coverage gate on src/
 ```

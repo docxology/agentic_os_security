@@ -13,14 +13,14 @@
   "figure_issues": [],
   "output_statistics": {
     "data": {
-      "files": 11,
-      "size_mb": 0.055123329162597656
+      "files": 12,
+      "size_mb": 0.05630302429199219
     },
     "detailed_validation": {
       "directories": {
         "data": {
           "exists": true,
-          "file_count": 11,
+          "file_count": 12,
           "largest_file": "candidate_basis.csv",
           "largest_file_path": "data/candidate_basis.csv",
           "size_mb": "0.06"
@@ -40,7 +40,7 @@
           "file_count": 13,
           "largest_file": "graphical_abstract.png",
           "largest_file_path": "figures/graphical_abstract.png",
-          "size_mb": "3.47"
+          "size_mb": "3.54"
         },
         "llm": {
           "exists": false,
@@ -57,14 +57,14 @@
           "file_count": 21,
           "largest_file": "references.bib",
           "largest_file_path": "manuscript/references.bib",
-          "size_mb": "0.30"
+          "size_mb": "0.31"
         },
         "pdf": {
           "exists": true,
           "file_count": 1,
           "largest_file": "agentic_os_security_combined.pdf",
           "largest_file_path": "pdf/agentic_os_security_combined.pdf",
-          "size_mb": "3.90"
+          "size_mb": "3.98"
         },
         "reports": {
           "exists": true,
@@ -83,18 +83,18 @@
           "file_count": 18,
           "largest_file": "03_evaluation_framework_slides.pdf",
           "largest_file_path": "slides/03_evaluation_framework_slides.pdf",
-          "size_mb": "3.76"
+          "size_mb": "3.84"
         },
         "web": {
           "exists": true,
           "file_count": 21,
           "largest_file": "index.html",
           "largest_file_path": "web/index.html",
-          "size_mb": "1.16"
+          "size_mb": "1.17"
         }
       },
       "file_counts": {
-        "data": 11,
+        "data": 12,
         "figures": 13,
         "manuscript": 21,
         "pdf": 1,
@@ -114,11 +114,11 @@
           "combined_pdf": {
             "exists": true,
             "readable": true,
-            "size_mb": 3.9
+            "size_mb": 3.98
           },
           "data": {
             "exists": true,
-            "files": 11,
+            "files": 12,
             "optional": false,
             "readable": true,
             "required": true,
@@ -144,7 +144,7 @@
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 3.47
+            "size_mb": 3.54
           },
           "llm": {
             "exists": false,
@@ -166,7 +166,7 @@
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 0.3
+            "size_mb": 0.31
           },
           "pdf": {
             "exists": true,
@@ -174,7 +174,7 @@
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 3.9
+            "size_mb": 3.98
           },
           "reports": {
             "exists": true,
@@ -197,7 +197,7 @@
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 3.76
+            "size_mb": 3.84
           },
           "web": {
             "exists": true,
@@ -205,7 +205,7 @@
             "optional": false,
             "readable": true,
             "required": true,
-            "size_mb": 1.16
+            "size_mb": 1.17
           }
         },
         "inventory_mode": "stable-local-output-v1",
@@ -215,11 +215,11 @@
         "valid": true,
         "warnings": []
       },
-      "total_size_mb": 12.643921852111816
+      "total_size_mb": 12.897624015808105
     },
     "evidence_issues": [
-      "02_threat_model.md:58: unsupported number 500000",
-      "02_threat_model.md:58: unsupported number 48",
+      "02_threat_model.md:60: unsupported number 500000",
+      "02_threat_model.md:60: unsupported number 48",
       "03_evaluation_framework.md:49: unsupported citation def:stance_mapping",
       "03_evaluation_framework.md:58: unsupported citation def:stance_order",
       "04_compartmentalization_qubes.md:17: unsupported number 45",
@@ -231,8 +231,10 @@
       "07_servers_agent_infrastructure.md:38: unsupported citation def:update_window_semantics",
       "07_servers_agent_infrastructure.md:54: unsupported number 23.10",
       "07_servers_agent_infrastructure.md:58: unsupported citation def:stack_layering",
+      "07_servers_agent_infrastructure.md:60: unsupported number 115",
+      "07_servers_agent_infrastructure.md:60: unsupported number 116",
       "09_agentic_authority_architecture.md:36: unsupported citation def:defense_composition",
-      "09_agentic_authority_architecture.md:73: unsupported citation def:authority_ladder_order",
+      "09_agentic_authority_architecture.md:44: unsupported citation def:authority_ladder_order",
       "11_opsec_for_agent_operators.md:15: unsupported number 8693",
       "12_orchestration_security.md:17: unsupported number 8693",
       "12_orchestration_security.md:23: unsupported number 9728",
@@ -245,30 +247,30 @@
     ],
     "figures": {
       "files": 13,
-      "size_mb": 3.4694576263427734
+      "size_mb": 3.5413684844970703
     },
     "inventory_mode": "stable-local-output-v1",
     "pdf": {
       "files": 1,
-      "size_mb": 3.898447036743164
+      "size_mb": 3.978245735168457
     },
     "stable_inventory": {
       "categories": {
         "data": {
-          "files": 11,
-          "size_bytes": 57801
+          "files": 12,
+          "size_bytes": 59038
         },
         "figures": {
           "files": 13,
-          "size_bytes": 3637990
+          "size_bytes": 3713394
         },
         "manuscript": {
           "files": 21,
-          "size_bytes": 316160
+          "size_bytes": 322106
         },
         "pdf": {
           "files": 1,
-          "size_bytes": 4087818
+          "size_bytes": 4171493
         },
         "reports": {
           "files": 1,
@@ -276,16 +278,16 @@
         },
         "slides": {
           "files": 18,
-          "size_bytes": 3939433
+          "size_bytes": 4023572
         },
         "web": {
           "files": 21,
-          "size_bytes": 1214648
+          "size_bytes": 1230273
         }
       },
       "mode": "stable-local-output-v1",
-      "total_files": 86,
-      "total_size_bytes": 13258113
+      "total_files": 87,
+      "total_size_bytes": 13524139
     }
   },
   "recommendations": [],
@@ -296,27 +298,27 @@
     "passed": 9,
     "total_checks": 9
   },
-  "timestamp": "2026-09-12T00:21:08Z",
+  "timestamp": "2026-09-13T21:23:53Z",
   "validated_inputs": {
     "artifact_manifest": {
       "path": "output/reports/artifact_manifest.json",
-      "sha256": "806e1834473ebb67770584b99c6cea0ea5c93cf5d116ef7b69bf2b9488a64aa2",
-      "size_bytes": 26263
+      "sha256": "653dd2fe5e5435a38327ab8c4e34936fb8d8f3b20c2f81ec7b5419ea4384ea18",
+      "size_bytes": 26564
     },
     "combined_manuscript": {
       "path": "output/web/_combined_manuscript.md",
-      "sha256": "30e82adf0da39b950ff19f64ff89289e381f96ca5fc478b28c574d8b0f167ac9",
-      "size_bytes": 260214
+      "sha256": "0c5484556336c665d9ba0498be6ace09575e0835d97e060cf504cad379bb7a90",
+      "size_bytes": 264698
     },
     "composition_manifest": {
       "path": "output/reports/manuscript_composition.json",
-      "sha256": "91b054ed1e140900c630e250a943dc06368d7e2dc51ad58cad18c833a0574d41",
+      "sha256": "12ddb054a13d64c83a49999b53851551e5f61c5393db77756b56d23b5187ddef",
       "size_bytes": 4263
     },
     "consumed_manuscript": [
       {
         "rendered_path": "output/manuscript/00_abstract.md",
-        "rendered_sha256": "7ce48fac1fc32e822e96d4edd844108a180db829af70565b6ae27a25d531448d",
+        "rendered_sha256": "cfe9288767207a155623eb3832afd3530eda7f7a0239ab1bafe6a5c96b11829a",
         "source_path": "manuscript/00_abstract.md",
         "source_sha256": "5a49674cb781e050efc86c1f1471b156830fefdb732df4776aacdbe68983de00"
       },
@@ -328,21 +330,21 @@
       },
       {
         "rendered_path": "output/manuscript/02_threat_model.md",
-        "rendered_sha256": "732a81e7c42ae19a62795468c4f0fd8d9d64b3a6bd5f23e713343c1bb3a59fcd",
+        "rendered_sha256": "20fc6265480256118b7fd15ad4cac524bc78d004ddc16eac8e460cf590a195a4",
         "source_path": "manuscript/02_threat_model.md",
-        "source_sha256": "0bf3d614fcc2e1d5139dcf2c4b95a3d6b414c4e79a1be08f5ac855966e577410"
+        "source_sha256": "19e160e01b730ff2e677efed1bdf6782bbcd7f5dfcf93e233b099e80a09b6247"
       },
       {
         "rendered_path": "output/manuscript/03_evaluation_framework.md",
-        "rendered_sha256": "296d637fd31e8ea988a2e3aa33582e458882143cc109ae07a88c1beb85a8b656",
+        "rendered_sha256": "c5bc5522f864243ecabebdc340c7481b14c09d1769607f065690ea22ad31910f",
         "source_path": "manuscript/03_evaluation_framework.md",
-        "source_sha256": "da7d52e3b830f9568cea9a46a7d2810ab173f0b80b30a569fd5d0bd0dee69640"
+        "source_sha256": "9d2cff88cfec8bc310963f0715a8c2e0f3c7d5e725654c86c2b7a5b41ccbb969"
       },
       {
         "rendered_path": "output/manuscript/04_compartmentalization_qubes.md",
-        "rendered_sha256": "bac9fa35991073f23716e47b8e3deb58a42d23db4959923f0ff94b1af95054cb",
+        "rendered_sha256": "1f517324402ec0bf97f9c7b359bf55e1043478cdb0d54bcbc627d8f164cc6221",
         "source_path": "manuscript/04_compartmentalization_qubes.md",
-        "source_sha256": "bac9fa35991073f23716e47b8e3deb58a42d23db4959923f0ff94b1af95054cb"
+        "source_sha256": "1f517324402ec0bf97f9c7b359bf55e1043478cdb0d54bcbc627d8f164cc6221"
       },
       {
         "rendered_path": "output/manuscript/05_reproducible_operations_nixos.md",
@@ -358,9 +360,9 @@
       },
       {
         "rendered_path": "output/manuscript/07_servers_agent_infrastructure.md",
-        "rendered_sha256": "3c7a73e57a54eb77d15daad2a7744d1d43d221d90c85b20ee785827e789c7e7c",
+        "rendered_sha256": "2f033ce28046b40bad722f3b0eb5bed59658f0e5092d10b611156ebafde45020",
         "source_path": "manuscript/07_servers_agent_infrastructure.md",
-        "source_sha256": "058960b83cddfcdc84cfbc5d8dd95a6b30cb05dba7b5fa9d82ac7f1e353e0fdc"
+        "source_sha256": "c570fa416784fbd07a85597f73fb5638052db6c8343185f672072bd160e2f8c4"
       },
       {
         "rendered_path": "output/manuscript/08_boundary_comparators.md",
@@ -370,15 +372,15 @@
       },
       {
         "rendered_path": "output/manuscript/09_agentic_authority_architecture.md",
-        "rendered_sha256": "448fa6902b2d8082049d980a001114ced158cb870efab1783b487a1887ffffab",
+        "rendered_sha256": "11fe43d732977091b6e12d7235d3b9ce99fc0712e4963d1c18654a8f68a22288",
         "source_path": "manuscript/09_agentic_authority_architecture.md",
-        "source_sha256": "2cf2eae6afc2f2259e0926cd09e541671a88b9a76ba9b226688be8b8d451f453"
+        "source_sha256": "3ae52e980ca63241ea45d3509ce96ddcecfadc18c852539862540a20b0df4fc6"
       },
       {
         "rendered_path": "output/manuscript/10_cognitive_security.md",
-        "rendered_sha256": "8be3835e8775f2ea1caf0f1cd7005c9764c3250dc8386ef44555694a0bd99cd9",
+        "rendered_sha256": "4ecfc0d1b67a696300cf11a144f51cf5e56d21fef00606c07a871639569f0f42",
         "source_path": "manuscript/10_cognitive_security.md",
-        "source_sha256": "8be3835e8775f2ea1caf0f1cd7005c9764c3250dc8386ef44555694a0bd99cd9"
+        "source_sha256": "4ecfc0d1b67a696300cf11a144f51cf5e56d21fef00606c07a871639569f0f42"
       },
       {
         "rendered_path": "output/manuscript/11_opsec_for_agent_operators.md",
@@ -388,9 +390,9 @@
       },
       {
         "rendered_path": "output/manuscript/12_orchestration_security.md",
-        "rendered_sha256": "195d421d9795cbc108c407c3c5a0a4ecb1824f37fccc7f9cfc1dd0d037d59727",
+        "rendered_sha256": "afb07783720bcd86b4532481edbda874fd7ff5a32f781e7ab9d5d17f02a4dfb9",
         "source_path": "manuscript/12_orchestration_security.md",
-        "source_sha256": "1a9620d1918c4b25f54b452ba4396fd4705f55de01739900648479ba5def0f84"
+        "source_sha256": "eb07f6998526747c63a34904780b398c6f960af2d559a698aae881d189292880"
       },
       {
         "rendered_path": "output/manuscript/13_configuration_authorization.md",
@@ -418,27 +420,27 @@
       },
       {
         "rendered_path": "output/manuscript/99_references.md",
-        "rendered_sha256": "7cda19cfebb4a8a27294415c6c5215e927b7561c3935da7cd9957bd0416b1194",
+        "rendered_sha256": "dcfd4df8e64e034651799a58baea93f67f21e26bf546b0a00afec97f9a1682a2",
         "source_path": "manuscript/99_references.md",
-        "source_sha256": "7cda19cfebb4a8a27294415c6c5215e927b7561c3935da7cd9957bd0416b1194"
+        "source_sha256": "dcfd4df8e64e034651799a58baea93f67f21e26bf546b0a00afec97f9a1682a2"
       }
     ],
     "fingerprints": {
       "config": {
         "file_count": 18,
-        "sha256": "c3cae440f55a5ad9db83db3b908edb72b4f3c3de4f23f481405f94a816466099"
+        "sha256": "9b0db9d462a897e6efb0564a18161f4fea1e9c2916bc55ed1f0878b183e492ff"
       },
       "output": {
-        "file_count": 86,
-        "sha256": "453ff4d031a0e8322dc6cca584862ef53df565e1f587a4920d66e2049ca125b5"
+        "file_count": 87,
+        "sha256": "7471ff550fb41e5f524d5b999dd4708fd00cef74629f554875699d11e9d40deb"
       },
       "source": {
         "file_count": 58,
-        "sha256": "c990d0a27227610fbc08ce9985a22a5fd12d412c26508ff8f89d07f74f42a046"
+        "sha256": "8bffffbf14d0020ab339830626ab8d1a694b756aab12c8ec8b04a3b6e2768870"
       },
       "stage": {
         "file_count": 1336,
-        "sha256": "a015786be9285185524f605137c4b587cfb1550e5f7c665f4c4f46b490472481"
+        "sha256": "d9fc7c1446db200aef915d78abd911031c23f9440fe4962b957e5fbf2c51a5ed"
       }
     },
     "project": "working/agentic_os_security",

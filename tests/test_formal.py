@@ -1,6 +1,7 @@
-"""Formal-definition structural invariants: 8 pinned definitions with
-ASCII-only LaTeX statements, balanced braces, bib-resolvable citation
-keys, and a surface grouping that covers every definition.
+"""Formal-definition and remark-block structural invariants: 8 pinned
+definitions with ASCII-only LaTeX statements, balanced braces,
+bib-resolvable citation keys, a surface grouping that covers every
+definition, and the 2 v0.6.0 auto-numbered remark blocks.
 """
 
 from __future__ import annotations
@@ -160,3 +161,45 @@ def test_definition_block_surfaces_match_formal_surfaces():
     for block in formal.DEFINITION_BLOCKS:
         assert block.surface.strip(), block.block_id
         assert surfaces_by_id[block.block_id] == block.surface, block.block_id
+
+
+REMARK_IDS = ["anti_scoring", "composition_interaction"]
+
+
+def test_two_remarks_with_pinned_ids():
+    ids = [b.block_id for b in formal.REMARK_BLOCKS]
+    assert len(formal.REMARK_BLOCKS) == 2
+    assert len(set(ids)) == len(ids)
+    assert ids == REMARK_IDS
+
+
+def test_remarks_are_kind_remark_with_pinned_titles():
+    titles = {b.block_id: b.title for b in formal.REMARK_BLOCKS}
+    for block in formal.REMARK_BLOCKS:
+        assert block.kind == "remark", block.block_id
+        assert block.title.strip(), block.block_id
+    assert titles == {
+        "anti_scoring": "Why no numeric scores",
+        "composition_interaction": "Composition is not monotone in practice",
+    }
+
+
+def test_remark_orders_are_sequential_one_through_two():
+    ordered = formal.remark_blocks_in_order()
+    assert [b.order for b in ordered] == [1, 2]
+    assert [b.block_id for b in ordered] == REMARK_IDS
+
+
+def test_remark_labels_are_unique_and_reference_form():
+    labels = [b.label for b in formal.REMARK_BLOCKS]
+    assert len(set(labels)) == len(labels) == 2
+    for block in formal.REMARK_BLOCKS:
+        assert block.label == f"rem:{block.block_id}", block.block_id
+
+
+def test_remark_surfaces_are_nonempty():
+    surfaces = {b.block_id: b.surface for b in formal.REMARK_BLOCKS}
+    assert surfaces == {
+        "anti_scoring": "registry/evaluation matrix",
+        "composition_interaction": "sec:agentic_authority",
+    }

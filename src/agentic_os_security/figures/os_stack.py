@@ -2,13 +2,12 @@
 
 ``{#fig:os_stack}`` -> ``output/figures/os_stack.png``
 
-Eight horizontal layers, top-down from hardware and firmware (ordinal 1)
-to the agent runtime and its tool bridge (ordinal 8), driven by
-:data:`agentic_os_security.stack.STACK_LAYERS`: each row carries the layer
-name, its representative mechanisms, and a candidate example. The right
-hand side is an archetype-coverage grid — the eight category archetypes x
-the eight layers, colored by the shared ``strong | partial | weak |
-n_a`` stance vocabulary from :data:`agentic_os_security.stack.STACK_COVERAGE`
+Publication-grade v0.6.0 layout: the left column carries a documented
+entry-point marker per struck layer (small vermillion dot + short tag
+naming the incidents from :data:`agentic_os_security.evidence.INCIDENTS`),
+the right hand side is an archetype-coverage grid — the eight category
+archetypes x the eight layers, colored by the shared ``strong | partial |
+weak | n_a`` stance vocabulary from :data:`agentic_os_security.stack.STACK_COVERAGE`
 — with a full-word legend (no letter codes).
 
 Publication-grade document-scale typography (7-11 pt), colorblind-safe,
@@ -22,11 +21,10 @@ from pathlib import Path
 
 from matplotlib.patches import Rectangle
 
+from ..evidence import INCIDENTS
 from ..project_paths import figures_dir
 from ..stack import ARCHETYPE_LABELS, STACK_COVERAGE, STACK_LAYERS
 from ._common import OKABE_ITO, STANCE_COLORS, ascii_text, new_figure, save_figure, wrap_ascii
-
-__all__ = ["generate_os_stack"]
 
 _ACCENT = OKABE_ITO["blue"]
 _GREEN = OKABE_ITO["bluish_green"]
@@ -43,6 +41,18 @@ _ROW_PITCH = 0.60
 _GRID_TOP = 5.55
 _STANCE_ORDER = ("strong", "partial", "weak", "n_a")
 _STANCE_WORDS = {"strong": "strong", "partial": "partial", "weak": "weak", "n_a": "not assessed"}
+#: Documented entry points (v0.6.0): layer_id -> (incident ids from
+#: :data:`evidence.INCIDENTS`, short full-word tag drawn beside a small
+#: vermillion dot on that layer's name row).
+_ENTRY_POINT_MARKERS: dict[str, tuple[tuple[str, ...], str]] = {
+    "hypervisor": (("qsb-110", "qsb-115", "qsb-116"), "QSB-110/115/116"),
+    "sandbox_runtime": (("cve_2026_1386",), "Firecracker CVE-2026-1386"),
+    "update_provisioning": (
+        ("nix_ghsa_g3g9", "nix_ghsa_vh5x", "cve_2026_44029"),
+        "Nix GHSAs",
+    ),
+    "agent_runtime_tool_bridge": (("aisi_inc_2026_07_28_01",), "AISI unsanctioned actions"),
+}
 
 
 def generate_os_stack(project_root: Path | str) -> Path:
@@ -52,6 +62,13 @@ def generate_os_stack(project_root: Path | str) -> Path:
 
     layers = list(STACK_LAYERS)
     archetypes = list(ARCHETYPE_LABELS)
+
+    # Documented entry points must trace to registered incidents.
+    incident_ids = {incident.incident_id for incident in INCIDENTS}
+    for _layer_id, (marker_ids, _tag) in _ENTRY_POINT_MARKERS.items():
+        assert all(mid in incident_ids for mid in marker_ids), (
+            f"entry-point marker cites unknown incidents: {_layer_id}"
+        )
 
     fig = new_figure((_CANVAS_W, _CANVAS_H))
     fig.subplots_adjust(left=0, right=1, top=1, bottom=0)
@@ -156,6 +173,30 @@ def generate_os_stack(project_root: Path | str) -> Path:
             va="center",
             color=_ACCENT,
         )
+
+        # Documented entry-point marker: vermillion dot + short tag on the
+        # layer-name row, right-aligned against the coverage grid.
+        marker = _ENTRY_POINT_MARKERS.get(layer.layer_id)
+        if marker:
+            _marker_ids, tag = marker
+            ax.plot(
+                [6.56],
+                [row_top - 0.16],
+                marker="o",
+                markersize=3.4,
+                color=OKABE_ITO["vermillion"],
+                zorder=4,
+            )
+            ax.text(
+                6.46,
+                row_top - 0.16,
+                ascii_text(tag),
+                fontsize=6.2,
+                ha="right",
+                va="center",
+                color=OKABE_ITO["vermillion"],
+                zorder=4,
+            )
 
         # Archetype coverage cells for this layer.
         for col, archetype in enumerate(archetypes):

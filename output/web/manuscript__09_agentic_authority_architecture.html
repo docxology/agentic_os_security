@@ -791,6 +791,41 @@ whose coverage interactions — not merely the count of layers — determine
 what an attacker must defeat: <span class="math display">\[D = d_1 \circ
 d_2 \circ \cdots \circ d_8\]</span> {#eq:defense_composition}</p>
 </div>
+<div id="rem:composition_interaction" class="remark"
+title="Composition is not monotone in practice">
+<p><strong>Remark 1 (Composition is not monotone in practice).</strong>
+Layered controls interact: a boundary can be bypassed through a
+dependency of another layer, so adding a control does not monotonically
+increase what an attacker must defeat. The composition of <a
+href="#def:defense_composition">Definition 2</a> bounds the composed
+whole rather than licensing each layer separately, and it is the audit
+rung of <a href="#def:authority_ladder_order">Definition 1</a> —
+independent verification against records the agent cannot rewrite — that
+keeps the composition honest in practice.</p>
+</div>
+<p>Each control above counters a named failure path, and the
+capability-mediation linkage makes the mapping explicit. Six agent
+capability classes — content intake, tool and bridge use, credential
+touch, external communication, state mutation, and self-modification —
+map onto the failure paths that most directly exploit them and the
+mediation points that counter them (the mediation taxonomy is developed
+in <span class="citation"
+data-cites="sec:orchestration">[@sec:orchestration]</span>): content
+intake and external communication sit on both failure paths,
+exploitation and authorized misuse, while the other four are exercised
+chiefly through authorized misuse; sandbox primitives and classifier
+escalation counter content intake; tool annotations, resource-server
+binding, and external approval counter tool and bridge use; agent
+identity exchange and external approval counter credential touch; egress
+proxy and sandbox observability counter external communication; external
+approval and tool-bridge constraining counter state mutation; and
+external approval with independent audit counters self-modification. The
+linkage is a residual-risk statement as much as a control plan — prompt
+injection against content intake remains probabilistic under every
+mediation point — and the composition-interaction caveat stated above is
+the reason the composition must be read as a whole: the failure paths
+cross layers, so a dependency of one control can route around the
+boundary of another.</p>
 <div class="table-scroll" role="region" tabindex="0" aria-label="Scrollable table: The nine controls of the agentic authority architecture: operating rule and design rationale for each. The rules hold…"><table id="tbl:controls" data-responsive-table="true">
 <caption>The nine controls of the agentic authority architecture:
 operating rule and design rationale for each. The rules hold regardless

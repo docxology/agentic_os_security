@@ -100,6 +100,11 @@
       "check": "update_windows_count",
       "detail": "24 update windows (expected 24)",
       "status": "green"
+    },
+    {
+      "check": "capability_mediation_linkage",
+      "detail": "6 capability linkage rows, ids match catalog, failure-path and mediation-point vocabularies",
+      "status": "green"
     }
   ],
   "evaluation_matrix": "evaluation_matrix.csv",

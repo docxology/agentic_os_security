@@ -1,7 +1,7 @@
 """Evaluation analysis pipeline: data artifacts, eleven registry figures,
 and the cover graphical abstract.
 
-``run_analysis(project_root)`` is idempotent: every run rewrites the ten
+``run_analysis(project_root)`` is idempotent: every run rewrites the eleven
 data artifacts plus the figure registry and the validation report from the
 pinned registry, regenerates all eleven registry figures plus the cover
 graphical abstract (which is not a registry figure).  Reports
@@ -50,8 +50,8 @@ from ..registry import (
     matrix_rows,
     stance_counts,
 )
-from ..orchestration import CIF_CONCEPTS
-from ..threat_model import AUTHORITY_LADDER
+from ..orchestration import CIF_CONCEPTS, MEDIATION_POINTS
+from ..threat_model import AGENT_CAPABILITY_CLASSES, AUTHORITY_LADDER, CAPABILITY_LINKAGE
 from ..formal import FORMAL_DEFINITIONS, FormalDefinition
 from ..stack import ARCHETYPE_LABELS, STACK_LAYERS
 from ..stack import stack_rows as coverage_rows
@@ -74,6 +74,8 @@ _CIF_CONCEPT_IDS: frozenset[str] = frozenset(
 __all__ = ["run_analysis"]
 
 _STANCE_VOCAB: frozenset[str] = frozenset({"strong", "partial", "weak", "n_a"})
+
+_FAILURE_PATH_VOCAB: frozenset[str] = frozenset({"exploitation", "authorized_misuse"})
 
 _FIGURE_GENERATORS: dict[str, Any] = {
     "incident_lessons.png": generate_incidents,
@@ -426,6 +428,25 @@ def _write_candidate_basis(path: Path) -> int:
     return len(CANDIDATE_BASIS)
 
 
+def _write_capability_mediation_map(path: Path) -> int:
+    """Write the capability x failure-path x mediation map (6 rows) from
+    ``threat_model.CAPABILITY_LINKAGE``."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(["capability_id", "failure_paths", "mediation_points", "residual_risk"])
+        for link in CAPABILITY_LINKAGE:
+            writer.writerow(
+                [
+                    link.capability_id,
+                    ";".join(link.failure_paths),
+                    ";".join(link.mediation_points),
+                    link.residual_risk,
+                ]
+            )
+    return len(CAPABILITY_LINKAGE)
+
+
 def _write_cognitive_defenses(path: Path) -> dict[str, Any]:
     """Write the CIF concept -> project-surface mapping (deterministic).
 
@@ -582,6 +603,34 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
         f"{len(UPDATE_WINDOWS)} update windows (expected 24)",
     )
 
+    # Capability x failure-path x mediation linkage (v0.6.0): 6 rows, ids
+    # matching the capability catalog, vocabularies pinned, residual note.
+    linkage = CAPABILITY_LINKAGE
+    capability_ids = {link.capability_id for link in linkage}
+    catalog_ids = {entry.split(":", 1)[0] for entry in AGENT_CAPABILITY_CLASSES}
+    mediation_ids = {point.point_id for point in MEDIATION_POINTS}
+    bad_failure_paths = sorted(
+        {fp for link in linkage for fp in link.failure_paths} - set(_FAILURE_PATH_VOCAB)
+    )
+    bad_mediation_ids = sorted(
+        {mp for link in linkage for mp in link.mediation_points} - mediation_ids
+    )
+    linkage_ok = (
+        len(linkage) == 6
+        and capability_ids == catalog_ids
+        and not bad_failure_paths
+        and not bad_mediation_ids
+        and all(link.residual_risk for link in linkage)
+    )
+    record(
+        "capability_mediation_linkage",
+        linkage_ok,
+        f"{len(linkage)} capability linkage rows, ids match catalog, failure-path and mediation-point vocabularies"
+        if linkage_ok
+        else f"rows={len(linkage)} catalog-mismatch={sorted(capability_ids ^ catalog_ids)} "
+        f"bad-paths={bad_failure_paths} bad-mediation={bad_mediation_ids}",
+    )
+
     stance_tallies = stance_counts()
     all_green = all(check["status"] == "green" for check in checks)
     if not all_green:
@@ -600,7 +649,7 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
 
 
 def run_analysis(project_root: Path | str) -> dict[str, Any]:
-    """Run the full analysis: 10 data artifacts, the 11 registry figures,
+    """Run the full analysis: 11 data artifacts, the 11 registry figures,
     and the cover graphical abstract.
 
     Returns a summary dict with artifact paths and row/figure counts.
@@ -619,7 +668,9 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
     formal_defs = _write_formal_definitions(data_dir(root) / "formal_definitions.json")
     registry_entries = _write_figure_registry(figures_dir(root) / "figure_registry.json")
     basis_rows_written = _write_candidate_basis(data_dir(root) / "candidate_basis.csv")
-
+    linkage_rows_written = _write_capability_mediation_map(
+        data_dir(root) / "capability_mediation_map.csv"
+    )
     report = _run_checks(data_path)
     report_path = data_dir(root) / "validation_report.json"
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -637,9 +688,9 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
         "matrix_rows": matrix_rows_written,
         "scenario_rows": scenario_rows_written,
         "defensive_stack_rows": stack_rows_written,
-        "update_window_rows": update_rows_written,
-        "incident_register_rows": incident_rows_written,
         "candidate_basis_rows": basis_rows_written,
+        "capability_mediation_rows": linkage_rows_written,
+        "incident_register_rows": incident_rows_written,
         "cif_concepts_mapped": cognitive_defenses["num_concepts"],
         "os_stack_coverage_rows": coverage_rows_written,
         "formal_definitions": formal_defs["num_definitions"],
@@ -654,8 +705,8 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
             "evidence_summary.json",
             "cognitive_defenses.json",
             "os_stack_coverage.csv",
-            "formal_definitions.json",
             "candidate_basis.csv",
+            "capability_mediation_map.csv",
             "figure_registry.json",
             "validation_report.json",
         ],

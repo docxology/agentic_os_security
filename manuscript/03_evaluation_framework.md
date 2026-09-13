@@ -57,6 +57,10 @@ $$\textit{strong} \succ \textit{partial} \succ \textit{weak}$$ {#eq:stance_order
 
 By [@def:stance_order] the order fixes postures, not distances between them: no arithmetic over stances is meaningful, and no rung is a probability. Notably, $n_a$ does not appear in [@eq:stance_order] at all — an unverified or out-of-scope cell sits outside the preference order entirely, which is what stops "we could not verify" from masquerading as "we verified it is weak." The formal model thus encodes exactly the discipline the vocabulary was built for: total coverage, ordered confidence in documented designs, and honesty about the unverified.
 
+:::: {.remark #rem:anti_scoring title="Why no numeric scores"}
+The stance vocabulary is ordinal without interval structure: strong and partial can be told apart, but no measurement assigns them distances, and an average over stances therefore implies a measurement that does not exist. By [@def:stance_order] the preference order is qualitative only — it fixes which posture dominates on a property, never by how much — so any composite score built on it would be arithmetic performed on words.
+::::
+
 ## How the matrix is constructed and refreshed
 
 The matrix lives as data, not prose. In `src/agentic_os_security/registry.py`, each candidate carries a `property_stance` dictionary keyed by all {{CONFIG_NUM_PROPERTIES}} property identifiers, alongside a design summary, a named limitation, and an assessment. The pipeline emits the full {{CONFIG_NUM_CANDIDATES}}-candidate × {{CONFIG_NUM_PROPERTIES}}-property table to `output/data/evaluation_matrix.csv` — one row per pair — and self-checks enforce stance-vocabulary validity and matrix completeness before any figure is regenerated. Stances are assigned from documented designs, official security documentation, project advisories, and primary incident reports; vendor feature lists support `partial` or `strong` stances only where the project itself documents the mechanism, never as measured resistance results.

@@ -24,8 +24,8 @@
 \contentsline {subsection}{\numberline {4.5}A formal stance model}{12}{subsection.4.5}%
 \contentsline {subsection}{\numberline {4.6}How the matrix is constructed and refreshed}{12}{subsection.4.6}%
 \contentsline {subsection}{\numberline {4.7}The defensive stack: mitigation classes as a second lens}{12}{subsection.4.7}%
-\contentsline {subsection}{\numberline {4.8}What the matrix buys}{15}{subsection.4.8}%
-\contentsline {subsection}{\numberline {4.9}Limitations of matrix thinking}{15}{subsection.4.9}%
+\contentsline {subsection}{\numberline {4.8}What the matrix buys}{14}{subsection.4.8}%
+\contentsline {subsection}{\numberline {4.9}Limitations of matrix thinking}{14}{subsection.4.9}%
 \contentsline {section}{\numberline {5}Compartmentalization: Qubes OS Under Offensive-Agent Load --- Capabilities and Limits}{16}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Architectural foundation: separation under Xen}{16}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}State model: templates, AppVMs, disposables}{16}{subsection.5.2}%
@@ -91,9 +91,9 @@
 \contentsline {subsection}{\numberline {13.5}Swarm threat models: MAESTRO, AegisSwarm, and the agent as insider}{46}{subsection.13.5}%
 \contentsline {subsection}{\numberline {13.6}Delegation chains and the confused deputy}{47}{subsection.13.6}%
 \contentsline {subsection}{\numberline {13.7}The mediation-point taxonomy}{48}{subsection.13.7}%
-\contentsline {subsection}{\numberline {13.8}Approval chains across agent hierarchies}{49}{subsection.13.8}%
-\contentsline {subsection}{\numberline {13.9}Auditability of multi-agent decisions}{49}{subsection.13.9}%
-\contentsline {subsection}{\numberline {13.10}Mapping to the trust-domain architecture}{49}{subsection.13.10}%
+\contentsline {subsection}{\numberline {13.8}Approval chains across agent hierarchies}{48}{subsection.13.8}%
+\contentsline {subsection}{\numberline {13.9}Auditability of multi-agent decisions}{48}{subsection.13.9}%
+\contentsline {subsection}{\numberline {13.10}Mapping to the trust-domain architecture}{48}{subsection.13.10}%
 \contentsline {section}{\numberline {14}Configuration Generation Is Not Authorization: Review Invariants and Enforcer Independence}{50}{section.14}%
 \contentsline {subsection}{\numberline {14.1}Generation versus enforcement}{50}{subsection.14.1}%
 \contentsline {subsection}{\numberline {14.2}Declarative configuration as an inspectable policy surface}{50}{subsection.14.2}%

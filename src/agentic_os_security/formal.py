@@ -1,4 +1,5 @@
-"""Formal definitions: 8 numbered formalisms for the v0.4.0 manuscript round.
+"""Formal definitions and remark blocks: numbered formalisms for the
+v0.4.0 manuscript round, with v0.6.0 auto-numbered Remark blocks.
 
 Each definition carries a LaTeX-renderable inline-math statement (ASCII
 only — LaTeX escapes, never unicode), an informal gloss, the manuscript
@@ -30,6 +31,9 @@ __all__ = [
     "DefinitionBlock",
     "DEFINITION_BLOCKS",
     "definition_blocks_in_order",
+    "RemarkBlock",
+    "REMARK_BLOCKS",
+    "remark_blocks_in_order",
 ]
 
 
@@ -288,3 +292,52 @@ DEFINITION_BLOCKS: tuple[DefinitionBlock, ...] = (
 def definition_blocks_in_order() -> tuple[DefinitionBlock, ...]:
     """Return the 8 Definition blocks sorted by their document order."""
     return tuple(sorted(DEFINITION_BLOCKS, key=lambda b: b.order))
+
+@dataclass(frozen=True)
+class RemarkBlock:
+    """One auto-numbered Remark block for the formalism.lua filter.
+
+    ``block_id`` is the pandoc identifier (``#rem:...``); ``kind`` is
+    always ``'remark'`` — the filter counts each kind with its own
+    counter, so remarks are numbered Remark 1, Remark 2, ... in document
+    order while the Definition counter (1..8) continues unaffected;
+    ``label`` is the prose reference form (``[@rem:...]``) the filter
+    resolves; ``order`` is the document position the filter's remark
+    counter assigns (never hand-numbered).
+    """
+
+    block_id: str
+    kind: str
+    title: str
+    label: str
+    surface: str
+    order: int
+
+
+#: The 2 Remark blocks (v0.6.0). Remarks get their own counter, separate
+#: from the definitions 1-8: the filter assigns Remark 1..2 in this
+#: document order across sections 03 and 09.
+REMARK_BLOCKS: tuple[RemarkBlock, ...] = (
+    RemarkBlock(
+        "anti_scoring",
+        "remark",
+        "Why no numeric scores",
+        "rem:anti_scoring",
+        "registry/evaluation matrix",
+        1,
+    ),
+    RemarkBlock(
+        "composition_interaction",
+        "remark",
+        "Composition is not monotone in practice",
+        "rem:composition_interaction",
+        "sec:agentic_authority",
+        2,
+    ),
+)
+
+
+def remark_blocks_in_order() -> tuple[RemarkBlock, ...]:
+    """Return the 2 Remark blocks sorted by their document order."""
+    return tuple(sorted(REMARK_BLOCKS, key=lambda b: b.order))
+

@@ -41,7 +41,7 @@ REQUIRED_KEY_SHAPES: dict[str, tuple[str, int | None]] = {
     "scenario_ids": ("str_list", 8),
     "trust_domain_ids": ("str_list", 7),
     "control_ids": ("str_list", 9),
-    "figure_registry": ("fig_list", 9),
+    "figure_registry": ("fig_list", 11),
 }
 
 #: Shape of each ``figure_registry`` entry, e.g. ``fig:property_matrix -> property_matrix.png``.

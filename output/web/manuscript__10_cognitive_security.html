@@ -772,10 +772,15 @@ security advice is the most directly dangerous variant: an agent’s
 confident recommendation to disable a confinement, widen an egress rule,
 or reuse a credential for convenience is a configuration change proposed
 with fluent justification and no way for the operator to distinguish it
-from competent advice without independent verification. The operator
-consuming agent output is, in this sense, in the position of a system
-consuming the output of a possibly compromised tool — the same
-skepticism the review applies to build artifacts applies to prose.</p>
+from competent advice without independent verification. In Endsley’s
+situation-awareness terms, such output degrades the operator’s model at
+all three levels — perception of what the system is doing, comprehension
+of what it means, and projection of where it is heading — so a single
+plausible fabrication corrupts not one decision but the trajectory of
+the decisions that follow [endsley1995]. The operator consuming agent
+output is, in this sense, in the position of a system consuming the
+output of a possibly compromised tool — the same skepticism the review
+applies to build artifacts applies to prose.</p>
 <h2 id="cognitive-boundary-design">Cognitive boundary design</h2>
 <p>The response is not exhortation to stay vigilant; it is the design of
 boundaries around cognition, parallel to the boundaries the trust-domain
