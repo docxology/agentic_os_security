@@ -7,7 +7,7 @@
 # Consumed by: `infrastructure/rendering/pdf_renderer.py` and `infrastructure/reporting/pipeline_report_model.py`
 paper:
   title: "Agentic Security and Operating Systems"
-  version: "0.6.0"
+  version: "0.7.0"
   date: "" # Auto-generated (\today) by the title-page builder when empty
   cover:
     image: "output/figures/graphical_abstract.png"
@@ -21,9 +21,9 @@ authors:
     affiliation: "Active Inference Institute"
     corresponding: true
 
-# Publication posture: PRIVATE for now. No DOI, no deposits, no bookends.
+# Publication: published — Zenodo DOI above; GitHub repo public.
 publication:
-  doi: ""
+  doi: "10.5281/zenodo.22754352"
   doi_status: "Forthcoming — Zenodo DOI reserved on release"
   version_doi: ""
   version_record: ""

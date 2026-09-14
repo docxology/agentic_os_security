@@ -18,3 +18,5 @@ The prospectus is therefore specific about what to build next:
 - **Auditable declarative baselines** in which intended system state is explicit, reviewable, reproducibly deployable — and independently authorized before deployment.
 
 The {{RESULT_NUM_FIGURES}} figures and the underlying analysis artifacts are reproducible from the repository's own pipeline, because a prospectus about independently rebuildable environments should be one. The composition that matters is not any single system. It is the set of boundaries an operator can actually keep: workstations that compartmentalize, operations that rebuild, updates that authenticate, and agents that can propose everything while authorizing almost nothing. Building those, in pieces that someone demonstrably maintains, is the work this horizon rewards.
+
+Finally, the skill library under `skills/` is the operational form of this prospectus: the review's concepts are available as nine harness-neutral skills, not only as prose.

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  13 SEP 2026 16:16
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  14 SEP 2026 09:09
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1664,19 +1664,42 @@ put/slides/01_introduction_slides.vrb) [13
 
 ] [18
 
-] [19
+]
+\openout4 = `01_introduction_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/01_introduction_slides.vrb) [19
 
 ]
-[20
+\openout4 = `01_introduction_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/01_introduction_slides.vrb) [20
 
 ] [21
 
 
-] [22
+]
+\openout4 = `01_introduction_slides.vrb'.
 
-] [23
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/01_introduction_slides.vrb) [22
+
+]
+\openout4 = `01_introduction_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/01_introduction_slides.vrb) [23
 
 ] [24
+
+] [25
+
+] [26
 
 ]
 \tf@nav=\write5
@@ -1702,13 +1725,13 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32378 strings out of 468168
- 646528 string characters out of 5432815
+ 32391 strings out of 468168
+ 647507 string characters out of 5432815
  1193338 words of memory out of 5000000
- 60535 multiletter control sequences out of 15000+600000
+ 60540 multiletter control sequences out of 15000+600000
  631264 words of font info for 73 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1108b,419s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/01_introduction_slides.pdf (24 pages).
+c_os_security/output/slides/01_introduction_slides.pdf (26 pages).

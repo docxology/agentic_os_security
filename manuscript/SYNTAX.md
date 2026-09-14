@@ -240,6 +240,10 @@ Files are assembled in lexicographic order by `infrastructure/rendering/pdf_rend
 - Assessments are analytical judgments from documented designs and advisories — never presented as penetration-test results; no numeric security scores ("Qubes 9.4" style) anywhere
 - No ```mermaid``` blocks in manuscript files (the combined-PDF render requires a browser shell for those; this project expresses diagrams as generated PNG figures)
 
+## Skills Surface (v0.7.0)
+
+Concepts ship as harness-neutral skills outside the numbered sections: `skills/<id>/SKILL.md` per concept plus `skills/registry.yaml` ({id, title, section, artifact, test}), pinned by `tests/test_skills.py`. A skill's Evidence block reuses the syntax above — a `{#sec:...}` label (validated against `SECTION_FILES` in `tests/test_manuscript_structure.py`), inline `[@key]` citations (validated against `references.bib`), and optionally `{#eq:...}`/`{#def:...}`/`{#fig:...}`/`{#tbl:...}` labels — plus a data artifact under `output/data/` or a pinned constant in `src/agentic_os_security/`, and a conformance test `tests/<file>.py::<name>`. Skills add no manuscript prose and no new cross-reference kinds; the numbered sections stay the only place the review argues.
+
 ## See Also
 
 - [`../../../docs/guides/manuscript-semantics.md`](../../../../docs/guides/manuscript-semantics.md) — Repository-wide canonical semantics

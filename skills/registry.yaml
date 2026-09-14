@@ -1,0 +1,62 @@
+# Concept-skill registry — the review's shipped concepts (v0.7.0).
+#
+# CogSecSkills registry doctrine [@cogsecskills2026]: each row is one
+# harness-neutral skill, defined by skills/<id>/SKILL.md, with its
+# manuscript section label, its evidence artifact (a generated data file
+# or a pinned registry constant), and the conformance test that pins the
+# concept. Pinned by tests/test_skills.py.
+
+skills:
+  - id: stance-evaluation
+    title: Stance evaluation
+    section: sec:evaluation_framework
+    artifact: output/data/evaluation_matrix.csv
+    test: tests/test_registry.py::test_every_candidate_stance_covers_all_properties_with_valid_vocab
+
+  - id: authority-ladder
+    title: Authority ladder
+    section: sec:agentic_authority
+    artifact: src/agentic_os_security/threat_model.py::AUTHORITY_LADDER
+    test: tests/test_threat_model.py::test_authority_ladder_is_pinned_six_rung_sequence
+
+  - id: trust-domain-design
+    title: Trust-domain design
+    section: sec:agentic_authority
+    artifact: src/agentic_os_security/trust_domains.py::TRUST_DOMAINS
+    test: tests/test_trust_domains.py::test_seven_unique_trust_domains_with_pinned_ids
+
+  - id: delegation-bound
+    title: Delegation bound
+    section: sec:orchestration
+    artifact: src/agentic_os_security/formal.py::delegation_bound
+    test: tests/test_formal.py::test_definition_blocks_mirror_formal_definitions
+
+  - id: mediation-selection
+    title: Mediation selection
+    section: sec:orchestration
+    artifact: output/data/capability_mediation_map.csv
+    test: tests/test_orchestration.py::test_ten_mediation_points_with_pinned_unique_ids
+
+  - id: incident-lessons
+    title: Incident lessons
+    section: sec:threat_model
+    artifact: output/data/incident_register.csv
+    test: tests/test_evidence.py::test_lesson_taxonomy_pins_five_unique_classes
+
+  - id: scenario-selection
+    title: Scenario selection
+    section: sec:scenarios
+    artifact: output/data/scenario_recommendations.csv
+    test: tests/test_registry.py::test_eight_unique_scenarios_with_narrative_fields
+
+  - id: configuration-invariants
+    title: Configuration invariants
+    section: sec:configuration_authorization
+    artifact: src/agentic_os_security/trust_domains.py::CONFIGURATION_INVARIANTS
+    test: tests/test_trust_domains.py::test_nine_configuration_invariants_are_nonempty_and_unique
+
+  - id: defensive-stack
+    title: Defensive stack
+    section: sec:evaluation_framework
+    artifact: output/data/defensive_stack.csv
+    test: tests/test_stack.py::test_eight_unique_layers_with_pinned_ids

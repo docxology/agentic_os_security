@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  13 SEP 2026 16:16
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  14 SEP 2026 09:09
 entering extended mode
  %&-line parsing enabled.
 **_combined_manuscript.tex
@@ -1636,53 +1636,21 @@ Overfull \hbox (0.37798pt too wide) detected at line 96
 \tf@toc=\write3
 \openout3 = `_combined_manuscript.toc'.
 
- [2] [3]
+ [2]
 LaTeX Font Info:    Font shape `TU/JuliaMono-Regular(0)/m/n' will be
-(Font)              scaled to size 7.05267pt on input line 420.
- [4] [5] [6]
+(Font)              scaled to size 7.05267pt on input line 290.
+ [3] [4] [5] [6] [7]
 File: ../figures/incident_lessons.png Graphic file (type bmp)
 <../figures/incident_lessons.png>
- [7] [8]
+ [8] [9]
 File: ../figures/evidence_timeline.png Graphic file (type bmp)
 <../figures/evidence_timeline.png>
- [9] [10] [11]
+ [10] [11] [12]
 File: ../figures/property_matrix.png Graphic file (type bmp)
 <../figures/property_matrix.png>
 File: ../figures/defensive_stack.png Graphic file (type bmp)
 <../figures/defensive_stack.png>
- [12] [13] [14] [15]
-
-Package natbib Warning: Multiple citation on page 16: same authors and year
-(natbib)                without distinguishing extra letter,
-(natbib)                appears as question mark.
-
-
-Package natbib Warning: Multiple citation on page 16: same authors and year
-(natbib)                without distinguishing extra letter,
-(natbib)                appears as question mark.
-
-
-Package natbib Warning: Multiple citation on page 16: same authors and year
-(natbib)                without distinguishing extra letter,
-(natbib)                appears as question mark.
-
-
-Package natbib Warning: Multiple citation on page 16: same authors and year
-(natbib)                without distinguishing extra letter,
-(natbib)                appears as question mark.
-
-
-Package natbib Warning: Multiple citation on page 16: same authors and year
-(natbib)                without distinguishing extra letter,
-(natbib)                appears as question mark.
-
-
-Package natbib Warning: Multiple citation on page 16: same authors and year
-(natbib)                without distinguishing extra letter,
-(natbib)                appears as question mark.
-
-
-ignored: Infinite glue shrinkage found in box being split [16]
+ [13] [14] [15] [16]
 
 Package natbib Warning: Multiple citation on page 17: same authors and year
 (natbib)                without distinguishing extra letter,
@@ -1698,83 +1666,115 @@ Package natbib Warning: Multiple citation on page 17: same authors and year
 (natbib)                without distinguishing extra letter,
 (natbib)                appears as question mark.
 
-[17]
+
+Package natbib Warning: Multiple citation on page 17: same authors and year
+(natbib)                without distinguishing extra letter,
+(natbib)                appears as question mark.
+
+
+Package natbib Warning: Multiple citation on page 17: same authors and year
+(natbib)                without distinguishing extra letter,
+(natbib)                appears as question mark.
+
+
+Package natbib Warning: Multiple citation on page 17: same authors and year
+(natbib)                without distinguishing extra letter,
+(natbib)                appears as question mark.
+
+
+ignored: Infinite glue shrinkage found in box being split [17]
+
+Package natbib Warning: Multiple citation on page 18: same authors and year
+(natbib)                without distinguishing extra letter,
+(natbib)                appears as question mark.
+
+
+Package natbib Warning: Multiple citation on page 18: same authors and year
+(natbib)                without distinguishing extra letter,
+(natbib)                appears as question mark.
+
 
 Package natbib Warning: Multiple citation on page 18: same authors and year
 (natbib)                without distinguishing extra letter,
 (natbib)                appears as question mark.
 
 [18]
-ignored: Infinite glue shrinkage found in box being split [19] [20] [21]
+
+Package natbib Warning: Multiple citation on page 19: same authors and year
+(natbib)                without distinguishing extra letter,
+(natbib)                appears as question mark.
+
+[19]
+ignored: Infinite glue shrinkage found in box being split [20] [21] [22]
 ignored: Infinite glu
-e shrinkage found in box being split [22] [23] [24]
+e shrinkage found in box being split [23] [24] [25]
 ignored: Infinite glue shrinkage foun
-d in box being split [25]
+d in box being split [26]
 File: ../figures/update_windows.png Graphic file (type bmp)
 <../figures/update_windows.png>
- [26] [27]
+ [27] [28]
 File: ../figures/os_stack.png Graphic file (type bmp)
 <../figures/os_stack.png>
- [28] [29] [30]
+ [29] [30] [31]
 
-Package natbib Warning: Multiple citation on page 31: same authors and year
+Package natbib Warning: Multiple citation on page 32: same authors and year
 (natbib)                without distinguishing extra letter,
 (natbib)                appears as question mark.
 
 
-Package natbib Warning: Multiple citation on page 31: same authors and year
+Package natbib Warning: Multiple citation on page 32: same authors and year
 (natbib)                without distinguishing extra letter,
 (natbib)                appears as question mark.
 
 
-Package natbib Warning: Citation `openbsd_innovations' on page 31 undefined on
-input line 2785.
+Package natbib Warning: Citation `openbsd_innovations' on page 32 undefined on
+input line 2817.
 
 
-Package natbib Warning: Citation `openbsd_79' on page 31 undefined on input lin
-e 2791.
+Package natbib Warning: Citation `openbsd_79' on page 32 undefined on input lin
+e 2823.
 
 
-ignored: Infinite glue shrinkage found in box being split [31] [32]
+ignored: Infinite glue shrinkage found in box being split [32] [33]
 
-Package natbib Warning: Citation `openbsd_innovations' on page 33 undefined on
-input line 2906.
+Package natbib Warning: Citation `openbsd_innovations' on page 34 undefined on
+input line 2938.
 
 
-Package natbib Warning: Citation `openbsd_79' on page 33 undefined on input lin
-e 2915.
+Package natbib Warning: Citation `openbsd_79' on page 34 undefined on input lin
+e 2947.
 
-[33]
+[34]
 File: ../figures/trust_domains.png Graphic file (type bmp)
 <../figures/trust_domains.png>
 
 
-Package natbib Warning: Multiple citation on page 34: same authors and year
+Package natbib Warning: Multiple citation on page 35: same authors and year
 (natbib)                without distinguishing extra letter,
 (natbib)                appears as question mark.
 
-[34] [35]
-ignored: Infinite glue shrinkage found in box being split [36]
+[35] [36]
+ignored: Infinite glue shrinkage found in box being split [37]
 File: ../figures/authority_ladder.png Graphic file (type bmp)
 <../figures/authority_ladder.png>
- [37] [38] [39] [40] [41] [42] [43] [44] [45] [46]
+ [38] [39] [40] [41] [42] [43] [44] [45] [46] [47]
 File: ../figures/orchestration_boundaries.png Graphic file (type bmp)
 <../figures/orchestration_boundaries.png>
- [47]
+ [48]
 File: ../figures/agent_surface.png Graphic file (type bmp)
 <../figures/agent_surface.png>
- [48]
-[49]
-ignored: Infinite glue shrinkage found in box being split [50] [51] [52]
+ [49]
+[50]
+ignored: Infinite glue shrinkage found in box being split [51] [52] [53]
 File: ../figures/forecast_horizon.png Graphic file (type bmp)
 <../figures/forecast_horizon.png>
- [53]
+ [54]
 
-Package natbib Warning: Multiple citation on page 54: same authors and year
+Package natbib Warning: Multiple citation on page 55: same authors and year
 (natbib)                without distinguishing extra letter,
 (natbib)                appears as question mark.
 
-[54] [55] [56] [57] (./_combined_manuscript.bbl [58] [59] [60]
+[55] [56] [57] [58] (./_combined_manuscript.bbl [59] [60] [61]
 Runaway argument?
 Project(2026{\natexlab {{}})]{openbsd_79} OpenBSD Project. \newblock \ETC.
 ! Paragraph ended before \@lbibitem was complete.
@@ -2262,7 +2262,7 @@ Underfull \hbox (badness 10000) detected at line 972
 [][]
  []
 
-[61]
+[62]
 
 ! LaTeX Error: Lonely \item--perhaps a missing list environment.
 
@@ -2763,7 +2763,7 @@ Things are pretty mixed up, but I think the worst is over.
 
 Package natbib Warning: There were undefined citations.
 
-[62] (./_combined_manuscript.aux
+[63] (./_combined_manuscript.aux
 Package cleveref Info: loaded `english' language definitions on input line 9.
 )
  ***********
@@ -2780,4 +2780,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  90i,9n,117p,1017b,1387s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on _combined_manuscript.pdf (63 pages).
+Output written on _combined_manuscript.pdf (64 pages).

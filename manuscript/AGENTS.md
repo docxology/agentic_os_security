@@ -64,6 +64,10 @@ Meta files: `config.yaml` (identity + experiment blocks; `config.yaml.example` d
 - Reference remarks as `[@rem:<label>]`; the `formalism.lua` filter numbers and resolves them (never natbib). Never hand-number a Remark; remarks get their own counter (Remark 1, 2, …) — definitions continue 1–8 in document order across sections 03, 07, 09, 12, 13.
 - Every registered remark label is declared exactly once across the numbered sections and every `[@rem:...]` target is registered (enforced by `tests/test_manuscript_structure.py` via `REMARK_LABELS`).
 
+## Skills surface (v0.7.0)
+
+The review's concepts ship as harness-neutral skills outside the numbered sections: `skills/<id>/SKILL.md` (frontmatter `name`/`description`; body = concept summary with its formal statement, Apply steps, and Evidence-in-this-repository pointers) for nine concepts, indexed by `skills/registry.yaml` (rows of {id, title, section, artifact, test}). `tests/test_skills.py` pins the surface: registry parses, nine unique ids, directory parity in both directions, frontmatter per SKILL.md, section labels within `SECTION_FILES` (from `tests/test_manuscript_structure.py`), artifact paths exist, referenced conformance tests exist, and every citation key used in a SKILL.md body exists in `references.bib`. Skill files stay harness-neutral — no harness-specific tool syntax — and they add no manuscript prose: they reference the pinned `{#sec:...}` labels above, they never introduce new cross-reference kinds, and the numbered sections remain the only place where the review's arguments are made.
+
 ## Section modification workflow
 
 1. Edit the section source (`NN_name.md`) — respecting the H1/label and conventions above.

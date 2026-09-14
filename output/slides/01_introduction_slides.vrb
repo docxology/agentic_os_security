@@ -1,3 +1,9 @@
-\frametitle{Deterministic evaluation artifacts}
-dependence, so a future reviewer can re-run the pipeline against updated
-project data and diff the outcome rather than re-litigate adjectives.
+\frametitle{Contributions}
+manuscript section, its generated data artifact or pinned registry
+constant, and the conformance test that keeps the definition honest. The
+skills stay harness-neutral on purpose --- no harness-specific tool
+syntax --- so a reader on any agent harness can apply the review
+directly: classify an action on the ladder, check a delegation chain
+against its bound, review a configuration change against the nine
+invariants. Concepts that live only in prose are advice; concepts that
+ship as skills are tools.

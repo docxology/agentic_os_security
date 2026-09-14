@@ -203,7 +203,7 @@
 
 \section{Abstract}\label{sec:abstract}
 
-\begin{frame}[allowframebreaks]{Abstract}
+\begin{frame}[fragile,allowframebreaks]{Abstract}
 AI agents now hold genuine system authority: they execute code, touch
 credentials, open network egress, parse hostile documents, and in many
 deployments initiate or approve changes to the very infrastructure they
@@ -220,8 +220,8 @@ the difficulty of exploiting it.
 
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Abstract}
-This revision (0.6.0) refreshes the evidence base through September 11,
+\begin{frame}[fragile,allowframebreaks]{Abstract}
+This revision (0.7.0) refreshes the evidence base through September 11,
 2026. The offensive baseline expands from four primary sources to the
 incident record now available: the NCSC assessments of January 2024 and
 May 2025, the Anthropic campaign investigation of November 2025 ---
@@ -238,7 +238,7 @@ rates. The platform reviews absorb the 2026 record: Qubes 4.3.0 (Xen
 4.19, the sys-gui split, the Devices API, the salt management model, and
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Abstract}
+\begin{frame}[fragile,allowframebreaks]{Abstract}
 the QSB-118 dom0 injection, CVE-2026-82636) and Nix 2.34/2.35 with its
 advisory chain, the removal of the hardened profiles, and 95.18 percent
 measured ISO reproducibility. The analysis is situated against the
@@ -253,7 +253,7 @@ candidate--property matrix as a second deterministic artifact.
 
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Abstract}
+\begin{frame}[fragile,allowframebreaks]{Abstract}
 The review extends the underlying architectural assessment into three
 domains the source treatment only touches implicitly: \textbf{cognitive
 security} (the authorized-misuse surface, where persuasion substitutes
@@ -265,7 +265,19 @@ anchor the analysis.
 
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Abstract}
+\begin{frame}[fragile,allowframebreaks]{Abstract}
+The review ships its concepts in two forms: the prose analysis, and a
+harness-neutral skill library (a \texttt{skills/} registry with
+conformance tests, following (Friedman 2026)) that lets an agent harness
+apply the evaluation vocabulary, the authority ladder, and the other
+review concepts directly. The evaluation artifacts --- the
+candidate--property matrix and the defensive-stack matrix --- regenerate
+deterministically from pinned data modules. The work is citable via its
+Zenodo DOI (printed on the cover).
+
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Abstract}
 \textbf{Keywords:} agentic security, operating systems,
 compartmentalization, capability mediation, Qubes OS, NixOS, threat
 modeling, cognitive security, operational security, agent orchestration,

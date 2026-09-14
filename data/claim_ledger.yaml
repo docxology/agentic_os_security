@@ -728,3 +728,15 @@ claims:
     source_tier: generated_metric
     freshness: active
     artifact_path: src/agentic_os_security/basis.py
+
+  # v0.7.0 skills-surface claim (registered 2026-09-14). The value comes
+  # from the approved-numbers list (skills-count 9); artifact_path carries
+  # no # fragments.
+
+  - claim_id: skills-count
+    kind: number
+    value: 9
+    source: skills/registry.yaml
+    source_tier: project_source
+    freshness: active
+    artifact_path: skills/registry.yaml

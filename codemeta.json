@@ -14,6 +14,7 @@
     }
   ],
   "codeRepository": "https://github.com/docxology/agentic_os_security",
+  "identifier": "10.5281/zenodo.22754352",
   "dateModified": "2026-09-10",
   "keywords": [
     "agentic security",
@@ -29,5 +30,5 @@
   ],
   "license": "https://spdx.org/licenses/MIT",
   "name": "Agentic Security and Operating Systems",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

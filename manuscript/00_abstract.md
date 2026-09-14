@@ -6,4 +6,6 @@ This revision ({{CONFIG_VERSION}}) refreshes the evidence base through September
 
 The review extends the underlying architectural assessment into three domains the source treatment only touches implicitly: **cognitive security** (the authorized-misuse surface, where persuasion substitutes for exploitation), **operator OpSec** (the practices that keep compartmentalization real under workload pressure), and **agent-orchestration security** (the boundary design of multi-agent systems themselves). Deep reviews of Qubes OS and NixOS anchor the analysis.
 
+The review ships its concepts in two forms: the prose analysis, and a harness-neutral skill library (a `skills/` registry with conformance tests, following [@cogsecskills2026]) that lets an agent harness apply the evaluation vocabulary, the authority ladder, and the other review concepts directly. The evaluation artifacts — the candidate–property matrix and the defensive-stack matrix — regenerate deterministically from pinned data modules. The work is citable via its Zenodo DOI (printed on the cover).
+
 **Keywords:** {{CONFIG_KEYWORDS}}.

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  13 SEP 2026 16:16
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.3.22)  14 SEP 2026 09:09
 entering extended mode
  %&-line parsing enabled.
 **/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/ou
@@ -1617,15 +1617,46 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ) [1
 
 ]
-[2
+\openout4 = `00_abstract_slides.vrb'.
 
-] [3
 
-] [4
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/00_abstract_slides.vrb) [2
 
-] [5
+]
+\openout4 = `00_abstract_slides.vrb'.
 
-] [6
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/00_abstract_slides.vrb) [3
+
+]
+\openout4 = `00_abstract_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/00_abstract_slides.vrb) [4
+
+]
+\openout4 = `00_abstract_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/00_abstract_slides.vrb) [5
+
+]
+\openout4 = `00_abstract_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/00_abstract_slides.vrb) [6
+
+]
+\openout4 = `00_abstract_slides.vrb'.
+
+
+(/Volumes/external_drive/Git/projects/ongoing/docxology/agentic_os_security/out
+put/slides/00_abstract_slides.vrb) [7
 
 ]
 \tf@nav=\write5
@@ -1651,13 +1682,13 @@ L3 programming layer <2026-01-19>
  ***********
  )
 Here is how much of TeX's memory you used:
- 32270 strings out of 468168
- 643893 string characters out of 5432815
+ 32295 strings out of 468168
+ 645460 string characters out of 5432815
  1188326 words of memory out of 5000000
- 60437 multiletter control sequences out of 15000+600000
- 631240 words of font info for 70 fonts, out of 8000000 for 9000
+ 60447 multiletter control sequences out of 15000+600000
+ 631248 words of font info for 71 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  128i,11n,123p,1104b,419s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on /Volumes/external_drive/Git/projects/ongoing/docxology/agenti
-c_os_security/output/slides/00_abstract_slides.pdf (6 pages).
+c_os_security/output/slides/00_abstract_slides.pdf (7 pages).

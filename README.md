@@ -1,69 +1,88 @@
-# agentic_os_security
+# Agentic Security and Operating Systems
 
-**Agentic Security and Operating Systems** — *A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security in the Emerging Present and Future*
+**A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security in the Emerging Present and Future**
 
-A standalone, private research project that produces a deep review and prospectus manuscript. It evaluates how contemporary operating systems — compartmentalized, reproducible, hardened, and conventional — stand up to offensive AI agents, and it extends that evaluation with three analytical domains the source literature only touches implicitly: **cognitive security**, **operator OpSec**, and **agentic cyber security** (securing the orchestration layer itself).
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22754352.svg)](https://doi.org/10.5281/zenodo.22754352)
+[![Zenodo record](https://img.shields.io/badge/Zenodo-22754352-blue)](https://zenodo.org/records/22754352)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Version](https://img.shields.io/badge/version-0.7.0-purple)
 
-## What the project does
+**Daniel Ari Friedman** · Active Inference Institute · [ORCID 0000-0001-6232-9096](https://orcid.org/0000-0001-6232-9096)
 
-- **Evaluation matrix.** Scores 24 OS candidates against 9 properties (`containment`, `authority`, `trusted_computing_base`, `application_confinement`, `integrity`, `persistence_recovery`, `update_operations`, `supply_chain_trust`, `human_usability`) with qualitative stances (`strong | partial | weak | n_a`) — never numeric security scores — across 8 operational scenarios.
-- **Evidence registry.** 155 documented sources (official docs, advisories, incident reports, research, community, plus the author's cognitive-security works) with an explicit capability baseline, a 14-incident register classed against a five-class lesson taxonomy (`containment_held`, `authority_exceeded`, `supply_chain`, `update_operations`, `cognitive_boundary`), one stance-profile basis per candidate (24 rows), an 8-class mitigation/defensive-stack matrix, documented update windows, an eight-layer operating-system security stack with archetype coverage (64 rows), eight pinned formal definitions, a 10-point agent mediation taxonomy, and the six Cognitive Integrity Framework (CIF) concepts mapped to controls and sections.
-- **Agentic authority architecture.** 7 trust domains, 9 controls, 9 configuration invariants an agent must never be able to violate.
-- **Forecast.** Confidence-tiered (high/moderate/low) predictions for 2028–2031.
-- **Manuscript.** 18 Pandoc-markdown sections hydrated from a deterministic token pipeline and rendered to PDF/HTML from a sibling template repository, fronted by a generated cover graphical abstract.
+**Cite:** Friedman, Daniel Ari (2026). *Agentic Security and Operating Systems* (v0.7.0). Zenodo. https://doi.org/10.5281/zenodo.22754352
 
-All assessments are **analytical judgments from documented designs**. There is no penetration testing, no exploit development, and no numeric scoring in this project.
+> **The one-paragraph version.** AI agents now hold genuine system authority: they execute code, touch credentials, open egress, parse hostile documents, and often initiate or approve changes to the infrastructure they run on. This review examines what that shift does to operating-system security through two failure paths — **exploitation** (an attacker crosses a boundary) and **authorized misuse** (an attacker persuades an agent to use its legitimate access; no kernel exploit required). Twenty-four operating systems are evaluated against **nine security properties** (216 stance cells, no numeric scores), anchored by deep reviews of Qubes OS and NixOS, and extended into three domains: **cognitive security** (the authorized-misuse surface), **operator OpSec**, and **agent-orchestration security**. The composition thesis: Qubes-like containment + Nix-like reproducibility + verified boot + capability-limited agents — one design target, not one product.
 
-## Structure
+**Published:** [Zenodo record 22754352](https://zenodo.org/records/22754352) · [DOI 10.5281/zenodo.22754352](https://doi.org/10.5281/zenodo.22754352) · 57-page PDF with graphical-abstract cover · open access.
 
-```mermaid
-graph TD
-    R[agentic_os_security/]
-    R --> M[manuscript/<br/>18 sections + config + references.bib]
-    R --> S[src/agentic_os_security/<br/>pure Python: registry, evidence,<br/>threat_model, trust_domains, forecasts,<br/>build_clock, manuscript_variables,<br/>figures/, analysis/]
-    R --> SC[scripts/<br/>thin orchestrators]
-    R --> T[tests/<br/>behavior-targeted, zero-mock]
-    R --> O[output/<br/>disposable artifacts: figures, data, reports]
-    R --> D[data/<br/>claim_ledger.yaml]
-    R --> DO[docs/<br/>project documentation]
-    S --> O
-    SC --> S
-    S --> M
-```
+---
 
-## Install
+## What is in this repository
 
-From the project root (the repo is standalone; it is not part of any uv workspace):
+| Surface | What it holds |
+| --- | --- |
+| `manuscript/` | 18-section modular manuscript (17 numbered sections + references), 168-entry bibliography, 12 tables, 11 figures |
+| `src/agentic_os_security/` | Pure evaluation layer: 24×9 stance matrix, 155-source evidence registry, threat model + authority ladder, 7 trust domains, 9 controls, 8-layer OS stack, mediation points, CIF concept map, 8 formal definitions |
+| `skills/` | **Concepts as skills** — 9 harness-neutral SKILL.md definitions with a registry and conformance tests |
+| `output/` | Regenerated figures (11 + cover), data artifacts (12), reports, rendered PDF |
+| `data/` | Claim ledger (89 sourced claims) |
+| `tests/` | 156 zero-mock tests, 95.77% coverage on `src/` |
 
-```bash
-uv sync
-```
+## The evaluation at a glance
 
-Requires Python ≥ 3.10. Dependencies: numpy, matplotlib, pillow, pyyaml, defusedxml; dev extras add pytest and pytest-cov.
+| Candidate class | Stance profile |
+| --- | --- |
+| Compartmentalized | 2 strong / 7 partial |
+| Reproducible | 1 strong / 5 partial / 3 weak |
+| Desktop | 7 strong / 34 partial / 22 weak |
+| Server | 13 strong / 37 partial / 13 weak |
+| Anonymity | 1 strong / 10 partial / 7 weak |
+| High assurance | 4 strong / 14 partial / 3 weak / 6 not assessed |
+| Mobile | 2 strong / 7 partial |
+| Offensive toolkit | 8 partial / 10 weak |
+
+## Concepts as skills
+
+Every core concept of the review is available both as prose and as a **harness-neutral skill** — a machine-checkable SKILL.md with a registry entry and conformance tests, following the [CogSecSkills](https://github.com/docxology/CogSecSkills) doctrine (DOI [10.5281/zenodo.21520558](https://doi.org/10.5281/zenodo.21520558)):
+
+`stance-evaluation` · `authority-ladder` · `trust-domain-design` · `delegation-bound` · `mediation-selection` · `incident-lessons` · `scenario-selection` · `configuration-invariants` · `defensive-stack`
+
+Each skill names the manuscript section it operationalizes, the data artifact that regenerates it, and the test that pins it. Drop a skill into any agent harness to apply the review's vocabulary directly.
 
 ## Quickstart
 
 ```bash
-uv run python scripts/00_preflight.py            # environment, deps, directory checks
-uv run python scripts/10_evaluation_analysis.py  # evaluation matrix + 11 figures + candidate basis + capability mediation map + validation report
-uv run python scripts/z_generate_manuscript_variables.py  # token pipeline -> output/data/manuscript_variables.json
-uv run pytest tests/ --cov=src --cov-fail-under=90        # ≥90% coverage gate on src/
+uv sync
+uv run python scripts/00_preflight.py
+uv run python scripts/10_evaluation_analysis.py      # evaluation matrix + 11 figures + validation
+uv run python scripts/z_generate_manuscript_variables.py
+uv run pytest tests/ --cov=src --cov-fail-under=90
 ```
 
-## Rendering the manuscript
+Render the PDF from the [template repository](https://github.com/docxology/template) with this project linked under `projects/working/`.
 
-This project does **not** contain a render pipeline. It lives (via symlink) at `projects/ongoing/Agentic/agentic_os_security` inside the sibling template repository, and rendering happens from that template environment with the project linked under `projects/working/`:
+## Repository map
 
-```bash
-uv run python scripts/pipeline/stage_03_render.py --project working/agentic_os_security
+```mermaid
+flowchart LR
+    A[skills/ concepts as skills] --> R[registry.yaml + conformance tests]
+    S[src/ pure evaluation layer] --> A
+    D[data/ claim ledger 89 claims] --> S
+    M[manuscript/ 18 sections] --> P[render pipeline]
+    S --> F[11 figures + 10 data artifacts]
+    F --> M
 ```
-
-Run from the template repo root. The `z_generate_manuscript_variables.py` script detects the template environment and injects resolved manuscript variables there; in standalone mode it writes `output/data/manuscript_variables.json` and skips injection. The manuscript avoids mermaid blocks so the Pandoc render chain has no diagram prerequisites.
 
 ## Claim boundaries
 
-- Every assessment in the manuscript and the registry is an analytical judgment derived from documented designs, public advisories, and incident reports — **not** from penetration testing or original offensive work.
-- Vendor findings are labeled as vendor findings (e.g., the Anthropic campaign report describes the vendor's own investigation; AISI results come from its own incident report).
-- Forecasts are distinguished from measurements; confidence is stated explicitly.
-- No numeric security scores ("Qubes 9.4" style) are assigned, anywhere.
-- **Private posture.** This repository is private. There is no DOI, no Zenodo deposit, no public metadata, and no publishing actions should be taken without the owner's explicit request.
+Assessments are **analytical judgments from documented designs, advisories, and incident reports** — not results of a comparative penetration test. No numeric security scores ("Qubes 9.4"-style) are assigned; stances are qualitative (`strong / partial / weak / not-assessed`). Vendor findings are labeled as vendor findings. The absence of a confirmed feature in this review is not proof that the feature is unavailable.
+
+## Related works by the author
+
+- [CogSecSkills: Multiharness Agentic Skills for Cognitive Security](https://doi.org/10.5281/zenodo.21520558) — the skills doctrine this repository follows
+- [Cognitive Integrity Framework Part 1: Formal Foundations](https://doi.org/10.5281/zenodo.22134544) · [Part 2](https://doi.org/10.5281/zenodo.18364128) · [Part 3](https://doi.org/10.5281/zenodo.22134548)
+- [AGEINT: Agentic Intelligence Curriculum](https://doi.org/10.5281/zenodo.20732274)
+
+## License
+
+MIT © 2026 Daniel Ari Friedman

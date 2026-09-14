@@ -221,7 +221,7 @@
 {\small\sffamily\texttt{daniel@activeinference.institute}\par}
 {\small\sffamily\href{https://orcid.org/0000-0001-6232-9096}{ORCID: 0000-0001-6232-9096}\par}
 \vspace{0.08em}
-{\small\sffamily DOI: Forthcoming — Zenodo DOI reserved on release\par}
+{\small\sffamily DOI: \href{https://doi.org/10.5281/zenodo.22754352}{10.5281/zenodo.22754352}\par}
 \vspace{0.35em}
 \makeatletter
 {\@date\par}
@@ -250,7 +250,7 @@ requires no kernel exploit at all, which reframes the evaluation: the
 axis of analysis is the authority a component already holds, not merely
 the difficulty of exploiting it.
 
-This revision (0.6.0) refreshes the evidence base through September 11,
+This revision (0.7.0) refreshes the evidence base through September 11,
 2026. The offensive baseline expands from four primary sources to the
 incident record now available: the NCSC assessments of January 2024 and
 May 2025, the Anthropic campaign investigation of November 2025 ---
@@ -285,6 +285,15 @@ compartmentalization real under workload pressure), and
 \textbf{agent-orchestration security} (the boundary design of
 multi-agent systems themselves). Deep reviews of Qubes OS and NixOS
 anchor the analysis.
+
+The review ships its concepts in two forms: the prose analysis, and a
+harness-neutral skill library (a \texttt{skills/} registry with
+conformance tests, following \citep{cogsecskills2026}) that lets an
+agent harness apply the evaluation vocabulary, the authority ladder, and
+the other review concepts directly. The evaluation artifacts --- the
+candidate--property matrix and the defensive-stack matrix --- regenerate
+deterministically from pinned data modules. The work is citable via its
+Zenodo DOI (printed on the cover).
 
 \textbf{Keywords:} agentic security, operating systems,
 compartmentalization, capability mediation, Qubes OS, NixOS, threat
@@ -549,6 +558,29 @@ assessment:
   confidence vocabulary, including negative forecasts that name what
   would be overconfident to claim.
 \end{enumerate}
+
+\textbf{Concepts as skills.} The review does not leave its concepts in
+prose: every one ships as a harness-neutral skill under
+\texttt{skills/}, defined by a machine-checkable SKILL.md (frontmatter,
+concept summary with its formal statement, apply steps, and evidence
+pointers), indexed by a registry, and pinned by conformance tests ---
+following the CogSecSkills registry doctrine \citep{cogsecskills2026}.
+The skill ids mirror the evaluation artifacts, so what the analysis
+pipeline computes is exactly what the skills package: the stance
+vocabulary (\breaktt{stance-evaluation}), the authority ladder
+(\breaktt{authority-ladder}), the delta-bounded delegation check
+(\breaktt{delegation-bound}), the capability-to-mediation map
+(\breaktt{mediation-selection}), the invariant predicates
+(\breaktt{configuration-invariants}), and the incident taxonomy
+(\breaktt{incident-lessons}). Each skill's evidence block points at its
+manuscript section, its generated data artifact or pinned registry
+constant, and the conformance test that keeps the definition honest. The
+skills stay harness-neutral on purpose --- no harness-specific tool
+syntax --- so a reader on any agent harness can apply the review
+directly: classify an action on the ladder, check a delegation chain
+against its bound, review a configuration change against the nine
+invariants. Concepts that live only in prose are advice; concepts that
+ship as skills are tools.
 
 \subsection{Reader's guide}\label{readers-guide}
 
@@ -5342,6 +5374,10 @@ operations that rebuild, updates that authenticate, and agents that can
 propose everything while authorizing almost nothing. Building those, in
 pieces that someone demonstrably maintains, is the work this horizon
 rewards.
+
+Finally, the skill library under \texttt{skills/} is the operational
+form of this prospectus: the review's concepts are available as nine
+harness-neutral skills, not only as prose.
 
 \newpage
 

@@ -579,7 +579,7 @@ exfiltrate secrets or authorize consequential actions. The second path
 requires no kernel exploit at all, which reframes the evaluation: the
 axis of analysis is the authority a component already holds, not merely
 the difficulty of exploiting it.</p>
-<p>This revision (0.6.0) refreshes the evidence base through September
+<p>This revision (0.7.0) refreshes the evidence base through September
 11, 2026. The offensive baseline expands from four primary sources to
 the incident record now available: the NCSC assessments of January 2024
 and May 2025, the Anthropic campaign investigation of November 2025 —
@@ -613,6 +613,14 @@ practices that keep compartmentalization real under workload pressure),
 and <strong>agent-orchestration security</strong> (the boundary design
 of multi-agent systems themselves). Deep reviews of Qubes OS and NixOS
 anchor the analysis.</p>
+<p>The review ships its concepts in two forms: the prose analysis, and a
+harness-neutral skill library (a <code>skills/</code> registry with
+conformance tests, following [cogsecskills2026]) that lets an agent
+harness apply the evaluation vocabulary, the authority ladder, and the
+other review concepts directly. The evaluation artifacts — the
+candidate–property matrix and the defensive-stack matrix — regenerate
+deterministically from pinned data modules. The work is citable via its
+Zenodo DOI (printed on the cover).</p>
 <p><strong>Keywords:</strong> agentic security, operating systems,
 compartmentalization, capability mediation, Qubes OS, NixOS, threat
 modeling, cognitive security, operational security, agent orchestration,

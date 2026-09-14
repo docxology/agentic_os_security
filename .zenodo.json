@@ -20,8 +20,10 @@
     "offensive AI"
   ],
   "license": "MIT",
+  "related_identifiers": [{"identifier": "https://github.com/docxology/agentic_os_security", "relation": "isSupplementTo"}],
+  "doi": "10.5281/zenodo.22754352",
   "title": "Agentic Security and Operating Systems",
   "upload_type": "publication",
   "publication_type": "report",
-  "version": "0.6.0"
+  "version": "0.7.0"
 }

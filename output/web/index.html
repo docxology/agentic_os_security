@@ -1115,7 +1115,7 @@ exfiltrate secrets or authorize consequential actions. The second path
 requires no kernel exploit at all, which reframes the evaluation: the
 axis of analysis is the authority a component already holds, not merely
 the difficulty of exploiting it.</p>
-<p>This revision (0.6.0) refreshes the evidence base through September
+<p>This revision (0.7.0) refreshes the evidence base through September
 11, 2026. The offensive baseline expands from four primary sources to
 the incident record now available: the NCSC assessments of January 2024
 and May 2025, the Anthropic campaign investigation of November 2025 —
@@ -1149,6 +1149,16 @@ practices that keep compartmentalization real under workload pressure),
 and <strong>agent-orchestration security</strong> (the boundary design
 of multi-agent systems themselves). Deep reviews of Qubes OS and NixOS
 anchor the analysis.</p>
+<p>The review ships its concepts in two forms: the prose analysis, and a
+harness-neutral skill library (a <code>skills/</code> registry with
+conformance tests, following <span class="citation"
+data-cites="cogsecskills2026">(<a href="#ref-cogsecskills2026"
+role="doc-biblioref">Friedman 2026e</a>)</span>) that lets an agent
+harness apply the evaluation vocabulary, the authority ladder, and the
+other review concepts directly. The evaluation artifacts — the
+candidate–property matrix and the defensive-stack matrix — regenerate
+deterministically from pinned data modules. The work is citable via its
+Zenodo DOI (printed on the cover).</p>
 <p><strong>Keywords:</strong> agentic security, operating systems,
 compartmentalization, capability mediation, Qubes OS, NixOS, threat
 modeling, cognitive security, operational security, agent orchestration,
@@ -1445,6 +1455,30 @@ href="#sec:forecast">15</a>; sec. <a href="#sec:scenarios">16</a>) using
 explicit confidence vocabulary, including negative forecasts that name
 what would be overconfident to claim.</li>
 </ol>
+<p><strong>Concepts as skills.</strong> The review does not leave its
+concepts in prose: every one ships as a harness-neutral skill under
+<code>skills/</code>, defined by a machine-checkable SKILL.md
+(frontmatter, concept summary with its formal statement, apply steps,
+and evidence pointers), indexed by a registry, and pinned by conformance
+tests — following the CogSecSkills registry doctrine <span
+class="citation" data-cites="cogsecskills2026">(<a
+href="#ref-cogsecskills2026" role="doc-biblioref">Friedman
+2026e</a>)</span>. The skill ids mirror the evaluation artifacts, so
+what the analysis pipeline computes is exactly what the skills package:
+the stance vocabulary (<code>stance-evaluation</code>), the authority
+ladder (<code>authority-ladder</code>), the delta-bounded delegation
+check (<code>delegation-bound</code>), the capability-to-mediation map
+(<code>mediation-selection</code>), the invariant predicates
+(<code>configuration-invariants</code>), and the incident taxonomy
+(<code>incident-lessons</code>). Each skill’s evidence block points at
+its manuscript section, its generated data artifact or pinned registry
+constant, and the conformance test that keeps the definition honest. The
+skills stay harness-neutral on purpose — no harness-specific tool syntax
+— so a reader on any agent harness can apply the review directly:
+classify an action on the ladder, check a delegation chain against its
+bound, review a configuration change against the nine invariants.
+Concepts that live only in prose are advice; concepts that ship as
+skills are tools.</p>
 <h2 data-number="2.7" id="readers-guide"><span
 class="header-section-number">2.7</span> Reader’s guide</h2>
 <p>Readers who want the threat framing first should read sec. <a
@@ -7027,6 +7061,9 @@ operations that rebuild, updates that authenticate, and agents that can
 propose everything while authorizing almost nothing. Building those, in
 pieces that someone demonstrably maintains, is the work this horizon
 rewards.</p>
+<p>Finally, the skill library under <code>skills/</code> is the
+operational form of this prospectus: the review’s concepts are available
+as nine harness-neutral skills, not only as prose.</p>
 <hr />
 <h1 data-number="18" id="sec:references"><span
 class="header-section-number">18</span> References</h1>

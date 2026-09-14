@@ -4,7 +4,7 @@ authors:
   given-names: Daniel Ari
   orcid: 0000-0001-6232-9096
 cff-version: 1.2.0
-date-released: '2026-09-10'
+date-released: "2026-09-14"
 keywords:
 - agentic security
 - operating systems
@@ -17,5 +17,14 @@ keywords:
 - agent orchestration
 - offensive AI
 license: MIT
+doi: 10.5281/zenodo.22754352
+identifiers:
+- description: The published Zenodo record (PDF + source archive).
+  identifier: 10.5281/zenodo.22754352
+  relation: isIdenticalTo
+  type: doi
 message: If you use this software, please cite it using the metadata from this file.
-version: 0.6.0
+repository-code: https://github.com/docxology/agentic_os_security
+title: "Agentic Security and Operating Systems: A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security"
+type: software
+version: 0.7.0
