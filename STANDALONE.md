@@ -46,7 +46,7 @@ The manuscript deliberately avoids mermaid blocks so rendering from the template
 
 ## What not to claim
 
-- Claim only the recorded record: v0.7.0 is deposited on Zenodo (DOI `10.5281/zenodo.22754352`) and the code lives at `github.com/docxology/agentic_os_security`. No further publishing actions without the owner's explicit ask.
+- Claim only the published record: v0.7.0 is deposited on Zenodo (DOI `10.5281/zenodo.22754352`) and the code lives at `github.com/docxology/agentic_os_security`. No further publishing actions without the owner's explicit ask.
 - Do not claim penetration-testing results, exploit capability, or measured attack outcomes. All assessments are analytical judgments from documented designs.
 - Do not claim numeric security scores for any candidate system.
 - Do not cite sources that are not in `manuscript/references.bib` (155 source-derived + 13 scholarly keys, enforced by tests).

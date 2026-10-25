@@ -36,7 +36,7 @@ Incident-lesson taxonomy: the incident figure places each of the 14 incidents in
 | `os_stack_coverage.csv` | Archetype x layer stances over the eight-layer OS security stack: `archetype_id, archetype, layer_id, layer, stance` | 64 rows (8 category archetypes x 8 stack layers) |
 | `formal_definitions.json` | The eight pinned formal definitions: `definition_id, name, formal_latex, informal, surface, citation_keys` | 8 definitions (from `formal.FORMAL_DEFINITIONS`) |
 | `capability_mediation_map.csv` | Capability x failure-path x mediation linkage: `capability_id, failure_paths, mediation_points, residual_risk` | 6 rows (from `threat_model.CAPABILITY_LINKAGE`) |
-| `cognitive_defenses.json` | CIF concept → project-surface mapping (the six `orchestration.CIF_CONCEPTS` with their citation keys) | single object |
+| `cognitive_defenses.json` | CIF concept → project-surface mapping: `concepts` (the six `orchestration.CIF_CONCEPTS` with citation keys and mapped surfaces) + `num_concepts` | single object |
 | `validation_report.json` | The analysis self-checks (matrix coverage, stance vocabulary, bib parity, figure registry, CIF coverage) with `all_green: true` | single object |
 
 Plus, from the variables script:

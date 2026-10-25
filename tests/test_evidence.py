@@ -251,8 +251,10 @@ def test_bib_parity_every_source_key_is_a_bib_entry(project_root):
     source_keys = {s.key for s in evidence.SOURCES}
     missing = source_keys - bib_keys
     assert not missing, f"SOURCES keys missing from references.bib: {sorted(missing)}"
-    # v0.5.0 contract: 164 entries total = 155 source-derived + 9 scholarly
-    # (the 6 classical anchors plus clark1987, biba1977, arpaci2018).
+    # v0.5.0 contract floor: the 155 source-derived keys plus at least these 9
+    # scholarly anchors (the 6 classical anchors plus clark1987, biba1977,
+    # arpaci2018). The bibliography now totals 168 = 155 source-derived + 13
+    # scholarly keys, so the >= 164 assertion stays a floor.
     scholarly = {
         "saltzer1975",
         "lampson1974",
