@@ -14,7 +14,7 @@ Assert what a consumer observes, not how the code is wired:
 - **Parity**: every `evidence.SOURCES` key has a matching `@...{key,` entry in `manuscript/references.bib` (155 + 13 = 168); every citation key in prose exists in the bib.
 - **Resolution**: every `{{X}}` in `manuscript/*.md` resolves via `generate_variables()`; values match the pinned constants.
 - **Determinism**: two consecutive figure-generation runs are byte-identical.
-- **Integration**: `run_analysis` writes the 11 data artifacts + 11 registered figures (+ the cover graphical abstract); the validation report is all-green.
+- **Integration**: `run_analysis` writes 12 files into `output/data/` (11 analysis artifacts + the validation report), the 11 registered figures, and the cover graphical abstract; the validation report is all-green.
 - **Structure**: 18 section files, unique sec labels, all `[@fig:`/`[@tbl:` targets defined, no mermaid fences, no raw `\cite{`/`\ref{`.
 - **Real errors**: `experiment_config` raises `ExperimentConfigError` on missing/invalid keys (tmp-dir fixture), not silent defaults.
 

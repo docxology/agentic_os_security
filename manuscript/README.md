@@ -1,10 +1,10 @@
 # manuscript/
 
-The manuscript for **"Agentic Security and Operating Systems: A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security in the Emerging Present and Future"** (v0.1.0, private).
+The manuscript for **"Agentic Security and Operating Systems: A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security in the Emerging Present and Future"** (v0.7.0).
 
 ## Orientation
 
-18 Pandoc-markdown sections (see `AGENTS.md` for the full inventory with labels), a `references.bib` with exactly 71 keys (65 source-derived + 6 scholarly), a `config.yaml` identity/experiment block, and a deterministic `{{TOKEN}}` hydration pipeline. Rendering to PDF/HTML happens from the sibling template repository; this directory holds the sources and conventions only.
+18 Pandoc-markdown sections (see `AGENTS.md` for the full inventory with labels), a `references.bib` with exactly 168 keys (155 source-derived + 13 scholarly), a `config.yaml` identity/experiment block, and a deterministic `{{TOKEN}}` hydration pipeline. Rendering to PDF/HTML happens from the sibling template repository; this directory holds the sources and conventions only.
 
 ## Section map
 

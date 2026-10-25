@@ -649,8 +649,9 @@ def _run_checks(data_path: Path) -> dict[str, Any]:
 
 
 def run_analysis(project_root: Path | str) -> dict[str, Any]:
-    """Run the full analysis: 11 data artifacts, the 11 registry figures,
-    and the cover graphical abstract.
+    """Run the full analysis: 11 analysis artifacts plus the validation
+    report (12 files in ``output/data/``), the 11 registry figures, and the
+    cover graphical abstract.
 
     Returns a summary dict with artifact paths and row/figure counts.
     """
@@ -702,12 +703,15 @@ def run_analysis(project_root: Path | str) -> dict[str, Any]:
         "data_artifacts": [
             "evaluation_matrix.csv",
             "scenario_recommendations.csv",
+            "defensive_stack.csv",
+            "update_windows.csv",
             "evidence_summary.json",
+            "incident_register.csv",
             "cognitive_defenses.json",
             "os_stack_coverage.csv",
+            "formal_definitions.json",
             "candidate_basis.csv",
             "capability_mediation_map.csv",
-            "figure_registry.json",
             "validation_report.json",
         ],
         "validation_all_green": report["all_green"],

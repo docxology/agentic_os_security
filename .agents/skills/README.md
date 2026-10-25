@@ -6,7 +6,7 @@ contract), and `README.md` (pointer).
 
 | Skill | Purpose |
 | --- | --- |
-| [`agentic-os-security/`](agentic-os-security/README.md) | Drive this exemplar end-to-end (commands, pitfalls, contract traceability). |
+| [`agentic-os-security/`](agentic-os-security/README.md) | Drive this project end-to-end (commands, pitfalls, contract traceability). |
 
 Load [`agentic-os-security/SKILL.md`](agentic-os-security/SKILL.md)
-when working inside the exemplar or forking it as a scaffold.
+when working inside the project or forking it as a scaffold.

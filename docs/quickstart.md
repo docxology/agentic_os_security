@@ -24,7 +24,7 @@ Checks the Python version, dependencies, and expected directories. Exit 0 = go.
 uv run python scripts/10_evaluation_analysis.py
 ```
 
-Produces the 11 registered figures in `output/figures/` (plus the cover graphical abstract) and 11 data artifacts in `output/data/` — including `evaluation_matrix.csv` (216 rows) and the all-green `validation_report.json`.
+Produces the 11 registered figures in `output/figures/` (plus the cover graphical abstract) and 12 files in `output/data/` (11 analysis artifacts plus the all-green `validation_report.json`) — including `evaluation_matrix.csv` (216 rows).
 
 ## 4. Manuscript variables
 

@@ -33,7 +33,7 @@ Scripts print a single-line cause on failure and exit non-zero; no tracebacks as
 | Script | Purpose |
 |---|---|
 | `00_preflight.py` | environment/dependency/directory checks |
-| `10_evaluation_analysis.py` | runs `analysis.pipeline.run_analysis` (6 figures + 4 data artifacts) |
+| `10_evaluation_analysis.py` | runs `analysis.pipeline.run_analysis` (11 registered figures + cover + 11 analysis artifacts + validation report) |
 | `z_generate_manuscript_variables.py` | token pipeline → `manuscript_variables.json` (+ template injection when detected) |
 
 Numbering is order-of-execution (`00` → `10` → `z` last). Adding a script: keep it thin, follow the exit-code table, and update `scripts/README.md` + `docs/quickstart.md`.

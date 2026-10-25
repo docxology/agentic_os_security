@@ -1,6 +1,6 @@
 # AGENTS.md — data/
 
-`data/` holds reviewed, version-controlled claim registrations for `agentic_os_security` (private deep-review + prospectus project on agentic security & OS security).
+`data/` holds reviewed, version-controlled claim registrations for `agentic_os_security` (deep-review + prospectus project on agentic security & OS security).
 
 1. **Purpose of `claim_ledger.yaml`.** Every numeric claim that appears in manuscript prose, figure captions, or reports and is not directly a registry constant must be registered here: claim_id, what it asserts, where it comes from, and which artifact backs it. The ledger is the bridge between code-generated artifacts and prose claims; tests and review use it to trace numbers.
 2. **Schema.** Top-level `claims:` list; each entry:

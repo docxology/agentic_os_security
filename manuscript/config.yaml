@@ -24,7 +24,7 @@ authors:
 # Publication: published — Zenodo DOI above; GitHub repo public.
 publication:
   doi: "10.5281/zenodo.22754352"
-  doi_status: "Forthcoming — Zenodo DOI reserved on release"
+  doi_status: "Published — Zenodo v0.7.0 record live (2026-09-14)"
   version_doi: ""
   version_record: ""
   github_repository: "docxology/agentic_os_security"

@@ -1,6 +1,6 @@
 # STANDALONE.md — agentic_os_security
 
-This repository is a **standalone, self-versioned** project (v0.1.0). It is developed inside the docxology template ecosystem but owns its own `pyproject.toml`, git history, and virtual environment; it is not a member of any template uv workspace.
+This repository is a **standalone, self-versioned** project (v0.7.0). It is developed inside the docxology template ecosystem but owns its own `pyproject.toml`, git history, and virtual environment; it is not a member of any template uv workspace.
 
 ## Purpose of this file
 
@@ -20,8 +20,8 @@ uv run python scripts/repo/copy_exemplar.py --name agentic_os_security
 
 A fresh copy of a template exemplar is not yet this project. Complete, at minimum:
 
-1. **Identity.** `pyproject.toml` (`name = agentic_os_security`, v0.1.0, MIT, author Daniel Ari Friedman), `CITATION.cff`, `codemeta.json` (no DOI — private posture), `manuscript/config.yaml` identity block.
-2. **Domain config.** `domain_profile.yaml` (domain `agentic_security_research`), `experiment_plan.yaml` (24 candidates × 9 properties × 8 scenarios; primary output = evaluation matrix; 6 expected figures).
+1. **Identity.** `pyproject.toml` (`name = agentic_os_security`, v0.7.0, MIT, author Daniel Ari Friedman), `CITATION.cff`, `codemeta.json`, `manuscript/config.yaml` identity block (a fork records its own DOI or none).
+2. **Domain config.** `domain_profile.yaml` (domain `agentic_security_research`), `experiment_plan.yaml` (24 candidates × 9 properties × 8 scenarios; primary output = evaluation matrix; 11 expected figures).
 3. **Content.** `manuscript/` sections per the label registry, `src/agentic_os_security/` modules per the brief, `data/claim_ledger.yaml`, `tests/`.
 4. **Docs.** Purge any template-era references (retired experiment tooling, live status pages, staged performance runs) from `README.md`, `AGENTS.md`, `docs/`, and skill stubs.
 5. **Symlink registration.** Link the project into the template repo at `projects/ongoing/Agentic/agentic_os_security` so render-time discovery works.
@@ -46,8 +46,8 @@ The manuscript deliberately avoids mermaid blocks so rendering from the template
 
 ## What not to claim
 
-- Do not claim a DOI, Zenodo deposit, publication venue, or any public availability. **This project is private**; no publishing actions without the owner's explicit ask.
+- Claim only the recorded record: v0.7.0 is deposited on Zenodo (DOI `10.5281/zenodo.22754352`) and the code lives at `github.com/docxology/agentic_os_security`. No further publishing actions without the owner's explicit ask.
 - Do not claim penetration-testing results, exploit capability, or measured attack outcomes. All assessments are analytical judgments from documented designs.
 - Do not claim numeric security scores for any candidate system.
-- Do not cite sources that are not in `manuscript/references.bib` (65 source-derived + 6 scholarly keys, enforced by tests).
+- Do not cite sources that are not in `manuscript/references.bib` (155 source-derived + 13 scholarly keys, enforced by tests).
 - Do not attribute numbers to the manuscript that do not trace to `data/claim_ledger.yaml`, the registry constants, or computed output in `output/`.

@@ -1,7 +1,7 @@
 # faq.md
 
 **Q: Is this published? Where's the DOI?**
-There is no DOI, no Zenodo deposit, no public metadata. The project is **private** by design; no publishing actions happen without the owner's explicit ask. `CITATION.cff` and `codemeta.json` record identity for internal use only.
+Yes: v0.7.0 is deposited on Zenodo (DOI [10.5281/zenodo.22754352](https://doi.org/10.5281/zenodo.22754352)) and the source lives at [github.com/docxology/agentic_os_security](https://github.com/docxology/agentic_os_security). `CITATION.cff`, `codemeta.json`, and `.zenodo.json` carry that metadata. No further publishing actions happen without the owner's explicit ask.
 
 **Q: Are the OS assessments based on penetration testing?**
 No. Every assessment is an analytical judgment from documented designs, official documentation, advisories, and published incident reports. The project performs no offensive work and assigns no numeric security scores — stances are qualitative (`strong | partial | weak | n_a`).

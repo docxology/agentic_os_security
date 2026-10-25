@@ -13,7 +13,7 @@
 
 > **The one-paragraph version.** AI agents now hold genuine system authority: they execute code, touch credentials, open egress, parse hostile documents, and often initiate or approve changes to the infrastructure they run on. This review examines what that shift does to operating-system security through two failure paths — **exploitation** (an attacker crosses a boundary) and **authorized misuse** (an attacker persuades an agent to use its legitimate access; no kernel exploit required). Twenty-four operating systems are evaluated against **nine security properties** (216 stance cells, no numeric scores), anchored by deep reviews of Qubes OS and NixOS, and extended into three domains: **cognitive security** (the authorized-misuse surface), **operator OpSec**, and **agent-orchestration security**. The composition thesis: Qubes-like containment + Nix-like reproducibility + verified boot + capability-limited agents — one design target, not one product.
 
-**Published:** [Zenodo record 22754352](https://zenodo.org/records/22754352) · [DOI 10.5281/zenodo.22754352](https://doi.org/10.5281/zenodo.22754352) · 57-page PDF with graphical-abstract cover · open access.
+**Published:** [Zenodo record 22754352](https://zenodo.org/records/22754352) · [DOI 10.5281/zenodo.22754352](https://doi.org/10.5281/zenodo.22754352) · 64-page PDF with graphical-abstract cover (v0.7.0 render in `output/pdf/`) · open access.
 
 ---
 
@@ -25,7 +25,7 @@
 | `src/agentic_os_security/` | Pure evaluation layer: 24×9 stance matrix, 155-source evidence registry, threat model + authority ladder, 7 trust domains, 9 controls, 8-layer OS stack, mediation points, CIF concept map, 8 formal definitions |
 | `skills/` | **Concepts as skills** — 9 harness-neutral SKILL.md definitions with a registry and conformance tests |
 | `output/` | Regenerated figures (11 + cover), data artifacts (12), reports, rendered PDF |
-| `data/` | Claim ledger (89 sourced claims) |
+| `data/` | Claim ledger (86 sourced claims) |
 | `tests/` | 156 zero-mock tests, 95.77% coverage on `src/` |
 
 ## The evaluation at a glance
@@ -67,9 +67,9 @@ Render the PDF from the [template repository](https://github.com/docxology/templ
 flowchart LR
     A[skills/ concepts as skills] --> R[registry.yaml + conformance tests]
     S[src/ pure evaluation layer] --> A
-    D[data/ claim ledger 89 claims] --> S
+    D[data/ claim ledger 86 claims] --> S
     M[manuscript/ 18 sections] --> P[render pipeline]
-    S --> F[11 figures + 10 data artifacts]
+    S --> F[11 figures + 12 data artifacts]
     F --> M
 ```
 
@@ -80,7 +80,7 @@ Assessments are **analytical judgments from documented designs, advisories, and 
 ## Related works by the author
 
 - [CogSecSkills: Multiharness Agentic Skills for Cognitive Security](https://doi.org/10.5281/zenodo.21520558) — the skills doctrine this repository follows
-- [Cognitive Integrity Framework Part 1: Formal Foundations](https://doi.org/10.5281/zenodo.22134544) · [Part 2](https://doi.org/10.5281/zenodo.18364128) · [Part 3](https://doi.org/10.5281/zenodo.22134548)
+- [Cognitive Integrity Framework Part 1: Formal Foundations](https://doi.org/10.5281/zenodo.22134544) · [Part 2](https://doi.org/10.5281/zenodo.22134546) · [Part 3](https://doi.org/10.5281/zenodo.22134548)
 - [AGEINT: Agentic Intelligence Curriculum](https://doi.org/10.5281/zenodo.20732274)
 
 ## License

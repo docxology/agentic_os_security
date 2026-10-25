@@ -4,7 +4,7 @@
 
 ## Before you fork
 
-1. Read the root `README.md` and `AGENTS.md` — the layer contract, determinism rules, and private posture apply to any fork.
+1. Read the root `README.md` and `AGENTS.md` — the layer contract, determinism rules, and publication posture apply to any fork.
 2. Understand the claim boundaries: analytical judgments from documented designs; no penetration testing; no numeric security scores. A fork that starts assigning scores has left this project's epistemic frame.
 
 ## Making the copy
@@ -14,7 +14,7 @@
 
 ## Required post-fork edits
 
-1. Identity: `pyproject.toml`, `CITATION.cff`, `codemeta.json`, `manuscript/config.yaml` — change name/author/version to the fork's; **keep the private posture** unless you own the publication decision.
+1. Identity: `pyproject.toml`, `CITATION.cff`, `codemeta.json`, `manuscript/config.yaml` — change name/author/version to the fork's; clear or replace the upstream DOI/record fields, and make no publication claims you cannot own.
 2. Re-run the full validation chain and make it green *before* content edits:
    ```bash
    uv sync

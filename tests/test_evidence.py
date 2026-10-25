@@ -168,7 +168,7 @@ PINNED_URLS = {
     "apollo_automode": "https://apolloresearch.ai/monitoring/pilot-automode-campaign",
     "cogsecskills2026": "https://zenodo.org/records/21520558",
     "cif_formal_2026": "https://zenodo.org/records/22134544",
-    "cif_validation_2026": "https://zenodo.org/records/18364128",
+    "cif_validation_2026": "https://zenodo.org/records/22134546",
     "cif_practitioner_2026": "https://zenodo.org/records/22134548",
     "ageint2026": "https://zenodo.org/records/20732274",
     "shade_arena": "https://www.anthropic.com/research/shade-arena-sabotage-monitoring",
@@ -272,7 +272,7 @@ def test_author_work_sources_carry_zenodo_publisher_and_record_urls():
     author_works = {
         "cogsecskills2026": "https://zenodo.org/records/21520558",
         "cif_formal_2026": "https://zenodo.org/records/22134544",
-        "cif_validation_2026": "https://zenodo.org/records/18364128",
+        "cif_validation_2026": "https://zenodo.org/records/22134546",
         "cif_practitioner_2026": "https://zenodo.org/records/22134548",
         "ageint2026": "https://zenodo.org/records/20732274",
     }

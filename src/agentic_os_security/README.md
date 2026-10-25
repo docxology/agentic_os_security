@@ -1,16 +1,16 @@
 # agentic_os_security (package)
 
-Pure-Python core of the **agentic_os_security** project — a private deep review + prospectus of agentic security and operating systems: OpSec, cognitive security, and agentic cyber security.
+Pure-Python core of the **agentic_os_security** project — a deep review + prospectus of agentic security and operating systems: OpSec, cognitive security, and agentic cyber security.
 
 ## What's inside
 
 - **Evaluation backbone** — `registry.py`: 9 properties × 24 OS candidates × 8 scenarios, qualitative stances (`strong | partial | weak | n_a`), 216-cell matrix.
-- **Evidence base** — `evidence.py`: 65 tiered sources mirroring the manuscript bibliography + a pinned capability baseline.
+- **Evidence base** — `evidence.py`: 155 tiered sources mirroring the manuscript bibliography + a pinned capability baseline.
 - **Threat model** — `threat_model.py`: exploitation vs authorized misuse, authority ladder, agent capability classes.
 - **Agentic architecture** — `trust_domains.py`: 7 trust domains, 9 controls, 9 configuration invariants.
 - **Forecast** — `forecasts.py`: confidence-tiered claims, horizon 2028–2031.
 - **Infrastructure-of-record** — `build_clock.py` (deterministic time), `project_paths.py`, `experiment_config.py`, `manuscript_variables.py` (the `{{TOKEN}}` pipeline).
-- **Generators** — `figures/` (6 deterministic PNGs) and `analysis/` (`run_analysis`: 4 data artifacts + figures + validation report).
+- **Generators** — `figures/` (11 deterministic PNGs plus the cover graphical abstract) and `analysis/` (`run_analysis`: 11 analysis artifacts + figures + validation report).
 
 ## Guarantees
 

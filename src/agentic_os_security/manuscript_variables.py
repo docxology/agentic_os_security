@@ -87,14 +87,21 @@ def _declared_figure_files() -> list[str]:
 
 
 def _declared_data_files() -> list[str]:
+    #: Fallback inventory for draft mode: the twelve files
+    #: scripts/10_evaluation_analysis.py writes into output/data/.
     return [
         "evaluation_matrix.csv",
         "scenario_recommendations.csv",
-        "evidence_summary.json",
-        "validation_report.json",
         "defensive_stack.csv",
         "update_windows.csv",
+        "evidence_summary.json",
+        "incident_register.csv",
+        "cognitive_defenses.json",
+        "os_stack_coverage.csv",
+        "formal_definitions.json",
         "candidate_basis.csv",
+        "capability_mediation_map.csv",
+        "validation_report.json",
     ]
 
 

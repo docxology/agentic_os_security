@@ -4,7 +4,7 @@ Operating contract for any agent working in this repository. Read this file and 
 
 ## Identity
 
-Standalone, **private** research project producing the manuscript *"Agentic Security and Operating Systems: A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security in the Emerging Present and Future"* (v0.1.0, MIT, author Daniel Ari Friedman). The authoritative content constants live in the section registries under `src/agentic_os_security/registry.py` (9 properties, 24 candidates, 8 scenarios), `evidence.py` (65 sources + capability baseline), `threat_model.py`, `trust_domains.py` (7 domains, 9 controls, 9 invariants), and `forecasts.py` (2028–2031 horizon).
+Standalone research project producing the manuscript *"Agentic Security and Operating Systems: A Deep Review and Prospectus of OpSec, Cognitive Security, and Agentic Cyber Security in the Emerging Present and Future"* (v0.7.0, MIT, author Daniel Ari Friedman; Zenodo DOI `10.5281/zenodo.22754352`). The authoritative content constants live in the section registries under `src/agentic_os_security/registry.py` (9 properties, 24 candidates, 8 scenarios), `evidence.py` (155 sources + capability baseline), `threat_model.py`, `trust_domains.py` (7 domains, 9 controls, 9 invariants), and `forecasts.py` (2028–2031 horizon).
 
 ## Layer contract
 
@@ -44,9 +44,9 @@ uv run python scripts/z_generate_manuscript_variables.py
 uv run pytest tests/ --cov=src --cov-fail-under=90
 ```
 
-## Private posture
+## Publication posture
 
-Do not publish, deposit, archive, upload, or announce anything from this project without the owner's explicit ask: no DOI, no Zenodo, no PyPI/HF/IPFS artifacts, no public repository actions. `publication.github_repository: docxology/agentic_os_security` is recorded as private metadata only.
+The v0.7.0 release is published: Zenodo DOI `10.5281/zenodo.22754352`, code at `github.com/docxology/agentic_os_security`; `manuscript/config.yaml` `publication:` records the current record. Do not create new deposits, uploads, or announcements (no new Zenodo versions/records, PyPI/HF/IPFS artifacts, or repo-visibility changes) without the owner's explicit ask.
 
 ## Decision memory
 

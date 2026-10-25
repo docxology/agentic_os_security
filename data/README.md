@@ -1,6 +1,6 @@
 # data/
 
-Claim registrations for **agentic_os_security** — a private deep review + prospectus of agentic security and operating systems (OpSec, cognitive security, agentic cyber security).
+Claim registrations for **agentic_os_security** — a deep review + prospectus of agentic security and operating systems (OpSec, cognitive security, agentic cyber security).
 
 ## Contents
 

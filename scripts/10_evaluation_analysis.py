@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the evaluation analysis pipeline (data artifacts + all six figures)."""
+"""Run the evaluation analysis pipeline (data artifacts + the 11 registered figures + cover)."""
 
 from __future__ import annotations
 

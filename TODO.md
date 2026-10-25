@@ -4,11 +4,10 @@ Forward-only; completed items move to `Done`.
 
 ## Open
 
-- [x] v0.3.0 delivered (2026-09-11): graphical abstract cover, extended titles, incident register, CIF mapping, author-work citations
-- [x] v0.4.0 delivered (2026-09-11): cover DOI + auto date, taller zero-code cover, formalisms, OS stack
-
 ## Done
 
+- [x] v0.4.0 delivered (2026-09-11): cover DOI + auto date, taller zero-code cover, formalisms, OS stack
+- [x] v0.3.0 delivered (2026-09-11): graphical abstract cover, extended titles, incident register, CIF mapping, author-work citations
 - [x] Scaffold project from `template_code_project` exemplar (v0.1.0, 2026-09-10)
 - [x] v0.1.0: 18-section modular manuscript, 24×9 matrix, 6 figures, 92.30% coverage
 - [x] v0.1.0: template pipeline render + stage_04 validation green, private remote pushed

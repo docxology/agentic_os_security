@@ -1475,10 +1475,10 @@ _SOURCES_V030: tuple[Source, ...] = (
     ),
     Source(
         "cif_validation_2026",
-        "Cognitive Integrity Framework Part 2: Computational Validation and Implementation",
+        "Cognitive Integrity Framework: Computational Validation and Empirical Analysis (Part 2 of 3)",
         "Zenodo",
         2026,
-        "https://zenodo.org/records/18364128",
+        "https://zenodo.org/records/22134546",
         "research",
         (
             "Part 2 of the CIF series: computational validation and implementation of the "

@@ -1,13 +1,13 @@
 # src/
 
-`src/agentic_os_security/` — the pure-Python core of **agentic_os_security**, a private deep review + prospectus of agentic security and operating systems (OpSec, cognitive security, agentic cyber security). Import name: `agentic_os_security`.
+`src/agentic_os_security/` — the pure-Python core of **agentic_os_security**, a deep review + prospectus of agentic security and operating systems (OpSec, cognitive security, agentic cyber security). Import name: `agentic_os_security`.
 
 ## Module map
 
 | Module | Role |
 |---|---|
 | `registry.py` | 9 properties × 24 candidates × 8 scenarios; `matrix_rows()` → 216 stance rows (`strong \| partial \| weak \| n_a`) |
-| `evidence.py` | 65 documented sources (tiered: official/advisory/incident_report/research/community) + capability baseline constants |
+| `evidence.py` | 155 documented sources (tiered: official/advisory/incident_report/research/community) + capability baseline constants |
 | `threat_model.py` | Failure paths (exploitation vs authorized misuse), adversary assumptions, authority ladder (propose→stage→authorize→exercise→audit→revoke), agent capability classes |
 | `trust_domains.py` | 7 trust domains, 9 controls, 9 configuration invariants |
 | `forecasts.py` | Confidence-tiered forecasts, horizon 2028–2031 |
@@ -15,8 +15,8 @@
 | `project_paths.py` | Project-root discovery + canonical output paths |
 | `experiment_config.py` | Loads/validates the `experiment:` block of `manuscript/config.yaml` |
 | `manuscript_variables.py` | `generate_variables()` — every `{{TOKEN}}` in the manuscript as a string |
-| `figures/` | 6 deterministic 300-dpi PNG generators (Agg, colorblind-safe, byte-reproducible) |
-| `analysis/` | `pipeline.run_analysis()` — evaluation matrix CSV, scenario CSV, evidence summary JSON, validation report JSON + all 6 figures |
+| `figures/` | 11 deterministic 300-dpi PNG generators plus the cover graphical abstract (Agg, colorblind-safe, byte-reproducible) |
+| `analysis/` | `pipeline.run_analysis()` — the 11 analysis artifacts + `validation_report.json` in `output/data/`, 11 registered figures, and the cover graphical abstract |
 
 ## Layer rule
 

@@ -1,6 +1,6 @@
 # architecture.md — agentic_os_security
 
-A standalone, private research project: deep review + prospectus of agentic security and operating systems (OpSec, cognitive security, agentic cyber security). Layers: `src/` (pure), `scripts/` (thin), `manuscript/` (conventions), `output/` (disposable).
+A standalone research project: deep review + prospectus of agentic security and operating systems (OpSec, cognitive security, agentic cyber security). Layers: `src/` (pure), `scripts/` (thin), `manuscript/` (conventions), `output/` (disposable).
 
 ## src/ module map (`src/agentic_os_security/`)
 
@@ -18,7 +18,7 @@ Pure Python + matplotlib. **No `infrastructure` imports anywhere in `src/`.** Im
 | `experiment_config.py` | Loads and validates the `experiment:` block of `manuscript/config.yaml`; raises `ExperimentConfigError` on missing/invalid keys. |
 | `manuscript_variables.py` | `generate_variables()` → every `{{TOKEN}}` in `manuscript/*.md` as a string; `save_variables()`. |
 | `figures/` (package) | `_common.py` (Agg backend, deterministic rcParams, colorblind-safe palette, `apply_style()`, `save_figure()`) + eleven registered generators (`incident_lessons`, `evidence_timeline`, `property_matrix`, `defensive_stack`, `trust_domains`, `authority_ladder`, `update_windows`, `os_stack`, `orchestration_boundaries`, `agent_surface`, `forecast_horizon`) plus the cover `graphical_abstract`. Each exposes `generate_<name>(project_root) -> Path`. |
-| `analysis/` (package) | `pipeline.py::run_analysis(project_root) -> dict` — writes the eleven data artifacts (see below) and generates all eleven registered figures plus the cover; returns a summary dict. |
+| `analysis/` (package) | `pipeline.py::run_analysis(project_root) -> dict` — writes the eleven analysis artifacts plus the validation report (see below) and generates all eleven registered figures plus the cover; returns a summary dict. |
 
 ## Scripts (`scripts/`, thin orchestrators)
 
@@ -40,7 +40,7 @@ graph LR
     TD[trust_domains] --> AN
     FC[forecasts] --> AN
     AN --> OUT[output/figures: 11 registered PNGs + cover]
-    AN --> OUTD[output/data: 11 artifacts]
+    AN --> OUTD[output/data: 12 files]
     OUTD --> MV[manuscript_variables]
     MV --> OUTV[output/data/manuscript_variables.json]
     OUTV -.-> M[manuscript sections resolved at render time]
