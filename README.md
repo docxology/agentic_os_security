@@ -17,6 +17,8 @@
 
 ---
 
+[Project documentation](docs/README.md) includes a defensive architecture note and its local verification guide.
+
 ## What is in this repository
 
 | Surface | What it holds |

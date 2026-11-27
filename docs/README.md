@@ -1,7 +1,8 @@
 # docs/
 
-Project documentation for `agentic_os_security` — a standalone, private deep-review + prospectus project on agentic security and operating systems (OpSec, cognitive security, agentic cyber security).
+Project documentation for `agentic_os_security` — a standalone deep-review + prospectus project on agentic security and operating systems (OpSec, cognitive security, agentic cyber security).
 
+- [Defensive design assurance note](manuscript/README.md) and [local verification](verification/README.md).
 - New here? Start with `quickstart.md`, then `architecture.md`.
 - Editing the manuscript? Read `syntax_guide.md` (token plan) and `style_guide.md` (RASP + attribution discipline).
 - Debugging a failed run? `troubleshooting.md`.

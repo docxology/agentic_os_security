@@ -1,0 +1,17 @@
+paper:
+  title: "Static Assurance for the Agentic OS Security Design Registry"
+  subtitle: "A finite documentation and consistency check"
+authors:
+  - name: "Agentic OS Security project"
+publication:
+  repository_url: "https://github.com/docxology/agentic_os_security"
+  repository_label: "Source repository"
+metadata:
+  language: en
+render:
+  formats:
+    pdf: true
+    html: true
+    slides: false
+    docx: false
+    epub: false
