@@ -5,7 +5,7 @@ The note uses only the versioned [trust-domain registry](../../src/agentic_os_se
 Create an isolated sparse worktree of the revision being checked. This keeps the published manuscript and its tracked generated release out of the local assurance build. From this repository, run the following commands with an absolute worktree path.
 
 ```bash
-proof=/absolute/path/to/agentic-os-defensive-proof
+proof=/absolute/path/to/agentic_os_security
 git worktree add --detach --no-checkout "$proof" HEAD
 git -C "$proof" sparse-checkout set --no-cone --stdin <<'PATHS'
 /*
