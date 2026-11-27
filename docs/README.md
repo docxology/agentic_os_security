@@ -4,7 +4,7 @@ Project documentation for `agentic_os_security` — a standalone deep-review + p
 
 - [Defensive design assurance note](manuscript/README.md) and [local verification](verification/README.md).
 - New here? Start with `quickstart.md`, then `architecture.md`.
-- Editing the manuscript? Read `syntax_guide.md` (token plan) and `style_guide.md` (RASP + attribution discipline).
+- Editing the defensive assurance note? Start with its [source index](manuscript/README.md) and [authoring guidance](manuscript/AGENTS.md).
 - Debugging a failed run? `troubleshooting.md`.
 - General agent operating rules: `agent_instructions.md` and the root `AGENTS.md`.
 
