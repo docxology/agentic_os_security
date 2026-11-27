@@ -17,7 +17,10 @@
 
 ---
 
-[Project documentation](docs/README.md) includes a defensive architecture note and its local verification guide.
+Start with the [documentation index](docs/README.md). The separate
+[defensive assurance note](docs/manuscript/README.md) links to a
+[local trust-domain registry check](docs/verification/README.md) for readers who
+want a bounded example of the evidence pipeline.
 
 ## What is in this repository
 
@@ -26,7 +29,7 @@
 | `manuscript/` | 18-section modular manuscript (17 numbered sections + references), 168-entry bibliography, 12 tables, 11 figures |
 | `src/agentic_os_security/` | Pure evaluation layer: 24×9 stance matrix, 155-source evidence registry, threat model + authority ladder, 7 trust domains, 9 controls, 8-layer OS stack, mediation points, CIF concept map, 8 formal definitions |
 | `skills/` | **Concepts as skills** — 9 harness-neutral SKILL.md definitions with a registry and conformance tests |
-| `output/` | Regenerated figures (11 + cover), data artifacts (12), reports, rendered PDF |
+| `output/` | Retained generated figures, data, reports, and release render |
 | `data/` | Claim ledger (86 sourced claims) |
 | `tests/` | 156 zero-mock tests, 95.77% coverage on `src/` |
 
@@ -53,8 +56,14 @@ Each skill names the manuscript section it operationalizes, the data artifact th
 
 ## Quickstart
 
+Use Python 3.11 or newer. For a focused local check, follow the
+[registry verification guide](docs/verification/README.md) in a disposable
+worktree. Its findings concern the declared trust domains and control records.
+The commands below are the broader published-review workflow.
+
+
 ```bash
-uv sync
+uv sync --locked
 uv run python scripts/00_preflight.py
 uv run python scripts/10_evaluation_analysis.py      # evaluation matrix + 11 figures + validation
 uv run python scripts/z_generate_manuscript_variables.py

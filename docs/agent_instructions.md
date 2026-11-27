@@ -15,7 +15,7 @@ You are working in `agentic_os_security`, a standalone, **private** research pro
 ## Workflow rules
 
 - **Workflow:** edit `src/` → regenerate analysis (`uv run python scripts/10_evaluation_analysis.py`) → regenerate variables (`uv run python scripts/z_generate_manuscript_variables.py`) → run tests (`uv run pytest tests/ --cov=src --cov-fail-under=90`).
-- `output/` is disposable. Never hand-edit or commit it; regenerate.
+- `output/` includes tracked release artifacts. Regenerate in a disposable checkout to preserve the released snapshot.
 - `{{TOKEN}}` markers in `manuscript/*.md` come only from the token plan (`docs/syntax_guide.md`); the unresolved-token check lives in `test_manuscript_variables.py`.
 - `WHY:` comments: leave one at any surprising local choice so the next agent does not "fix" it back.
 - When you find stale template-era references (retired experiment tooling, numeric-optimization sweeps, live status pages, staged performance runs), delete them in the files you own; do not preserve them "for history".

@@ -13,7 +13,8 @@ Standalone research project producing the manuscript *"Agentic Security and Oper
 | `src/agentic_os_security/` | **Pure Python + matplotlib only.** No `infrastructure` imports anywhere in `src/`. Deterministic, importable, testable in isolation. |
 | `scripts/` | Thin orchestrators: argparse, exit codes, imports from `src/`. No business logic. Template-repo detection for manuscript-variable injection only (see `scripts/CONVENTIONS.md`). |
 | `manuscript/` | Pandoc markdown. Citations `[@key]` from `references.bib` only; cross-refs `[@sec:...]`/`[@fig:...]`/`[@tbl:...]`; `{{TOKEN}}` markers only from the token plan in `docs/syntax_guide.md`; **no mermaid blocks**. |
-| `output/` | **Disposable.** Everything here regenerates from scripts; never hand-edit, never commit. |
+| `output/` | Generated files, including retained release outputs. Work in a disposable checkout when verifying changes so the tracked snapshot stays intact. |
+| `docs/manuscript/` | Separate defensive assurance note and its own render inputs. |
 | `data/` | Small, reviewed, version-controlled inputs and ledgers (`claim_ledger.yaml`). |
 | `tests/` | Zero-mock, behavior-targeted tests against the real modules and real `manuscript/` files. |
 
@@ -36,6 +37,11 @@ Every generated artifact (figures, CSVs, JSON reports, resolved manuscripts) mus
 - `docs/` — keep honest and current; purge stale references when the project changes.
 
 ## Verification commands
+
+For changes to the defensive note or its registry claims, use the isolated
+[trust-domain verification guide](docs/verification/README.md). The commands
+below are for the broader review.
+
 
 ```bash
 uv run python scripts/00_preflight.py
