@@ -1,0 +1,3 @@
+# Abstract
+
+An operating-system design for AI-assisted work benefits from clear records of what each trust domain may hold, which actions it must restrict, and which permissions remain outside an agent's authority. We check whether the static registry accompanying the published *Agentic Security and Operating Systems* review records its intended boundaries consistently [@friedman2026agentic]. A local replay checks unique entries, nonempty domain descriptions and restrictions, and a rule and rationale for each control. The resulting inventory describes coverage of the registry. It provides no measurement of deployed security.

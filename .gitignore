@@ -16,3 +16,6 @@ coverage_project.json
 .DS_Store
 .mypy_cache/
 .ruff_cache/
+
+# Untracked output from the isolated assurance build
+/output/
